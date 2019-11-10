@@ -1,0 +1,34 @@
+doctype html
+head
+  meta charset="utf-8"
+  link rel="stylesheet" type="text/css" href="/files/dnd.css"
+  
+  title Выбор игрока
+
+body
+  == styled_flash
+  div.main
+    - if @user.players.size>0
+      p Выберите игрока:
+      ul
+        - @user.players.each do |p|
+          li
+            a href="/player/#{p.id}" = p.name
+            | (#{p.adventure.name})
+    - if @user.masters.size>0
+      p Выберите мастера:
+      ul
+        - @user.masters.each do |p|
+          li
+            a href="/master/#{p.id}" = p.name
+            | (#{p.adventure.name})
+
+    form action='/player/new' method='post'
+      fieldset width='100%'
+        legend Или создайте нового игрока:
+        p.flex-container
+          label.text-right for='reg_name' style='min-width: 20%'
+            | Имя:
+          input.fill-width name='reg_name' id='reg_name' type='text'
+        p.flex-container
+          input type='submit' value='Создать!'

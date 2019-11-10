@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export SESSION_SECRET=175d969ed5477c730a2463fa5fb2aa350fd3513fcd65804d3952dde0b1e13877998dc8a161e31e4de77cd35bb72c8d662a9e9ce6f58dcb76274960de6c392738
+
+bundle exec rackup -o 0.0.0.0 -p 4567 config.ru
+

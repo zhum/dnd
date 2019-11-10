@@ -1,0 +1,188 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.l-wrap {
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.center{
+  text-align: center;
+}
+
+.right {
+  float:  right;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.fill-width {
+  flex: 1;
+}
+
+.width-1em {
+  width: 1.4em;
+}
+.button-def {
+  background-color: #008CBA;
+  border: 2px solid #4CAF50;
+  border-radius: 10%;
+  color: white;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.button-def:active {
+  /* background-color: #3e8e41; */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+  transform: translateY(4px);
+}
+
+div.main{
+  display: block;
+  max-width: 1140px;
+  width:  100%;
+  background: #eee;
+  margin: 0 auto;
+  padding: 1px;
+  overflow: hidden;
+}
+
+.p-wrap{
+  overflow: hidden;
+}
+
+.column {
+  position: relative;
+  float: left;
+}
+
+.column + .column {
+  margin-left: 1.5%;
+}
+
+.column-1-5 {
+  width: 18.8%;
+  float:  left;
+}
+
+.column-1-6 {
+  width: 16%;
+  float:  left;
+}
+
+.column-1-3 {
+  width: 32%;
+  float:  left;
+}
+
+.column-2-3 {
+  width: 64%;
+  float:  left;
+}
+
+div.header {
+  width: 100%;
+  background: #eee;
+  position: relative;
+  display:  block;
+}
+
+div.char-info{
+  position: relative;
+  /*height: 100%;
+  */
+}
+
+.char-info::after{
+  content:'';
+  display: block;
+  clear:both
+}
+
+div.avatar{
+  position: relative;
+  width:  30%;
+  float: left;
+}
+
+img.avatar{
+  width: 100%;
+  height: auto;
+  float:left; /* Выравнивание по левому краю */
+  margin: 3px;
+  display: block;
+}
+div.fullwidth{
+  width:  100%;
+}
+
+.player-name{
+  font-size: 2em;
+}
+
+.player-class{
+  font-size: 0.8em;
+}
+
+.hp{
+  font-size: 1.8em;  
+}
+
+.coins{
+  font-size: 0.9em;
+}
+
+.label1 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.block{
+  display:  block;
+}
+
+div.fight{
+  
+}
+div.char{
+  
+}
+div.inventory{
+  
+}
+
+/* old phones */
+@media all and (max-width: 320px){
+  div{
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 740px) {
+  div {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 741px) {
+  div {
+    font-size: 20px;
+  }
+}

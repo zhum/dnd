@@ -1,0 +1,1048 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Re",
+				"Regexp\t(disk2yaml.rb)"
+			],
+			[
+				"Base",
+				"BaseApp\tabc"
+			],
+			[
+				"playr",
+				"player\t(gamne-js.html)"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"dow",
+				"downcase\t(disks-gtk.rb)"
+			],
+			[
+				"ch_",
+				"ch_hit_dice_full\tabc"
+			],
+			[
+				"set",
+				"set_value\tabc"
+			],
+			[
+				"each",
+				"forEach(function(aSome) {"
+			],
+			[
+				"init",
+				"initiative\t(index_dnd.slim)"
+			],
+			[
+				"font",
+				"font-style"
+			],
+			[
+				"ri",
+				"right\tabc"
+			],
+			[
+				"bor",
+				"border"
+			],
+			[
+				"hi",
+				"hidden\t(gamne-js.html)"
+			],
+			[
+				"player-",
+				"player-class\tabc"
+			],
+			[
+				"to",
+				"to_json\tabc"
+			],
+			[
+				"play",
+				"player-name\tabc"
+			],
+			[
+				"mar",
+				"margin\tabc"
+			],
+			[
+				"aut",
+				"auto\tabc"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"char",
+				"char-info\tabc"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"Da",
+				"Date()"
+			],
+			[
+				"Now",
+				"now"
+			],
+			[
+				"US",
+				"USE_RBENV\tabc"
+			],
+			[
+				"tomo",
+				"tomorrow_code\tabc"
+			],
+			[
+				"TODAY",
+				"today_code"
+			],
+			[
+				"JSO",
+				"JSON.load\tabc"
+			],
+			[
+				"now",
+				"now_feel\tabc"
+			],
+			[
+				"today",
+				"today_code\tabc"
+			],
+			[
+				"ICO",
+				"ICON_NAMES\tabc"
+			],
+			[
+				"da",
+				"day\tabc"
+			],
+			[
+				"lan",
+				"lang_code\t(rubysaver.conf)"
+			],
+			[
+				"re",
+				"req\trequire \"..\""
+			],
+			[
+				"Wea",
+				"WeatherDarkSky\tabc"
+			],
+			[
+				"is",
+				"is_a\t(disks-gtk.rb)"
+			],
+			[
+				"top",
+				"topics\t(triggerd.rb)"
+			],
+			[
+				"Has",
+				"Hash\t(yaml2serials.rb)"
+			],
+			[
+				"topic",
+				"topic_actions\tabc"
+			],
+			[
+				"Y",
+				"Yd-\tYAML.dump(.., file)"
+			],
+			[
+				"Te",
+				"TeleLoop\tabc"
+			],
+			[
+				"chec",
+				"check_array"
+			],
+			[
+				"che",
+				"check_array〔function〕"
+			],
+			[
+				"Arra",
+				"Array〔class〕"
+			],
+			[
+				"eve",
+				"every_day"
+			],
+			[
+				"sub",
+				"subtitles"
+			],
+			[
+				"inde",
+				"index\t(disk2yaml.rb)"
+			],
+			[
+				"check",
+				"check_name"
+			],
+			[
+				"File",
+				"File\tFile.open(\"..\") { |file| .. }"
+			],
+			[
+				"ex",
+				"ext"
+			],
+			[
+				"def",
+				"def\tdef … end"
+			],
+			[
+				"Fil",
+				"File\tFile.open(\"..\") { |file| .. }"
+			],
+			[
+				"op",
+				"opt\toption(..)"
+			],
+			[
+				"dest",
+				"dest_height"
+			],
+			[
+				"inter",
+				"interpolation_type"
+			],
+			[
+				"x_",
+				"x_labels_h"
+			],
+			[
+				"dra",
+				"draw_h"
+			],
+			[
+				"bars",
+				"bars_interval"
+			],
+			[
+				"No",
+				"NorthWest"
+			],
+			[
+				"max_",
+				"max_bar〔variable〕"
+			],
+			[
+				"com",
+				"combine_options"
+			],
+			[
+				"cla",
+				"cla\tclass .. initialize .. end"
+			],
+			[
+				"fil",
+				"fill"
+			],
+			[
+				"set_",
+				"set_fill_colors"
+			],
+			[
+				"fill",
+				"fill_count"
+			],
+			[
+				"stro",
+				"stroke_colors"
+			],
+			[
+				"stroke",
+				"stroke_colors"
+			],
+			[
+				"get_",
+				"get_legenda_rect"
+			],
+			[
+				"lege",
+				"legenda_align"
+			],
+			[
+				"cal",
+				"calc_labels"
+			],
+			[
+				"val",
+				"vals_on_dia"
+			],
+			[
+				"ge",
+				"get_text_size"
+			],
+			[
+				"Sou",
+				"SouthWest"
+			],
+			[
+				"Nort",
+				"NorthWest"
+			],
+			[
+				"dr",
+				"draw"
+			],
+			[
+				"center",
+				"center_titles"
+			],
+			[
+				"cente",
+				"center_titles"
+			],
+			[
+				"lab",
+				"label_outline"
+			],
+			[
+				"ali",
+				"align_left"
+			],
+			[
+				"la",
+				"label_color"
+			],
+			[
+				"str",
+				"stroke"
+			],
+			[
+				"poly",
+				"polyline"
+			],
+			[
+				"kind_",
+				"kind_of?〔function〕"
+			],
+			[
+				"Dr",
+				"Diagram"
+			],
+			[
+				"Ha",
+				"Hash\t(fb-adapter.rb)"
+			],
+			[
+				"Arr",
+				"Array\t(state_processor.rb)"
+			],
+			[
+				"varia",
+				"variables"
+			],
+			[
+				"fin",
+				"find_by"
+			],
+			[
+				"exis",
+				"exists"
+			],
+			[
+				"reen",
+				"reenter\t(lomo_bot.rb)"
+			],
+			[
+				"service",
+				"service_port\t(telebot2.rb)"
+			],
+			[
+				"exi",
+				"exists\t(telebot2.rb)"
+			],
+			[
+				"ada",
+				"adapter"
+			],
+			[
+				"Proce",
+				"Processors"
+			],
+			[
+				"imple",
+				"implementation"
+			],
+			[
+				"mess",
+				"messengers"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"Pro",
+				"Proxy\t(telegram_adapter.rb)"
+			],
+			[
+				"un",
+				"unsubscribe"
+			],
+			[
+				"su",
+				"subscribe"
+			],
+			[
+				"user",
+				"username\t(README.md)"
+			],
+			[
+				"pro",
+				"proxy"
+			],
+			[
+				"confi",
+				"configuration\t(telegram_adapter.rb)"
+			],
+			[
+				"tele",
+				"tele_config〔module〕"
+			],
+			[
+				"ch",
+				"chomp"
+			],
+			[
+				"pa",
+				"path"
+			],
+			[
+				"LOG_",
+				"LOG_COUNT"
+			],
+			[
+				"Tele",
+				"TeleLoop\t(fb-adapter.rb)"
+			],
+			[
+				"contr",
+				"control_loop\t(telebot2.rb)"
+			],
+			[
+				"b",
+				"body"
+			],
+			[
+				"co",
+				"conf"
+			],
+			[
+				"messa",
+				"message"
+			],
+			[
+				"message",
+				"message_options"
+			],
+			[
+				"parse",
+				"parsed_body"
+			],
+			[
+				"sender",
+				"sender_id"
+			],
+			[
+				"face",
+				"facebook-id"
+			],
+			[
+				"send",
+				"sender"
+			],
+			[
+				"access",
+				"access_token"
+			],
+			[
+				"pag",
+				"page_id"
+			],
+			[
+				"fb",
+				"fb_thread"
+			],
+			[
+				"fb_",
+				"fb_token\t(telebot2.rb)"
+			],
+			[
+				"queue",
+				"queues"
+			],
+			[
+				"Ba",
+				"Base\t(coltrol_bot.rb)"
+			],
+			[
+				"ju",
+				"just_enter"
+			],
+			[
+				"to_",
+				"to_sym〔function〕"
+			],
+			[
+				"on",
+				"on_message\t(telegram_adapter.rb)"
+			],
+			[
+				"start",
+				"start_async\t(telegram_adapter.rb)"
+			],
+			[
+				"TeleL",
+				"TeleLoop\t(telegram_adapter.rb)"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control:",
+				"Package Control: Remove Package"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inde",
+				"Auto indent"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Snippet: code",
+				"Snippet: code-xml"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Install Package Control"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"json",
+				"Indent JSON"
+			],
+			[
+				"remote",
+				"Remote Edit Start Panel"
+			],
+			[
+				"open",
+				"Remote Edit Start Panel"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			],
+			[
+				"Package Control: remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"package sync",
+				"Package Syncing: Push Settings"
+			],
+			[
+				"sync",
+				"Package Syncing: Define Sync Folder"
+			],
+			[
+				"Deviot: boar",
+				"Deviot: Select Board"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"re",
+				"Remote Edit: Open Remote File Prompt"
+			],
+			[
+				"evern",
+				"Evernote: Open Evernote Note"
+			],
+			[
+				"ever",
+				"Evernote Settings: Reconfigure Authorization"
+			]
+		],
+		"width": 569.0
+	},
+	"console":
+	{
+		"height": 72.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/serg/ownCloud/disk2yaml.rb",
+		"/home/serg/ownCloud/disks-gtk.rb",
+		"/home/serg/services/views/days.slim",
+		"/home/serg/dnd/static/files/dnd.css",
+		"/home/serg/dnd/views/index_dnd.slim",
+		"/home/serg/dnd/app.rb",
+		"/home/serg/dnd/app/logic.rb",
+		"/home/serg/dnd/app/dnd.rb",
+		"/home/serg/dnd/models/player.rb",
+		"/home/serg/services/views/hours.slim",
+		"/home/serg/ownCloud/yaml2serials.rb",
+		"/home/serg/Dropbox/gamne-js.html",
+		"/home/serg/dnd/app.ru",
+		"/home/serg/dnd/model/player.rb",
+		"/home/serg/dnd/dnd.rb",
+		"/home/serg/dnd/db/migrate/20191104160227_add_secret_to_player.rb",
+		"/home/serg/dnd/db/migrate/20191104085415_create_chars_table.rb",
+		"/home/serg/dnd/views/auth.slim",
+		"/home/serg/dnd/model/resource.rb",
+		"/home/serg/dnd/db/migrate/20191104083407_create_players_table.rb",
+		"/home/serg/dnd/Gemfile",
+		"/home/serg/Рабочий стол/Игры 01",
+		"/home/serg/dnd/dnd.css",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C025%5D/Внутр. накопитель/wifi_config.log",
+		"/home/serg/dnd/index_dnd.slim",
+		"/home/serg/services/diagram.rb",
+		"/opt/rubysaver/bundle/rs-darksky.rb",
+		"/home/serg/tmp/rubysaver/rs.rb",
+		"/home/serg/tmp/rubysaver/README.md",
+		"/home/serg/tmp/rubysaver/rs-old.rb",
+		"/home/serg/tmp/rubysaver/rs.sh",
+		"/home/serg/.config/rubysaver.conf",
+		"/home/serg/a.json",
+		"/home/serg/.config/sublime-text-3/Packages/User/code-xml.sublime-snippet",
+		"/home/serg/Dropbox/Sublime/Packages/User/code-xml.sublime-snippet",
+		"/home/serg/Dropbox/Книга по администрированию СК/FB2/Supierkomp'iutiery_ administrirovaniie - Sierghiei Anatol'ievich Zhumatii.fb2",
+		"/home/serg/Dropbox/Книга по администрированию СК/FB2/v7.fb2",
+		"/home/serg/.config/sublime-text-3/Packages/User/PackageSync.sublime-settings",
+		"/home/serg/.config/sublime-text-3/Packages/User/Package Syncing.sublime-settings",
+		"/home/serg/Dropbox/triggerd.yaml",
+		"/home/serg/Dropbox/triggerd.rb",
+		"/media/serg/CONFIG/network/my-network",
+		"/tmp/rsub-mgpvk0/fb-adapter.rb",
+		"/tmp/rsub-3kd7qy/state_processor.rb",
+		"/tmp/rsub-6whrxn/telegram_adapter.rb",
+		"/tmp/rsub-_jx2ii/Gemfile",
+		"/tmp/rsub-b6oub8/tele_bot_async.rb",
+		"/tmp/rsub-_1f8e7/tele.log",
+		"/tmp/rsub-xz_2oa/telebot2.rb",
+		"/home/serg/ownCloud/названия моделей дома.txt",
+		"/home/serg/Dropbox/mm.rb",
+		"/home/serg/bin/mkv_jp_def",
+		"/home/serg/ownCloud/disks-ui.rb",
+		"/home/serg/tmp/lom_bot/lib/users.rb",
+		"/home/serg/services/telebot/lib/state_processors/exec-processor.rb",
+		"/home/serg/tmp/lom_bot/lib/state_processors/exec-processor.rb",
+		"/home/serg/tmp/lom_bot/lib/tele_loop.rb",
+		"/home/serg/tmp/lom_bot/lib/lomo_bot.rb",
+		"/home/serg/tmp/lom_bot/README.md",
+		"/home/serg/tmp/lom_bot/lib/adapters/telegram_adapter.rb",
+		"/home/serg/tmp/lom_bot/lib/tele_bot_async.rb",
+		"/home/serg/tmp/lom_bot/lib/adapters/fb-adapter.rb",
+		"/home/serg/tmp/lom_bot/tele_config.rb",
+		"/home/serg/tmp/lom_bot/telebot2.rb",
+		"/home/serg/tmp/lom_bot/lib/state_processor.rb",
+		"/home/serg/tmp/lom_bot/bot2.yaml",
+		"/home/serg/tmp/lom_bot/teleconfig.yaml",
+		"/opt/rubysaver/bundle/rs.rb",
+		"/opt/rubysaver/b3/rs3.rb",
+		"/home/serg/tmp/lom_bot/Gemfile",
+		"/home/serg/tmp/lom_bot/teleconfig.sample.yaml",
+		"/home/serg/tmp/lom_bot/lib/adapters/console_adapter.rb",
+		"/home/serg/tmp/lom_bot/lib/control_bot.rb",
+		"/home/serg/tmp/lom_bot/facebook-messenger/lib/facebook/messenger/server.rb",
+		"/home/serg/tmp/lom_bot/test_send.sh",
+		"/home/serg/tmp/lom_bot/fb/bot.rb",
+		"/home/serg/tmp/lom_bot/fb/config.ru",
+		"/home/serg/tmp/lom_bot/fb/app.rb",
+		"/home/serg/tmp/lom_bot/test1.rb",
+		"/home/serg/tmp/lom_bot/lib/coltrol_bot.rb",
+		"/home/serg/tmp/lom_bot/fb/persistent_menu.rb",
+		"/home/serg/tmp/lom_bot/lib/tele_config.rb",
+		"/home/serg/tmp/lom_bot/lib/processors-OLD/exec_responder.rb",
+		"/home/serg/tmp/lom_bot/lib/bot_logic.rb",
+		"/home/serg/tmp/lom_bot/lib/telegram_responder.rb",
+		"/home/serg/services/home_bot/lib/bot_logic.rb",
+		"/home/serg/tmp/lom_bot/users.yaml",
+		"/home/serg/tmp/lom_bot/teleconfig-home.yaml",
+		"/home/serg/services/home_bot/lib/adapters/console_adapter.rb",
+		"/home/serg/services/home_bot/lib/adapters/telegram_adapter.rb",
+		"/home/serg/services/home_bot/lib/users.rb",
+		"/home/serg/services/home_bot/lib/state_processors/exec-processor.rb",
+		"/home/serg/services/home_bot/lib/state_processors/subscriptions-processor.rb",
+		"/home/serg/services/home_bot/lib/state_processors/auth-processor.rb",
+		"/home/serg/services/home_bot/lib/state_processor.rb",
+		"/home/serg/services/home_bot/telebot2.rb",
+		"/home/serg/services/home_bot/teleconfig-home.yaml",
+		"/home/serg/services/home_bot/teleconfig.yaml",
+		"/home/serg/services/home_bot/bot2.yaml",
+		"/home/serg/services/home_bot/lib/README.md",
+		"/home/serg/services/home_bot/lib/tst.rb",
+		"/home/serg/services/home_bot/bot_home.yaml",
+		"/home/serg/services/home_bot/lib/lomo_bot.rb",
+		"/home/serg/services/home_bot/users.yaml",
+		"/home/serg/services/views/hours_bars.slim",
+		"/home/serg/services/views/days_bars.slim",
+		"/home/serg/.config/sublime-text-3/Packages/GoSublime/USAGE.md",
+		"/home/serg/services/home_bot/teleconfig3.yaml",
+		"/home/serg/services/home_bot/lib/telegram_responder.rb",
+		"/home/serg/services/home_bot/lib/bot.rb",
+		"/home/serg/services/home_bot/lib/processors/menu_responder.rb",
+		"/home/serg/services/home_bot/lib/processors/exec_responder.rb",
+		"/home/serg/tmp/rchart/gruff-chart.rb",
+		"/home/serg/Dropbox/panasas - cheatsheet.txt",
+		"/home/serg/Dropbox/guitar-zakaz.txt",
+		"/home/serg/Dropbox/punkrocker.txt",
+		"/home/serg/ownCloud/Backup-codes-sergzhum.txt",
+		"/home/serg/ownCloud/fun-фотографы.txt",
+		"/opt/rubysaver/conditions-apixu.json",
+		"/home/serg/tmp/rubysaver/rubysaver.conf",
+		"/home/serg/Рабочий стол/Photoshop-CS2.serial.txt",
+		"/home/serg/services/home_bot/lib/processors/internal_responders.rb",
+		"/home/serg/services/home_bot/lib/processors/test.rb",
+		"/home/serg/BOT/lib/processors/subscriptions_responder.rb",
+		"/home/serg/BOT/lib/users.rb",
+		"/home/serg/BOT/lib/telegram_responder.rb",
+		"/home/serg/BOT/lib/processors/menu_responder.rb",
+		"/home/serg/BOT/lib/bot_logic.rb"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 125.0,
+		"where_history":
+		[
+			"/home/serg/tmp/lom_bot",
+			"/home/serg/tmp/lom_bot/lib"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"contrib",
+			"id",
+			"h",
+			"'].",
+			":",
+			"span",
+			"name",
+			"1-6",
+			"span",
+			"mt",
+			"one-fifth",
+			"span",
+			"div",
+			"weather_cache",
+			"weathercache",
+			"weahercache",
+			"betwee",
+			"cache",
+			"now_weather_text2",
+			"now_weather",
+			"(%+3",
+			"warn",
+			"today_image",
+			"today_image_in",
+			"sunrise",
+			"DEB",
+			"WeatherDarkSky",
+			"now_cels",
+			"now_cel",
+			"temp",
+			"today",
+			",#",
+			"#",
+			"today",
+			"images_cache",
+			"now_image_ind",
+			"icon_path",
+			"IMG_",
+			",",
+			", ",
+			"get_wea",
+			"get_real",
+			"weatherc",
+			"get_wea",
+			"new",
+			"weather",
+			">",
+			"sunr",
+			"sun",
+			"sunri",
+			"sunris",
+			"astro",
+			"JSON",
+			"apixu",
+			"location",
+			"</title><empty-line />",
+			"<empty-line /></section>",
+			" = ",
+			"empty",
+			"<strong></strong>",
+			"<empty-line /></section>",
+			"—",
+			"code",
+			"<p>(.*)</p>",
+			"centos6",
+			"<p>(.*)</p>",
+			"<p>Node Description:....................n51001 HCA-1</p>",
+			"<p>(.*)</p>",
+			"<section",
+			"section",
+			"<section",
+			"<sectio",
+			"sectio",
+			"sectp",
+			"<empty-line /></section><section><title><p>([^<]+)</p></title>",
+			"<empty-line /></section><section><title><p>2</p></title>",
+			"<empty-line /></section><section><title><p>([^<]+)</p></title>",
+			"<empty-line /></section><section><title><p>2</p></title>",
+			"<empty-line /></section><section><title><p>([^<]+)</p></title>",
+			"cite",
+			"poem",
+			"<title>([^<]+)</title>",
+			"<p>\\s*</p>",
+			" </p>",
+			"<title>\n<p> <strong>([^<]+)</strong> </p>\n</title>",
+			"warn",
+			"logger",
+			"pixbuf",
+			"GdkPixbuf::PixbufLoader",
+			"message",
+			"end",
+			"2019-05-19",
+			"yaml",
+			"add_cu",
+			"tracks",
+			"k",
+			"REG",
+			"split",
+			"forei",
+			"fore",
+			"foreig",
+			"set_alignment",
+			"Pango::ALIGN_RIGHT",
+			"compos",
+			"GdkPixbuf::Pixbuf::InterpType::BILINEAR",
+			"Gdk::Pixbuf",
+			"draw_h",
+			"draw_w",
+			"y_shift",
+			"SouthEast",
+			"label_s",
+			"label",
+			"legenda_a",
+			"agenda_a",
+			"labels",
+			"max_la",
+			"label_siz",
+			"*3",
+			"debug",
+			"label_size",
+			"gap",
+			"@labels",
+			"set_fill",
+			"fil",
+			"@width",
+			"1",
+			"x",
+			"canno"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"</title>",
+			"</section>",
+			"<p><code>$1</code></p>",
+			"<empty-line />\\n<p><strong>$1</strong></p>",
+			"<empty-line />\\n<p>$1</p>",
+			"<title><p>$1</p></title>",
+			"<empty-line />",
+			"</p>",
+			"<title>$1</title>"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 68.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "dnd.sublime-project",
+	"replace":
+	{
+		"height": 75.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

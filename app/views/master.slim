@@ -1,0 +1,181 @@
+doctype html
+head
+  meta charset="utf-8"
+  link rel="stylesheet" type="text/css" href="/files/dnd.css"
+  
+  title Мастер
+
+body
+  == styled_flash
+  div.main
+    div.header.p-wrap
+      div.l-wrap
+        div.column.column-1-5.center
+          a href='/msg' Собщ
+        div.column.column-1-5.center
+          a href='/note' Заметки
+        div.column.column-1-5.center
+          a href='/rules' Правила
+        div.column.column-1-5.center
+          a href='/map' Карта
+        div.column.column-1-5.center
+          a href='/logout' X
+
+
+    /div.info
+      div.avatar
+        img.avatar src="/img/player/#{@player.id}"
+      div.char-info
+        div.fullwidth
+          span.player-name#player-name ...
+        div.fullwidth
+          span.player-class id="player-class"
+            | ...
+          | / 
+          span.player-race id="player-race"
+            | ...
+        div.fullwidth
+          span.hp#hp
+            | ...
+          span.hp
+            | &nbsp;ХП &nbsp;
+          span.hp
+            a.button-def.width-1em href='#' onclick="hp_plus();" +
+            | &nbsp; 
+          span.hp
+            a.button-def.width-1em href='#' onclick="hp_minus();" -
+            | &nbsp; 
+          span.hp
+            a.button-def.width-1em href='#' onclick="hp_opts();" #
+            | &nbsp;
+        div.fullwidth
+          span.coins
+            | Золота: 
+          span.coins#total-gold
+            | ...
+          span.right
+            a.button-def href='#' onclick="short_rest();" к. отдых
+            | &nbsp;
+            a.button-def href='#' onclick="long_rest();" д. отдых
+
+
+    /div.coins.p-wrap
+      div.l-wrap
+        div.coins.column.column-1-5
+          | ММ: 
+          span#ccoins
+            | ...
+        div.coins.column.column-1-5
+          | &nbsp;СМ: 
+          span#scoins
+            | ...
+        div.coins.column.column-1-5
+          | &nbsp;ЗМ: 
+          span#gcoins
+            | ...
+        div.coins.column.column-1-5
+          | &nbsp;ЭМ: 
+          span#ecoins
+            | ...
+        div.coins.column.column-1-5
+          | &nbsp;ПМ:
+          span#pcoins 
+            | ...
+    /div.main-char.p-wrap
+      div.l-wrap.center
+        div.column.column-1-3
+          span.block.fullwidth#ch_armour_class
+            | ...
+          span.block.fullwidth.center.label1
+            | КД
+        div.column.column-1-3
+          span.block.fullwidth#ch_initiative
+            | ...
+          span.block.fullwidth.center.label1
+            | Инициатива
+        div.column.column-1-3
+          span.block.fullwidth#ch_speed
+            | ...
+          span.block.fullwidth.center.label1
+            | Скорость
+      div.l-wrap.center
+        div.column.column-1-3
+          span.block.fullwidth#ch_pass_attentiveness
+            | ...
+          span.block.fullwidth.center.label1
+            | Внимательность
+        div.column.column-1-3
+          span.block.fullwidth#ch_masterlevel
+            | ...
+          span.block.fullwidth.center.label1
+            | Мастерство
+        div.column.column-1-3
+          span.block.fullwidth#ch_hit_dice_full
+            | X DY
+          span.block.fullwidth.center.label1
+            | Кости хитов
+
+    /div.fight
+      | Бой .....
+
+
+    /div.char
+      | Характеристики .....
+
+
+    /div.inventory
+      | Снаряжение .....
+
+
+
+  javascript:
+    var secret="#{{@user.secret}}";
+
+    function set_value(id,value){
+      var el = document.getElementById(id)
+      if(el){
+        el.innerHTML = value;
+      }
+    }
+
+    function render_master(data){
+      //alert(data);
+      set_value('player-name', data.name);
+      set_value('player-class', data.klass);
+      set_value('player-race', data.race);
+      set_value('hp', data.hp);
+      set_value('ccoins', data.coins[0]);
+      set_value('scoins', data.coins[1]);
+      set_value('gcoins', data.coins[2]);
+      set_value('ecoins', data.coins[3]);
+      set_value('pcoins', data.coins[4]);
+      set_value('total-gold', (data.coins[0]+data.coins[1]*10+data.coins[2]*100+data.coins[3]*50+data.coins[4]*1000)/100);
+      for( var ch in data.chars){
+        set_value('ch_'+ch, data.chars[ch]);
+      }
+      set_value('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
+    }
+    window.onload = function(){
+      var show = function(el){}
+      // function(el){
+      //   return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
+      // }(document.getElementById('msgs'));
+
+      var ws       = new WebSocket('ws://' + window.location.host + window.location.pathname);
+      ws.onopen    = function()  { ws.send(secret+': get_master'); };
+      ws.onclose   = function()  { show('websocket closed'); }
+      ws.onmessage = function(m) {
+        //alert(m.data);
+        render_master(JSON.parse(m.data))
+      };
+
+      // var sender = function(f){
+      //   var input     = document.getElementById('input');
+      //   input.onclick = function(){ input.value = "" };
+      //   f.onsubmit    = function(){
+      //     ws.send(input.value);
+      //     input.value = "send a message";
+      //     return false;
+      //   }
+      // }(document.getElementById('form'));
+    }
