@@ -9,17 +9,23 @@ class DNDLogic
       when 'get_player'
         #@player = Player.find(session[:id]||1001)
         logger.warn "id=#{player.id}"
-        m = player.to_json
+        m = {'player' => player}.to_json
         logger.warn "get_player: '#{m}'"
         ws.send(m)
-      when 'chat_message'
+      when 'get_chat'
+        logger.warn "id=#{player.id}"
+        m = {'chat_history' => [{from: 'MASTER', text: 'Превед'},{from: player.name, text: 'Превед, мастер!'}]}.to_json
+        logger.warn "get_chat: '#{m}'"
+        ws.send(m)
+      when /^chat_message=(.*)/
+        message = $1;
         adventure = player.adventure
         #FIXME add messages storing
         if opts[:player]
           master = adventure.master
           socket = opts[:ws]["m#{master.id}"]
           if socket
-            socket.send "chat:#{player.name}:#{text}"
+            socket.send {'chat' => {'from' => player.name, 'text' => message}}.to_json
           else
             logger.warn "Ouch! master not found!"
           end
@@ -27,7 +33,7 @@ class DNDLogic
           adventure.players.each{|p|
             socket = opts[:ws][player.id]
             if socket
-              socket.send "chat:MASTER:#{text}"
+              socket.send {'chat' => {'from' => 'MASTER', 'text' => message}}.to_json
             else
               logger.warn "Ouch! player #{player_id} (#{player.name}) not found!"
             end
