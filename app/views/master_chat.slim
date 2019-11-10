@@ -1,0 +1,85 @@
+doctype html
+head
+  meta charset="utf-8"
+  link rel="stylesheet" type="text/css" href="/files/dnd.css"
+  
+  title Переписка с игроками
+
+body
+  == styled_flash
+  div.main
+    div.header.p-wrap
+      div.l-wrap
+        div.column.column-1-5.center
+          a href='/master' ВОЗВРАТ
+        div.column.column-1-5.center
+          a href='/note' Заметки
+        div.column.column-1-5.center
+          a href='/rules' Правила
+        div.column.column-1-5.center
+          a href='/map' Карта
+        div.column.column-1-5.center
+          a href='/logout' X
+
+    div.info
+      p.flex-container
+        input.fill-width name='msg' id='msg' type='text'
+        input type='button' onclick='send_msg_to_chat();' value="Послать!"
+    div.chat
+      
+
+  javascript:
+    var secret="#{{@user.secret}}";
+    var chat_messages=[];
+    var ws;
+
+    function set_value(id,value){
+      var el = document.getElementById(id)
+      if(el){
+        el.innerHTML = value;
+      }
+    }
+
+    function render_chat(){
+      var chat_text='';
+      var name_style;
+      var text_style;
+      for (var i = chat_messages.length - 1; i >= 0; i--) {
+        name_style = chat_messages[i]['from']=='MASTER' ? 'master-name' : 'my-name';
+        text_style = chat_messages[i]['from']=='MASTER' ? 'master-message' : 'my-message';
+        chat_text = chat_text+'<p><span style="'+name_style+'">'+
+          chat_messages[i]['from']+': </span><span style="'+text_style+'">'+
+          chat_messages[i]['text']+'</span></p>';
+      }
+      set_value('chat',chat_text);
+    }
+
+    function send_msg_to_chat(text){
+      ws.send(secret+': chat_message')
+    }
+
+    window.onload = function(){
+      var show = function(el){}
+      // function(el){
+      //   return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
+      // }(document.getElementById('msgs'));
+
+      ws           = new WebSocket('ws://' + window.location.host+'?player_id='+player);
+      ws.onopen    = function()  { ws.send(secret+': get_chat'); };
+      ws.onclose   = function()  { }
+      ws.onmessage = function(m) {
+        //alert(m.data);
+        var msg = JSON.parse(m.data);
+        if(msg['master']){
+          render_master(msg['master']);
+        }
+        else if(msg['chat']){
+          chat_messages.push(msg['chat']);
+          render_chat();
+        }
+        else if(msg['chat_history']){
+          chat_messages = msg['chat_history'];
+          render_chat();
+        }
+      };
+    }
