@@ -156,18 +156,31 @@ body
       }
       set_value('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
     }
+
+    function render_chat(data){
+      
+    }
+
     window.onload = function(){
       var show = function(el){}
       // function(el){
       //   return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
       // }(document.getElementById('msgs'));
 
-      var ws       = new WebSocket('ws://' + window.location.host);// + window.location.pathname);
-      ws.onopen    = function()  { ws.send(secret+': '+player': get_player'); };
+      var ws       = new WebSocket('ws://' + window.location.host+'?player_id='+player);// + window.location.pathname);
+      ws.onopen    = function()  { ws.send(secret+': get_player'); };
       ws.onclose   = function()  { show('websocket closed'); }
       ws.onmessage = function(m) {
         //alert(m.data);
-        render_player(JSON.parse(m.data))
+        var msg = JSON.parse(m.data);
+        if(msg['player']){
+          render_player(msg['player']);
+        }
+        else if(msg['chat']){
+          render_chat(msg['chat']);
+        }
+
+        //render_player(JSON.parse(m.data))
       };
 
       // var sender = function(f){

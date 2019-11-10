@@ -4,7 +4,7 @@ require 'sinatra-websocket'
 require 'json'
 
 class DNDController < BaseApp
-  WSregex = Regexp.new '^(\S+): (\S+): (.*)'
+  WSregex = Regexp.new '^(\S+): (.*)'
 
   get '/img/player/:player_id' do
     id = params[:player_id].to_i
@@ -28,21 +28,32 @@ class DNDController < BaseApp
       logger.warn "Websocket!"
       request.websocket do |ws|
         ws.onopen do
-          logger.warn "Connection #{ws}"
+          logger.warn "Connection #{ws.methods}"
           #ws.send("Hello World!")
-          #settings.sockets << ws
+          #settings.sockets
         end
         ws.onmessage do |msg|
           logger.warn "GOT: '#{msg}'"
           id = nil
           txt = nil
           if WSregex.match msg
+            player_id = params[:player_id]
             txt = $2
-            u = User.where(secret: $1).take
-            if u.nil?
+            user = User.find_by_secret $1
+            if user.nil?
               logger.warn "Bad secret: #{$1}"
             else
-              DNDLogic.process_message(ws,u,player,txt)
+              player = Player.find(player_id)
+              master = Master.find(player_id)
+              if player && player.user == user
+                settings.sockets[player_id] ||= ws
+                DNDLogic.process_message(ws,user,player,txt, ws: settings.sockets, player: true)
+              elsif master && master.user == user
+                settings.sockets["m#{player_id}"] ||= ws
+                DNDLogic.process_message(ws,user,master,txt, ws: settings.sockets, master: true)          
+              else
+                logger.warn "Bad player (#{player_id})"
+              end
             end
           else
             logger.warn "Bad ws request (#{msg})"
@@ -50,7 +61,7 @@ class DNDController < BaseApp
         end
         ws.onclose do
           #warn("websocket closed")
-          settings.sockets.delete(ws)
+          settings.sockets.delete_if{|k,s| logger.warn "Delete socket #{k}";s==ws}
         end
       end
     end
@@ -74,15 +85,15 @@ class DNDController < BaseApp
   #   end
   # end
 
-  get '/auth' do
-    slim :auth
-  end
-
   get '/logout' do
     session[:player_id]=0
     session[:secret]=0
     flash[:warn]='Пока!'
     redirect '/auth'
+  end
+
+  get '/auth' do
+    slim :auth
   end
 
   post '/auth' do

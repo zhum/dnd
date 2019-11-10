@@ -34,12 +34,11 @@ class BaseApp < Sinatra::Base
 
   configure do
     #enable :logging
-    logfile =Logger.new("#{settings.root}/../log/#{settings.environment}.log", 10, 10_240_000)
+    $logger = Logger.new("#{settings.root}/../log/#{settings.environment}.log", 10, 10_240_000)
     #logfile.sync = true
-    use Rack::CommonLogger, logfile
-    set :logger, logfile
+    use Rack::CommonLogger, $logger
+    set :logger, $logger
 
-    $logger = logger
     if env == 'development'
       #register Sinatra::Reloader 
       # Dir.glob("../models/*.rb").each do |file|
@@ -64,8 +63,9 @@ class BaseApp < Sinatra::Base
     end
   end
 
-  before '*' do
-    logger.warn "session=#{session.inspect}"
+  before do
+    #env['rack.errors'] = $logger
+    logger.warn "session: user_id=#{session[:user_id]}; player_id=#{session[:player_id]}; master_id=#{session[:master_id]}; secret=#{session[:secret]}"
     return if request.path=='/auth' or request.path=='/register'
     unless request.websocket? #!!!!!!!!! FIXME! Do auth for websocket too
       authenticate!

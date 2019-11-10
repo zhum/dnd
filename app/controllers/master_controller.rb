@@ -16,4 +16,10 @@ class MasterController < BaseApp
       redirect '/auth'
     end
   end
+
+  # Chat
+  get '/msg' do
+    @master = Master.find(session[:master_id])
+    slim :master_chat
+  end
 end
