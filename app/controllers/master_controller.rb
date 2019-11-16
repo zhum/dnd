@@ -1,15 +1,23 @@
 class MasterController < BaseApp
   # master interface
   get '/' do
-    @master = Master.find(session[:master_id])
-    slim :master
+    @player = Player.find(session[:player_id])
+    slim :master, locals: {title: "Переписка с игроками"}
+  end
+
+  # Chat
+  get '/msg' do
+    @player = Player.find(session[:player_id])
+    @title = "Чат с игроками"
+    slim :master_chat
   end
 
   #...
-  get '/:master_id' do
-    master = Master.find(params[:master_id])
-    if master.user == @user
-      session[:master_id] = params[:master_id]
+  get '/:player_id' do
+    @player = Player.find(params[:player_id])
+    if @player.user == @user
+      session[:player_id] = params[:player_id]
+      session[:master_id] = params[:player_id]
       redirect '/master'
     else
       session[:user_id] = 0
@@ -17,9 +25,4 @@ class MasterController < BaseApp
     end
   end
 
-  # Chat
-  get '/msg' do
-    @master = Master.find(session[:master_id])
-    slim :master_chat
-  end
 end

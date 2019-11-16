@@ -4,6 +4,110 @@
 		"selected_items":
 		[
 			[
+				"le",
+				"left\tabc"
+			],
+			[
+				"col",
+				"column-1-5\t(dnd.css)"
+			],
+			[
+				"chat",
+				"chat_text\tabc"
+			],
+			[
+				"fle",
+				"flex-container\t(dnd.css)"
+			],
+			[
+				"mar",
+				"margin-left\tabc"
+			],
+			[
+				"margin",
+				"margin-left\tabc"
+			],
+			[
+				"mas",
+				"master-name\t(common.js)"
+			],
+			[
+				"get_",
+				"get_value\tabc"
+			],
+			[
+				"inl",
+				"inline"
+			],
+			[
+				"hi",
+				"hidden\tabc"
+			],
+			[
+				"JSO",
+				"JSON.parse\t(player.slim)"
+			],
+			[
+				"sr",
+				"src\tmaster.slim"
+			],
+			[
+				"master",
+				"master_id\t(dnd_controller.rb)"
+			],
+			[
+				"els",
+				"elsif\t(logic.rb)"
+			],
+			[
+				"ad",
+				"adventure\t(player_controller.rb)"
+			],
+			[
+				"pla",
+				"player_id\tabc"
+			],
+			[
+				"pl",
+				"player_id\t(dnd_controller.rb)"
+			],
+			[
+				"DND",
+				"DNDController\t(dnd_controller.rb)"
+			],
+			[
+				"B",
+				"BaseApp\t(application_controller.rb)"
+			],
+			[
+				"password_",
+				"password_hash\t(user.rb)"
+			],
+			[
+				"requ",
+				"request\tabc"
+			],
+			[
+				"user",
+				"user_id\tabc"
+			],
+			[
+				"pass",
+				"password\tabc"
+			],
+			[
+				"do",
+				"downcase"
+			],
+			[
+				"na",
+				"name\t(player.rb)"
+			],
+			[
+				"be",
+				"belongs_to\t(player.rb)"
+			],
+			[
 				"Re",
 				"Regexp\t(disk2yaml.rb)"
 			],
@@ -52,10 +156,6 @@
 				"border"
 			],
 			[
-				"hi",
-				"hidden\t(gamne-js.html)"
-			],
-			[
 				"player-",
 				"player-class\tabc"
 			],
@@ -66,10 +166,6 @@
 			[
 				"play",
 				"player-name\tabc"
-			],
-			[
-				"mar",
-				"margin\tabc"
 			],
 			[
 				"aut",
@@ -110,10 +206,6 @@
 			[
 				"TODAY",
 				"today_code"
-			],
-			[
-				"JSO",
-				"JSON.load\tabc"
 			],
 			[
 				"now",
@@ -272,10 +364,6 @@
 				"stroke_colors"
 			],
 			[
-				"get_",
-				"get_legenda_rect"
-			],
-			[
 				"lege",
 				"legenda_align"
 			],
@@ -404,10 +492,6 @@
 				"subscribe"
 			],
 			[
-				"user",
-				"username\t(README.md)"
-			],
-			[
 				"pro",
 				"proxy"
 			],
@@ -430,95 +514,150 @@
 			[
 				"LOG_",
 				"LOG_COUNT"
-			],
-			[
-				"Tele",
-				"TeleLoop\t(fb-adapter.rb)"
-			],
-			[
-				"contr",
-				"control_loop\t(telebot2.rb)"
-			],
-			[
-				"b",
-				"body"
-			],
-			[
-				"co",
-				"conf"
-			],
-			[
-				"messa",
-				"message"
-			],
-			[
-				"message",
-				"message_options"
-			],
-			[
-				"parse",
-				"parsed_body"
-			],
-			[
-				"sender",
-				"sender_id"
-			],
-			[
-				"face",
-				"facebook-id"
-			],
-			[
-				"send",
-				"sender"
-			],
-			[
-				"access",
-				"access_token"
-			],
-			[
-				"pag",
-				"page_id"
-			],
-			[
-				"fb",
-				"fb_thread"
-			],
-			[
-				"fb_",
-				"fb_token\t(telebot2.rb)"
-			],
-			[
-				"queue",
-				"queues"
-			],
-			[
-				"Ba",
-				"Base\t(coltrol_bot.rb)"
-			],
-			[
-				"ju",
-				"just_enter"
-			],
-			[
-				"to_",
-				"to_sym〔function〕"
-			],
-			[
-				"on",
-				"on_message\t(telegram_adapter.rb)"
-			],
-			[
-				"start",
-				"start_async\t(telegram_adapter.rb)"
-			],
-			[
-				"TeleL",
-				"TeleLoop\t(telegram_adapter.rb)"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "db/migrate/20191109184900_rename_password.rb",
+			"settings":
+			{
+				"buffer_size": 155,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/logic.rb",
+			"settings":
+			{
+				"buffer_size": 2185,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/dnd_controller.rb",
+			"settings":
+			{
+				"buffer_size": 4294,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "127.0.0.1 - - [14/Nov/2019:20:31:51 +0300] \"GET /?player_id=1001 HTTP/1.1\" -1 - 52.7536                                                                                \nW, [2019-11-14T20:31:51.819139 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [14/Nov/2019:20:31:51 +0300] \"GET /player/msg HTTP/1.1\" 200 1087 0.0154                                                                                  \n127.0.0.1 - - [14/Nov/2019:20:31:52 +0300] \"GET /files/dnd.css HTTP/1.1\" 200 2760 0.0008                                                                               \n127.0.0.1 - - [14/Nov/2019:20:31:52 +0300] \"GET /files/common.js HTTP/1.1\" 200 3059 0.0008                                                                             \nW, [2019-11-14T20:31:52.189455 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [14/Nov/2019:20:31:52 +0300] \"GET /favicon.ico HTTP/1.1\" 404 530 0.0014                                                                                  \nW, [2019-11-14T20:31:52.579034 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \nW, [2019-11-14T20:31:52.579509 #22021]  WARN -- : Websocket!                                                                                                           \nW, [2019-11-14T20:31:52.579929 #22021]  WARN -- : Connection                                                                                                           \nW, [2019-11-14T20:31:52.664011 #22021]  WARN -- : GOT: 'qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r: get_chat'                                                     \nLogic got 'get_chat'                                                                                                                                                   \nid=1001                                                                                                                                                                \nW, [2019-11-14T20:32:49.150021 #22021]  WARN -- : Delete socket 1001                                                                                                   \n127.0.0.1 - - [14/Nov/2019:20:32:49 +0300] \"GET /?player_id=1001 HTTP/1.1\" -1 - 56.5717                                                                                \nW, [2019-11-14T20:32:49.263255 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [14/Nov/2019:20:32:49 +0300] \"GET /player/msg HTTP/1.1\" 200 1087 0.0080                                                                                  \n127.0.0.1 - - [14/Nov/2019:20:32:49 +0300] \"GET /files/dnd.css HTTP/1.1\" 200 2760 0.0013                                                                               \n127.0.0.1 - - [14/Nov/2019:20:32:49 +0300] \"GET /files/common.js HTTP/1.1\" 200 3070 0.0011                                                                             \nW, [2019-11-14T20:32:49.924109 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \nW, [2019-11-14T20:32:49.924676 #22021]  WARN -- : Websocket!                                                                                                           \nW, [2019-11-14T20:32:49.925045 #22021]  WARN -- : Connection                                                                                                           \nW, [2019-11-14T20:32:49.926873 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [14/Nov/2019:20:32:49 +0300] \"GET /favicon.ico HTTP/1.1\" 404 530 0.0029                                                                                  \nW, [2019-11-14T20:32:49.988927 #22021]  WARN -- : GOT: 'qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r: get_chat'                                                     \nLogic got 'get_chat'                                                                                                                                                   \nid=1001                                                                                                                                                                \nW, [2019-11-14T20:34:19.356182 #22021]  WARN -- : Delete socket 1001                                                                                                   \n127.0.0.1 - - [14/Nov/2019:20:34:19 +0300] \"GET /?player_id=1001 HTTP/1.1\" -1 - 89.4329                                                                                \nW, [2019-11-14T20:34:19.499897 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [14/Nov/2019:20:34:19 +0300] \"GET /player/msg HTTP/1.1\" 200 1087 0.0078                                                                                  \n127.0.0.1 - - [14/Nov/2019:20:34:19 +0300] \"GET /files/dnd.css HTTP/1.1\" 200 2844 0.0035                                                                               \n127.0.0.1 - - [14/Nov/2019:20:34:19 +0300] \"GET /files/common.js HTTP/1.1\" 200 3070 0.0010                                                                             \nW, [2019-11-14T20:34:19.984002 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [14/Nov/2019:20:34:19 +0300] \"GET /favicon.ico HTTP/1.1\" 404 530 0.0016                                                                                  \nW, [2019-11-14T20:34:20.264521 #22021]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \nW, [2019-11-14T20:34:20.264998 #22021]  WARN -- : Websocket!                                                                                                           \nW, [2019-11-14T20:34:20.265287 #22021]  WARN -- : Connection                                                                                                           \nW, [2019-11-14T20:34:20.275949 #22021]  WARN -- : GOT: 'qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r: get_chat'                                                     \nLogic got 'get_chat'                                                                                                                                                   \nid=1001                                                                                                                                                                \n                                                                                                                                                                       \n",
+			"settings":
+			{
+				"buffer_size": 7056,
+				"line_ending": "Unix",
+				"name": "Terminal (bash)",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "app/views/player.slim:        div.column.column-1-3                                                                                                                    \napp/views/player.slim:        div.column.column-1-3                                                                                                                    \napp/views/player.slim:        div.column.column-1-3                                                                                                                    \napp/views/player.slim:        div.column.column-1-3                                                                                                                    \napp/views/master_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/master_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/master_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/master_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/master_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/player_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/player_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/player_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/player_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/player_chat.slim:        div.column.column-1-5.center                                                                                                        \napp/views/master.slim:        div.column.column-1-5.center                                                                                                             \napp/views/master.slim:        div.column.column-1-5.center                                                                                                             \napp/views/master.slim:        div.column.column-1-5.center                                                                                                             \napp/views/master.slim:        div.column.column-1-5.center                                                                                                             \napp/views/master.slim:        div.column.column-1-5.center                                                                                                             \napp/views/master.slim:        div.coins.column.column-1-5                                                                                                              \napp/views/master.slim:        div.coins.column.column-1-5                                                                                                              \napp/views/master.slim:        div.coins.column.column-1-5                                                                                                              \napp/views/master.slim:        div.coins.column.column-1-5                                                                                                              \napp/views/master.slim:        div.coins.column.column-1-5                                                                                                              \napp/views/master.slim:        div.column.column-1-3                                                                                                                    \napp/views/master.slim:        div.column.column-1-3                                                                                                                    \napp/views/master.slim:        div.column.column-1-3                                                                                                                    \napp/views/master.slim:        div.column.column-1-3                                                                                                                    \napp/views/master.slim:        div.column.column-1-3                                                                                                                    \napp/views/master.slim:        div.column.column-1-3                                                                                                                    \napp/static/files/dnd.css:.column {                                                                                                                                     \napp/static/files/dnd.css:.column + .column {                                                                                                                           \napp/static/files/dnd.css:.column-1-5 {                                                                                                                                 \napp/static/files/dnd.css:.column-1-6 {                                                                                                                                 \napp/static/files/dnd.css:.column-1-3 {                                                                                                                                 \napp/static/files/dnd.css:.column-2-3 {                                                                                                                                 \napp/static/files/common.js:    chat_text = chat_text+'<div class=\"column\"><div data-msgid=\"'+chat_messages[i]['id']+'\" class=\"column-1-5 '+name_style+'\">'+            \n                                                                                                                                                                       \n |2.5.1| zh-home in ~/dnd                                                                                                                                              \n▒ |master ✗| $                                                                                                                                                         \n",
+			"settings":
+			{
+				"buffer_size": 6720,
+				"line_ending": "Unix",
+				"name": "Terminal (bash)",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "app/models/player.rb",
+			"settings":
+			{
+				"buffer_size": 1127,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/static/files/dnd.css",
+			"settings":
+			{
+				"buffer_size": 2820,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 781,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/static/files/common.js",
+			"settings":
+			{
+				"buffer_size": 3070,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/player.slim",
+			"settings":
+			{
+				"buffer_size": 5609,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/player_controller.rb",
+			"settings":
+			{
+				"buffer_size": 950,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/player_chat.slim",
+			"settings":
+			{
+				"buffer_size": 963,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/master_chat.slim",
+			"settings":
+			{
+				"buffer_size": 2626,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/master.slim",
+			"settings":
+			{
+				"buffer_size": 5358,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/master_controller.rb",
+			"settings":
+			{
+				"buffer_size": 492,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -531,6 +670,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"termi",
+				"Terminal View: Open Bash Terminal"
+			],
+			[
+				"git",
+				"Set Syntax: Git Commit"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"Package Control:",
 				"Package Control: Remove Package"
@@ -558,10 +709,6 @@
 			[
 				"install",
 				"Package Control: Install Package"
-			],
-			[
-				"insta",
-				"Install Package Control"
 			],
 			[
 				"mark",
@@ -655,29 +802,59 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/home/serg/dnd",
+		"/home/serg/dnd/app",
+		"/home/serg/dnd/app/controllers",
+		"/home/serg/dnd/app/models",
+		"/home/serg/dnd/app/static",
+		"/home/serg/dnd/app/static/files",
+		"/home/serg/dnd/app/views"
+	],
 	"file_history":
 	[
+		"/home/serg/dnd/app/controllers/player_controller.rb",
+		"/home/serg/dnd/app/static/files/dnd.css",
+		"/home/serg/dnd/app/static/common.js",
+		"/home/serg/dnd/app/views/master.slim",
+		"/home/serg/dnd/app/views/auth.slim",
+		"/home/serg/dnd/config.ru",
+		"/home/serg/dnd/app/application_controller.rb",
+		"/home/serg/dnd/app/views/index_dnd.slim",
+		"/home/serg/dnd/app/controllers/application_controller.rb",
+		"/home/serg/dnd/config/environment.rb",
+		"/home/serg/dnd/Gemfile",
+		"/home/serg/dnd/app/player_mod.rb",
+		"/home/serg/dnd/models/adventure.rb",
+		"/home/serg/dnd/models/user.rb",
+		"/home/serg/dnd/views/auth.slim",
+		"/home/serg/dnd/views/index_dnd.slim",
+		"/home/serg/dnd/views/player_select.slim",
+		"/home/serg/dnd/models/master.rb",
+		"/home/serg/dnd/app/dnd.rb",
+		"/home/serg/dnd/db/migrate/20191107080500_create_master_table.rb",
+		"/home/serg/dnd/views/player.slim",
+		"/home/serg/dnd/app.rb",
+		"/home/serg/dnd/app.ru",
+		"/home/serg/Dropbox/besta-anime.txt",
+		"/home/serg/dnd/views/select_player.slim",
+		"/home/serg/dnd/db/migrate/20191105203903_add_secret_to_user.rb",
+		"/home/serg/dnd/db/migrate/20191104160227_add_secret_to_player.rb",
 		"/home/serg/ownCloud/disk2yaml.rb",
 		"/home/serg/ownCloud/disks-gtk.rb",
 		"/home/serg/services/views/days.slim",
 		"/home/serg/dnd/static/files/dnd.css",
-		"/home/serg/dnd/views/index_dnd.slim",
-		"/home/serg/dnd/app.rb",
 		"/home/serg/dnd/app/logic.rb",
-		"/home/serg/dnd/app/dnd.rb",
 		"/home/serg/dnd/models/player.rb",
 		"/home/serg/services/views/hours.slim",
 		"/home/serg/ownCloud/yaml2serials.rb",
 		"/home/serg/Dropbox/gamne-js.html",
-		"/home/serg/dnd/app.ru",
 		"/home/serg/dnd/model/player.rb",
 		"/home/serg/dnd/dnd.rb",
-		"/home/serg/dnd/db/migrate/20191104160227_add_secret_to_player.rb",
 		"/home/serg/dnd/db/migrate/20191104085415_create_chars_table.rb",
-		"/home/serg/dnd/views/auth.slim",
 		"/home/serg/dnd/model/resource.rb",
 		"/home/serg/dnd/db/migrate/20191104083407_create_players_table.rb",
-		"/home/serg/dnd/Gemfile",
 		"/home/serg/Рабочий стол/Игры 01",
 		"/home/serg/dnd/dnd.css",
 		"/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C025%5D/Внутр. накопитель/wifi_config.log",
@@ -764,27 +941,7 @@
 		"/home/serg/services/views/hours_bars.slim",
 		"/home/serg/services/views/days_bars.slim",
 		"/home/serg/.config/sublime-text-3/Packages/GoSublime/USAGE.md",
-		"/home/serg/services/home_bot/teleconfig3.yaml",
-		"/home/serg/services/home_bot/lib/telegram_responder.rb",
-		"/home/serg/services/home_bot/lib/bot.rb",
-		"/home/serg/services/home_bot/lib/processors/menu_responder.rb",
-		"/home/serg/services/home_bot/lib/processors/exec_responder.rb",
-		"/home/serg/tmp/rchart/gruff-chart.rb",
-		"/home/serg/Dropbox/panasas - cheatsheet.txt",
-		"/home/serg/Dropbox/guitar-zakaz.txt",
-		"/home/serg/Dropbox/punkrocker.txt",
-		"/home/serg/ownCloud/Backup-codes-sergzhum.txt",
-		"/home/serg/ownCloud/fun-фотографы.txt",
-		"/opt/rubysaver/conditions-apixu.json",
-		"/home/serg/tmp/rubysaver/rubysaver.conf",
-		"/home/serg/Рабочий стол/Photoshop-CS2.serial.txt",
-		"/home/serg/services/home_bot/lib/processors/internal_responders.rb",
-		"/home/serg/services/home_bot/lib/processors/test.rb",
-		"/home/serg/BOT/lib/processors/subscriptions_responder.rb",
-		"/home/serg/BOT/lib/users.rb",
-		"/home/serg/BOT/lib/telegram_responder.rb",
-		"/home/serg/BOT/lib/processors/menu_responder.rb",
-		"/home/serg/BOT/lib/bot_logic.rb"
+		"/home/serg/services/home_bot/teleconfig3.yaml"
 	],
 	"find":
 	{
@@ -795,6 +952,7 @@
 		"height": 125.0,
 		"where_history":
 		[
+			"/home/serg/dnd",
 			"/home/serg/tmp/lom_bot",
 			"/home/serg/tmp/lom_bot/lib"
 		]
@@ -804,6 +962,30 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"100",
+			"100&",
+			"coins",
+			"get_player",
+			"[",
+			"*",
+			"'",
+			"\"",
+			"master",
+			"player",
+			"name",
+			"data",
+			"master",
+			"WSReg",
+			"secret",
+			"player",
+			"Player",
+			"player",
+			"name",
+			"reg_email",
+			"player",
+			"name",
+			":id",
+			"player",
 			"contrib",
 			"id",
 			"h",
@@ -907,31 +1089,7 @@
 			"foreig",
 			"set_alignment",
 			"Pango::ALIGN_RIGHT",
-			"compos",
-			"GdkPixbuf::Pixbuf::InterpType::BILINEAR",
-			"Gdk::Pixbuf",
-			"draw_h",
-			"draw_w",
-			"y_shift",
-			"SouthEast",
-			"label_s",
-			"label",
-			"legenda_a",
-			"agenda_a",
-			"labels",
-			"max_la",
-			"label_siz",
-			"*3",
-			"debug",
-			"label_size",
-			"gap",
-			"@labels",
-			"set_fill",
-			"fil",
-			"@width",
-			"1",
-			"x",
-			"canno"
+			"compos"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -958,8 +1116,670 @@
 	"groups":
 	[
 		{
+			"selected": 6,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "db/migrate/20191109184900_rename_password.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22,
+								22
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/logic.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								320,
+								320
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/controllers/dnd_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								354,
+								354
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7056,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6888,
+								6888
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_complete_commit_on_tab": false,
+							"caret_style": "blink",
+							"color_scheme": "Packages/TerminalView/TerminalView.hidden-tmTheme",
+							"default_dir": "/home/serg/.config/sublime-text-3/Packages/User",
+							"draw_centered": false,
+							"draw_indent_guides": false,
+							"draw_white_space": "none",
+							"gutter": false,
+							"highlight_line": false,
+							"scroll_past_end": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"terminal_view": true,
+							"terminal_view_activate_args":
+							{
+								"cmd": "/bin/bash -l",
+								"cwd": "/home/serg/dnd",
+								"keep_open": false,
+								"syntax": null,
+								"title": "Terminal (bash)"
+							},
+							"terminal_view_last_cursor_pos":
+							[
+								41,
+								0
+							],
+							"terminal_view_scroll": null,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6720,
+						"regions":
+						{
+							"38,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6384,
+										6393
+									]
+								],
+								"scope": "terminalview.black_brown"
+							},
+							"38,20":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6404,
+										6409
+									]
+								],
+								"scope": "terminalview.black_green"
+							},
+							"38,9":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6393,
+										6401
+									]
+								],
+								"scope": "terminalview.black_magenta"
+							},
+							"39,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6552,
+										6553
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
+							"39,1":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6553,
+										6562
+									]
+								],
+								"scope": "terminalview.black_green"
+							},
+							"39,10":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6562,
+										6563
+									]
+								],
+								"scope": "terminalview.black_red"
+							},
+							"39,11":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6563,
+										6566
+									]
+								],
+								"scope": "terminalview.black_green"
+							},
+							"40,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_brown"
+							},
+							"40,20":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_green"
+							},
+							"40,9":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_magenta"
+							},
+							"41,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
+							"41,1":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_green"
+							},
+							"41,10":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_red"
+							},
+							"41,11":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										6720,
+										6720
+									]
+								],
+								"scope": "terminalview.black_green"
+							}
+						},
+						"selection":
+						[
+							[
+								6567,
+								6567
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_complete_commit_on_tab": false,
+							"caret_style": "blink",
+							"color_scheme": "Packages/TerminalView/TerminalView.hidden-tmTheme",
+							"default_dir": "/home/serg/dnd/app/models",
+							"draw_centered": false,
+							"draw_indent_guides": false,
+							"draw_white_space": "none",
+							"gutter": false,
+							"highlight_line": false,
+							"scroll_past_end": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"terminal_view": true,
+							"terminal_view_activate_args":
+							{
+								"cmd": "/bin/bash -l",
+								"cwd": "/home/serg/dnd",
+								"keep_open": false,
+								"syntax": null,
+								"title": "Terminal (bash)"
+							},
+							"terminal_view_last_cursor_pos":
+							[
+								39,
+								15
+							],
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/models/player.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1127,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1063,
+								1063
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 198.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/static/files/dnd.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2820,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1599,
+								1599
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS3/CSS3.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1895.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 781,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/static/files/common.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3070,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1822,
+								1822
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 660.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/views/player.slim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								281,
+								281
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/controllers/player_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 950,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								695,
+								695
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/views/player_chat.slim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								741,
+								741
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/views/master_chat.slim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2626,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								702,
+								702
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "app/views/master.slim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								297,
+								297
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "app/controllers/master_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 492,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								239,
+								239
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1040,7 +1860,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 193.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

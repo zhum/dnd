@@ -6,8 +6,15 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :password_hash
 
   has_many :players
-  has_many :masters
   has_many :adventures, through: :players
+
+  def just_players
+    self.where(is_master: false)
+  end
+  
+  def masters
+    self.where(is_master: true)
+  end
 
   def authorize(pass)
     self.password == pass

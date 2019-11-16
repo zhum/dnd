@@ -1,41 +1,33 @@
-doctype html
-head
-  meta charset="utf-8"
-  link rel="stylesheet" type="text/css" href="/files/dnd.css"
+== styled_flash
+form action='/auth' method='post'
+  fieldset width='100%'
+    legend Представьтесь...
+    p.flex-container
+      label.text-right for='email' style='min-width: 20%'
+        | Email:
+      input.fill-width name='email' id='email' type='email'
+    p.flex-container
+      label.text-right for='password' style='min-width: 20%'
+        | Пароль:
+      input.fill-width name='password' id='password' type='password'
+  div.fullwidth.center
+    input type='submit' value='Отправить'
 
-  title Представьтесь...
-
-body
-  == styled_flash
-  form action='/auth' method='post'
-    fieldset width='100%'
-      legend Представьтесь...
-      p.flex-container
-        label.text-right for='email' style='min-width: 20%'
-          | Email:
-        input.fill-width name='email' id='email' type='email'
-      p.flex-container
-        label.text-right for='password' style='min-width: 20%'
-          | Пароль:
-        input.fill-width name='password' id='password' type='password'
-    div.fullwidth.center
-      input type='submit' value='Отправить'
-
-  form action='/register' method='post'
-    fieldset width='100%'
-      legend Или зарегистрируйтесь
-      p.flex-container
-        label.text-right for='reg_email' style='min-width: 20%'
-          | Email:
-        input.fill-width name='reg_email' id='reg_email' type='email'
-      p.flex-container
-        label.text-right for='reg_pass' style='min-width: 20%'
-          | Пароль:
-        input.fill-width name='reg_pass' id='reg_pass' type='password'
-      p.flex-container
-        label.text-right for='reg_name' style='min-width: 20%'
-          | Имя в игре:
-        input.fill-width name='reg_name' id='reg_name' type='text'
-    div.fullwidth.center
-      input type='submit' value='Отправить'
+form action='/register' method='post'
+  fieldset width='100%'
+    legend Или зарегистрируйтесь
+    p.flex-container
+      label.text-right for='reg_email' style='min-width: 20%'
+        | Email:
+      input.fill-width name='reg_email' id='reg_email' type='email'
+    p.flex-container
+      label.text-right for='reg_pass' style='min-width: 20%'
+        | Пароль:
+      input.fill-width name='reg_pass' id='reg_pass' type='password'
+    p.flex-container
+      label.text-right for='reg_name' style='min-width: 20%'
+        | Имя в игре:
+      input.fill-width name='reg_name' id='reg_name' type='text'
+  div.fullwidth.center
+    input type='submit' value='Отправить'
 

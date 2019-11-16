@@ -18,9 +18,11 @@ class DNDController < BaseApp
   get '/' do
     if !request.websocket?
       if session[:player_id].to_i > 0
-        redirect '/player'
-      elsif session[:master_id].to_i > 0
-        redirect '/master'
+        if Player.find(session[:player_id].to_i).is_master
+          redirect '/master'
+        else
+          redirect '/player'
+        end
       else
         redirect '/auth'
       end
@@ -28,7 +30,7 @@ class DNDController < BaseApp
       logger.warn "Websocket!"
       request.websocket do |ws|
         ws.onopen do
-          logger.warn "Connection #{ws.methods}"
+          logger.warn "Connection "#{ws.methods}"
           #ws.send("Hello World!")
           #settings.sockets
         end
@@ -37,20 +39,20 @@ class DNDController < BaseApp
           id = nil
           txt = nil
           if WSregex.match msg
-            player_id = params[:player_id]
+            player_id = params[:player_id].to_i
             txt = $2
             user = User.find_by_secret $1
             if user.nil?
               logger.warn "Bad secret: #{$1}"
             else
-              player = Player.find(player_id)
-              master = Master.find(player_id)
+              player = Player.find_by_id(player_id)
               if player && player.user == user
                 settings.sockets[player_id] ||= ws
-                DNDLogic.process_message(ws,user,player,txt, ws: settings.sockets, player: true)
-              elsif master && master.user == user
-                settings.sockets["m#{player_id}"] ||= ws
-                DNDLogic.process_message(ws,user,master,txt, ws: settings.sockets, master: true)          
+                DNDLogic.process_message(
+                  ws, user, player, txt,
+                  ws: settings.sockets,
+                  player: !player.is_master,
+                  master: player.is_master)
               else
                 logger.warn "Bad player (#{player_id})"
               end
@@ -71,6 +73,7 @@ class DNDController < BaseApp
   get '/player_select' do
     #@user = User.find(session[:user_id])
     logger.warn "PLAYER_SELECT"
+    @title = "Выберите кем играть"
     slim :player_select
   end
 
@@ -93,6 +96,7 @@ class DNDController < BaseApp
   end
 
   get '/auth' do
+    @title = "Представьтесь..."
     slim :auth
   end
 
@@ -109,8 +113,8 @@ class DNDController < BaseApp
     elsif @user && @user.authorize(params[:password])
       session[:user_id]=@user.id
       session[:secret]=@user.secret
-      players = @user.players
-      masters = @user.masters
+      players = @user.players.where(is_master: false)
+      masters = @user.players.where(is_master: true)
       if players.size+masters.size>0
         warn "User=#{@user.inspect}"
         warn "player_select! (#{session.inspect})"
