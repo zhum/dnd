@@ -17,19 +17,21 @@ class DNDLogic
       # send chat history
       when 'get_chat'
         warn "id=#{player.id}"
-        if true
-          messages = Message.where(player: player).order(created_at: :asc)
-          list = messages.map{|msg|
-            {
-              from: msg.to_master ? 'Я' : 'МАСТЕР',
-              text: msg.text
-            }
-          }
-          logger.warn "get_chat: '#{list}'"
-          ws.send({'chat_history' => list}.to_json)
+        messages = if player.is_master
+          Message.all
         else
-          warn "Opppppppsssssss....."
+          Message.where(player: player).order(created_at: :asc)
         end
+        list = messages.map{|msg|
+          {
+            from: player.is_master ? 
+              (msg.to_master ? msg.player.name : 'Я') :
+              (msg.to_master ? 'Я' : 'Мастер'),
+            text: msg.text
+          }
+        }
+        logger.warn "get_chat: '#{list}'"
+        ws.send({'chat_history' => list}.to_json)
       when /^message=(.*)/
         message = nil
         begin
@@ -47,15 +49,10 @@ class DNDLogic
     end
 
     def send_message socket, correspondent, from_text, to_master, text
-      m = Message.create(player: correspondent, to_master: to_master, text: text)
-      m.save
-      warn "Шлёт мастер?(#{sender_is_master}) Шлёт мастеру?(#{to_master})"
-      from_text = sender_is_master ?
-        (to_master ? 'Я' : 'Мастер' ) :    # master->self / master -> player
-        (to_master ? correspondent.name : 'Я')  # player -> master / player -> self
-       # to_master ?
-       #  (is_master ? 'Я' : correspondent.name) :         # x -> master
-       #  (is_master ? 'Я' : 'МАСТЕР')            # x -> player
+      #warn "Шлёт мастер?(#{sender_is_master}) Шлёт мастеру?(#{to_master})"
+      # from_text = sender_is_master ?
+      #   (to_master ? 'Я' : 'Мастер' ) :    # master->self / master -> player
+      #   (to_master ? correspondent.name : 'Я')  # player -> master / player -> self
       if socket
         socket.send({chat: {from: from_text, text: text}}.to_json)
         true
@@ -80,6 +77,8 @@ class DNDLogic
       if player.is_master
         #FIXME! send to selected player!
         adventure.players.where(is_master: false).each { |e|
+          m = Message.create(player: e, to_master: false, text: message['text'])
+          m.save
           socket = opts[:ws][e.id]
           warn "player.is_master: #{e.is_master} to player s=#{socket}"
           if ! send_message socket, player, 'Мастер', false, message['text']
@@ -89,6 +88,8 @@ class DNDLogic
       else
         # send to master
         socket = opts[:ws][master.id]
+        m = Message.create(player: player, to_master: true, text: message['text'])
+        m.save
         warn "sender.is_master: #{player.is_master} to master s=#{socket}"
         if ! send_message socket, player, player.name, true, message['text']
           warn "Ouch! master is not connected!"
