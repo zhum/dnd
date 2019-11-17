@@ -1,9 +1,12 @@
 == styled_flash
 div.main.mui-container
+  div.app-bar.center
+    = @player.name
+    | (Мастер)
   div.app-bar.mui-container-fluid
     div.mui-row
       div.center.mui-col-xs-2
-        a href='/player/msg' ОБРАТНО
+        a href='/player' ОБРАТНО
       div.center.mui-col-xs-2.mui--divider-left
         a href='/note' Заметки
       div.center.mui-col-xs-4.mui--divider-left

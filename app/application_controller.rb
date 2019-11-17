@@ -40,17 +40,20 @@ class BaseApp < Sinatra::Base
     set :logger, $logger
 
     if env == 'development'
-      #register Sinatra::Reloader 
-      # Dir.glob("../models/*.rb").each do |file|
-      #   also_reload file
-      # end
-      # Dir.glob("*.rb").each do |file|
-      #   also_reload file
-      # end
+      register Sinatra::Reloader 
+      Dir.glob("#{root}/app/models/*.rb").each do |file|
+        also_reload file
+      end
+      Dir.glob("#{root}/app/conreollers/*.rb").each do |file|
+        also_reload file
+      end
+      Dir.glob("#{root}/app/*.rb").each do |file|
+        also_reload file
+      end
 
-      # after_reload do
-      #   logger.warn "Reloaded!"
-      # end
+      after_reload do
+        logger.warn "Reloaded!"
+      end
     end
   end
 
