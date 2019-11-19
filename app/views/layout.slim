@@ -3,9 +3,10 @@ head
   meta charset="utf-8"
   link rel="stylesheet" type="text/css" href="/files/dnd.css"
   link rel="stylesheet" type="text/css" href="/mui/css/mui.min.css"
+  script src="/mui/js/mui.min.js"
   
   title
-    = @title
+    = "#{@title}#{@player.nil? ? '' : "(#{@player.id})"}"
 
 body
   == yield

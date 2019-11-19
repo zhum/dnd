@@ -16,10 +16,25 @@ div.main.mui-container
       div.center.mui-col-xs-2.mui--divider-left
         a href='/logout' X
 
-  div.fullwidth
-    input.fill-width.mui-container-fluid name='msg' id='msg' type='text'
-    input type='button' onclick='send_msg_to_chat();' value="Послать!"
-  div#chat.chat
+  ul class="mui-tabs__bar"
+    - liclass = 'mui--is-active'
+    - players = @adventure.players.where(is_master: false).order(:name)
+    - players.each do |p|
+      li class="#{liclass}"
+        a data-mui-toggle="tab" data-mui-controls="pane-default-#{p.id}"
+          = p.name
+      - liclass = nil
+    /li a data-mui-toggle="tab" data-mui-controls="pane-default-2" Tab-2
+    /li a data-mui-toggle="tab" data-mui-controls="pane-default-3" Tab-3
+
+  - liclass = 'mui--is-active'
+  - players.each do |p|
+    div class="mui-tabs__pane #{liclass}" id="pane-default-#{p.id}"
+      div.fullwidth
+        input.fill-width.mui-container-fluid name='msg' id='msg-#{p.id}' data-for='#{p.id}' type='text'
+        input type='submit' onclick='send_msg_to_chat("msg-#{p.id}");' value="Послать!"
+      div id="chat#{p.id}" class="chat"
+    - liclass = nil
 
 javascript:
   var secret="#{{@user.secret}}";

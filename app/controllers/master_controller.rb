@@ -8,6 +8,7 @@ class MasterController < BaseApp
   # Chat
   get '/msg' do
     @player = Player.find(session[:player_id])
+    @adventure = @player.adventure
     @title = "Чат с игроками"
     slim :master_chat
   end
