@@ -35,7 +35,7 @@ class DNDLogic
         list.each{|id,lst|
           logger.warn "get_chat: #{id} '#{lst}'"
           message = {'chat_history' => lst}
-          if not player.is_master
+          if player.is_master
             message['from'] = id
           end
           ws.send(message.to_json)
@@ -76,7 +76,11 @@ class DNDLogic
       adventure = player.adventure
       master = adventure.master
       #is_master = player.id==master.id
-
+      if message['text']==''
+        warn "Empty message from #{player.name} (#{player.id})"
+        return
+      end
+      
       # send back to self
       socket = opts[:ws][player.id]
       warn "self.is_master: #{player.is_master} to self s=#{socket}"
