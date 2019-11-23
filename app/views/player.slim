@@ -122,9 +122,12 @@ div.main.mui-container
 
 
   div.mui-container-fluid
-    div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('char');"
-      | Характеристики
-      span.mui-caret.mui-caret--right
+    div.mui-row.mui--text-center.mui--z2
+      span onclick="toggle_item('char');"
+        | Характеристики
+        span.mui-caret.mui-caret--right
+      span.mui--pull-right data-char-view="mod" onclick="toggle_char_view();" Мод.
+    div.mui--clearfix
     div#char.mui--hide
       div.mui-row.mui--divider-bottom
         - ['strength','constitution','dexterity'].each do |i|
@@ -132,7 +135,7 @@ div.main.mui-container
             span.label2
               = t("char.#{i}")
               | : 
-          div.mui-col-xs-2 id="ch_#{i}"
+          div.mui-col-xs-2 id="mod_#{i}"
             | ...
       div.mui-row.mui--divider-bottom
         - ['intellegence','wisdom','charisma'].each do |i|
@@ -140,12 +143,12 @@ div.main.mui-container
             span.label2
               = t("char.#{i}")
               | : 
-          div.mui-col-xs-2 id="ch_#{i}"
+          div.mui-col-xs-2 id="mod_#{i}"
             | ...
 
 
   div.mui-container-fluid
-    div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('inventory');"
+    div.mui-row.mui--text-center.mui--z2 onclick="toggle_item('inventory');"
       | Снаряжение
       span.mui-caret.mui-caret--right
     div#inventory.mui--hide

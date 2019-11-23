@@ -1,5 +1,6 @@
 var chat_messages={};
 var ws;
+var player;
 
 function set_value(id,value){
   var el = document.getElementById(id)
@@ -14,6 +15,31 @@ function get_value(id,value){
     return el.innerText;
   }
   return null;
+}
+
+/*
+  Change characheristics view: absolute or as modifier
+ */
+function toggle_char_view(){
+  var el = document.querySelector('[data-char-view]');
+  var mod = el.getAttribute('data-char-view');
+  if(mod=='mod'){
+    el.innerHTML='Абс.';
+    el.setAttribute('data-char-view','abs');
+  }
+  else{    
+    el.innerHTML='Мод.';
+    el.setAttribute('data-char-view','mod');
+  }
+  render_chars();
+}
+
+function render_chars(){
+  var el = document.querySelector('[data-char-view]');
+  var view = el.getAttribute('data-char-view');
+  for( var mod in player['mods']){
+    set_value('mod_'+mod, view=='mod' ? Math.floor((10.0-player['mods'][mod])/2) : player['mods'][mod]);
+  }
 }
 
 function render_player(data){
@@ -32,6 +58,7 @@ function render_player(data){
   for( var ch in data.chars){
     set_value('ch_'+ch, data.chars[ch]);
   }
+  render_chars();
   set_value('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
 }
 
@@ -109,7 +136,8 @@ window.onload = function(){
       render_master(msg['master']);
     }
     else if(msg['player']){
-      render_player(msg['player']);
+      player = msg['player'];
+      render_player(player);
     }
     else if(msg['chat']){ // new message!
       var id='';

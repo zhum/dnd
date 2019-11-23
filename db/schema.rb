@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_16_114101) do
+ActiveRecord::Schema.define(version: 2019_11_23_203702) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 2019_11_16_114101) do
     t.integer "player_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "to_master"
     t.index ["player_id"], name: "index_messages_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.string "email"
     t.string "klass"
     t.string "race"
     t.integer "hp"
@@ -55,6 +55,12 @@ ActiveRecord::Schema.define(version: 2019_11_16_114101) do
     t.integer "user_id"
     t.integer "adventure_id"
     t.boolean "is_master"
+    t.integer "mod_strength"
+    t.integer "mod_dexterity"
+    t.integer "mod_constitution"
+    t.integer "mod_intellegence"
+    t.integer "mod_wisdom"
+    t.integer "mod_charisma"
     t.index ["adventure_id"], name: "index_players_on_adventure_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end

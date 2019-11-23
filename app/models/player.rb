@@ -6,12 +6,18 @@ class Player < ActiveRecord::Base
   belongs_to :user
   belongs_to :adventure
 
+  MODS = [
+    'strength','dexterity','constitution',
+    'intellegence','wisdom','charisma'
+  ]
+
   def to_json
     h = ['id', 'name', 'klass', 'race', 'hp'].map{|name|
       [name, self.public_send(name)]
     }
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
+    h << ['mods',Hash[MODS.map{|c| [c,public_send("mod_#{c}")]}]]
     warn "===> #{h.inspect}"
     Hash[h].to_json.to_s
     
