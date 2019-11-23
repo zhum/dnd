@@ -24,6 +24,10 @@ class PlayerController < BaseApp
   
   get '/:player_id' do
     @player = Player.find(params[:player_id])
+    # @char_translation = {
+    #   'strength' => 'Сил.','constitution' => 'Телосл.',
+    #   'dexterity' => 'Ловк.','intellegence' => 'Интел.',
+    #   'wisdom' => 'Мудр.','charisma' => 'Харизма'}
     if @player.user == @user
       session[:player_id] = params[:player_id]
       redirect '/player'
@@ -37,6 +41,10 @@ class PlayerController < BaseApp
   get '/' do
     @player = Player.find(session[:player_id])
     @title = "Игрок"
+    # @char_translation = {
+    #   'strength' => 'Сил.','constitution' => 'Телосл.',
+    #   'dexterity' => 'Ловк.','intellegence' => 'Интел.',
+    #   'wisdom' => 'Мудр.','charisma' => 'Харизма'}
     slim :player
   end
 

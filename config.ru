@@ -12,12 +12,15 @@ Bundler.require(:default, ENV['SINATRA_ENV'])
 require 'sinatra/base'
 require 'sinatra/json'
 require 'sinatra/flash'
+require 'i18n'
+require 'i18n/backend/fallbacks'
 #require 'sinatra/reloader'
 require 'active_record'
 require 'yaml'
 require 'json'
 
 
+Dir.glob('./app/helpers/*.rb').each { |file| require file }
 Dir.glob('./app/*.rb').each { |file| require file }
 Dir.glob('./app/models/*.rb').each { |file| require file }
 Dir.glob('./app/controllers/*.rb').each { |file| require file }

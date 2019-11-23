@@ -95,6 +95,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bcrypt
+  i18n
   logger
   pry
   rack

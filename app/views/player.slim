@@ -79,7 +79,7 @@ div.main.mui-container
         | &nbsp;ПМ:
         span#pcoins 
           | ...
-  div.main-char.mui-container-fluid
+  div.main-char.mui-container-fluid.mui--bg-primary-light
     div.mui-row.center.mui--divider-bottom
       div.mui-col-xs-4
         span.block.fullwidth#ch_armour_class
@@ -96,7 +96,7 @@ div.main.mui-container
           | ...
         span.block.fullwidth.center.label1
           | Скорость
-    div.mui-row.center
+    div.mui-row.center.mui--divider-bottom
       div.mui-col-xs-4
         span.block.fullwidth#ch_pass_attentiveness
           | ...
@@ -113,16 +113,43 @@ div.main.mui-container
         span.block.fullwidth.center.label1
           | Кости хитов
 
-  div.fight
-    | Бой .....
+  div.mui-container-fluid.
+    div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('fight');"
+      | Бой
+      span.mui-caret.mui-caret--right onclick="toggle_item('fight');"
+    div#fight.mui--hide
+      | .....
 
 
-  div.char
-    | Характеристики .....
+  div.mui-container-fluid
+    div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('char');"
+      | Характеристики
+      span.mui-caret.mui-caret--right
+    div#char.mui--hide
+      div.mui-row.mui--divider-bottom
+        - ['strength','constitution','dexterity'].each do |i|
+          div.mui-col-xs-2.mui--divider-left
+            span.label2
+              = t("char.#{i}")
+              | : 
+          div.mui-col-xs-2 id="ch_#{i}"
+            | ...
+      div.mui-row.mui--divider-bottom
+        - ['intellegence','wisdom','charisma'].each do |i|
+          div.mui-col-xs-2.mui--divider-left
+            span.label2
+              = t("char.#{i}")
+              | : 
+          div.mui-col-xs-2 id="ch_#{i}"
+            | ...
 
 
-  div.inventory
-    | Снаряжение .....
+  div.mui-container-fluid
+    div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('inventory');"
+      | Снаряжение
+      span.mui-caret.mui-caret--right
+    div#inventory.mui--hide
+      | ...
 
 
 
@@ -133,67 +160,11 @@ javascript:
     ws.send(secret+': get_player');
   }
 
-script src="/files/common.js"
-
-//
-  function set_value(id,value){
-    var el = document.getElementById(id)
+  function toggle_item(item){
+    var el = document.getElementById(item);
     if(el){
-      el.innerHTML = value;
+      el.classList.toggle('mui--hide');
     }
   }
 
-  function render_player(data){
-    //alert(data);
-    set_value('player-name', data.name);
-    set_value('player-class', data.klass);
-    set_value('player-race', data.race);
-    set_value('hp', data.hp);
-    set_value('ccoins', data.coins[0]);
-    set_value('scoins', data.coins[1]);
-    set_value('gcoins', data.coins[2]);
-    set_value('ecoins', data.coins[3]);
-    set_value('pcoins', data.coins[4]);
-    set_value('total-gold', (data.coins[0]+data.coins[1]*10+data.coins[2]*100+data.coins[3]*50+data.coins[4]*1000)/100);
-    for( var ch in data.chars){
-      set_value('ch_'+ch, data.chars[ch]);
-    }
-    set_value('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
-  }
-
-  function render_chat(data){
-
-  }
-
-  window.onload = function(){
-    var show = function(el){}
-    // function(el){
-    //   return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
-    // }(document.getElementById('msgs'));
-
-    var ws       = new WebSocket('ws://' + window.location.host+player_str);// + window.location.pathname);
-    ws.onopen    = function()  { ws.send(secret+': get_player'); };
-    ws.onclose   = function()  { show('websocket closed'); }
-    ws.onmessage = function(m) {
-      //alert(m.data);
-      var msg = JSON.parse(m.data);
-      if(msg['player']){
-        render_player(msg['player']);
-      }
-      else if(msg['chat']){
-        render_chat(msg['chat']);
-      }
-
-      //render_player(JSON.parse(m.data))
-    };
-
-    // var sender = function(f){
-    //   var input     = document.getElementById('input');
-    //   input.onclick = function(){ input.value = "" };
-    //   f.onsubmit    = function(){
-    //     ws.send(input.value);
-    //     input.value = "send a message";
-    //     return false;
-    //   }
-    // }(document.getElementById('form'));
-  }
+script src="/files/common.js"

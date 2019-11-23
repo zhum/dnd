@@ -3,6 +3,7 @@ source :rubygems
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-flash'
+gem 'i18n'
 #gem 'sinatra-activerecord'
 gem 'activerecord', require: 'active_record'
 gem 'sqlite3'

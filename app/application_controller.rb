@@ -39,6 +39,10 @@ class BaseApp < Sinatra::Base
     use Rack::CommonLogger, $logger
     set :logger, $logger
 
+    I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+    I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
+    I18n.backend.load_translations
+
     if env == 'development'
       register Sinatra::Reloader 
       Dir.glob("#{root}/app/models/*.rb").each do |file|
@@ -70,10 +74,12 @@ class BaseApp < Sinatra::Base
     #env['rack.errors'] = $logger
     logger.warn "session: user_id=#{session[:user_id]}; player_id=#{session[:player_id]}; master_id=#{session[:master_id]}; secret=#{session[:secret]}"
     return if request.path=='/auth' or request.path=='/register'
+    I18n.locale = 'ru' || params[:locale]
     unless request.websocket? #!!!!!!!!! FIXME! Do auth for websocket too
       authenticate!
     end
     @user = User.find_by_id(session[:user_id])
   end
 
+  include ::IntHelpers
 end
