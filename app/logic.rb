@@ -7,6 +7,12 @@ class DNDLogic
     def process_message ws,user,player,text,opts={}
       warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       case text
+      when 'hello'
+        logger.warn "got hello from #{player.id} (#{player.name})"
+        return
+      when 'get_master'
+        logger.warn "got master request from #{player.id} (#{player.name})"
+        return
       # send player info
       when 'get_player'
         #@player = Player.find(session[:id]||1001)
@@ -80,7 +86,7 @@ class DNDLogic
         warn "Empty message from #{player.name} (#{player.id})"
         return
       end
-      
+
       # send back to self
       socket = opts[:ws][player.id]
       warn "self.is_master: #{player.is_master} to self s=#{socket}"
@@ -101,8 +107,8 @@ class DNDLogic
         m = Message.create(player: reciepient, to_master: false, text: message['text'])
         m.save
         socket = opts[:ws][reciepient.id]
-        warn "player.is_master: #{reciepient.is_master} to player s=#{socket} (ws=#{opts[:ws].keys})"
-        if ! send_message socket, player, 'Мастер', false, message['text'], message['for']
+        warn "player.is_master: #{reciepient.is_master} to #{reciepient.id}/#{reciepient.name} s=#{socket}"
+        if ! send_message socket, player, 'Мастер', false, message['text'] #, message['for']
           warn "Ouch! player #{reciepient.name} is not connected now!"
         end
 

@@ -6,7 +6,7 @@ div.main.mui-container
   div.app-bar.mui-container-fluid
     div.mui-row
       div.center.mui-col-xs-2
-        a href='/player' ОБРАТНО
+        a href='/master' ОБРАТНО
       div.center.mui-col-xs-2.mui--divider-left
         a href='/note' Заметки
       div.center.mui-col-xs-4.mui--divider-left
@@ -23,13 +23,12 @@ div.main.mui-container
       li class="#{liclass}"
         a data-mui-toggle="tab" data-mui-controls="pane-default-#{p.id}"
           = p.name
+          span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}" *
       - liclass = nil
-    /li a data-mui-toggle="tab" data-mui-controls="pane-default-2" Tab-2
-    /li a data-mui-toggle="tab" data-mui-controls="pane-default-3" Tab-3
 
   - liclass = 'mui--is-active'
   - players.each do |p|
-    div class="mui-tabs__pane #{liclass}" id="pane-default-#{p.id}"
+    div class="mui-tabs__pane #{liclass}" id="pane-default-#{p.id}" data-ind-id="#{p.id}"
       div.fullwidth
         input.fill-width.mui-container-fluid name='msg' id='msg-#{p.id}' data-for='#{p.id}' type='text'
         input type='submit' onclick='send_msg_to_chat("msg-#{p.id}");' value="Послать!"
@@ -37,10 +36,27 @@ div.main.mui-container
     - liclass = nil
 
 javascript:
-  var secret="#{{@user.secret}}";
-  var player_str='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
     ws.send(secret+': get_chat');
+  }
+
+  function tabShow(ev) {
+    var id = ev.paneId; //ev.relatedPaneId;
+    var pane = document.getElementById(id);
+    if(pane){
+      var el = document.getElementById('chat-indicator'+pane.getAttribute('data-ind-id'));
+      el.classList.remove('new-message');
+      el.classList.add('no-messages');
+    }
+  }
+
+  function dnd_init(){
+    var elist = document.querySelectorAll('[data-mui-controls^="pane-default-"]');
+
+    // attach event handlers
+    for (var i=0; i < elist.length; i++) {
+      elist[i].addEventListener('mui.tabs.showend', tabShow);
+    }
   }
 
 script src="/files/common.js"

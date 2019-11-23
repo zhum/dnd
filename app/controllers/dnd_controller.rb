@@ -14,6 +14,10 @@ class DNDController < BaseApp
     redirect "/img/player_#{id}.png"
   end
 
+  get '/img/:img' do
+    redirect "/img/default.jpg"
+  end
+
   # websocket request or redirect to player/master/auth
   get '/' do
     if !request.websocket?

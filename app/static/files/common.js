@@ -1,4 +1,4 @@
-var chat_messages=[];
+var chat_messages={};
 var ws;
 
 function set_value(id,value){
@@ -46,9 +46,10 @@ function render_chat(from=''){
   if(el){
     render_chat_full(from);
   }
-  var ind = document.getElementById('chat_indicator'+from);
+  var ind = document.getElementById('chat-indicator'+from);
   if(ind){
-    el.classList.add('new_message');
+    ind.classList.remove('no-messages');
+    ind.classList.add('new-message');
   }
 }
 
@@ -57,13 +58,14 @@ function render_chat_full(from=''){
   var name_style;
   var text_style;
   var read;
-  for (var i = chat_messages.length - 1; i >= 0; i--) {
-    name_style = chat_messages[i]['from']=='MASTER' ? 'master-name' : 'my-name';
-    text_style = chat_messages[i]['from']=='MASTER' ? 'master-message' : 'my-message';
-    read = chat_messages[i]['read']=='yes' ? '' : '<span class="new-message">*</span>';
-    chat_text = chat_text+'<div class="mui-row"><div data-msgid="'+chat_messages[i]['id']+'" class="mui-col-xs-2 '+name_style+'">'+
-      chat_messages[i]['from']+': </div><div class="mui-col-xs-10 '+text_style+'">'+
-      chat_messages[i]['text']+'</div></div>';
+  var list = chat_messages[from];
+  for (var i = list.length - 1; i >= 0; i--) {
+    name_style = list[i]['from']=='MASTER' ? 'master-name' : 'my-name';
+    text_style = list[i]['from']=='MASTER' ? 'master-message' : 'my-message';
+    read = list[i]['read']=='yes' ? '' : '<span class="new-message">*</span>';
+    chat_text = chat_text+'<div class="mui-row"><div data-msgid="'+list[i]['id']+'" class="mui-col-xs-2 '+name_style+'">'+
+      list[i]['from']+': </div><div class="mui-col-xs-10 '+text_style+'">'+
+      list[i]['text']+'</div></div>';
   }
   chat_text = chat_text+'</div>';
   set_value('chat'+from,chat_text);
@@ -93,8 +95,10 @@ window.onload = function(){
 
   ws           = new WebSocket('ws://' + window.location.host+player_str);// + window.location.pathname);
   ws.onopen    = function(){
-    //ws.send(secret+': get_chat');
-    on_websocket_open(ws);
+    ws.send(secret+': hello');
+    if(on_websocket_open){
+      on_websocket_open(ws);
+    }
   };
   ws.onclose   = function()
   { }
@@ -108,12 +112,26 @@ window.onload = function(){
       render_player(msg['player']);
     }
     else if(msg['chat']){ // new message!
-      chat_messages.push(msg['chat']);
-      render_chat(msg['from']);
+      var id='';
+      if('from' in msg){
+        id = msg['from'];
+      }
+      if(!chat_messages[id]){
+        chat_messages[id]=[];
+      }
+      chat_messages[id].push(msg['chat']);
+      render_chat(id);
     }
     else if(msg['chat_history']){
-      chat_messages = msg['chat_history'];
-      render_chat(msg['from']);
+      var id='';
+      if('from' in msg){
+        id = msg['from'];
+      }
+      chat_messages[id] = msg['chat_history'];
+      render_chat(id);
     }
   };
+  if(typeof(dnd_init)==='function'){
+    dnd_init();
+  }
 }
