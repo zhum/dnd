@@ -1,5 +1,6 @@
 var chat_messages={};
 var ws;
+var ws_timeout=null;
 var player;
 
 function set_value(id,value){
@@ -20,26 +21,41 @@ function get_value(id,value){
 /*
   Change characheristics view: absolute or as modifier
  */
-function toggle_char_view(){
-  var el = document.querySelector('[data-char-view]');
-  var mod = el.getAttribute('data-char-view');
-  if(mod=='mod'){
-    el.innerHTML='Абс.';
-    el.setAttribute('data-char-view','abs');
+function toggle_char_edit(){
+  var el = document.querySelector('[data-char-edit]');
+  var mod = el.getAttribute('data-char-edit');
+  if(mod=='view'){
+    el.innerHTML='<i class="iw-eye"></i>';
+    el.setAttribute('data-char-edit','edit');
   }
   else{    
-    el.innerHTML='Мод.';
-    el.setAttribute('data-char-view','mod');
+    el.innerHTML='<i class="iw-edit"></i>';
+    el.setAttribute('data-char-edit','view');
   }
+  document.querySelectorAll('[data-char-plus]').forEach(function(el){
+    el.classList.toggle('mui--hide');
+  });
+  document.querySelectorAll('[data-char-minus]').forEach(function(el){
+    el.classList.toggle('mui--hide');
+  });
   render_chars();
 }
 
 function render_chars(){
-  var el = document.querySelector('[data-char-view]');
-  var view = el.getAttribute('data-char-view');
   for( var mod in player['mods']){
-    set_value('mod_'+mod, view=='mod' ? Math.floor((10.0-player['mods'][mod])/2) : player['mods'][mod]);
+    var n = Math.floor((player['mods'][mod]-10.0)/2);
+    set_value('mod_'+mod, n+' ('+player['mods'][mod]+')');
   }
+}
+
+function char_plus(mod){
+  player['mods'][mod] += 1;
+  ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+}
+
+function char_minus(mod){
+  player['mods'][mod] += 1;
+  ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
 }
 
 function render_player(data){
@@ -114,51 +130,73 @@ function send_msg_to_chat(inputid=''){
   el.value = '';
 }
 
-window.onload = function(){
-  var show = function(el){}
-  // function(el){
-  //   return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
-  // }(document.getElementById('msgs'));
+function mark_connection(on){
+  var el = document.getElementById('connected');
+  if(el){
+    if(on=='yes'){
+      el.classList.add('connected'); el.classList.remove('disconnected');
+    }
+    else{
+      el.classList.remove('connected'); el.classList.add('disconnected');
+    }
+  }
+}
 
-  ws           = new WebSocket('ws://' + window.location.host+player_str);// + window.location.pathname);
-  ws.onopen    = function(){
-    ws.send(secret+': hello');
-    if(on_websocket_open){
-      on_websocket_open(ws);
-    }
-  };
-  ws.onclose   = function()
-  { }
-  ws.onmessage = function(m) {
-    //alert(m.data);
-    var msg = JSON.parse(m.data);
-    if(msg['master']){
-      render_master(msg['master']);
-    }
-    else if(msg['player']){
-      player = msg['player'];
-      render_player(player);
-    }
-    else if(msg['chat']){ // new message!
-      var id='';
-      if('from' in msg){
-        id = msg['from'];
+function try_connect(){
+  ws = new WebSocket('ws://' + window.location.host+player_str);// + window.location.pathname);
+  if(ws){
+    clearTimeout(ws_timeout);
+    ws.onopen    = function(){
+      mark_connection('yes');
+      ws.send(secret+': hello');
+      if(on_websocket_open){
+        on_websocket_open(ws);
       }
-      if(!chat_messages[id]){
-        chat_messages[id]=[];
-      }
-      chat_messages[id].push(msg['chat']);
-      render_chat(id);
+    };
+    ws.onclose   = function(){
+      mark_connection('no');
+      ws_timeout = setTimeout(try_connect,2000);
     }
-    else if(msg['chat_history']){
-      var id='';
-      if('from' in msg){
-        id = msg['from'];
-      }
-      chat_messages[id] = msg['chat_history'];
-      render_chat(id);
+    ws.onerror   = function(){
+      mark_connection('no');
+      ws_timeout = setTimeout(try_connect,2000);
     }
-  };
+    ws.onmessage = function(m) {
+      //alert(m.data);
+      var msg = JSON.parse(m.data);
+      if(msg['master']){
+        render_master(msg['master']);
+      }
+      else if(msg['player']){
+        player = msg['player'];
+        render_player(player);
+      }
+      else if(msg['chat']){ // new message!
+        var id='';
+        if('from' in msg){
+          id = msg['from'];
+        }
+        if(!chat_messages[id]){
+          chat_messages[id]=[];
+        }
+        chat_messages[id].push(msg['chat']);
+        render_chat(id);
+      }
+      else if(msg['chat_history']){
+        var id='';
+        if('from' in msg){
+          id = msg['from'];
+        }
+        chat_messages[id] = msg['chat_history'];
+        render_chat(id);
+      }
+    }
+  }
+}
+window.onload = function(){
+
+  try_connect();
+
   if(typeof(dnd_init)==='function'){
     dnd_init();
   }

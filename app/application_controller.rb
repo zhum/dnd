@@ -82,4 +82,5 @@ class BaseApp < Sinatra::Base
   end
 
   include ::IntHelpers
+  include ::PartitionHelpers
 end

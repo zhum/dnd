@@ -8,6 +8,7 @@ head
 
   link rel="stylesheet" type="text/css" href="/files/dnd.css"
   link rel="stylesheet" type="text/css" href="/mui/css/mui.min.css"
+  link rel="stylesheet" href="/files/icon-works.css" type="text/css" charset="utf-8"
   script src="/mui/js/mui.min.js"
   
   title
@@ -17,5 +18,7 @@ body
   javascript:
     var secret="#{{@user && @user.secret}}";
     var player_str='?player_id='+"#{{@player && @player.id}}";
+  
+  div#connected.disconnected
 
   == yield

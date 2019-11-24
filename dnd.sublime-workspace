@@ -4,6 +4,70 @@
 		"selected_items":
 		[
 			[
+				"af",
+				"after\tabc"
+			],
+			[
+				"try",
+				"try_connect()\tcommon.js"
+			],
+			[
+				"mui",
+				"mui--hide\t(player.slim)"
+			],
+			[
+				"cla",
+				"classList\tabc"
+			],
+			[
+				"data-",
+				"data-char-plus\t(player.slim)"
+			],
+			[
+				"render",
+				"render_char\tabc"
+			],
+			[
+				"data",
+				"data-char-view\tabc"
+			],
+			[
+				"inte",
+				"intellegence\t(player.slim)"
+			],
+			[
+				"req",
+				"req\trequire \"..\""
+			],
+			[
+				"mui--",
+				"mui--hide\tabc"
+			],
+			[
+				"fi",
+				"fight\tabc"
+			],
+			[
+				"get",
+				"get_master"
+			],
+			[
+				"class",
+				"classList\t(common.js)"
+			],
+			[
+				"chat",
+				"chat_messages\tcommon.js"
+			],
+			[
+				"cha",
+				"chat_messages\tabc"
+			],
+			[
+				"pla",
+				"player\tabc"
+			],
+			[
 				"маст",
 				"мастеру"
 			],
@@ -44,20 +108,12 @@
 				"Player.find\t(logic.rb)"
 			],
 			[
-				"mui",
-				"mui-row\tabc"
-			],
-			[
 				"le",
 				"left\tabc"
 			],
 			[
 				"col",
 				"column-1-5\t(dnd.css)"
-			],
-			[
-				"chat",
-				"chat_text\tabc"
 			],
 			[
 				"fle",
@@ -106,10 +162,6 @@
 			[
 				"ad",
 				"adventure\t(player_controller.rb)"
-			],
-			[
-				"pla",
-				"player_id\tabc"
 			],
 			[
 				"DND",
@@ -376,10 +428,6 @@
 				"combine_options"
 			],
 			[
-				"cla",
-				"cla\tclass .. initialize .. end"
-			],
-			[
 				"fil",
 				"fill"
 			],
@@ -466,54 +514,6 @@
 			[
 				"Ha",
 				"Hash\t(fb-adapter.rb)"
-			],
-			[
-				"Arr",
-				"Array\t(state_processor.rb)"
-			],
-			[
-				"varia",
-				"variables"
-			],
-			[
-				"fin",
-				"find_by"
-			],
-			[
-				"exis",
-				"exists"
-			],
-			[
-				"reen",
-				"reenter\t(lomo_bot.rb)"
-			],
-			[
-				"service",
-				"service_port\t(telebot2.rb)"
-			],
-			[
-				"exi",
-				"exists\t(telebot2.rb)"
-			],
-			[
-				"ada",
-				"adapter"
-			],
-			[
-				"Proce",
-				"Processors"
-			],
-			[
-				"imple",
-				"implementation"
-			],
-			[
-				"va",
-				"value"
-			],
-			[
-				"Pro",
-				"Proxy\t(telegram_adapter.rb)"
 			]
 		]
 	},
@@ -523,13 +523,13 @@
 			"file": "app/logic.rb",
 			"settings":
 			{
-				"buffer_size": 3348,
+				"buffer_size": 5496,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "W, [2019-11-18T09:22:03.221879 #27836]  WARN -- : session: user_id=; player_id=; master_id=; secret=                                                                   \n124.156.50.129 - - [18/Nov/2019:09:22:03 +0300] \"GET / HTTP/1.0\" 302 - 0.0151                                                                                          \nW, [2019-11-18T18:24:17.182489 #27836]  WARN -- : session: user_id=; player_id=; master_id=; secret=                                                                   \n104.237.128.197 - - [18/Nov/2019:18:24:17 +0300] \"GET / HTTP/1.0\" 302 - 0.0686                                                                                         \n^CW, [2019-11-18T20:31:10.028095 #27836]  WARN -- : Delete socket 1001                                                                                                 \nW, [2019-11-18T20:31:10.028331 #27836]  WARN -- : Delete socket 1003                                                                                                   \n127.0.0.1 - - [18/Nov/2019:20:31:10 +0300] \"GET /?player_id=1001 HTTP/1.1\" -1 - 116201.0260                                                                            \nW, [2019-11-18T20:31:10.048578 #27836]  WARN -- : Delete socket 1003                                                                                                   \n127.0.0.1 - - [18/Nov/2019:20:31:10 +0300] \"GET /?player_id=1003 HTTP/1.1\" -1 - 116198.3120                                                                            \n                                                                                                                                                                       \n                                                                                                                                                                       \n |2.5.1| zh-home in ~/dnd                                                                                                                                              \n▒ |master ✓| $ ./run_app                                                                                                                                               \nW, [2019-11-18T20:31:24.646763 #22592]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \n127.0.0.1 - - [18/Nov/2019:20:31:24 +0300] \"GET /player/msg HTTP/1.1\" 200 1269 0.2067                                                                                  \n127.0.0.1 - - [18/Nov/2019:20:31:25 +0300] \"GET /files/dnd.css HTTP/1.1\" 200 2864 0.0183                                                                               \n127.0.0.1 - - [18/Nov/2019:20:31:25 +0300] \"GET /mui/css/mui.min.css HTTP/1.1\" 200 44119 0.0135                                                                        \n127.0.0.1 - - [18/Nov/2019:20:31:25 +0300] \"GET /files/common.js HTTP/1.1\" 200 3058 0.0114                                                                             \nW, [2019-11-18T20:31:26.105656 #22592]  WARN -- : session: user_id=1; player_id=1001; master_id=1; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r              \nW, [2019-11-18T20:31:26.106366 #22592]  WARN -- : Websocket!                                                                                                           \nW, [2019-11-18T20:31:26.106711 #22592]  WARN -- : Connection                                                                                                           \nW, [2019-11-18T20:31:26.108855 #22592]  WARN -- : GOT: 'qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r: get_chat'                                                     \nLogic got 'get_chat' from 1001 false Гудвил Евилнес                                                                                                                    \nid=1001                                                                                                                                                                \nW, [2019-11-18T20:31:32.746187 #22592]  WARN -- : session: user_id=2; player_id=1003; master_id=1003; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                        \n127.0.0.1 - - [18/Nov/2019:20:31:32 +0300] \"GET /master/msg HTTP/1.1\" 200 1285 0.0399                                                                                  \n127.0.0.1 - - [18/Nov/2019:20:31:32 +0300] \"GET /files/dnd.css HTTP/1.1\" 200 2864 0.0012                                                                               \n127.0.0.1 - - [18/Nov/2019:20:31:33 +0300] \"GET /mui/css/mui.min.css HTTP/1.1\" 200 44119 0.0014                                                                        \n127.0.0.1 - - [18/Nov/2019:20:31:33 +0300] \"GET /files/common.js HTTP/1.1\" 200 3058 0.0009                                                                             \nW, [2019-11-18T20:31:33.271966 #22592]  WARN -- : session: user_id=2; player_id=1003; master_id=1003; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                        \nW, [2019-11-18T20:31:33.272599 #22592]  WARN -- : Websocket!                                                                                                           \nW, [2019-11-18T20:31:33.272996 #22592]  WARN -- : Connection                                                                                                           \nW, [2019-11-18T20:31:33.277155 #22592]  WARN -- : GOT: 'qweasfdhtyiurfuuvuwq3er7qwe6trdjfh: get_chat'                                                                  \nLogic got 'get_chat' from 1003 true Великий Инквизитор                                                                                                                 \nid=1003                                                                                                                                                                \nW, [2019-11-18T20:31:33.285524 #22592]  WARN -- : session: user_id=2; player_id=1003; master_id=1003; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                        \n127.0.0.1 - - [18/Nov/2019:20:31:33 +0300] \"GET /favicon.ico HTTP/1.1\" 404 530 0.0034                                                                                  \nW, [2019-11-19T05:08:40.787016 #22592]  WARN -- : session: user_id=; player_id=; master_id=; secret=                                                                   \n45.33.71.222 - - [19/Nov/2019:05:08:40 +0300] \"GET / HTTP/1.1\" 302 - 0.2204                                                                                            \nW, [2019-11-19T05:08:41.146414 #22592]  WARN -- : session: user_id=; player_id=; master_id=; secret=                                                                   \n45.33.71.222 - - [19/Nov/2019:05:08:41 +0300] \"GET /auth HTTP/1.1\" 200 1594 0.2515                                                                                     \n                                                                                                                                                                       \n",
+			"contents": "W, [2019-11-24T10:22:48.727777 #31613]  WARN -- : Connection                                                                                                           \nW, [2019-11-24T10:22:48.810493 #31613]  WARN -- : GOT: 'qweasfdhtyiurfuuvuwq3er7qwe6trdjfh: hello'                                                                     \nLogic got 'hello' from 1002 false Радомир Бурнохвост                                                                                                                   \nW, [2019-11-24T10:22:48.817587 #31613]  WARN -- : GOT: 'qweasfdhtyiurfuuvuwq3er7qwe6trdjfh: get_player'                                                                \nLogic got 'get_player' from 1002 false Радомир Бурнохвост                                                                                                              \n===> [[\"id\", 1002], [\"name\", \"Радомир Бурнохвост\"], [\"klass\", \"прохвост\"], [\"race\", \"японец\"], [\"hp\", 33], [\"coins\", [1, 1, 1, 1, 1]], [\"chars\", {\"armour_class\"=>\"10\",\n \"initiavive\"=>\"1\", \"initiative\"=>\"1\", \"speed\"=>\"22\", \"pass_attentiveness\"=>\"10\", \"masterlevel\"=>\"1\", \"hit_dice\"=>\"3\", \"hit_dice_of\"=>\"10\"}], [\"mods\", {\"strength\"=>16,\n \"dexterity\"=>17, \"constitution\"=>11, \"intellegence\"=>15, \"wisdom\"=>2, \"charisma\"=>8}]]                                                                                \nW, [2019-11-24T10:23:10.421992 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /player HTTP/1.1\" 200 8310 0.0604                                                                                      \nW, [2019-11-24T10:23:10.497801 #31613]  WARN -- : Delete socket 1001                                                                                                   \nW, [2019-11-24T10:23:10.497867 #31613]  WARN -- : Delete socket 1002                                                                                                   \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /?player_id=1002 HTTP/1.1\" -1 - 21.7723                                                                                \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /files/dnd.css HTTP/1.1\" 200 3077 0.0023                                                                               \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /mui/css/mui.min.css HTTP/1.1\" 200 44119 0.0681                                                                        \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /files/common.js HTTP/1.1\" 200 5254 0.0334                                                                             \nW, [2019-11-24T10:23:10.667421 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /files/icon-works.css HTTP/1.1\" 404 544 0.0058                                                                         \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /mui/js/mui.min.js HTTP/1.1\" 200 19506 0.0794                                                                          \nW, [2019-11-24T10:23:10.749838 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /img/player/1002 HTTP/1.1\" 302 - 0.0044                                                                                \nW, [2019-11-24T10:23:10.888615 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /img/player_1002.png HTTP/1.1\" 302 - 0.0083                                                                            \n127.0.0.1 - - [24/Nov/2019:10:23:10 +0300] \"GET /img/default.jpg HTTP/1.1\" 200 368866 0.0336                                                                           \nW, [2019-11-24T10:23:11.249584 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \nW, [2019-11-24T10:23:11.250219 #31613]  WARN -- : Websocket!                                                                                                           \nW, [2019-11-24T10:23:11.250469 #31613]  WARN -- : Connection                                                                                                           \nW, [2019-11-24T10:23:11.300619 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \n127.0.0.1 - - [24/Nov/2019:10:23:11 +0300] \"GET /favicon.ico HTTP/1.1\" 404 530 0.0018                                                                                  \nW, [2019-11-24T10:23:11.317107 #31613]  WARN -- : GOT: 'qweasfdhtyiurfuuvuwq3er7qwe6trdjfh: hello'                                                                     \nLogic got 'hello' from 1002 false Радомир Бурнохвост                                                                                                                   \nW, [2019-11-24T10:23:11.318514 #31613]  WARN -- : GOT: 'qweasfdhtyiurfuuvuwq3er7qwe6trdjfh: get_player'                                                                \nLogic got 'get_player' from 1002 false Радомир Бурнохвост                                                                                                              \n===> [[\"id\", 1002], [\"name\", \"Радомир Бурнохвост\"], [\"klass\", \"прохвост\"], [\"race\", \"японец\"], [\"hp\", 33], [\"coins\", [1, 1, 1, 1, 1]], [\"chars\", {\"armour_class\"=>\"10\",\n \"initiavive\"=>\"1\", \"initiative\"=>\"1\", \"speed\"=>\"22\", \"pass_attentiveness\"=>\"10\", \"masterlevel\"=>\"1\", \"hit_dice\"=>\"3\", \"hit_dice_of\"=>\"10\"}], [\"mods\", {\"strength\"=>16,\n \"dexterity\"=>17, \"constitution\"=>11, \"intellegence\"=>15, \"wisdom\"=>2, \"charisma\"=>8}]]                                                                                \nW, [2019-11-24T10:27:56.513089 #31613]  WARN -- : session: user_id=2; player_id=1002; master_id=; secret=qweasfdhtyiurfuuvuwq3er7qwe6trdjfh                            \n127.0.0.1 - - [24/Nov/2019:10:27:57 +0300] \"GET /player HTTP/1.1\" 200 8310 1.0787                                                                                      \nW, [2019-11-24T10:27:57.327107 #31613]  WARN -- : Delete socket 1001                                                                                                   \nW, [2019-11-24T10:27:57.327200 #31613]  WARN -- : Delete socket 1002                                                                                                   \n127.0.0.1 - - [24/Nov/2019:10:27:57 +0300] \"GET /?player_id=1002 HTTP/1.1\" -1 - 286.0783                                                                               \n                                                                                                                                                                       \n",
 			"settings":
 			{
 				"buffer_size": 7056,
@@ -540,7 +540,7 @@
 			}
 		},
 		{
-			"contents": "~                                                                                                                                                                      \n~                                                                                                                                                                      \n~                                                                                                                                                                      \n~                                                                                                                                                                      \n\".git/COMMIT_EDITMSG\" 18L, 828C записано                                                                                                                               \n[master 1bd37af] wip                                                                                                                                                   \n 7 files changed, 60 insertions(+), 29 deletions(-)                                                                                                                    \n                                                                                                                                                                       \n |2.5.1| zh-home in ~/dnd                                                                                                                                              \n▒ |master ✓| $ git push                                                                                                                                                \nПодсчет объектов: 12, готово.                                                                                                                                          \nDelta compression using up to 2 threads.                                                                                                                               \nСжатие объектов: 100% (12/12), готово.                                                                                                                                 \nЗапись объектов: 100% (12/12), 2.58 KiB | 1.29 MiB/s, готово.                                                                                                          \nTotal 12 (delta 8), reused 0 (delta 0)                                                                                                                                 \nremote: Resolving deltas: 100% (8/8), completed with 8 local objects.                                                                                                  \nTo github.com:zhum/dnd.git                                                                                                                                             \n   ed61180..1bd37af  master -> master                                                                                                                                  \n                                                                                                                                                                       \n |2.5.1| zh-home in ~/dnd                                                                                                                                              \n▒ |master ✓| $ bgbbbbh                                                                                                                                                 \n=['\\;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bgbbbbh: команда не найдена                                                                                \n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                                                                            \n |2.5.1| zh-home in ~/dnd                                                                                                                                              \n▒ |master ✓| $ git pull                                                                                                                                                \nremote: Enumerating objects: 13, done.                                                                                                                                 \nremote: Counting objects: 100% (13/13), done.                                                                                                                          \nremote: Compressing objects: 100% (2/2), done.                                                                                                                         \nremote: Total 9 (delta 5), reused 9 (delta 5), pack-reused 0                                                                                                           \nРаспаковка объектов: 100% (9/9), готово.                                                                                                                               \nИз github.com:zhum/dnd                                                                                                                                                 \n   1bd37af..4d57dc9  master     -> origin/master                                                                                                                       \nОбновление 1bd37af..4d57dc9                                                                                                                                            \nFast-forward                                                                                                                                                           \n app/logic.rb     |  41 +++++++++++++++++++++--------------------                                                                                                      \n dnd.sqlite3      | Bin 81920 -> 81920 bytes                                                                                                                           \n log/.placeholder |   2 ++                                                                                                                                             \n 3 files changed, 23 insertions(+), 20 deletions(-)                                                                                                                    \n create mode 100644 log/.placeholder                                                                                                                                   \n                                                                                                                                                                       \n |2.5.1| zh-home in ~/dnd                                                                                                                                              \n▒ |master ✓| $                                                                                                                                                         \n",
+			"contents": ">> Char                                                                                                                                                                \nChar                                                                                                                                                                   \n>> Char.find(36).destroy                                                                                                                                               \n=> #<Char id: 36, player_id: 1002, name: \"wisdom\", value: \"-20\">                                                                                                       \n>> Char.find(35).destroy                                                                                                                                               \n=> #<Char id: 35, player_id: 1002, name: \"intellegence\", value: \"333\">                                                                                                 \n>> Char.find(34).destroy                                                                                                                                               \n=> #<Char id: 34, player_id: 1002, name: \"constitution\", value: \"33\">                                                                                                  \n>> Char.find(33).destroy                                                                                                                                               \n=> #<Char id: 33, player_id: 1002, name: \"strength\", value: \"3\">                                                                                                       \n>> Char.find(32).destroy                                                                                                                                               \n=> #<Char id: 32, player_id: 1002, name: \"dexterity\", value: \"3\">                                                                                                      \n>> Char.find(31).destroy                                                                                                                                               \n=> #<Char id: 31, player_id: 1002, name: \"power\", value: \"3\">                                                                                                          \n>> Char.find(30).destroy                                                                                                                                               \n=> #<Char id: 30, player_id: 1002, name: \"charisma\", value: \"2\">                                                                                                       \n>> p                                                                                                                                                                   \n=> #<Player id: 1002, name: \"Радомир Бурнохвост\", klass: \"прохвост\", race: \"японец\", hp: 33, max_hp: 35, mcoins: 1, scoins: 1, gcoins: 1, ecoins: 1, pcoins: 1, secret:\n 123, user_id: 2, adventure_id: 1, is_master: false, mod_strength: 0, mod_dexterity: 17, mod_constitution: 11, mod_intellegence: 13, mod_wisdom: 2, mod_charisma: 8>   \n>> p.chars                                                                                                                                                             \n=> #<ActiveRecord::Associations::CollectionProxy [#<Char id: 22, player_id: 1002, name: \"armour_class\", value: \"10\">, #<Char id: 23, player_id: 1002, name: \"initiavive\n\", value: \"1\">, #<Char id: 24, player_id: 1002, name: \"initiative\", value: \"1\">, #<Char id: 25, player_id: 1002, name: \"speed\", value: \"22\">, #<Char id: 26, player_id:\n 1002, name: \"pass_attentiveness\", value: \"10\">, #<Char id: 27, player_id: 1002, name: \"masterlevel\", value: \"1\">, #<Char id: 28, player_id: 1002, name: \"hit_dice\", va\nlue: \"3\">, #<Char id: 29, player_id: 1002, name: \"hit_dice_of\", value: \"10\">, #<Char id: 30, player_id: 1002, name: \"charisma\", value: \"2\">, #<Char id: 31, player_id: \n1002, name: \"power\", value: \"3\">, ...]>                                                                                                                                \n>> Char.find(30).destroy!                                                                                                                                              \nActiveRecord::RecordNotFound: Couldn't find Char with 'id'=30                                                                                                          \n    /home/serg/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-6.0.1/lib/active_record/core.rb:177:in `find'                                               \n    (ripl):17:in `<main>'                                                                                                                                              \n>> Char.find(30).destroy                                                                                                                                               \nActiveRecord::RecordNotFound: Couldn't find Char with 'id'=30                                                                                                          \n    /home/serg/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-6.0.1/lib/active_record/core.rb:177:in `find'                                               \n    (ripl):18:in `<main>'                                                                                                                                              \n>> p=Player.find(1002)                                                                                                                                                 \n=> #<Player id: 1002, name: \"Радомир Бурнохвост\", klass: \"прохвост\", race: \"японец\", hp: 33, max_hp: 35, mcoins: 1, scoins: 1, gcoins: 1, ecoins: 1, pcoins: 1, secret:\n 123, user_id: 2, adventure_id: 1, is_master: false, mod_strength: 0, mod_dexterity: 17, mod_constitution: 11, mod_intellegence: 13, mod_wisdom: 2, mod_charisma: 8>   \n>> p.chars                                                                                                                                                             \n=> #<ActiveRecord::Associations::CollectionProxy [#<Char id: 22, player_id: 1002, name: \"armour_class\", value: \"10\">, #<Char id: 23, player_id: 1002, name: \"initiavive\n\", value: \"1\">, #<Char id: 24, player_id: 1002, name: \"initiative\", value: \"1\">, #<Char id: 25, player_id: 1002, name: \"speed\", value: \"22\">, #<Char id: 26, player_id:\n 1002, name: \"pass_attentiveness\", value: \"10\">, #<Char id: 27, player_id: 1002, name: \"masterlevel\", value: \"1\">, #<Char id: 28, player_id: 1002, name: \"hit_dice\", va\nlue: \"3\">, #<Char id: 29, player_id: 1002, name: \"hit_dice_of\", value: \"10\">]>                                                                                         \n>>                                                                                                                                                                     \n",
 			"settings":
 			{
 				"buffer_size": 7056,
@@ -551,28 +551,10 @@
 			}
 		},
 		{
-			"file": "app/models/adventure.rb",
+			"file": "app/controllers/player_controller.rb",
 			"settings":
 			{
-				"buffer_size": 166,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/static/files/dnd.css",
-			"settings":
-			{
-				"buffer_size": 2840,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 781,
+				"buffer_size": 1397,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -581,7 +563,25 @@
 			"file": "app/static/files/common.js",
 			"settings":
 			{
-				"buffer_size": 3058,
+				"buffer_size": 5240,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layout.slim",
+			"settings":
+			{
+				"buffer_size": 781,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/static/files/dnd.css",
+			"settings":
+			{
+				"buffer_size": 3052,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -590,34 +590,16 @@
 			"file": "app/views/player.slim",
 			"settings":
 			{
-				"buffer_size": 5536,
+				"buffer_size": 5672,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/player_chat.slim",
+			"file": "app/controllers/dnd_controller.rb",
 			"settings":
 			{
-				"buffer_size": 877,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/master_chat.slim",
-			"settings":
-			{
-				"buffer_size": 894,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/master.slim",
-			"settings":
-			{
-				"buffer_size": 766,
+				"buffer_size": 4316,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -770,39 +752,44 @@
 	[
 		"/home/serg/dnd",
 		"/home/serg/dnd/app",
-		"/home/serg/dnd/app/controllers",
-		"/home/serg/dnd/app/models",
-		"/home/serg/dnd/app/static",
-		"/home/serg/dnd/app/static/files",
 		"/home/serg/dnd/app/views"
 	],
 	"file_history":
 	[
+		"/home/serg/dnd/app/static/files/dnd.css",
+		"/home/serg/dnd/app/models/player.rb",
 		"/home/serg/dnd/app/application_controller.rb",
 		"/home/serg/dnd/app/views/layout.slim",
-		"/home/serg/dnd/app/controllers/player_controller.rb",
+		"/home/serg/dnd/app/views/master.slim",
+		"/home/serg/dnd/db/migrate/20191123203702_rename_mods.rb",
+		"/home/serg/dnd/db/migrate/20191123203701_add_mods_to_player.rb",
+		"/home/serg/dnd/README.md",
+		"/home/serg/dnd/app/locales/ru.yml",
+		"/home/serg/dnd/app/views/master_chat.slim",
+		"/home/serg/dnd/db/migrate/20191123203700_delete_email_from_player.rb",
+		"/home/serg/dnd/app/helpers/app-helpers.rb",
+		"/home/serg/dnd/app/views/player_chat.slim",
+		"/home/serg/dnd/locales/ru.yml",
+		"/home/serg/dnd/config.ru",
+		"/home/serg/dnd/Gemfile",
 		"/home/serg/dnd/app/controllers/master_controller.rb",
+		"/home/serg/dnd/app/models/adventure.rb",
+		"/home/serg/dnd/app/controllers/player_controller.rb",
 		"/home/serg/dnd/app/controllers/dnd_controller.rb",
 		"/home/serg/dnd/app/views/player_select.slim",
 		"/home/serg/dnd/app/models/user.rb",
-		"/home/serg/dnd/app/models/adventure.rb",
 		"/home/serg/dnd/db/migrate/20191116114103_rename_master_to_player.rb",
 		"/home/serg/dnd/db/migrate/20191116114100_create_messages.rb",
 		"/home/serg/dnd/app/views/auth.slim",
-		"/home/serg/dnd/app/views/master_chat.slim",
 		"/home/serg/dnd/app/models/message.rb",
 		"/home/serg/dnd/db/migrate/20191105203902_create_adventures_table.rb",
 		"/home/serg/dnd/app/views/player.erb",
 		"/home/serg/dnd/app/views/layout.erb",
 		"/home/serg/.cache/.fr-5gnLOR/sitetent-tentcss-812839a/README.md",
-		"/home/serg/dnd/app/static/files/dnd.css",
 		"/home/serg/dnd/app/static/common.js",
-		"/home/serg/dnd/app/views/master.slim",
-		"/home/serg/dnd/config.ru",
 		"/home/serg/dnd/app/views/index_dnd.slim",
 		"/home/serg/dnd/app/controllers/application_controller.rb",
 		"/home/serg/dnd/config/environment.rb",
-		"/home/serg/dnd/Gemfile",
 		"/home/serg/dnd/app/player_mod.rb",
 		"/home/serg/dnd/models/adventure.rb",
 		"/home/serg/dnd/models/user.rb",
@@ -896,20 +883,11 @@
 		"/home/serg/tmp/lom_bot/lib/tele_config.rb",
 		"/home/serg/tmp/lom_bot/lib/processors-OLD/exec_responder.rb",
 		"/home/serg/tmp/lom_bot/lib/bot_logic.rb",
-		"/home/serg/tmp/lom_bot/lib/telegram_responder.rb",
-		"/home/serg/services/home_bot/lib/bot_logic.rb",
-		"/home/serg/tmp/lom_bot/users.yaml",
-		"/home/serg/tmp/lom_bot/teleconfig-home.yaml",
-		"/home/serg/services/home_bot/lib/adapters/console_adapter.rb",
-		"/home/serg/services/home_bot/lib/adapters/telegram_adapter.rb",
-		"/home/serg/services/home_bot/lib/users.rb",
-		"/home/serg/services/home_bot/lib/state_processors/exec-processor.rb",
-		"/home/serg/services/home_bot/lib/state_processors/subscriptions-processor.rb",
-		"/home/serg/services/home_bot/lib/state_processors/auth-processor.rb"
+		"/home/serg/tmp/lom_bot/lib/telegram_responder.rb"
 	],
 	"find":
 	{
-		"height": 66.0
+		"height": 44.0
 	},
 	"find_in_files":
 	{
@@ -926,6 +904,32 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"= mod",
+			"wisdom",
+			"primary",
+			"view",
+			"toggle_char_view",
+			"innerText",
+			"mods",
+			"data",
+			"mas",
+			"mod_",
+			",",
+			"integer",
+			"chars",
+			"ch",
+			"ch_",
+			"-3",
+			",",
+			"player_str",
+			"toggleEls",
+			"chat_mess",
+			"chat_messages",
+			"sockets",
+			"do",
+			"/div",
+			">",
+			"<",
 			"{\n",
 			"receiver",
 			"from",
@@ -1027,33 +1031,7 @@
 			"location",
 			"</title><empty-line />",
 			"<empty-line /></section>",
-			" = ",
-			"empty",
-			"<strong></strong>",
-			"<empty-line /></section>",
-			"—",
-			"code",
-			"<p>(.*)</p>",
-			"centos6",
-			"<p>(.*)</p>",
-			"<p>Node Description:....................n51001 HCA-1</p>",
-			"<p>(.*)</p>",
-			"<section",
-			"section",
-			"<section",
-			"<sectio",
-			"sectio",
-			"sectp",
-			"<empty-line /></section><section><title><p>([^<]+)</p></title>",
-			"<empty-line /></section><section><title><p>2</p></title>",
-			"<empty-line /></section><section><title><p>([^<]+)</p></title>",
-			"<empty-line /></section><section><title><p>2</p></title>",
-			"<empty-line /></section><section><title><p>([^<]+)</p></title>",
-			"cite",
-			"poem",
-			"<title>([^<]+)</title>",
-			"<p>\\s*</p>",
-			" </p>"
+			" = "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1080,7 +1058,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1089,15 +1067,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3348,
+						"buffer_size": 5496,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								685,
-								685
+								1670,
+								1670
 							]
 						],
 						"settings":
@@ -1107,10 +1085,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 70.0,
+						"translation.y": 1320.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1121,66 +1099,6 @@
 						"buffer_size": 7056,
 						"regions":
 						{
-							"11,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1848,
-										1857
-									]
-								],
-								"scope": "terminalview.black_brown"
-							},
-							"11,20":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1868,
-										1873
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"11,9":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1857,
-										1865
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"12,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										2016,
-										2017
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"12,1":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										2017,
-										2030
-									]
-								],
-								"scope": "terminalview.black_green"
-							}
 						},
 						"selection":
 						[
@@ -1224,7 +1142,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1235,182 +1153,14 @@
 						"buffer_size": 7056,
 						"regions":
 						{
-							"0,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										0,
-										167
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"1,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										168,
-										335
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"19,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3192,
-										3201
-									]
-								],
-								"scope": "terminalview.black_brown"
-							},
-							"19,20":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3212,
-										3217
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"19,9":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3201,
-										3209
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"2,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										336,
-										503
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"20,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3360,
-										3361
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"20,1":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3361,
-										3374
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"23,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3864,
-										3873
-									]
-								],
-								"scope": "terminalview.black_brown"
-							},
-							"23,20":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3884,
-										3889
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"23,9":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3873,
-										3881
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"24,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										4032,
-										4033
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"24,1":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										4033,
-										4046
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"3,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										504,
-										671
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
 							"34,24":
 							{
 								"flags": 272,
 								"regions":
 								[
 									[
-										5736,
-										5757
+										7056,
+										7056
 									]
 								],
 								"scope": "terminalview.black_green"
@@ -1421,8 +1171,8 @@
 								"regions":
 								[
 									[
-										5757,
-										5777
+										7056,
+										7056
 									]
 								],
 								"scope": "terminalview.black_red"
@@ -1433,8 +1183,8 @@
 								"regions":
 								[
 									[
-										5904,
-										5909
+										7056,
+										7056
 									]
 								],
 								"scope": "terminalview.black_red"
@@ -1445,8 +1195,8 @@
 								"regions":
 								[
 									[
-										5913,
-										5918
+										7056,
+										7056
 									]
 								],
 								"scope": "terminalview.black_green"
@@ -1457,128 +1207,8 @@
 								"regions":
 								[
 									[
-										6072,
-										6074
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"40,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										6720,
-										6729
-									]
-								],
-								"scope": "terminalview.black_brown"
-							},
-							"40,20":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										6740,
-										6745
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"40,9":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										6729,
-										6737
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"41,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										6888,
-										6889
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"41,1":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										6889,
-										6902
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"8,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1344,
-										1353
-									]
-								],
-								"scope": "terminalview.black_brown"
-							},
-							"8,20":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1364,
-										1369
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"8,9":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1353,
-										1361
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"9,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1512,
-										1513
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"9,1":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1513,
-										1526
+										7056,
+										7056
 									]
 								],
 								"scope": "terminalview.black_green"
@@ -1587,8 +1217,8 @@
 						"selection":
 						[
 							[
-								6903,
-								6903
+								6891,
+								6891
 							]
 						],
 						"settings":
@@ -1618,7 +1248,7 @@
 							"terminal_view_last_cursor_pos":
 							[
 								41,
-								15
+								3
 							],
 							"word_wrap": false
 						},
@@ -1626,52 +1256,114 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "app/models/adventure.rb",
+					"file": "app/controllers/player_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 166,
+						"buffer_size": 1397,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								156,
-								156
+								1370,
+								1370
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.sublime-syntax"
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "app/static/files/dnd.css",
+					"file": "app/static/files/common.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2840,
+						"buffer_size": 5240,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								86,
-								86
+								4688,
+								4688
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2908.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/layout.slim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 781,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								469,
+								469
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/static/files/dnd.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3052,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16,
+								16
 							]
 						],
 						"settings":
@@ -1684,65 +1376,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 781,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								408,
-								408
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/static/files/common.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3058,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1806,
-								1806
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 594.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1751,15 +1385,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5536,
+						"buffer_size": 5672,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								79,
-								79
+								3921,
+								3921
 							]
 						],
 						"settings":
@@ -1769,100 +1403,40 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2248.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "app/views/player_chat.slim",
+					"file": "app/controllers/dnd_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 877,
+						"buffer_size": 4316,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								72,
-								72
+								400,
+								400
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 726.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "app/views/master_chat.slim",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 894,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								59,
-								59
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/views/master.slim",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 766,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								59,
-								59
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]

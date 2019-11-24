@@ -1,3 +1,203 @@
+i.iw-edit:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "n";
+}
+i.iw-cross:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "ù";
+}
+i.iw-ok:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "Ù";
+}
+i.iw-up:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "y";
+}
+i.iw-down:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "Y";
+}
+i.iw-right:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "W";
+}
+i.iw-left:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "w";
+}
+i.iw-power:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "X";
+}
+i.iw-trash:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "o";
+}
+i.iw-wheel:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "j";
+}
+i.iw-heart:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "!";
+}
+i.iw-star:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "\"";
+}
+i.iw-map:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "&";
+}
+i.iw-shield:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "*";
+}
+i.iw-mouse:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "'";
+}
+i.iw-camera:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "+";
+}
+i.iw-unlock:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "-";
+}
+i.iw-reload:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "1";
+}
+i.iw-no:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "2";
+}
+i.iw-target:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "3";
+}
+i.iw-link:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "9";
+}
+i.iw-image:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: ":";
+}
+i.iw-globe:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "<";
+}
+i.iw-bell:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "J";
+}
+i.iw-lock:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "_";
+}
+i.iw-message:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "m";
+}
+i.iw-updown:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "x";
+}
+i.iw-diskette:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "}";
+}
+i.iw-eye:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "©";
+}
+i.iw-home:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "Ç";
+}
+i.iw-thunderbolt:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "Ï";
+}
+i.iw-letter:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "à";
+}
+i.iw-wait:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "ú";
+}
+
+
 /* html {
   box-sizing: border-box;
 }
@@ -192,6 +392,18 @@ div.char{
 }
 div.inventory{
   
+}
+
+.connected {
+  height: 3px;
+  width:  100%;
+  background: #0f0;
+}
+
+.disconnected {
+  height: 3px;
+  width:  100%;
+  background: #f00;
 }
 
 .no-messages {

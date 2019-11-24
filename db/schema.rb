@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_203702) do
+ActiveRecord::Schema.define(version: 2019_11_24_114900) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 2019_11_23_203702) do
     t.string "name"
     t.string "value"
     t.index ["player_id"], name: "index_chars_on_player_id"
+  end
+
+  create_table "equipments", force: :cascade do |t|
+    t.string "name"
+    t.integer "count"
+    t.integer "player_id"
+    t.index ["player_id"], name: "index_equipments_on_player_id"
   end
 
   create_table "masters", force: :cascade do |t|

@@ -12,9 +12,11 @@ div.main.mui-container
       div.center.mui-col-xs-4.mui--divider-left
         a href='/rules' Правила
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/map' Карта
+        a href='/map'
+          i.iw-map
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/logout' X
+        a href='/logout'
+          i.iw-cross
 
   ul class="mui-tabs__bar"
     - liclass = 'mui--is-active'
@@ -23,7 +25,8 @@ div.main.mui-container
       li class="#{liclass}"
         a data-mui-toggle="tab" data-mui-controls="pane-default-#{p.id}"
           = p.name
-          span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}" *
+          span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}"
+            i.iw-bell
       - liclass = nil
 
   - liclass = 'mui--is-active'

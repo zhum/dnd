@@ -7,15 +7,18 @@ div.main.mui-container
     div.mui-row
       div.center.mui-col-xs-2
         a href='/player/msg' Собщ
-        span#chat-indicator class='no-messages' *
+        span#chat-indicator class='no-messages'
+          i.iw-bell
       div.center.mui-col-xs-2.mui--divider-left
         a href='/note' Заметки
       div.center.mui-col-xs-4.mui--divider-left
         a href='/rules' Правила
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/map' Карта
+        a href='/map'
+          i.iw-map
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/logout' X
+        a href='/logout'
+          i.iw-cross
 
 
   div.info.mui-container-fluid
@@ -126,26 +129,36 @@ div.main.mui-container
       span onclick="toggle_item('char');"
         | Характеристики
         span.mui-caret.mui-caret--right
-      span.mui--pull-right data-char-view="mod" onclick="toggle_char_view();" Мод.
+      span.mui--pull-right data-char-edit="view" onclick="toggle_char_edit();"
+        i.iw-edit
     div.mui--clearfix
     div#char.mui--hide
       div.mui-row.mui--divider-bottom
         - ['strength','constitution','dexterity'].each do |i|
-          div.mui-col-xs-2.mui--divider-left
+          div.mui-col-xs-4.mui--divider-left
             span.label2
               = t("char.#{i}")
               | : 
-          div.mui-col-xs-2 id="mod_#{i}"
-            | ...
+            span id="mod_#{i}"
+              | ...
+            span.mui--pull-right
+              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+                i.iw-up
+              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+                i.iw-down
       div.mui-row.mui--divider-bottom
         - ['intellegence','wisdom','charisma'].each do |i|
-          div.mui-col-xs-2.mui--divider-left
+          div.mui-col-xs-4.mui--divider-left
             span.label2
               = t("char.#{i}")
               | : 
-          div.mui-col-xs-2 id="mod_#{i}"
-            | ...
-
+            span id="mod_#{i}"
+              | ...
+            span.mui--pull-right
+              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+                i.iw-up
+              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+                i.iw-down
 
   div.mui-container-fluid
     div.mui-row.mui--text-center.mui--z2 onclick="toggle_item('inventory');"

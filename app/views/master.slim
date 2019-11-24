@@ -9,15 +9,18 @@ div.main.mui-container
         a href='/master/msg' Собщ
         - players = @player.adventure.players.where(is_master: false).order(:name)
         - players.each do |p|
-          span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}" *
+          span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}"
+            i.iw-bell
       div.center.mui-col-xs-2.mui--divider-left
         a href='/note' Заметки
       div.center.mui-col-xs-4.mui--divider-left
         a href='/rules' Правила
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/map' Карта
+        a href='/map'
+          i.iw-map
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/logout' X
+        a href='/logout'
+          i.iw-cross
 
 javascript:
   var secret="#{{@user.secret}}";

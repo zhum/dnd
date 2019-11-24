@@ -46,6 +46,30 @@ class DNDLogic
           end
           ws.send(message.to_json)
         }
+      when /^mod ([a-z]+)=(.*)/
+        mod = $1
+        value = $2.to_i
+        case mod
+        when 'wisdom'
+          player.mod_wisdom = value
+        when 'intellegence'
+          player.mod_intellegence = value
+        when 'strength'
+          player.mod_strength = value
+        when 'dexterity'
+          player.mod_dexterity = value
+        when 'construction'
+          player.mod_construction = value
+        when 'charisma'
+          player.mod_charisma = value
+        else
+          logger.warn "Bad modifier #{mod}"
+        end
+        player.save
+        logger.warn "mod_intellegence #{player.mod_intellegence}"
+        m = "{\"player\": #{player.to_json}}"
+        logger.warn "get_player: '#{m}'"
+        ws.send(m)
       when /^message=(.*)/
         message = nil
         begin
