@@ -1,0 +1,8 @@
+ru:
+  char:
+    strength: 'Сила'
+    constitution: 'Телосл.'
+    dexterity: 'Ловк.'
+    intellegence: 'Интел.'
+    wisdom: 'Мудр.'
+    charisma: 'Харизма'
