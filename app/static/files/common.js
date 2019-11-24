@@ -48,6 +48,16 @@ function render_chars(){
   }
 }
 
+function push_to_str(str,x){
+
+}
+function render_equipmets(){
+  var
+  for (var i = player['equipmets'].length - 1; i >= 0; i--) {
+    player['equipmets'][i]
+  }
+}
+
 function char_plus(mod){
   player['mods'][mod] += 1;
   ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
@@ -75,6 +85,7 @@ function render_player(data){
     set_value('ch_'+ch, data.chars[ch]);
   }
   render_chars();
+  render_equipmets();
   set_value('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
 }
 
