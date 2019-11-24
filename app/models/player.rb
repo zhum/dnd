@@ -19,8 +19,8 @@ class Player < ActiveRecord::Base
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
     h << ['mods',Hash[MODS.map{|c| [c,public_send("mod_#{c}")]}]]
-    h << ['equipments',Hash[equipments.map{|c| [c.name,c.count]}]]
-    warn "===> #{h.inspect}"
+    h << ['equipments',equipments]
+    warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s
     
   end

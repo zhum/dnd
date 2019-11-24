@@ -48,13 +48,28 @@ function render_chars(){
   }
 }
 
-function push_to_str(str,x){
-
+function push_to_eq(str,x){
+  str += '<div class="mui-row equipment"><div class="mui-col-xs-4 mui--text-left">'+
+    x['name']+'</div><div class="mui-col-xs-3">'+
+    x['description']+'</div>';
+  if(x['countable']){
+    str += '<div class="mui-col-xs-2">'+x['count']+' ('+
+      x['max_count']+')</div><div class="mui-col-xs-2">'+
+      '<span class="mui-btn mui-btn--small"><i class="iw-up" onclick="add_equip('+
+      x['id']+')"></i>'+
+      '<span class="mui-btn mui-btn--small"><i class="iw-down" onclick="del_equip('+
+      x['id']+')"></i></div></div>';
+  } else {
+    str += '<div class="mui-col-xs-2">'+x['count']+'</div></div>';
+  }
+  return str;
+  // count countable description
 }
+
 function render_equipmets(){
-  var
-  for (var i = player['equipmets'].length - 1; i >= 0; i--) {
-    player['equipmets'][i]
+  var eq_html='';
+  for (var i = player['equipments'].length - 1; i >= 0; i--) {
+    eq_html = push_to_eq(eq_html, player['equipments'][i]);
   }
 }
 
