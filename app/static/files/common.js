@@ -41,6 +41,29 @@ function toggle_char_edit(){
   render_chars();
 }
 
+/*
+  Change characheristics view: absolute or as modifier
+ */
+function toggle_inventory_edit(){
+  var el = document.querySelector('[data-inventory-edit]');
+  var mod = el.getAttribute('data-inventory-edit');
+  if(mod=='view'){
+    el.innerHTML='<i class="iw-eye"></i>';
+    el.setAttribute('data-inventory-edit','edit');
+  }
+  else{    
+    el.innerHTML='<i class="iw-edit"></i>';
+    el.setAttribute('data-inventory-edit','view');
+  }
+  document.querySelectorAll('[data-inventory-plus]').forEach(function(el){
+    el.classList.toggle('mui--hide');
+  });
+  document.querySelectorAll('[data-inventory-minus]').forEach(function(el){
+    el.classList.toggle('mui--hide');
+  });
+  render_chars();
+}
+
 function render_chars(){
   for( var mod in player['mods']){
     var n = Math.floor((player['mods'][mod]-10.0)/2);
@@ -49,19 +72,27 @@ function render_chars(){
 }
 
 function push_to_eq(str,x){
-  str += '<div class="mui-row equipment"><div class="mui-col-xs-4 mui--text-left">'+
+  str += '<div class="mui-row mui--divider-bottom equipment"><div class="mui-col-xs-3 mui--text-left">'+
     x['name']+'</div><div class="mui-col-xs-3">'+
     x['description']+'</div>';
-  if(x['countable']){
-    str += '<div class="mui-col-xs-2">'+x['count']+' ('+
-      x['max_count']+')</div><div class="mui-col-xs-2">'+
-      '<span class="mui-btn mui-btn--small"><i class="iw-up" onclick="add_equip('+
-      x['id']+')"></i>'+
-      '<span class="mui-btn mui-btn--small"><i class="iw-down" onclick="del_equip('+
-      x['id']+')"></i></div></div>';
-  } else {
-    str += '<div class="mui-col-xs-2">'+x['count']+'</div></div>';
-  }
+  // if(x['countable']){
+  //   str += '<div class="mui-col-xs-2">'+x['count']+' ('+
+  //     x['max_count']+')</div><div class="mui-col-xs-2">'+
+  //     '<span class="mui-btn mui-btn--small"><i class="iw-up" onclick="add_equip('+
+  //     x['id']+')"></i>'+
+  //     '<span class="mui-btn mui-btn--small"><i class="iw-down" onclick="del_equip('+
+  //     x['id']+')"></i></div></div>';
+  // } else {
+    str += '<div class="mui-col-xs-1">'+x['count']+
+    '</div><div class="mui-col-xs-3">'+
+    '<span class="mui-btn mui-btn--small mui-btn--accent mui--hide"'+
+    'data-inventory-plus="'+x['id']+'" onclick="inventory_plus('+x['id']+');">'+
+    '<i class="iw-up"></i>'+
+    '</div><span class="mui-btn mui-btn--small mui-btn--accent mui--hide"'+
+    'data-inventory-minus="'+x['id']+'" onclick="inventory_minus('+x['id']+');">'+
+    '<i class="iw-down"></i>'+
+    '</div></div>';
+  // }
   return str;
   // count countable description
 }
@@ -71,6 +102,7 @@ function render_equipmets(){
   for (var i = player['equipments'].length - 1; i >= 0; i--) {
     eq_html = push_to_eq(eq_html, player['equipments'][i]);
   }
+  set_value('inventory',eq_html);
 }
 
 function char_plus(mod){
@@ -81,6 +113,16 @@ function char_plus(mod){
 function char_minus(mod){
   player['mods'][mod] += 1;
   ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+}
+
+function inventory_plus(inv){
+  player['inventory'][inv] += 1;
+  ws.send(secret+': inv '+inv+'='+player['inventory'][inv]);
+}
+
+function inventory_minus(inv){
+  player['inventory'][inv] += 1;
+  ws.send(secret+': inv '+inv+'='+player['inventory'][inv]);
 }
 
 function render_player(data){

@@ -158,7 +158,8 @@ div.main.mui-container
     div.mui-row.mui--text-center.mui--z2
       /onclick="toggle_item('inventory');"
       | Снаряжение
-      span.mui-caret.mui-caret--right
+      span.mui--pull-right data-inventory-edit="view" onclick="toggle_inventory_edit();"
+        i.iw-edit
     div#inventory
       /.mui--hide
       | ...
