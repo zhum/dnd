@@ -25,7 +25,7 @@ div.main.mui-container
     div.mui-row
       div.avatar.mui-col-xs-3
         img.avatar src="/img/player/#{@player.id}"
-      div.char-info
+      div.char-info.mui-col-xs-9
         div.fullwidth
           span.player-name#player-name ...
         div.fullwidth
@@ -41,13 +41,13 @@ div.main.mui-container
             span.hp
               | &nbsp;ХП &nbsp;
           /div
-          a.mui-btn.mui-btn--primary.mui-col-xs-1 href='#' onclick="hp_plus();" +
+          a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_plus();" +
           /| &nbsp; 
           /div
-          a.mui-btn.mui-btn--primary.mui-col-xs-1 href='#' onclick="hp_minus();" -
+          a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_minus();" -
           /  | &nbsp; 
           /div
-          a.mui-btn.mui-btn--primary.mui-col-xs-1 href='#' onclick="hp_opts();" #
+          a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_opts();" #
           /  | &nbsp;
       div.fullwidth
         div.coins.mui-col-xs-5
@@ -55,9 +55,9 @@ div.main.mui-container
           span#total-gold
             | ...
         div
-          a.mui-col-xs-3.mui-btn.mui-btn--primary href='#' onclick="short_rest();" к. отдых
+          a.mui-col-xs-3.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
           | &nbsp;
-          a.mui-col-xs-3.mui-btn.mui-btn--primary href='#' onclick="long_rest();" д. отдых
+          a.mui-col-xs-3.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
 
 
   div.coins.mui-container-fluid
