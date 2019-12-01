@@ -122,9 +122,9 @@ function push_to_eq(str,x,keys_visible=false){
 
 function render_equipments(mod){
   var eq_html='';
-  for(var i in player['equipments']){
+  Object.keys(player['equipments']).sort().forEach(function(i) {
     eq_html = push_to_eq(eq_html, player['equipments'][i], mod);
-  }
+  });
   set_value('equipment',eq_html);
 }
 
@@ -132,14 +132,6 @@ function push_to_weap(str,x,keys_visible){
   str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
     x['name']+'</div><div class="mui-col-xs-5">'+
     x['description']+'</div>';
-  // if(x['countable']){
-  //   str += '<div class="mui-col-xs-2">'+x['count']+' ('+
-  //     x['max_count']+')</div><div class="mui-col-xs-2">'+
-  //     '<span class="dnd-btn dnd-btn--small"><i class="iw-up" onclick="add_equip('+
-  //     x['id']+')"></i>'+
-  //     '<span class="dnd-btn dnd-btn--small"><i class="iw-down" onclick="del_equip('+
-  //     x['id']+')"></i></div></div>';
-  // } else {
     str += '<div class="mui-col-xs-1">'+x['count']+
     '</div><div class="mui-col-xs-1">'+x['dice']+'d'+x['of_dice']+
     '</div><div class="mui-col-xs-3">'+
@@ -157,10 +149,11 @@ function push_to_weap(str,x,keys_visible){
 
 function render_weapons(mod){
   var weap_html='';
-  for(var i in player['weapons']){
+  //for(var i in player['weapons']){
+  Object.keys(player['weapons']).sort().forEach(function(i) {
     weap_html = push_to_weap(weap_html, player['weapons'][i], mod);
-  }
-  set_value('weapon',weap_html);
+  });
+  set_value('weapons',weap_html);
 }
 
 function char_plus(mod){
@@ -191,6 +184,12 @@ function weapon_plus(weap){
 function weapon_minus(weap){
   player['weapons'][weap]['count'] -= 1;
   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+}
+
+function set_num(value,id){
+  var v = Number(value);
+  if(Number.isNaN(v)){return;}
+  set_value(id,v);
 }
 
 function render_player(data){
@@ -258,6 +257,45 @@ function render_chat_full(from=''){
   chat_text = chat_text+'</div>';
   set_value('chat'+from,chat_text);
 }
+
+function toggle_item(item){
+  var el = document.getElementById(item);
+  if(el){
+    el.classList.toggle('mui--hide');
+  }
+}
+
+var modal_function;
+var modal_arg;
+
+function activateModal(f,id) {
+  // initialize modal element
+  var modalEl = document.createElement('div');
+  modalEl.style.width = '95%';
+  modalEl.style.height = '3em';
+  modalEl.style.margin = '50% auto';
+  modalEl.style.padding = '5px 5px';
+  modalEl.style.backgroundColor = '#fff';
+  modalEl.innerHTML = '<form><span>Число: </span><input id="qq" type="text"></input><button onClick="modalEnter();">OK</input></form>';
+  modal_function = f;
+  modal_arg = id;
+  // var el = modalEl.children[0];
+  // el.setAttribute('data-function',f);
+
+  // show modal
+  mui.overlay('on', modalEl);
+}
+
+function modalEnter(){
+  // var el = document.getElementById('qq');
+  // var f = el.getAttribute('data-function');
+  modal_function(document.getElementById('qq').value,modal_arg);
+  mui.overlay('off');
+}
+
+
+
+
 
 function send_msg_to_chat(inputid=''){
   if(inputid==''){
