@@ -482,6 +482,36 @@ div.inventory{
   background-color: #ff5a92;
 }
 
+.dnd-btn--primary {
+  color: #FFF;
+  background-color: #2196F3;
+}
+
+.dnd-btn--primary:hover, .dnd-btn--primary:focus, .dnd-btn--primary:active {
+  color: #FFF;
+  background-color: #39a1f4;
+}
+
+.dnd-flex-row {
+  display: inline-flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: baseline;
+  align-content: center;
+}
+
+.dnd-flex-grow1 {
+  flex-grow: 1;
+}
+
+.dnd-flex-grow2 {
+  flex-grow: 2;
+}
+
+.dnd-flex-grow0 {
+  flex-grow: 0;
+}
 
 /* old phones */
 @media all and (max-width: 320px){

@@ -25,21 +25,20 @@ div.main.mui-container
     div.mui-row
       div.avatar.mui-col-xs-3
         img.avatar src="/img/player/#{@player.id}"
-      div.char-info.mui-col-xs-9
+      div.char-info.mui-col-xs-8
         div.fullwidth
           span.player-name#player-name ...
-        div.fullwidth
+        div.fullwidth.dnd-flex-row
           span.player-class id="player-class"
             | ...
           | / 
           span.player-race id="player-race"
             | ...
-        div
-          div.mui-col-xs-3
-            span.hp#hp
-              | ...
-            span.hp
-              | &nbsp;ХП &nbsp;
+        div.fullwidth.dnd-flex-row
+          span.hp#hp
+            | ...
+          span.hp
+            | &nbsp;ХП &nbsp;
           /div
           a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_plus();" +
           /| &nbsp; 
@@ -49,39 +48,38 @@ div.main.mui-container
           /div
           a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_opts();" #
           /  | &nbsp;
-      div.fullwidth
-        div.coins.mui-col-xs-5
-          | Золота: 
+        div.fullwidth.dnd-flex-row
+          span.coins
+            | Золота: 
           span#total-gold
             | ...
-        div
-          a.mui-col-xs-3.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
-          | &nbsp;
-          a.mui-col-xs-3.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
+          span
+            a.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
+            | &nbsp;
+            a.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
+        div.coins.fullwidth.dnd-flex-row
+          span.center
+            | ММ: 
+            span#ccoins
+              | ...
+          span.center.mui--divider-left
+            | &nbsp;СМ: 
+            span#scoins
+              | ...
+          span.center.mui--divider-left
+            | &nbsp;ЗМ: 
+            span#gcoins
+              | ...
+          span.center.mui--divider-left
+            | &nbsp;ЭМ: 
+            span#ecoins
+              | ...
+          span.center.mui--divider-left
+            | &nbsp;ПМ:
+            span#pcoins 
+              | ...
 
 
-  div.coins.mui-container-fluid
-    div.mui-row
-      div.mui-col-xs-2.mui-col-xs-offset-1
-        | ММ: 
-        span#ccoins
-          | ...
-      div.center.mui-col-xs-2.mui--divider-left
-        | &nbsp;СМ: 
-        span#scoins
-          | ...
-      div.center.mui-col-xs-2.mui--divider-left
-        | &nbsp;ЗМ: 
-        span#gcoins
-          | ...
-      div.center.mui-col-xs-2.mui--divider-left
-        | &nbsp;ЭМ: 
-        span#ecoins
-          | ...
-      div.center.mui-col-xs-2.mui--divider-left
-        | &nbsp;ПМ:
-        span#pcoins 
-          | ...
   div.main-char.mui-container-fluid.mui--bg-primary-light
     div.mui-row.center.mui--divider-bottom
       div.mui-col-xs-4
@@ -155,13 +153,13 @@ div.main.mui-container
                 i.iw-down
 
   div.mui-container-fluid
-    div.mui-row.mui--text-center.mui--z2
-      /onclick="toggle_item('equipment');"
-      | Снаряжение
-      span.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
+    /div.mui-row.mui--text-center.mui--z2
+    div.dnd-flex-row.mui--z2.fullwidth
+      span.dnd-flex-grow1.mui--text-center onclick="toggle_item('equipment');"
+        | Снаряжение
+      span.dnd-flex-grow0.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
         i.iw-edit
     div#equipment
-      /.mui--hide
       | ...
     div.mui-row.mui--text-center.mui--z2
       | Оружие
@@ -172,9 +170,9 @@ div.main.mui-container
 
 
   div.mui-container-fluid
-    div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('fight');"
+    div.mui-row.mui--text-center.mui--z2 onclick="toggle_item('fight');"
       | Бой
-      span.mui-caret.mui-caret--right onclick="toggle_item('fight');"
+      span.mui-caret.mui-caret--right
     div#fight.mui--hide
       | .....
 
