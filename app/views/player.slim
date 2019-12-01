@@ -79,8 +79,24 @@ div.main.mui-container
             span#pcoins 
               | ...
 
+  div.main-char.dnd-flex-row.mui--bg-primary-light
+    div.mui-col-xs-6.mui-col-sm-4
+      span.block.fullwidth#ch_armour_class
+        | ...
+      span.block.fullwidth.center.label1
+        | КД
+    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left
+      span.block.fullwidth#ch_initiative
+        | ...
+      span.block.fullwidth.center.label1
+        | Инициатива
+    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left
+      span.block.fullwidth#ch_speed
+        | ...
+      span.block.fullwidth.center.label1
+        | Скорость
 
-  div.main-char.mui-container-fluid.mui--bg-primary-light
+  /div.main-char.mui-container-fluid.mui--bg-primary-light
     div.mui-row.center.mui--divider-bottom
       div.mui-col-xs-4
         span.block.fullwidth#ch_armour_class
@@ -114,67 +130,70 @@ div.main.mui-container
         span.block.fullwidth.center.label1
           | Кости хитов
 
-  div.mui-container-fluid
-    div.mui-row.mui--text-center.mui--z2
-      span
-        /onclick="toggle_item('char');"
-        | Характеристики
-        /span.mui-caret.mui-caret--right
-      span.mui--pull-right.right-pad data-char-edit="view" onclick="toggle_char_edit();"
-        i.iw-edit
-    div.mui--clearfix
-    div#char
-      /.mui--hide
-      div.mui-row.mui--divider-bottom
-        - ['strength','constitution','dexterity'].each do |i|
-          div.mui-col-xs-4.mui--divider-left
-            span.label2
-              = t("char.#{i}")
-              | : 
-            span id="mod_#{i}"
-              | ...
-            span.mui--pull-right
-              span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
-                i.iw-up
-              span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
-                i.iw-down
-      div.mui-row.mui--divider-bottom
-        - ['intellegence','wisdom','charisma'].each do |i|
-          div.mui-col-xs-4.mui--divider-left
-            span.label2
-              = t("char.#{i}")
-              | : 
-            span id="mod_#{i}"
-              | ...
-            span.mui--pull-right
-              span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
-                i.iw-up
-              span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
-                i.iw-down
+  /div.mui-container-fluid
+  div.dnd-flex-row.mui--z2.fullwidth
+    /.mui-row.mui--text-center.mui--z2
+    span.dnd-flex-grow1.mui--text-center
+      /onclick="toggle_item('char');"
+      | Характеристики
+      /span.mui-caret.mui-caret--right
+    span.dnd-flex-grow0.mui--pull-right.right-pad data-char-edit="view" onclick="toggle_char_edit();"
+      i.iw-edit
+  div.mui--clearfix
+  div#char
+    /.mui--hide
+    div.mui-row.mui--divider-bottom
+      - ['strength','constitution','dexterity'].each do |i|
+        div.mui-col-xs-4.mui--divider-left
+          span.label2
+            = t("char.#{i}")
+            | : 
+          span id="mod_#{i}"
+            | ...
+          span.mui--pull-right
+            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+              i.iw-up
+            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+              i.iw-down
+    div.mui-row.mui--divider-bottom
+      - ['intellegence','wisdom','charisma'].each do |i|
+        div.mui-col-xs-4.mui--divider-left
+          span.label2
+            = t("char.#{i}")
+            | : 
+          span id="mod_#{i}"
+            | ...
+          span.mui--pull-right
+            span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+              i.iw-up
+            span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+              i.iw-down
 
-  div.mui-container-fluid
-    /div.mui-row.mui--text-center.mui--z2
-    div.dnd-flex-row.mui--z2.fullwidth
-      span.dnd-flex-grow1.mui--text-center onclick="toggle_item('equipment');"
-        | Снаряжение
-      span.dnd-flex-grow0.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
-        i.iw-edit
-    div#equipment
-      | ...
-    div.mui-row.mui--text-center.mui--z2
+  /div.mui-container-fluid
+  /div.mui-row.mui--text-center.mui--z2
+  div.dnd-flex-row.mui--z2.fullwidth
+    span.dnd-flex-grow1.mui--text-center onclick="toggle_item('equipment');"
+      | Снаряжение
+    span.dnd-flex-grow0.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
+      i.iw-edit
+  div#equipment
+    | ...
+
+  div.dnd-flex-row.mui--z2.fullwidth
+    span.dnd-flex-grow1.mui--text-center
       | Оружие
-      span.mui--pull-right.right-pad data-weapon-edit="view" onclick="toggle_weapon_edit();"
-        i.iw-edit
-    div#weapon
-      | ...
+    span.dnd-flex-grow0.mui--pull-right.right-pad data-weapon-edit="view" onclick="toggle_weapon_edit();"
+      i.iw-edit
+  div#weapon
+    | ...
 
 
-  div.mui-container-fluid
-    div.mui-row.mui--text-center.mui--z2 onclick="toggle_item('fight');"
+  div.dnd-flex-row.mui--z2.fullwidth
+    span.fullwidth.mui--text-center onclick="toggle_item('fight');"
       | Бой
       span.mui-caret.mui-caret--right
-    div#fight.mui--hide
-      | .....
+  div#fight.mui--hide
+    | .....
 
 
 javascript:
