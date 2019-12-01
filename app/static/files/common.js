@@ -42,26 +42,49 @@ function toggle_char_edit(){
 }
 
 /*
-  Change characheristics view: absolute or as modifier
+  
  */
-function toggle_inventory_edit(){
-  var el = document.querySelector('[data-inventory-edit]');
-  var mod = el.getAttribute('data-inventory-edit');
+function toggle_equipment_edit(){
+  var el = document.querySelector('[data-equipment-edit]');
+  var mod = el.getAttribute('data-equipment-edit');
   if(mod=='view'){
     el.innerHTML='<i class="iw-eye"></i>';
-    el.setAttribute('data-inventory-edit','edit');
+    el.setAttribute('data-equipment-edit','edit');
   }
   else{    
     el.innerHTML='<i class="iw-edit"></i>';
-    el.setAttribute('data-inventory-edit','view');
+    el.setAttribute('data-equipment-edit','view');
   }
-  document.querySelectorAll('[data-inventory-plus]').forEach(function(el){
+  document.querySelectorAll('[data-equipment-plus]').forEach(function(el){
     el.classList.toggle('mui--hide');
   });
-  document.querySelectorAll('[data-inventory-minus]').forEach(function(el){
+  document.querySelectorAll('[data-equipment-minus]').forEach(function(el){
     el.classList.toggle('mui--hide');
   });
-  render_chars();
+  render_chars(mod==='view'); // previous value!
+}
+
+/*
+  
+ */
+function toggle_weapon_edit(){
+  var el = document.querySelector('[data-weapon-edit]');
+  var mod = el.getAttribute('data-weapon-edit');
+  if(mod=='view'){
+    el.innerHTML='<i class="iw-eye"></i>';
+    el.setAttribute('data-weapon-edit','edit');
+  }
+  else{    
+    el.innerHTML='<i class="iw-edit"></i>';
+    el.setAttribute('data-weapon-edit','view');
+  }
+  document.querySelectorAll('[data-weapon-plus]').forEach(function(el){
+    el.classList.toggle('mui--hide');
+  });
+  document.querySelectorAll('[data-weapon-minus]').forEach(function(el){
+    el.classList.toggle('mui--hide');
+  });
+  render_weapons(mod==='view'); // previous value!
 }
 
 function render_chars(){
@@ -71,38 +94,73 @@ function render_chars(){
   }
 }
 
-function push_to_eq(str,x){
+function push_to_eq(str,x,keys_visible=false){
   str += '<div class="mui-row mui--divider-bottom equipment"><div class="mui-col-xs-3 mui--text-left">'+
     x['name']+'</div><div class="mui-col-xs-3">'+
     x['description']+'</div>';
   // if(x['countable']){
   //   str += '<div class="mui-col-xs-2">'+x['count']+' ('+
   //     x['max_count']+')</div><div class="mui-col-xs-2">'+
-  //     '<span class="mui-btn mui-btn--small"><i class="iw-up" onclick="add_equip('+
+  //     '<span class="dnd-btn mui-btn--small"><i class="iw-up" onclick="add_equip('+
   //     x['id']+')"></i>'+
   //     '<span class="mui-btn mui-btn--small"><i class="iw-down" onclick="del_equip('+
   //     x['id']+')"></i></div></div>';
   // } else {
     str += '<div class="mui-col-xs-1">'+x['count']+
     '</div><div class="mui-col-xs-3">'+
-    '<span class="mui-btn mui-btn--small mui-btn--accent mui--hide"'+
-    'data-inventory-plus="'+x['id']+'" onclick="inventory_plus('+x['id']+');">'+
+    '<span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
+    'data-equipment-plus="'+x['id']+'" onclick="equipment_plus('+x['id']+');">'+
     '<i class="iw-up"></i>'+
-    '</div><span class="mui-btn mui-btn--small mui-btn--accent mui--hide"'+
-    'data-inventory-minus="'+x['id']+'" onclick="inventory_minus('+x['id']+');">'+
+    '</span><span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
+    'data-equipment-minus="'+x['id']+'" onclick="equipment_minus('+x['id']+');">'+
     '<i class="iw-down"></i>'+
-    '</div></div>';
+    '</span></div></div>';
   // }
   return str;
   // count countable description
 }
 
-function render_equipmets(){
+function render_equipments(mod){
   var eq_html='';
-  for (var i = player['equipments'].length - 1; i >= 0; i--) {
-    eq_html = push_to_eq(eq_html, player['equipments'][i]);
+  for(var i in player['equipments']){
+    eq_html = push_to_eq(eq_html, player['equipments'][i], mod);
   }
-  set_value('inventory',eq_html);
+  set_value('equipment',eq_html);
+}
+
+function push_to_weap(str,x,keys_visible){
+  str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
+    x['name']+'</div><div class="mui-col-xs-5">'+
+    x['description']+'</div>';
+  // if(x['countable']){
+  //   str += '<div class="mui-col-xs-2">'+x['count']+' ('+
+  //     x['max_count']+')</div><div class="mui-col-xs-2">'+
+  //     '<span class="dnd-btn dnd-btn--small"><i class="iw-up" onclick="add_equip('+
+  //     x['id']+')"></i>'+
+  //     '<span class="dnd-btn dnd-btn--small"><i class="iw-down" onclick="del_equip('+
+  //     x['id']+')"></i></div></div>';
+  // } else {
+    str += '<div class="mui-col-xs-1">'+x['count']+
+    '</div><div class="mui-col-xs-1">'+x['dice']+'d'+x['of_dice']+
+    '</div><div class="mui-col-xs-3">'+
+      '<span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
+      ' data-weapon-plus="'+x['id']+'" onclick="weapon_plus('+x['id']+');">'+
+      '<i class="iw-up"></i>'+
+      '</span><span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
+      ' data-weapon-minus="'+x['id']+'" onclick="weapon_minus('+x['id']+');">'+
+      '<i class="iw-down"></i>'+
+    '</span></div></div>';
+  // }
+  return str;
+  // count countable description
+}
+
+function render_weapons(mod){
+  var weap_html='';
+  for(var i in player['weapons']){
+    weap_html = push_to_weap(weap_html, player['weapons'][i], mod);
+  }
+  set_value('weapon',weap_html);
 }
 
 function char_plus(mod){
@@ -115,14 +173,24 @@ function char_minus(mod){
   ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
 }
 
-function inventory_plus(inv){
-  player['inventory'][inv] += 1;
-  ws.send(secret+': inv '+inv+'='+player['inventory'][inv]);
+function equipment_plus(equip){
+  player['equipments'][equip]['count'] += 1;
+  ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
 }
 
-function inventory_minus(inv){
-  player['inventory'][inv] += 1;
-  ws.send(secret+': inv '+inv+'='+player['inventory'][inv]);
+function equipment_minus(equip){
+  player['equipments'][equip]['count'] += 1;
+  ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
+}
+
+function weapon_plus(weap){
+  player['weapons'][weap]['count'] += 1;
+  ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+}
+
+function weapon_minus(weap){
+  player['weapons'][weap]['count'] -= 1;
+  ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
 }
 
 function render_player(data){
@@ -141,9 +209,18 @@ function render_player(data){
   for( var ch in data.chars){
     set_value('ch_'+ch, data.chars[ch]);
   }
-  render_chars();
-  render_equipmets();
   set_value('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
+
+  render_chars();
+  
+  var el = document.querySelector('[data-equipment-edit]');
+  var mod = el.getAttribute('data-equipment-edit');
+  render_equipments(mod==='edit');
+  
+  el = document.querySelector('[data-weapon-edit]');
+  mod = el.getAttribute('data-weapon-edit');
+  render_weapons(mod==='edit');
+  
 }
 
 function render_chat(from=''){

@@ -4,6 +4,7 @@ class Player < ActiveRecord::Base
   has_many :resources
   has_many :chars
   has_many :equipments
+  has_many :weapons
   belongs_to :user
   belongs_to :adventure
 
@@ -19,7 +20,8 @@ class Player < ActiveRecord::Base
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
     h << ['mods',Hash[MODS.map{|c| [c,public_send("mod_#{c}")]}]]
-    h << ['equipments',equipments.all.to_a]
+    h << ['equipments',Hash[equipments.all.map{|w| [w.id,w]}]]
+    h << ['weapons',Hash[weapons.all.map{|w| [w.id,w]}]]
     warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s
     

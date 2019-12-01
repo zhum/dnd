@@ -433,6 +433,55 @@ div.inventory{
   text-align: left;
 }
 
+.right-pad {
+  padding-right: 0.5em;
+}
+
+.dnd-btn--small {
+  line-height: 1em;
+  padding: 0 6px;
+}
+
+.dnd-btn {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #FFF;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  margin: 2px 2px 2px 2px;
+  padding: 3px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  background-image: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.dnd-btn:hover, .dnd-btn:focus, .dnd-btn:active {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: white;
+}
+
+.dnd-btn--accent {
+  color: #FFF;
+  background-color: #FF4081;
+}
+
+.dnd-btn--accent:hover, .dnd-btn--accent:focus, .dnd-btn--accent:active {
+  color: #FFF;
+  background-color: #ff5a92;
+}
+
 
 /* old phones */
 @media all and (max-width: 320px){

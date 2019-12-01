@@ -122,7 +122,7 @@ div.main.mui-container
         /onclick="toggle_item('char');"
         | Характеристики
         /span.mui-caret.mui-caret--right
-      span.mui--pull-right data-char-edit="view" onclick="toggle_char_edit();"
+      span.mui--pull-right.right-pad data-char-edit="view" onclick="toggle_char_edit();"
         i.iw-edit
     div.mui--clearfix
     div#char
@@ -136,9 +136,9 @@ div.main.mui-container
             span id="mod_#{i}"
               | ...
             span.mui--pull-right
-              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+              span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
                 i.iw-up
-              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+              span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
                 i.iw-down
       div.mui-row.mui--divider-bottom
         - ['intellegence','wisdom','charisma'].each do |i|
@@ -149,23 +149,29 @@ div.main.mui-container
             span id="mod_#{i}"
               | ...
             span.mui--pull-right
-              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+              span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
                 i.iw-up
-              span.mui-btn.mui-btn--small.mui-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+              span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
                 i.iw-down
 
   div.mui-container-fluid
     div.mui-row.mui--text-center.mui--z2
-      /onclick="toggle_item('inventory');"
+      /onclick="toggle_item('equipment');"
       | Снаряжение
-      span.mui--pull-right data-inventory-edit="view" onclick="toggle_inventory_edit();"
+      span.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
         i.iw-edit
-    div#inventory
+    div#equipment
       /.mui--hide
+      | ...
+    div.mui-row.mui--text-center.mui--z2
+      | Оружие
+      span.mui--pull-right.right-pad data-weapon-edit="view" onclick="toggle_weapon_edit();"
+        i.iw-edit
+    div#weapon
       | ...
 
 
-  div.mui-container-fluid.
+  div.mui-container-fluid
     div.mui-row.mui--text-center.mui--z2  onclick="toggle_item('fight');"
       | Бой
       span.mui-caret.mui-caret--right onclick="toggle_item('fight');"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_114901) do
+ActiveRecord::Schema.define(version: 2019_11_26_193602) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -30,13 +30,6 @@ ActiveRecord::Schema.define(version: 2019_11_24_114901) do
     t.string "description"
     t.integer "player_id"
     t.index ["player_id"], name: "index_equipment_on_player_id"
-  end
-
-  create_table "equipments", force: :cascade do |t|
-    t.string "name"
-    t.integer "count"
-    t.integer "player_id"
-    t.index ["player_id"], name: "index_equipments_on_player_id"
   end
 
   create_table "masters", force: :cascade do |t|
@@ -94,6 +87,17 @@ ActiveRecord::Schema.define(version: 2019_11_24_114901) do
     t.string "email"
     t.boolean "active"
     t.string "secret"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "name"
+    t.integer "count"
+    t.boolean "countable"
+    t.string "description"
+    t.integer "dice"
+    t.integer "of_dice"
+    t.integer "player_id"
+    t.index ["player_id"], name: "index_weapons_on_player_id"
   end
 
 end
