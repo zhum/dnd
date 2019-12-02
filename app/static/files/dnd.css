@@ -166,6 +166,12 @@ i.iw-diskette:before{
   font-style: normal;
   content: "}";
 }
+i.iw-keyboard:before{
+  font-family: 'icon-worksregular';
+  text-transform: none;
+  font-style: normal;
+  content: "{";
+}
 i.iw-eye:before{
   font-family: 'icon-worksregular';
   text-transform: none;

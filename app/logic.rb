@@ -28,6 +28,14 @@ class DNDLogic
         when 'get_chat'
           LogicChat.get_chat player,ws
 
+        # hp change
+        when /^hp=(\d+)/
+          hp = $1.to_i
+          player.hp = hp
+          player.save
+          logger.warn "player hp: #{hp}"
+          m = "{\"player\": #{player.to_json}}"
+          ws.send(m)
         # weapon change
         when /^weap (\d+)=(.*)/
           id = $1.to_i

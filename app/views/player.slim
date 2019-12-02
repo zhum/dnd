@@ -35,28 +35,20 @@ div.main.mui-container
           span.player-race id="player-race"
             | ...
         div.fullwidth.dnd-flex-row
-          span.hp#hp
+          - hp_form = '<form><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_plus();xover();">+</a><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_minus();xover();">-</a><input type="text" width="3" id="hp_value"></input><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_set();xover();">OK</a></form>'
+          a#hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal('#{hp_form}');"
             | ...
           span.hp
             | &nbsp;ХП &nbsp;
-          /div
-          a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_plus();" +
-          /| &nbsp; 
-          /div
-          a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="hp_minus();" -
-          /  | &nbsp; 
-          /div
-          a.dnd-btn.dnd-btn--primary.mui-col-xs-1 href='#' onclick="activateModal(set_num,'hp');" #
-          /  | &nbsp;
-        div.fullwidth.dnd-flex-row
           span.coins
             | Золота: 
           span#total-gold
             | ...
-          span
-            a.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
-            | &nbsp;
-            a.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
+          / span
+          /   a.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
+          /   | &nbsp;
+          /   a.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
+        div.fullwidth.dnd-flex-row
         div.coins.fullwidth.dnd-flex-row
           span.center
             | ММ: 
@@ -135,6 +127,8 @@ div.main.mui-container
               i.iw-up
             span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
               i.iw-down
+            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="intModal(char_set,'#{i}');"
+              i.iw-keyboard
     div.mui-row.mui--divider-bottom
       - ['intellegence','wisdom','charisma'].each do |i|
         div.mui-col-xs-4.mui--divider-left
@@ -148,6 +142,8 @@ div.main.mui-container
               i.iw-up
             span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
               i.iw-down
+            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="intModal(char_set,'#{i}');"
+              i.iw-keyboard
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('equipment');"
@@ -192,4 +188,21 @@ javascript:
     document.getElementById(id).innerHTML = data;
   }
 
+  function hp_plus(){
+    player['hp'] += 1;
+    ws.send(secret+': hp='+player['hp']);
+  }
+
+  function hp_minus(){
+    if(player['hp']>0){player['hp'] -= 1;}
+    ws.send(secret+': hp='+player['hp']);
+  }
+
+  function hp_set(){
+    var v = Number(get_value('hp_value'));
+    if(!Number.isNaN(v) && v>=0){
+      player['hp'] = v;
+      ws.send(secret+': hp='+player['hp']);
+    }
+  }
 script src="/files/common.js"
