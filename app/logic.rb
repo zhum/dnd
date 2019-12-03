@@ -26,6 +26,7 @@ class DNDLogic
         # send player info
         when 'get_player'
           #@player = Player.find(session[:id]||1001)
+          #sleep 10
           logger.warn "id=#{player.id}"
           send_player ws, player, true
 

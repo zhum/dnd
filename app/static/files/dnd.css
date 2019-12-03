@@ -203,6 +203,27 @@ i.iw-wait:before{
   content: "ú";
 }
 
+.loading {
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  57% {
+    -webkit-transform: rotate(270deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
 /* html {
   box-sizing: border-box;

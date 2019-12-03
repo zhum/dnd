@@ -27,21 +27,21 @@ div.main.mui-container
         img.avatar src="/img/player/#{@player.id}"
       div.char-info.mui-col-xs-8
         div.fullwidth
-          span.player-name#player-name ...
+          span.player-name#player-nami.iw-reload
         div.fullwidth
           span.player-class id="player-class"
-            | ...
+            i.iw-reload
           | / 
           span.player-race id="player-race"
-            | ...
+            i.iw-reload
         div.fullwidth.dnd-flex-row
           /- hp_form = '<form class="mui--text-center"><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_plus();xover();">+</a><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_minus();xover();">-</a><input type="text" width="3" id="hp_value"></input><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_set();xover();">OK</a></form>'
           a#hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('hp_plus','hp_minus','hp_set'));"
-            | ...
+            i.iw-reload
           span.hp
             | &nbsp;ХП &nbsp;/&nbsp;
           span.coins-total#total-gold
-            | ...
+            i.iw-reload
           span.coins-total
             | золота 
           / span
@@ -53,56 +53,56 @@ div.main.mui-container
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',0));"
               | ММ: 
             span#ccoins
-              | ...
+              i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',1));"
               | СМ: 
             span#scoins
-              | ...
+              i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',2));"
               | ЗМ: 
             span#gcoins
-              | ...
+              i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',3));"
               | ЭМ: 
             span#ecoins
-              | ...
+              i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',4));"
               | ПМ:
             span#pcoins 
-              | ...
+              i.iw-reload
 
   div.main-char.dnd-flex-row.mui--bg-primary-light
     div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.mui--text-center.block.fullwidth#ch_armour_class
-        | ...
+        i.iw-reload
       span.block.fullwidth.mui--text-center.label1
         | КД
     div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_initiative
-        | ...
+        i.iw-reload
       span.block.fullwidth.mui--text-center.label1
         | Инициатива
     div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_speed
-        | ...
+        i.iw-reload
       span.block.fullwidth.mui--text-center.label1
         | Скорость
     div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_pass_attentiveness
-        | ...
+        i.iw-reload
       span.block.fullwidth.mui--text-center.label1
         | Внимательность
     div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_masterlevel
-        | ...
+        i.iw-reload
       span.block.fullwidth.mui--text-center.label1
         | Мастерство
     div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
@@ -128,7 +128,7 @@ div.main.mui-container
             = t("char.#{i}")
             | : 
           span id="mod_#{i}"
-            | ...
+            i.iw-reload
           /span.mui--pull-right
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
               i.iw-edit
@@ -146,7 +146,7 @@ div.main.mui-container
             = t("char.#{i}")
             | : 
           span id="mod_#{i}"
-            | ...
+            i.iw-reload
           /span.mui--pull-right
             span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
               i.iw-up
@@ -161,7 +161,7 @@ div.main.mui-container
     /span.dnd-flex-grow0.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
       i.iw-edit
   div#equipment
-    | ...
+    i.iw-reload
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('weapons');"
@@ -169,14 +169,15 @@ div.main.mui-container
     /span.dnd-flex-grow0.mui--pull-right.right-pad data-weapon-edit="view" onclick="toggle_weapon_edit();"
       i.iw-edit
   div#weapons
-    | ...
+    span.loading
+      i.iw-reload
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.fullwidth.mui--text-center onclick="toggle_item('fight');"
       | Бой
       span.mui-caret.mui-caret--right
   div#fight.mui--hide
-    | .....
+    i.iw-wait.loading
 
 javascript:
   var secret="#{{@user.secret}}";
