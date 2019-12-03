@@ -10,7 +10,7 @@ function set_html(id,value){
   }
 }
 
-function get_html(id,value){
+function get_html(id){
   var el = document.getElementById(id)
   if(el){
     return el.innerText;
@@ -18,7 +18,7 @@ function get_html(id,value){
   return null;
 }
 
-function get_value(id,value){
+function get_value(id){
   var el = document.getElementById(id)
   if(el){
     return el.value;
@@ -26,9 +26,14 @@ function get_value(id,value){
   return null;
 }
 
+function get_int_value(id){
+  var v = get_value(id);
+  if(typeof v === 'object' || typeof v === 'undefined' || v=='')
+    return Number.NaN;
+  return Number(v);
+}
 /*
   Change characheristics view: absolute or as modifier
- */
 function toggle_char_edit(){
   var el = document.querySelector('[data-char-edit]');
   var mod = el.getAttribute('data-char-edit');
@@ -48,10 +53,10 @@ function toggle_char_edit(){
   });
   render_chars();
 }
+ */
 
 /*
   
- */
 function toggle_equipment_edit(){
   var el = document.querySelector('[data-equipment-edit]');
   var mod = el.getAttribute('data-equipment-edit');
@@ -71,10 +76,10 @@ function toggle_equipment_edit(){
   });
   render_chars(mod==='view'); // previous value!
 }
+ */
 
 /*
   
- */
 function toggle_weapon_edit(){
   var el = document.querySelector('[data-weapon-edit]');
   var mod = el.getAttribute('data-weapon-edit');
@@ -94,7 +99,7 @@ function toggle_weapon_edit(){
   });
   render_weapons(mod==='view'); // previous value!
 }
-
+*/
 function render_chars(){
   for( var mod in player['mods']){
     var n = Math.floor((player['mods'][mod]-10.0)/2);
@@ -103,59 +108,54 @@ function render_chars(){
 }
 
 function push_to_eq(str,x,keys_visible=false){
-  str += '<div class="mui-row mui--divider-bottom equipment"><div class="mui-col-xs-3 mui--text-left">'+
-    x['name']+'</div><div class="mui-col-xs-3">'+
-    x['description']+'</div>';
-  // if(x['countable']){
-  //   str += '<div class="mui-col-xs-2">'+x['count']+' ('+
-  //     x['max_count']+')</div><div class="mui-col-xs-2">'+
-  //     '<span class="dnd-btn mui-btn--small"><i class="iw-up" onclick="add_equip('+
-  //     x['id']+')"></i>'+
-  //     '<span class="mui-btn mui-btn--small"><i class="iw-down" onclick="del_equip('+
-  //     x['id']+')"></i></div></div>';
-  // } else {
-    str += '<div class="mui-col-xs-1">'+x['count']+
-    '</div><div class="mui-col-xs-3">'+
-    '<span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
-    'data-equipment-plus="'+x['id']+'" onclick="equipment_plus('+x['id']+');">'+
-    '<i class="iw-up"></i>'+
-    '</span><span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
-    'data-equipment-minus="'+x['id']+'" onclick="equipment_minus('+x['id']+');">'+
-    '<i class="iw-down"></i>'+
-    '</span></div></div>';
-  // }
+  //*** columns version
+  // str += '<div class="mui-row mui--divider-bottom equipment"><div class="mui-col-xs-3 mui--text-left">'+
+  //  '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'eq_plus\',\'eq_minus\',\'eq_set\',\''+x['id']+'\'));">'+
+  //   x['name']+'</a></div><span class="mui-col-xs-3">'+
+  //   x['description']+'</span>';
+  //   str += '<span class="mui-col-xs-1">'+x['count']+
+  //   '</span></div>';
+  //   
+  //*** flex version
+  str += '<span class="mui--text-left">'+
+   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'eq_plus\',\'eq_minus\',\'eq_set\',\''+x['id']+'\'));">'+
+    x['name']+'</a><span> ('+x['count']+'); </span></span>';
   return str;
-  // count countable description
 }
 
-function render_equipments(mod){
-  var eq_html='';
+function render_equipments(mod=false){
+  var eq_html='<div class="dnd-flex-row">';
   Object.keys(player['equipments']).sort().forEach(function(i) {
     eq_html = push_to_eq(eq_html, player['equipments'][i], mod);
   });
-  set_html('equipment',eq_html);
+  set_html('equipment',eq_html+'</div>');
 }
 
 function push_to_weap(str,x,keys_visible){
+  // str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
+  //   x['name']+'</div><div class="mui-col-xs-5">'+
+  //   x['description']+'</div>';
+  //   str += '<div class="mui-col-xs-1">'+x['count']+
+  //   '</div><div class="mui-col-xs-1">'+x['dice']+'d'+x['of_dice']+
+  //   '</div><div class="mui-col-xs-3">'+
+  //     '<span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
+  //     ' data-weapon-plus="'+x['id']+'" onclick="weapon_plus('+x['id']+');">'+
+  //     '<i class="iw-up"></i>'+
+  //     '</span><span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
+  //     ' data-weapon-minus="'+x['id']+'" onclick="weapon_minus('+x['id']+');">'+
+  //     '<i class="iw-down"></i>'+
+  //   '</span></div></div>';
   str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
-    x['name']+'</div><div class="mui-col-xs-5">'+
-    x['description']+'</div>';
-    str += '<div class="mui-col-xs-1">'+x['count']+
-    '</div><div class="mui-col-xs-1">'+x['dice']+'d'+x['of_dice']+
-    '</div><div class="mui-col-xs-3">'+
-      '<span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
-      ' data-weapon-plus="'+x['id']+'" onclick="weapon_plus('+x['id']+');">'+
-      '<i class="iw-up"></i>'+
-      '</span><span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
-      ' data-weapon-minus="'+x['id']+'" onclick="weapon_minus('+x['id']+');">'+
-      '<i class="iw-down"></i>'+
-    '</span></div></div>';
-  // }
+    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\',\''+x['id']+'\'));">'+
+    x['name']+'</a></div>'+
+    '<div class="mui-col-xs-1">'+x['count']+'</div><div class="mui-col-xs-5 mui--divider-left">'+
+    x['description']+
+    '</div><div class="mui-col-xs-1 mui--divider-left">'+x['dice']+'d'+x['of_dice']+
+    '</div></div>';
   return str;
-  // count countable description
 }
 
-function render_weapons(mod){
+function render_weapons(mod=false){
   var weap_html='';
   //for(var i in player['weapons']){
   Object.keys(player['weapons']).sort().forEach(function(i) {
@@ -164,42 +164,15 @@ function render_weapons(mod){
   set_html('weapons',weap_html);
 }
 
-function char_plus(mod){
-  player['mods'][mod] += 1;
-  ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
-}
+// function weapon_plus(weap){
+//   player['weapons'][weap]['count'] += 1;
+//   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+// }
 
-function char_minus(mod){
-  player['mods'][mod] += 1;
-  ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
-}
-
-function char_set(value,mod){
-  var v = Number(value);
-  if(Number.isNaN(v)){return;}
-  player['mods'][mod] = v;
-  ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
-}
-
-function equipment_plus(equip){
-  player['equipments'][equip]['count'] += 1;
-  ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
-}
-
-function equipment_minus(equip){
-  player['equipments'][equip]['count'] += 1;
-  ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
-}
-
-function weapon_plus(weap){
-  player['weapons'][weap]['count'] += 1;
-  ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
-}
-
-function weapon_minus(weap){
-  player['weapons'][weap]['count'] -= 1;
-  ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
-}
+// function weapon_minus(weap){
+//   player['weapons'][weap]['count'] -= 1;
+//   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+// }
 
 function set_num(value,id){
   var v = Number(value);
@@ -227,13 +200,13 @@ function render_player(data){
 
   render_chars();
   
-  var el = document.querySelector('[data-equipment-edit]');
-  var mod = el.getAttribute('data-equipment-edit');
-  render_equipments(mod==='edit');
+  // var el = document.querySelector('[data-equipment-edit]');
+  // var mod = el.getAttribute('data-equipment-edit');
+  render_equipments();//mod==='edit');
   
-  el = document.querySelector('[data-weapon-edit]');
-  mod = el.getAttribute('data-weapon-edit');
-  render_weapons(mod==='edit');
+  // el = document.querySelector('[data-weapon-edit]');
+  // mod = el.getAttribute('data-weapon-edit');
+  render_weapons();//mod==='edit');
   
 }
 
@@ -341,7 +314,23 @@ function xover(){
   mui.overlay('off');
 }
 
+function overForm3(f1,f2,f3,arg){
+  return '<form class="mui--text-center"><div class="dnd-flex-row fullwidth">'+
+    '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f1+"('"+arg+"');xover();\"> + </a>"+
+    '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f2+"('"+arg+"');xover();\"> - </a>"+
+    '<input type="text" class="dnd-flex-grow2" id="over_value"></input>'+
+    '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f3+"('"+arg+"');xover();\">OK</a>"+
+  '</div></form>'
+}
 
+// function overForm5(fp1,fp5,fm1,fm5,fs,arg){
+//   return '<form class="mui--text-center">'+
+//     '<a class="dnd-btn dnd-btn--primary" href="#" onclick="'+f1+"('"+arg+"');xover();\">+</a>"+
+//     '<a class="dnd-btn dnd-btn--primary" href="#" onclick="'+f2+"('"+arg+"');xover();\">-</a>"+
+//     '<input type="text" width="3" id="over_value"></input>'+
+//     '<a class="dnd-btn dnd-btn--primary" href="#" onclick="'+f3+"('"+arg+"');xover();\">OK</a>"+
+//   '</form>'
+// }
 
 /************************************************************
    Connections

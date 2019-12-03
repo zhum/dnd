@@ -4,6 +4,12 @@ class DNDLogic
       $logger
     end
 
+    def send_player ws, player, logit=false
+      m = "{\"player\": #{player.to_json}}"
+      logger.warn "get_player: '#{m}'" if logit
+      ws.send(m)
+    end
+
     def process_message ws,user,player,text,opts={}
       warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       begin
@@ -12,7 +18,7 @@ class DNDLogic
           logger.warn "got hello from #{player.id} (#{player.name})"
           return
         
-        # send master info
+        # send master info (NOT USED)
         when 'get_master'
           logger.warn "got master request from #{player.id} (#{player.name})"
           return
@@ -21,9 +27,8 @@ class DNDLogic
         when 'get_player'
           #@player = Player.find(session[:id]||1001)
           logger.warn "id=#{player.id}"
-          m = "{\"player\": #{player.to_json}}"
-          logger.warn "get_player: '#{m}'"
-          ws.send(m)
+          send_player ws, player, true
+
         # send chat history
         when 'get_chat'
           LogicChat.get_chat player,ws
@@ -33,9 +38,20 @@ class DNDLogic
           hp = $1.to_i
           player.hp = hp
           player.save
-          logger.warn "player hp: #{hp}"
-          m = "{\"player\": #{player.to_json}}"
-          ws.send(m)
+          send_player ws, player
+          logger.info "new hp= #{player.hp}"
+
+        # money change
+        when /^coins=\[(\d+),(\d+),(\d+),(\d+),(\d+)\]/
+          player.mcoins = $1.to_i
+          player.scoins = $2.to_i
+          player.gcoins = $3.to_i
+          player.ecoins = $4.to_i
+          player.pcoins = $5.to_i
+          player.save
+          send_player ws, player
+          logger.info "new gold= #{player.gcoins}"
+
         # weapon change
         when /^weap (\d+)=(.*)/
           id = $1.to_i
@@ -47,9 +63,8 @@ class DNDLogic
           end
           w.count = json['count']
           w.save
-          player = Player.find(player.id) # just reload
-          m = "{\"player\": #{player.to_json}}"
-          ws.send(m)
+          send_player ws, player
+          logger.info "Weapon: #{w}"
 
         # equipment change
         when /^equip (\d+)=(.*)/
@@ -62,9 +77,8 @@ class DNDLogic
           end
           w.count = json['count']
           w.save
-          player = Player.find(player.id) # just reload
-          m = "{\"player\": #{player.to_json}}"
-          ws.send(m)
+          send_player ws, player
+          logger.info "Equip: #{w}"
 
         # modifier change
         when /^mod ([a-z]+)=(.*)/
@@ -88,9 +102,7 @@ class DNDLogic
           end
           player.save
           logger.warn "mod_intellegence #{player.mod_intellegence}"
-          m = "{\"player\": #{player.to_json}}"
-          logger.warn "get_player: '#{m}'"
-          ws.send(m)
+          send_player ws, player
 
         #chat message
         when /^message=(.*)/

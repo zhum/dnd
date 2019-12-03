@@ -81,6 +81,6 @@ class BaseApp < Sinatra::Base
     @user = User.find_by_id(session[:user_id])
   end
 
-  include ::IntHelpers
+  include ::AppHelpers
   include ::PartitionHelpers
 end

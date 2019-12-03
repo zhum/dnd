@@ -267,68 +267,7 @@ div.main{
   overflow: hidden;
 }
 
- .flex-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 
-.fill-width {
-  flex: 1;
-}
-
-/*
-.column {
-  position: relative;
-  float: left;
-}
-
-.column + .column {
-  margin-left: 1.5%;
-}
-
-.column-1-5 {
-  width: 18.8%;
-  float:  left;
-  flex:  1;
-}
-
-.column-4-5 {
-  width: 81.1%;
-  float:  left;
-  flex:  1;
-}
-
-.column-2-5 {
-  width: 37.6%;
-  float:  left;
-  flex:  1;
-}
-
-.column-3-5 {
-  width: 62.4%;
-  float:  left;
-  flex:  1;
-}
-
-.column-1-6 {
-  width: 16%;
-  float:  left;
-  flex:  1;
-}
-
-.column-1-3 {
-  width: 32%;
-  float:  left;
-  flex:  1;
-}
-
-.column-2-3 {
-  width: 64%;
-  float:  left;
-  flex:  1;
-}
- */
 div.header {
   width: 100%;
   background: #eee;
@@ -374,11 +313,16 @@ div.fullwidth{
 }
 
 .hp{
-  font-size: 1.8em;  
+  font-size: 1.5em;  
+}
+
+.coins-total{
+  font-size: 1.2em;
 }
 
 .coins{
-  font-size: 0.9em;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .label1 {
@@ -496,6 +440,14 @@ div.inventory{
 .dnd-btn--primary:hover, .dnd-btn--primary:focus, .dnd-btn--primary:active {
   color: #FFF;
   background-color: #39a1f4;
+}
+
+.fill-width {
+  flex: 1;
+}
+
+.auto-width {
+  margin: auto;
 }
 
 .dnd-flex-row {

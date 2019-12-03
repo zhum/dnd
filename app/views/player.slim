@@ -35,39 +35,47 @@ div.main.mui-container
           span.player-race id="player-race"
             | ...
         div.fullwidth.dnd-flex-row
-          - hp_form = '<form><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_plus();xover();">+</a><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_minus();xover();">-</a><input type="text" width="3" id="hp_value"></input><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_set();xover();">OK</a></form>'
-          a#hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal('#{hp_form}');"
+          /- hp_form = '<form class="mui--text-center"><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_plus();xover();">+</a><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_minus();xover();">-</a><input type="text" width="3" id="hp_value"></input><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_set();xover();">OK</a></form>'
+          a#hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('hp_plus','hp_minus','hp_set'));"
             | ...
           span.hp
-            | &nbsp;ХП &nbsp;
-          span.coins
-            | Золота: 
-          span#total-gold
+            | &nbsp;ХП &nbsp;/&nbsp;
+          span.coins-total#total-gold
             | ...
+          span.coins-total
+            | золота 
           / span
           /   a.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
           /   | &nbsp;
           /   a.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
-        div.fullwidth.dnd-flex-row
-        div.coins.fullwidth.dnd-flex-row
+      div.coins.fullwidth.dnd-flex-row
           span.center
-            | ММ: 
+            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',0));"
+              | ММ: 
             span#ccoins
               | ...
           span.center.mui--divider-left
-            | &nbsp;СМ: 
+            | &nbsp;
+            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',1));"
+              | СМ: 
             span#scoins
               | ...
           span.center.mui--divider-left
-            | &nbsp;ЗМ: 
+            | &nbsp;
+            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',2));"
+              | ЗМ: 
             span#gcoins
               | ...
           span.center.mui--divider-left
-            | &nbsp;ЭМ: 
+            | &nbsp;
+            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',3));"
+              | ЭМ: 
             span#ecoins
               | ...
           span.center.mui--divider-left
-            | &nbsp;ПМ:
+            | &nbsp;
+            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',4));"
+              | ПМ:
             span#pcoins 
               | ...
 
@@ -105,11 +113,10 @@ div.main.mui-container
 
   div.dnd-flex-row.mui--z2.fullwidth
     /.mui-row.mui--text-center.mui--z2
-    span.dnd-flex-grow1.mui--text-center
-      /onclick="toggle_item('char');"
+    span.dnd-flex-grow1.mui--text-center onclick="toggle_item('char');"
       | Характеристики
       /span.mui-caret.mui-caret--right
-    span.dnd-flex-grow0.mui--pull-right.right-pad data-char-edit="view" onclick="toggle_char_edit();"
+    /span.dnd-flex-grow0.mui--pull-right.right-pad data-char-edit="view" onclick="toggle_char_edit();"
       i.iw-edit
   div.mui--clearfix
   div#char
@@ -117,46 +124,49 @@ div.main.mui-container
     div.mui-row.mui--divider-bottom
       - ['strength','constitution','dexterity'].each do |i|
         div.mui-col-xs-4.mui--divider-left
-          span.label2
+          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
             = t("char.#{i}")
             | : 
           span id="mod_#{i}"
             | ...
-          span.mui--pull-right
-            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
-              i.iw-up
-            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
-              i.iw-down
-            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="intModal(char_set,'#{i}');"
-              i.iw-keyboard
+          /span.mui--pull-right
+            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
+              i.iw-edit
+            / span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
+            /   i.iw-up
+            / span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
+            /   i.iw-down
+            / span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_set('#{i}');"
+            /   i.iw-keyboard
     div.mui-row.mui--divider-bottom
       - ['intellegence','wisdom','charisma'].each do |i|
         div.mui-col-xs-4.mui--divider-left
-          span.label2
+          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
+            /span.label2
             = t("char.#{i}")
             | : 
           span id="mod_#{i}"
             | ...
-          span.mui--pull-right
+          /span.mui--pull-right
             span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-plus="#{i}" onclick="char_plus('#{i}');"
               i.iw-up
             span.dnd-btn.dnd-btn-small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_minus('#{i}');"
               i.iw-down
-            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="intModal(char_set,'#{i}');"
+            span.dnd-btn.dnd-btn--small.dnd-btn--accent.mui--hide data-char-minus="#{i}" onclick="char_set('#{i}');"
               i.iw-keyboard
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('equipment');"
       | Снаряжение
-    span.dnd-flex-grow0.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
+    /span.dnd-flex-grow0.mui--pull-right.right-pad data-equipment-edit="view" onclick="toggle_equipment_edit();"
       i.iw-edit
   div#equipment
     | ...
 
   div.dnd-flex-row.mui--z2.fullwidth
-    span.dnd-flex-grow1.mui--text-center
+    span.dnd-flex-grow1.mui--text-center onclick="toggle_item('weapons');"
       | Оружие
-    span.dnd-flex-grow0.mui--pull-right.right-pad data-weapon-edit="view" onclick="toggle_weapon_edit();"
+    /span.dnd-flex-grow0.mui--pull-right.right-pad data-weapon-edit="view" onclick="toggle_weapon_edit();"
       i.iw-edit
   div#weapons
     | ...
@@ -167,15 +177,6 @@ div.main.mui-container
       span.mui-caret.mui-caret--right
   div#fight.mui--hide
     | .....
-  button class="mui-btn mui-btn--primary" onclick="activateModal(myfunc,'qwe')"
-    | Activate
-  span id="qwe"
-  / button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown"
-  /   | qqqq
-  /   span class="mui-caret"
-  / form class="mui-dropdown__menu"
-  /   label for="ttt"
-  /   input id="ttt" type="text"
 
 javascript:
   var secret="#{{@user.secret}}";
@@ -189,20 +190,130 @@ javascript:
   }
 
   function hp_plus(){
-    player['hp'] += 1;
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    player['hp'] += v;
     ws.send(secret+': hp='+player['hp']);
   }
 
   function hp_minus(){
-    if(player['hp']>0){player['hp'] -= 1;}
-    ws.send(secret+': hp='+player['hp']);
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    if(player['hp']-v>0){
+      player['hp'] -= v;
+      ws.send(secret+': hp='+player['hp']);
+    }
   }
 
   function hp_set(){
-    var v = Number(get_value('hp_value'));
+    var v = get_int_value('over_value');
     if(!Number.isNaN(v) && v>=0){
       player['hp'] = v;
       ws.send(secret+': hp='+player['hp']);
     }
   }
-script src="/files/common.js"
+
+  function char_plus(mod){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    player['mods'][mod] += v;
+    ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+  }
+
+  function char_minus(mod){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    if(player['mods'][mod]-v>0){
+      player['mods'][mod] -= v;
+      ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+    }
+  }
+
+  function char_set(mod){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v)){return;}
+    player['mods'][mod] = v;
+    ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+  }
+
+  function eq_plus(equip){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    player['equipments'][equip]['count'] += v;
+    ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
+  }
+
+  function eq_minus(equip){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    if(player['equipments'][equip]['count']-v>0){
+      player['equipments'][equip]['count'] -= v;
+      ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
+    }
+  }
+
+  function eq_set(equip){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v)){return;}
+    player['equipments'][equip]['count'] = v;
+    ws.send(secret+': equip '+equip+'='+JSON.stringify(player['equipments'][equip]));
+  }
+
+  function weap_plus(weap){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    player['weapons'][weap]['count'] += v;
+    ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+  }
+
+  function weap_minus(weap){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    if(player['weapons'][weap]['count']-v>0){
+      player['weapons'][weap]['count'] -= v;
+      ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+    }
+  }
+
+  function weap_set(weap){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v)){return;}
+    player['weapons'][weap]['count'] = v;
+    ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
+  }
+
+
+  function coins_plus(c){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    player['coins'][c] += v;
+    ws.send(secret+': coins='+JSON.stringify(player['coins']));
+  }
+
+  function coins_minus(c){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    if(player['coins'][c]-v>0){
+      player['coins'][c] -= v;
+      ws.send(secret+': coins='+JSON.stringify(player['coins']));
+    }
+  }
+
+  function coins_set(c){
+    var v = get_int_value('over_value');
+    if(!Number.isNaN(v) && v>=0){
+      player['coins'][c] = v;
+      ws.send(secret+': coins='+JSON.stringify(player['coins']));
+    }
+  }
+
