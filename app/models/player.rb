@@ -5,6 +5,8 @@ class Player < ActiveRecord::Base
   has_many :chars
   has_many :equipments
   has_many :weapons
+  has_many :armorings
+  has_many :armors, through: :armorings
   belongs_to :user
   belongs_to :adventure
 
