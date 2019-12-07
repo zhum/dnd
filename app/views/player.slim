@@ -27,27 +27,30 @@ div.main.mui-container
         img.avatar src="/img/player/#{@player.id}"
       div.char-info.mui-col-xs-8
         div.fullwidth
-          span.player-name#player-nami.iw-reload
+          span#player-name.player-name.iw-reload
         div.fullwidth
-          span.player-class id="player-class"
+          span.player-class#player-class
             i.iw-reload
-          | / 
-          span.player-race id="player-race"
+          |&nbsp;/&nbsp;
+          span.player-race#player-race
             i.iw-reload
-        div.fullwidth.dnd-flex-row
-          /- hp_form = '<form class="mui--text-center"><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_plus();xover();">+</a><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_minus();xover();">-</a><input type="text" width="3" id="hp_value"></input><a class="dnd-btn dnd-btn--primary" href="#" onclick="hp_set();xover();">OK</a></form>'
+          |&nbsp;/&nbsp;
+          span.player-exp#player-exp
+            i.iw-reload
+        div.fullwidth
           a#hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('hp_plus','hp_minus','hp_set'));"
             i.iw-reload
+          | &nbsp; (
+          a#max-hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('maxhp_plus','maxhp_minus','maxhp_set'));"
+            i.iw-reload
+          | ) &nbsp;
           span.hp
-            | &nbsp;ХП &nbsp;/&nbsp;
+            | ХП
+        div.fullwidth
           span.coins-total#total-gold
             i.iw-reload
           span.coins-total
-            | золота 
-          / span
-          /   a.dnd-btn.dnd-btn--primary href='#' onclick="short_rest();" к. отдых
-          /   | &nbsp;
-          /   a.dnd-btn.dnd-btn--primary href='#' onclick="long_rest();" д. отдых
+            | &nbsp;золота 
       div.coins.fullwidth.dnd-flex-row
           span.center
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',0));"
@@ -213,6 +216,32 @@ javascript:
     if(!Number.isNaN(v) && v>=0){
       player['hp'] = v;
       ws.send(secret+': hp='+player['hp']);
+    }
+  }
+
+  function maxhp_plus(){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    player['max_hp'] += v;
+    ws.send(secret+': max_hp='+player['max_hp']);
+  }
+
+  function maxhp_minus(){
+    var v = get_int_value('over_value');
+    if(Number.isNaN(v))
+      v = 1;
+    if(player['max_hp']-v>0){
+      player['max_hp'] -= v;
+      ws.send(secret+': max_hp='+player['max_hp']);
+    }
+  }
+
+  function maxhp_set(){
+    var v = get_int_value('over_value');
+    if(!Number.isNaN(v) && v>=0){
+      player['max_hp'] = v;
+      ws.send(secret+': max_hp='+player['max_hp']);
     }
   }
 

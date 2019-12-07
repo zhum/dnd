@@ -4,5 +4,6 @@ export SESSION_SECRET=175d969ed5477c730a2463fa5fb2aa350fd3513fcd65804d3952dde0b1
 
 NUM_SERV=5
 #bundle exec rackup -q -o 0.0.0.0 -p 4567 config.ru
-bundle exec thin -q -a 0.0.0.0 -p 4567 -R config.ru -s $NUM_SERV start
+#bundle exec thin -q -a 0.0.0.0 -p 4567 -R config.ru -s $NUM_SERV start
+bundle exec thin --threaded -a 0.0.0.0 -p 4567 -R config.ru start
 

@@ -186,6 +186,8 @@ function render_player(data){
   set_html('player-class', data.klass);
   set_html('player-race', data.race);
   set_html('hp', data.hp);
+  set_html('max-hp', data.max_hp);
+  set_html('player-exp', data.experience);
   set_html('ccoins', data.coins[0]);
   set_html('scoins', data.coins[1]);
   set_html('gcoins', data.coins[2]);

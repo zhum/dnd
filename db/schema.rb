@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_193602) do
+ActiveRecord::Schema.define(version: 2019_12_05_214646) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "armors", force: :cascade do |t|
+    t.string "name"
+    t.boolean "bad_stealth"
+    t.integer "weight"
+    t.integer "cost"
+    t.integer "klass"
+    t.boolean "add_sleight"
+    t.string "description"
   end
 
   create_table "chars", force: :cascade do |t|
@@ -70,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_193602) do
     t.integer "mod_intellegence"
     t.integer "mod_wisdom"
     t.integer "mod_charisma"
+    t.integer "experience"
     t.index ["adventure_id"], name: "index_players_on_adventure_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end

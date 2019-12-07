@@ -6,6 +6,7 @@
 require 'yaml'
 require 'logger'
 require 'active_record'
+require 'sinatra/activerecord/rake'
 
 include ActiveRecord::Tasks
 

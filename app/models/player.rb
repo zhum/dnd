@@ -14,7 +14,7 @@ class Player < ActiveRecord::Base
   ]
 
   def to_json
-    h = ['id', 'name', 'klass', 'race', 'hp'].map{|name|
+    h = ['id', 'name', 'klass', 'race', 'hp', 'max_hp', 'experience'].map{|name|
       [name, self.public_send(name)]
     }
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]

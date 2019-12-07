@@ -42,6 +42,14 @@ class DNDLogic
           send_player ws, player
           logger.info "new hp= #{player.hp}"
 
+        # max_hp change
+        when /^max_hp=(\d+)/
+          max_hp = $1.to_i
+          player.max_hp = max_hp
+          player.save
+          send_player ws, player
+          logger.info "new max_hp= #{player.max_hp}"
+
         # money change
         when /^coins=\[(\d+),(\d+),(\d+),(\d+),(\d+)\]/
           player.mcoins = $1.to_i
