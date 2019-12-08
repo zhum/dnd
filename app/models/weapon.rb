@@ -7,7 +7,7 @@
 
 class Weapon < ActiveRecord::Base
   #belongs_to :player
-  has_many :weaponing
+  has_many :weaponings
 end
 
     # "name": "Боевой посох",

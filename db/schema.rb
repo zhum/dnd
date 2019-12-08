@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_08_095524) do
+ActiveRecord::Schema.define(version: 2019_12_08_104157) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -103,19 +103,19 @@ ActiveRecord::Schema.define(version: 2019_12_08_095524) do
     t.index ["player_id"], name: "index_resources_on_player_id"
   end
 
-  create_table "things", force: :cascade do |t|
-    t.string "name"
-    t.integer "cost"
-    t.integer "weight"
-  end
-
-  create_table "thingsing", force: :cascade do |t|
+  create_table "thingings", force: :cascade do |t|
     t.integer "player_id"
     t.integer "thing_id"
     t.integer "count"
     t.string "modificator"
-    t.index ["player_id"], name: "index_thingsing_on_player_id"
-    t.index ["thing_id"], name: "index_thingsing_on_thing_id"
+    t.index ["player_id"], name: "index_thingings_on_player_id"
+    t.index ["thing_id"], name: "index_thingings_on_thing_id"
+  end
+
+  create_table "things", force: :cascade do |t|
+    t.string "name"
+    t.integer "cost"
+    t.integer "weight"
   end
 
   create_table "users", force: :cascade do |t|

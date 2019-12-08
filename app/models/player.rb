@@ -31,6 +31,12 @@ class Player < ActiveRecord::Base
     h << ['mods',Hash[MODS.map{|c| [c,public_send("mod_#{c}")]}]]
     h << ['equipments',Hash[equipments.all.map{|w| [w.id,w]}]]
     h << ['weapons',Hash[weapons.all.map{|w| [w.id,w]}]]
+    h << ['things',Hash[thingings.include(:thing).all.map{|t|
+      tt=t.thing; [t.id,{name: tt.name, count: t.count, cost: tt.cost, weight: tt.weight}]}]
+    ]
+    h << ['armors',Hash[armorings.all.map{|a|
+      aa = a.armoring; [a.id,{name: a.name, count: aa.count}]}]
+    ]
     warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s
     
