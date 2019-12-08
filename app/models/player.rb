@@ -4,7 +4,10 @@ class Player < ActiveRecord::Base
   has_many :resources
   has_many :chars
   has_many :equipments
-  has_many :weapons
+
+  has_many :weaponings
+  has_many :weapons, through: :weaponings
+
   has_many :armorings
   has_many :armors, through: :armorings
   belongs_to :user

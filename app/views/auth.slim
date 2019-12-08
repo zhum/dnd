@@ -1,33 +1,48 @@
 == styled_flash
-form action='/auth' method='post'
-  fieldset width='100%'
-    legend Представьтесь...
-    p.flex-container
-      label.text-right for='email' style='min-width: 20%'
-        | Email:
-      input.fill-width name='email' id='email' type='email'
-    p.flex-container
-      label.text-right for='password' style='min-width: 20%'
-        | Пароль:
-      input.fill-width name='password' id='password' type='password'
-  div.fullwidth.center
-    input type='submit' value='Отправить'
+div.main
+  form.fullwidth action='/auth' method='post'
+    fieldset.fullwidth 
+      div.mui-container-fluid
+        div.mui-row
+          legend.mui-col-xs-12 Представьтесь...
+        div.mui-row
+          label.mui-col-xs-5.mui-col-md-3.text-right for='email'
+            | Email:
+          input.mui-col-xs-6.mui-col-md-8 name='email' id='email' type='email'
+        div.mui-row
+          label.mui-col-xs-5.mui-col-md-3.text-right for='password'
+            | Пароль:
+          input.mui-col-xs-6.mui-col-md-8 name='password' id='password' type='password'
+        div.fullwidth.center
+          input type='submit' value='Отправить'
 
-form action='/register' method='post'
-  fieldset width='100%'
-    legend Или зарегистрируйтесь
-    p.flex-container
-      label.text-right for='reg_email' style='min-width: 20%'
-        | Email:
-      input.fill-width name='reg_email' id='reg_email' type='email'
-    p.flex-container
-      label.text-right for='reg_pass' style='min-width: 20%'
-        | Пароль:
-      input.fill-width name='reg_pass' id='reg_pass' type='password'
-    p.flex-container
-      label.text-right for='reg_name' style='min-width: 20%'
-        | Имя в игре:
-      input.fill-width name='reg_name' id='reg_name' type='text'
-  div.fullwidth.center
-    input type='submit' value='Отправить'
+  form.fullwidth action='/register' method='post'
+    fieldset.fullwidth
+      div.mui-container-fluid
+        div.mui-row
+          legend Или зарегистрируйтесь
+        div.mui-row
+          label.mui-col-xs-5.mui-col-md-3.text-right for='reg_email'
+            | Email:
+          input.mui-col-xs-6.mui-col-md-8 name='reg_email' id='reg_email' type='email'
+        div.mui-row
+          label.mui-col-xs-5.mui-col-md-3.text-right for='reg_pass'
+            | Пароль:
+          input.mui-col-xs-6.mui-col-md-8 name='reg_pass' id='reg_pass' type='password'
+        div.mui-row
+          label.mui-col-xs-5.mui-col-md-3.text-right for='reg_name'
+            | Имя в игре:
+          input.mui-col-xs-6.mui-col-md-8 name='reg_name' id='reg_name' type='text'
+      div.fullwidth.center
+        input type='submit' value='Отправить'
 
+css:
+  .main{
+    width: 90%;
+    background-color: #eee;
+  }
+  @media (min-width: 992px) {
+    .main{
+      width: 800px;
+      background-color: #eee;
+    }

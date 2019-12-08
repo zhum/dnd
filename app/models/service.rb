@@ -16,5 +16,26 @@ class Service
         a.save
       }
     end
+    def import_weapon filename
+      json = JSON.parse(File.read(filename))
+      json.each { |e|
+        a = Weapon.create(
+          name: e['name'].strip,
+          cost: e['cost'],
+          damage: e['damage'],
+          damage_dice: e['damage_dice'],
+          weight: e['weight'],
+          description: e['description'],
+        )
+        a.save
+      }
+    end
   end
 end
+#    "name": "Боевой посох",
+    "cost": 20,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "дробящий",
+    "weight": 4,
+    "description": "Универсальное (1d8)"

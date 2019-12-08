@@ -1,0 +1,335 @@
+[
+{
+    "name": "Боевой посох",
+    "cost": 20,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "дробящий",
+    "weight": 4,
+    "description": "Универсальное (1d8)"
+},
+{
+    "name": "Булава",
+    "cost": 500,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "дробящий",
+    "weight": 4,
+    "description": "-"
+},
+{
+    "name": " Дубинка",
+    "cost": 10,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "дробящий",
+    "weight": 2,
+    "description": "Легкое "
+},
+{
+    "name": " Кинжал",
+    "cost": 200,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "колющий",
+    "weight": 1,
+    "description": "Легкое"
+},
+{
+    "name": " Копье",
+    "cost": 100,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "колющий",
+    "weight": 3,
+    "description": "Метательное (дис. 20/60)"
+},
+{
+    "name": " Легкий молот",
+    "cost": 200,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "дробящий",
+    "weight": 2,
+    "description": "Легкое"
+},
+{
+    "name": " Метательное копье",
+    "cost": 50,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "колющий",
+    "weight": 2,
+    "description": "Метательное (дис. 30/120) "
+},
+{
+    "name": " Палица",
+    "cost": 20,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "дробящий",
+    "weight": 10,
+    "description": "Двуручное"
+},
+{
+    "name": " Ручной топор",
+    "cost": 500,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "рубящий",
+    "weight": 2,
+    "description": "Легкое"
+},
+{
+    "name": " Серп",
+    "cost": 100,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "рубящий",
+    "weight": 2,
+    "description": "Легкое "
+},
+{
+    "name": "Арбалет легкий",
+    "cost": 2500,
+    "damage": "1",
+    "damage_dice": "8",
+    "weight": 5,
+    "damage_type": "колющий",
+    "description": "Боеприпас (дис. 80/320), двуручное, перезарядка"
+},
+{
+    "name": "Дротик",
+    "cost": 5,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "колющий",
+    "weight": 14,
+    "description": "Метательное (дис. 20/60)"
+},
+{
+    "name": " Короткий лук",
+    "cost": 2500,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "колющий",
+    "weight": 2,
+    "description": "Боеприпас (дис. 80/320)"
+},
+{
+    "name": " Праща",
+    "cost": 10,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "дробящий",
+    "weight": 0,
+    "description": "Боеприпас (дис. 30/120) "
+},
+{
+    "name": " Алебарда",
+    "cost": 2000,
+    "damage": "1",
+    "damage_dice": "10",
+    "damage_type": "рубящий",
+    "weight": 6,
+    "description": "Двуручное"
+},
+{
+    "name": " Боевая кирка",
+    "cost": 500,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "колющий",
+    "weight": 2,
+    "description": "-"
+},
+{
+    "name": " Боевой молот",
+    "cost": 1500,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "дробящий",
+    "weight": 2,
+    "description": "Универсальное (1d10) "
+},
+{
+    "name": " Боевой топор",
+    "cost": 1000,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "рубящий",
+    "weight": 4,
+    "description": "Универсальное (1d10) "
+},
+{
+    "name": " Глефа",
+    "cost": 2000,
+    "damage": "1",
+    "damage_dice": "10",
+    "damage_type": "рубящий",
+    "weight": 6,
+    "description": "Двуручное"
+},
+{
+    "name": " Двуручный меч",
+    "cost": 5000,
+    "damage": "2",
+    "damage_dice": "6",
+    "damage_type": "рубящий",
+    "weight": 6,
+    "description": "Двуручное"
+},
+{
+    "name": " Длинное копье",
+    "cost": 1000,
+    "damage": "1",
+    "damage_dice": "12",
+    "damage_type": "колющий",
+    "weight": 6,
+    "description": "Досягаемость"
+},
+{
+    "name": " Длинный меч",
+    "cost": 1500,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "рубящий",
+    "weight": 3,
+    "description": "Универсальное (1d10) "
+},
+{
+    "name": " Кнут",
+    "cost": 200,
+    "damage": "1",
+    "damage_dice": "4",
+    "damage_type": "рубящий",
+    "weight": 3,
+    "description": "Досягаемость"
+},
+{
+    "name": " Короткий меч",
+    "cost": 1000,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "колющий",
+    "weight": 2,
+    "description": "Легкое"
+},
+{
+    "name": " Молот",
+    "cost": 1000,
+    "damage": "2",
+    "damage_dice": "6",
+    "damage_type": "дробящий",
+    "weight": 10,
+    "description": "Двуручное"
+},
+{
+    "name": " Моргентштерн",
+    "cost": 1500,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "колющий",
+    "weight": 4,
+    "description": "-"
+},
+{
+    "name": " Пика",
+    "cost": 500,
+    "damage": "1",
+    "damage_dice": "10",
+    "damage_type": "колющий",
+    "weight": 18,
+    "description": "Двуручное"
+},
+{
+    "name": " Рапира",
+    "cost": 2500,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "колющий",
+    "weight": 2,
+    "description": "Фехтовальное"
+},
+{
+    "name": " Секира",
+    "cost": 3000,
+    "damage": "1",
+    "damage_dice": "12",
+    "damage_type": "рубящий",
+    "weight": 7,
+    "description": "Двуручное"
+},
+{
+    "name": " Скимитар",
+    "cost": 2500,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "рубящий",
+    "weight": 3,
+    "description": "Легкое"
+},
+{
+    "name": " Трезубец",
+    "cost": 500,
+    "damage": "1",
+    "damage_dice": "6",
+    "damage_type": "колющий",
+    "weight": 4,
+    "description": "Метательное (дис. 20/60)"
+},
+{
+    "name": " Цеп",
+    "cost": 1000,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "дробящий",
+    "weight": 2,
+    "description": "-"
+},
+{
+    "name": "Арбалет ручной",
+    "cost": 7500,
+    "damage": "1",
+    "damage_dice": "6",
+    "weight": 3,
+    "damage_type": "колющий",
+    "description": "Боеприпас (дис. 30/120), лёгкое, перезарядка"
+},
+{
+    "name": "Арбалет тяжелый",
+    "cost": 5000,
+    "damage": "1",
+    "damage_dice": "10",
+    "weight": 18,
+    "damage_type": "колющий",
+    "description": "Боеприпас (дис. 100/400), двуручное, перезарядка, тяжёлое"
+},
+{
+    "name": " Длинный лук",
+    "cost": 5000,
+    "damage": "1",
+    "damage_dice": "8",
+    "damage_type": "колющий",
+    "weight": 2,
+    "description": "Боеприпас (дис. 150/600)"
+},
+{
+    "name": " Духовая трубка",
+    "cost": 1000,
+    "damage": "1",
+    "damage_dice": "0",
+    "damage_type": "колющий",
+    "weight": 1,
+    "description": "Боеприпас (дис. 25/100)"
+},
+{
+    "name": " Сеть",
+    "cost": 100,
+    "damage": "0",
+    "damage_dice": "0",
+    "damage_type": "none",
+    "weight": 3,
+    "description": "Метательное (дис. 5/15)"
+}
+]
