@@ -1,5 +1,6 @@
 class Service
   class << self
+    DTYPES={'дробящий' => 1, "колющий" => 2, "рубящий" => 3, "none" => 0}
     def import_armor filename
       json = JSON.parse(File.read(filename))
       json.each { |e|
@@ -24,18 +25,25 @@ class Service
           cost: e['cost'],
           damage: e['damage'],
           damage_dice: e['damage_dice'],
+          damage_type: DTYPES[e['damage_type']],
           weight: e['weight'],
-          description: e['description'],
+          countable: false,
+          description: e['description'].strip,
+        )
+        a.save
+      }
+    end
+    def import_things filename
+      json = JSON.parse(File.read(filename))
+      json.each { |e|
+        a = Thing.create(
+          name: e['name'].strip,
+          cost: e['cost'].to_i,
+          weight: (e['weight'].to_f*10).to_i
         )
         a.save
       }
     end
   end
 end
-#    "name": "Боевой посох",
-    "cost": 20,
-    "damage": "1",
-    "damage_dice": "6",
-    "damage_type": "дробящий",
-    "weight": 4,
-    "description": "Универсальное (1d8)"
+__END__

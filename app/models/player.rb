@@ -10,6 +10,10 @@ class Player < ActiveRecord::Base
 
   has_many :armorings
   has_many :armors, through: :armorings
+
+  has_many :thingings
+  has_many :things, through: :thingings
+
   belongs_to :user
   belongs_to :adventure
 

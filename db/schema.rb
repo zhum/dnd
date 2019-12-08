@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_07_185545) do
+ActiveRecord::Schema.define(version: 2019_12_08_095524) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -103,6 +103,21 @@ ActiveRecord::Schema.define(version: 2019_12_07_185545) do
     t.index ["player_id"], name: "index_resources_on_player_id"
   end
 
+  create_table "things", force: :cascade do |t|
+    t.string "name"
+    t.integer "cost"
+    t.integer "weight"
+  end
+
+  create_table "thingsing", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "thing_id"
+    t.integer "count"
+    t.string "modificator"
+    t.index ["player_id"], name: "index_thingsing_on_player_id"
+    t.index ["thing_id"], name: "index_thingsing_on_thing_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_hash"
@@ -111,15 +126,24 @@ ActiveRecord::Schema.define(version: 2019_12_07_185545) do
     t.string "secret"
   end
 
+  create_table "weaponings", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "weapon_id"
+    t.integer "count"
+    t.integer "max_count"
+    t.index ["player_id"], name: "index_weaponings_on_player_id"
+    t.index ["weapon_id"], name: "index_weaponings_on_weapon_id"
+  end
+
   create_table "weapons", force: :cascade do |t|
     t.string "name"
-    t.integer "count"
     t.boolean "countable"
     t.string "description"
-    t.integer "dice"
-    t.integer "of_dice"
-    t.integer "player_id"
-    t.index ["player_id"], name: "index_weapons_on_player_id"
+    t.integer "damage"
+    t.integer "damage_dice"
+    t.integer "cost"
+    t.integer "damage_type"
+    t.integer "weight"
   end
 
 end
