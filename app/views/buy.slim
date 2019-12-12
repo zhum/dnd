@@ -5,13 +5,18 @@ div.main.mui-container
     = @player.name
 
   div.info.mui-container-fluid
-    - @items.sort{|a,b| a.name <=> b.name}.each do |item|
+    - @items.sort{|a,b| a[:name] <=> b[:name]}.each do |item|
       div.mui-row
         div.mui-col-xs-1
-          a.dnd-btn.dnd-btn--primary href='#' onclick="buy('#{@item_type}',#{item.id});"
+          a.dnd-btn.dnd-btn--primary href='#' onclick="buy('#{@item_type}',#{item[:id]});"
             i.icon-ok-circle
-        div.mui-col-xs-10
-          = item.name
+        div.mui-col-xs-3
+          = item[:name]
+        div.mui-col-xs-1
+          = item[:cost]/100
+          |&nbsp;ЗМ&nbsp;
+        div.mui-col-xs-6
+          = item[:description]
 
 javascript:
   var secret="#{{@user.secret}}";

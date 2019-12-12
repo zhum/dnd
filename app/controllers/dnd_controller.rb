@@ -161,11 +161,11 @@ class DNDController < BaseApp
     @item_type = params[:type]
     case params[:type]
     when 'things'
-      @items = Thing.all
+      @items = Thing.all.map{|x| {cost: x.cost, id: x.id, name: x.name, description: x.short_description}}
     when 'weapon'
-      @items = Weapon.all
+      @items = Weapon.all.map{|x| {cost: x.cost, id: x.id, name: x.name, description: x.short_description}}
     when 'armor'
-      @items = Armor.all
+      @items = Armor.all.map{|x| {cost: x.cost, id: x.id, name: x.name, description: x.short_description}}
     else
       @items = []
     end

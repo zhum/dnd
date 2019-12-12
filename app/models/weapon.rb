@@ -8,6 +8,10 @@
 class Weapon < ActiveRecord::Base
   #belongs_to :player
   has_many :weaponings
+
+  def short_description
+    "#{weight}фнт. #{damage}d#{damage_dice} #{damage_type} #{description}"
+  end
 end
 
     # "name": "Боевой посох",

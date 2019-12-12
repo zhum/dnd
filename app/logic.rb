@@ -4,6 +4,10 @@ class DNDLogic
       $logger
     end
 
+    def zero_plus(x)
+      x >= 0 ? x : 0
+    end
+
     def send_player ws, player, logit=false
       m = "{\"player\": #{player.to_json}}"
       logger.warn "get_player: '#{m}'" if logit
@@ -71,7 +75,7 @@ class DNDLogic
         # hp change
         when /^hp=(\d+)/
           hp = $1.to_i
-          player.hp = hp
+          player.hp = zero_plus hp
           player.save
           send_player ws, player
           logger.info "new hp= #{player.hp}"
@@ -79,18 +83,18 @@ class DNDLogic
         # max_hp change
         when /^max_hp=(\d+)/
           max_hp = $1.to_i
-          player.max_hp = max_hp
+          player.max_hp = zero_plus max_hp
           player.save
           send_player ws, player
           logger.info "new max_hp= #{player.max_hp}"
 
         # money change
         when /^coins=\[(\d+),(\d+),(\d+),(\d+),(\d+)\]/
-          player.mcoins = $1.to_i
-          player.scoins = $2.to_i
-          player.gcoins = $3.to_i
-          player.ecoins = $4.to_i
-          player.pcoins = $5.to_i
+          player.mcoins = zero_plus $1.to_i
+          player.scoins = zero_plus $2.to_i
+          player.gcoins = zero_plus $3.to_i
+          player.ecoins = zero_plus $4.to_i
+          player.pcoins = zero_plus $5.to_i
           player.save
           send_player ws, player
           logger.info "new gold= #{player.gcoins}"
@@ -104,10 +108,15 @@ class DNDLogic
             logger.warn "Bad weapon - not belongs to player!"
             return
           end
-          w.count = count
-          w.save
+          if count<1
+            logger.warn "Deleting this weapon"
+            w.destroy
+          else
+            w.count = count
+            w.save
+            logger.info "Weapon: #{w}"
+          end
           send_player ws, player
-          logger.info "Weapon: #{w}"
 
         # armor change
         when /^armor (\d+)=(\d+)/
@@ -118,10 +127,15 @@ class DNDLogic
             logger.warn "Bad armor - not belongs to player!"
             return
           end
-          w.count = count
-          w.save
+          if count<1
+            logger.warn "Deleting this armor"
+            w.destroy
+          else
+            w.count = count
+            w.save
+            logger.info "armor: #{w}"
+          end
           send_player ws, player
-          logger.info "armor: #{w}"
 
         # thing change
         when /^thing (\d+)=(\d+)/
@@ -132,10 +146,15 @@ class DNDLogic
             logger.warn "Bad thing - not belongs to player!"
             return
           end
-          w.count = count
-          w.save
+          if count<1
+            logger.warn "Deleting this thing"
+            w.destroy
+          else
+            w.count = count
+            w.save
+            logger.info "Thing: #{w}"
+          end
           send_player ws, player
-          logger.info "Thing: #{w}"
 
         # set preferences
         when /^pref ([^=]+)=(\S+)/
