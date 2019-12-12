@@ -492,6 +492,13 @@ div.inventory{
   flex-grow: 0;
 }
 
+.modal-form {
+  width: 95vw;
+  height: 3em;
+  margin: 50vh auto;
+  padding: 5px;
+  background-color: #fff;
+}
 /* old phones */
 @media all and (max-width: 320px){
   div{
@@ -508,5 +515,12 @@ div.inventory{
 @media (min-width: 741px) {
   div {
     font-size: 20px;
+  }
+  .modal-form {
+    width: 60vw;
+    height: 3em;
+    margin: 50vh auto;
+    padding: 5px;
+    background-color: #fff;
   }
 }

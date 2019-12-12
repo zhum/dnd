@@ -2,6 +2,8 @@ var chat_messages={};
 var ws;
 var ws_timeout=null;
 var player;
+var prefs={};
+var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 
 function set_html(id,value){
   var el = document.getElementById(id)
@@ -107,7 +109,7 @@ function render_chars(){
   }
 }
 
-function push_to_eq(str,x,keys_visible=false){
+function push_to_arm(str,x,id,keys_visible=false){
   //*** columns version
   // str += '<div class="mui-row mui--divider-bottom equipment"><div class="mui-col-xs-3 mui--text-left">'+
   //  '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'eq_plus\',\'eq_minus\',\'eq_set\',\''+x['id']+'\'));">'+
@@ -118,20 +120,38 @@ function push_to_eq(str,x,keys_visible=false){
   //   
   //*** flex version
   str += '<span class="mui--text-left">'+
-   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'eq_plus\',\'eq_minus\',\'eq_set\',\''+x['id']+'\'));">'+
-    x['name']+'</a><span> ('+x['count']+'); </span></span>';
+   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'arm_plus\',\'arm_minus\',\'arm_set\','+id+'));">'+
+    x['name']+'</a><span> '+x['count']+'</span></span>';
   return str;
 }
 
-function render_equipments(mod=false){
-  var eq_html='<div class="dnd-flex-row">';
-  Object.keys(player['equipments']).sort().forEach(function(i) {
-    eq_html = push_to_eq(eq_html, player['equipments'][i], mod);
-  });
-  set_html('equipment',eq_html+'</div>');
+function render_armors(mod=false){
+  var arm_html='<div class="dnd-flex-row">';
+  //Object.keys(player['armors']).sort().forEach(function(i) {
+  for (var i in player['armors']) {
+    arm_html = push_to_arm(arm_html, player['armors'][i], i, mod);
+  };
+  set_html('armor',arm_html+'</div>');
 }
 
-function push_to_weap(str,x,keys_visible){
+function push_to_thing(str,x,id,keys_visible=false){
+  str += '<span class="mui--text-left">'+
+   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'thing_plus\',\'thing_minus\',\'thing_set\','+id+'));">'+
+    x['name']+'</a><span> '+x['count']+'</span></span>';
+  return str;
+}
+
+function render_things(mod=false){
+  var thing_html='<div class="dnd-flex-row">';
+  //Object.keys(player['thingors']).sort().forEach(function(i) {
+  for (var i in player['things']) {
+    thing_html = push_to_thing(thing_html, player['things'][i], i, mod);
+  };
+  //thing_html += '<a class="dnd-btn dnd-btn--primary" href="/buy?type=things">+</a>'
+  set_html('things',thing_html+'</div>');
+}
+
+function push_to_weap(str,x,id,keys_visible){
   // str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
   //   x['name']+'</div><div class="mui-col-xs-5">'+
   //   x['description']+'</div>';
@@ -146,21 +166,21 @@ function push_to_weap(str,x,keys_visible){
   //     '<i class="iw-down"></i>'+
   //   '</span></div></div>';
   str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
-    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\',\''+x['id']+'\'));">'+
+    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\','+id+'));">'+
     x['name']+'</a></div>'+
     '<div class="mui-col-xs-1">'+x['count']+'</div><div class="mui-col-xs-5 mui--divider-left">'+
     x['description']+
-    '</div><div class="mui-col-xs-1 mui--divider-left">'+x['dice']+'d'+x['of_dice']+
-    '</div></div>';
+    '</div><div class="mui-col-xs-1 mui--divider-left">'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+
+    ')</div></div>';
   return str;
 }
 
 function render_weapons(mod=false){
   var weap_html='';
-  //for(var i in player['weapons']){
-  Object.keys(player['weapons']).sort().forEach(function(i) {
-    weap_html = push_to_weap(weap_html, player['weapons'][i], mod);
-  });
+  for(var i in player['weapons']){
+  //Object.keys(player['weapons']).sort().forEach(function(i) {
+    weap_html = push_to_weap(weap_html, player['weapons'][i], i, mod);
+  };
   set_html('weapons',weap_html);
 }
 
@@ -204,11 +224,13 @@ function render_player(data){
   
   // var el = document.querySelector('[data-equipment-edit]');
   // var mod = el.getAttribute('data-equipment-edit');
-  render_equipments();//mod==='edit');
+  render_armors();//mod==='edit');
   
   // el = document.querySelector('[data-weapon-edit]');
   // mod = el.getAttribute('data-weapon-edit');
   render_weapons();//mod==='edit');
+
+  render_things();
   
 }
 
@@ -252,9 +274,38 @@ function toggle_item(item){
   var el = document.getElementById(item);
   if(el){
     el.classList.toggle('mui--hide');
+    ws.send(secret+': pref ui_'+item+'='+(el.classList.contains('mui--hide') ? '0' : '1'));
   }
 }
 
+function onoff_item(item,value){
+  var el = document.getElementById(item);
+  if(value=='1')
+    el.classList.remove('mui--hide')
+  else
+    el.classList.add('mui--hide')  
+}
+
+function apply_prefs(){
+  for (var i in prefs) {
+    value = prefs[i];
+    if(i=='ui_weapons'){
+      onoff_item('weapons',value)
+    }
+    else if(i=='ui_armor'){
+      onoff_item('armor',value)
+    }
+    else if(i=='ui_things'){
+      onoff_item('things',value)
+    }
+    else if(i=='ui_fight'){
+      onoff_item('fight',value)
+    }
+    else if(i=='ui_char'){
+      onoff_item('char',value)
+    }
+  }
+}
 
 /************************************************************
    Modals
@@ -285,6 +336,7 @@ function modalEnter(){
   // var el = document.getElementById('qq');
   // var f = el.getAttribute('data-function');
   modal_function(document.getElementById('qq').value,modal_arg);
+  document.getElementById('mui-overlay').classList.remove('modal-form')
   mui.overlay('off');
 }
 
@@ -292,11 +344,11 @@ function modalEnter(){
 function formModal(form) {
   // initialize modal element
   var modalEl = document.createElement('div');
-  modalEl.style.width = '95vw';
-  modalEl.style.height = '3em';
-  modalEl.style.margin = '50vh auto';
-  modalEl.style.padding = '5px 5px';
-  modalEl.style.backgroundColor = '#fff';
+  // modalEl.style.width = '95vw';
+  // modalEl.style.height = '3em';
+  // modalEl.style.margin = '50vh auto';
+  // modalEl.style.padding = '5px 5px';
+  // modalEl.style.backgroundColor = '#fff';
   modalEl.innerHTML = form;
   // modal_function = f;
   // modal_arg = arg;
@@ -305,15 +357,20 @@ function formModal(form) {
 
   // show modal
   mui.overlay('on', modalEl);
+  //modalEl.classList.add = 'modal-form';
+  document.getElementById('mui-overlay').classList.add('modal-form')
 }
 
 function formEnter(){
   modal_function(document.getElementById('qq').value,modal_arg);
+  document.getElementById('mui-overlay').classList.remove('modal-form')
+
   mui.overlay('off');
 }
 
 function xover(){
   mui.overlay('off');
+  document.getElementById('mui-overlay').classList.remove('modal-form')
 }
 
 function overForm3(f1,f2,f3,arg){
@@ -393,6 +450,10 @@ function try_connect(){
       else if(msg['player']){
         player = msg['player'];
         render_player(player);
+      }
+      else if(msg['prefs']){
+        prefs = msg['prefs'];
+        apply_prefs(prefs);
       }
       else if(msg['chat']){ // new message!
         var id='';

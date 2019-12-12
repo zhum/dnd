@@ -3,7 +3,8 @@ class Player < ActiveRecord::Base
 
   has_many :resources
   has_many :chars
-  has_many :equipments
+  #has_many :equipments
+  has_many :prefs
 
   has_many :weaponings
   has_many :weapons, through: :weaponings
@@ -21,24 +22,54 @@ class Player < ActiveRecord::Base
     'strength','dexterity','constitution',
     'intellegence','wisdom','charisma'
   ]
+  DTYPES=['none', 'дробящий', 'колющий', 'рубящий']
+
+
+  def all_weapon
+    weaponings.all.map{|w|
+      ww = w.weapon;
+      atrs = ['name','countable','description','damage',
+              'damage_dice','cost','damage_type','weight'].map{|x|
+        [x,ww.read_attribute(x)]
+      }.append(['count', w.count]).append(['max_count', w.max_count])
+      [w.id, Hash[atrs]]
+    }
+  end
+
+  def add_weapon(w,count,max_count)
+    weaponings << Weaponing.create!(count: count, max_count: max_count, weapon: w)
+    save
+  end
+
+  def del_weapon(w)
+    weaponing = if w.is_a?(Numeric)
+      Weaponing.where(player_id: id, weapon_id: w)
+    else
+      Weaponing.where(player_id: id, weapon_id: w.id)
+    end
+    weaponing.delete
+  end
 
   def to_json
     h = ['id', 'name', 'klass', 'race', 'hp', 'max_hp', 'experience'].map{|name|
-      [name, self.public_send(name)]
+      [name, read_attribute(name)]
     }
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
-    h << ['mods',Hash[MODS.map{|c| [c,public_send("mod_#{c}")]}]]
-    h << ['equipments',Hash[equipments.all.map{|w| [w.id,w]}]]
-    h << ['weapons',Hash[weapons.all.map{|w| [w.id,w]}]]
-    h << ['things',Hash[thingings.include(:thing).all.map{|t|
-      tt=t.thing; [t.id,{name: tt.name, count: t.count, cost: tt.cost, weight: tt.weight}]}]
-    ]
+    h << ['mods',Hash[MODS.map{|c| [c,read_attribute("mod_#{c}")]}]]
+    #h << ['equipments',Hash[equipments.all.map{|w| [w.id,'x' ]}]]
+
+    h << ['weapons',Hash[all_weapon]]
+    h << ['things',Hash[thingings.all.map{|t|
+      tt=t.thing;
+      [t.id,{count: t.count}.merge(Hash[
+        ['name','cost','weight'].map{|x| [x,tt.read_attribute(x)]}])
+      ]
+    }]]
     h << ['armors',Hash[armorings.all.map{|a|
-      aa = a.armoring; [a.id,{name: a.name, count: aa.count}]}]
+      aa = a.armor; [a.id, {name: aa.name, count: a.count}]}]
     ]
     warn "===> #{Hash[h].inspect}"
-    Hash[h].to_json.to_s
-    
+    Hash[h].to_json.to_s 
   end
 end

@@ -30,6 +30,40 @@ class DNDLogic
           logger.warn "id=#{player.id}"
           send_player ws, player, true
 
+        # send player preferences info
+        when 'get_prefs'
+          m = "{\"prefs\": #{Hash[player.prefs.map{|p| [p.name, p.value]}].to_json}}"
+          logger.warn "get_prefs: '#{m}'"
+          ws.send(m)
+          warn "Sent..."
+
+        # buy
+        when /buy (\S+) (\d+)/
+          id = $2.to_i
+          case $1
+          when 'things'
+            t = Thing.find(id)
+            if player.things.include? t
+              logger.warn "Thing is already bought"
+              return
+            end
+            player.thingings << Thinging.create(thing: t, count: 1)
+          when 'armor'
+            t = Armor.find(id)
+            if player.armors.include? t
+              logger.warn "Armor is already bought"
+              return
+            end
+            player.armorings << Armoring.create(armor: t, count: 1)
+          when 'weapon'
+            t = Weapon.find(id)
+            if player.weapons.include? t
+              logger.warn "Weapon is already bought"
+              return
+            end
+            player.weaponings << Weaponing.create(weapon: t, count: 1)
+          end
+          player.save
         # send chat history
         when 'get_chat'
           LogicChat.get_chat player,ws
@@ -62,32 +96,72 @@ class DNDLogic
           logger.info "new gold= #{player.gcoins}"
 
         # weapon change
-        when /^weap (\d+)=(.*)/
+        when /^weap (\d+)=(\d+)/
           id = $1.to_i
-          json = JSON.parse($2)
-          w = Weapon.find(id)
+          count = $2.to_i
+          w = Weaponing.find(id)
           if w.player != player
             logger.warn "Bad weapon - not belongs to player!"
             return
           end
-          w.count = json['count']
+          w.count = count
           w.save
           send_player ws, player
           logger.info "Weapon: #{w}"
 
-        # equipment change
-        when /^equip (\d+)=(.*)/
+        # armor change
+        when /^armor (\d+)=(\d+)/
           id = $1.to_i
-          json = JSON.parse($2)
-          w = Equipment.find(id)
+          count = $2.to_i
+          w = Armoring.find(id)
           if w.player != player
-            logger.warn "Bad equipment - not belongs to player!"
+            logger.warn "Bad armor - not belongs to player!"
             return
           end
-          w.count = json['count']
+          w.count = count
           w.save
           send_player ws, player
-          logger.info "Equip: #{w}"
+          logger.info "armor: #{w}"
+
+        # thing change
+        when /^thing (\d+)=(\d+)/
+          id = $1.to_i
+          count = $2.to_i
+          w = Thinging.find(id)
+          if w.player != player
+            logger.warn "Bad thing - not belongs to player!"
+            return
+          end
+          w.count = count
+          w.save
+          send_player ws, player
+          logger.info "Thing: #{w}"
+
+        # set preferences
+        when /^pref ([^=]+)=(\S+)/
+          name = $1
+          value = $2
+          begin
+            pref = Pref.find_or_create_by(player: player, name: name)
+            pref.value = value
+            pref.save
+          rescue => e
+            logger.warn "Bad preference: #{name} = '#{value}' (#{e.message})"
+          end
+
+        # # equipment change
+        # when /^equip (\d+)=(.*)/
+        #   id = $1.to_i
+        #   json = JSON.parse($2)
+        #   w = Equipment.find(id)
+        #   if w.player != player
+        #     logger.warn "Bad equipment - not belongs to player!"
+        #     return
+        #   end
+        #   w.count = json['count']
+        #   w.save
+        #   send_player ws, player
+        #   logger.info "Equip: #{w}"
 
         # modifier change
         when /^mod ([a-z]+)=(.*)/

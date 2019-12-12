@@ -155,4 +155,20 @@ class DNDController < BaseApp
     session[:user_id] = user.id
     redirect '/player_select'
   end
+
+  get '/buy' do
+    @player = Player.find(session[:player_id].to_i)
+    @item_type = params[:type]
+    case params[:type]
+    when 'things'
+      @items = Thing.all
+    when 'weapon'
+      @items = Weapon.all
+    when 'armor'
+      @items = Armor.all
+    else
+      @items = []
+    end
+    slim :buy
+  end
 end
