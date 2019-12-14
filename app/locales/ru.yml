@@ -1,8 +1,31 @@
 ru:
   char:
-    strength: 'Сила'
-    constitution: 'Телосл.'
-    dexterity: 'Ловк.'
-    intellegence: 'Интел.'
-    wisdom: 'Мудр.'
-    charisma: 'Харизма'
+    characheristics: Характеристики
+    strength: 'Сил'
+    constitution: 'Тел'
+    dexterity: 'Лов'
+    intellegence: 'Инт'
+    wisdom: 'Мдр'
+    charisma: 'Хар'
+
+    skills: Навыки
+    athletics: Атлетика(Сил)
+    acrobatics: Акробатика (Лов)
+    investigation: Анализ (Инт)
+    perception: Внимательность (Мдр)
+    survival: Выживание (Мдр)
+    performance: Выступление (Хар)
+    intimidation: Запугивание (Хар)
+    history: История (Инт)
+    sleight_of_hands: Ловкость рук (Лов)
+    arcana: Магия (Инт)
+    medicine: Медицина (Мдр)
+    deception: Обман (Хар)
+    nature: Природа (Инт)
+    insight: Проницательность (Мдр)
+    religion: Религия (Инт)
+    stealth: Скрытность (Лов)
+    persuasion: Убеждение (Хар)
+    animal_handling: Уход за животными (Мдр)
+
+

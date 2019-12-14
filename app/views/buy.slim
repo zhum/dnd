@@ -6,15 +6,17 @@ div.main.mui-container
 
   div.info.mui-container-fluid
     - @items.sort{|a,b| a[:name] <=> b[:name]}.each do |item|
-      div.mui-row
+      div.mui-row.mui--align-moddle.mui--divider-bottom
         div.mui-col-xs-1
-          a.dnd-btn.dnd-btn--primary href='#' onclick="buy('#{@item_type}',#{item[:id]});"
+          a.dnd-btn.dnd-btn--primary href='#' onclick="buy('#{@item_type}',#{item[:id]},0);"
             i.icon-ok-circle
+          a.dnd-btn.dnd-btn--primary href='#' onclick="buy('#{@item_type}',#{item[:id]},1);"
+            i.icon-dollaralt
         div.mui-col-xs-3
           = item[:name]
-        div.mui-col-xs-1
-          = item[:cost]/100
-          |&nbsp;ЗМ&nbsp;
+        div.mui-col-xs-2
+          = "%8.2f" % (item[:cost].to_f/100)
+          i.icon-rouble.mui--text-caption
         div.mui-col-xs-6
           = item[:description]
 
@@ -26,7 +28,7 @@ javascript:
     // ws.send(secret+': get_prefs');
   }
 
-  function buy(item_type,id){
-    ws.send(secret+': buy '+item_type+' '+id);
+  function buy(item_type,id,type){
+    ws.send(secret+': buy '+item_type+' '+id+' '+type);
     window.location.href = '/player';
   }

@@ -1,4 +1,5 @@
 == styled_flash
+- char_icons= {'strength' => 'icon-hammeralt','constitution' => 'icon-bone','dexterity' => 'icon-cat','intellegence' => 'icon-student-school','wisdom' => 'icon-bookalt','charisma' => 'icon-star'}
 
 div.main.mui-container
   div.app-bar.center
@@ -84,32 +85,37 @@ div.main.mui-container
   div.dnd-flex-grow1.mui--z2.mui--text-center onclick="toggle_item('main-char');"
     | Основные характеристики
   div#main-char.main-char.dnd-flex-row.mui--bg-primary-light
-    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
+    div.mui-col-xs-4.mui--divider-left.mui--divider-bottom
       span.mui--text-center.block.fullwidth#ch_armour_class
         i.iw-reload
       span.block.fullwidth.mui--text-center.label1
+        i.icon-securityalt-shieldalt
         | КД
-    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
+    div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_initiative
         i.iw-reload
       span.block.fullwidth.mui--text-center.label1
+        i.icon-queen
         | Инициатива
-    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
+    div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_speed
         i.iw-reload
       span.block.fullwidth.mui--text-center.label1
+        i.icon-rabbit
         | Скорость
-    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
+    div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_pass_attentiveness
         i.iw-reload
       span.block.fullwidth.mui--text-center.label1
+        i.icon-glasses
         | Внимательность
-    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
+    div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_masterlevel
         i.iw-reload
       span.block.fullwidth.mui--text-center.label1
+        i.icon-screwdriver
         | Мастерство
-    div.mui-col-xs-6.mui-col-sm-4.mui--divider-left.mui--divider-bottom
+    div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth#ch_hit_dice_full
         | X DY
       span.block.fullwidth.mui--text-center.label1
@@ -117,24 +123,38 @@ div.main.mui-container
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('char');"
-      | Характеристики
+      = t('char.characheristics')
 
   div.mui--clearfix
   div#char
     div.mui-row.mui--divider-bottom
       - ['strength','constitution','dexterity'].each do |i|
         div.mui-col-xs-4.mui--divider-left
+          i class="#{char_icons[i]}"
           a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
             = t("char.#{i}")
           span id="mod_#{i}"
             i.iw-reload
-    div.mui-row.mui--divider-bottom
+      div.mui-row.mui--divider-bottom
       - ['intellegence','wisdom','charisma'].each do |i|
         div.mui-col-xs-4.mui--divider-left
+          i class="#{char_icons[i]}"
           a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
             = t("char.#{i}")
           span id="mod_#{i}"
             i.iw-reload
+  div.dnd-flex-row.mui--z2.fullwidth
+    span.dnd-flex-grow1.mui--text-center onclick="toggle_item('skills');"
+      = t('char.skills')
+  div#skills
+    div.mui-row.mui--divider-bottom
+    - ['athletics','acrobatics','investigation','perception','survival','performance','intimidation','history','sleight_of_hands','arcana','medicine','deception','nature','insight','religion','stealth','persuasion','animal_handling'].each do |s|
+      div.mui-col-xs-4.mui--divider-left
+        = t("char.#{s}")
+        |:&nbsp;
+        span id="skill_#{s}"
+          | 0
+
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('armor');"
@@ -192,7 +212,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['hp']-v>0){
+    if(player['hp']-v>=0){
       player['hp'] -= v;
       ws.send(secret+': hp='+player['hp']);
     }
@@ -218,7 +238,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['max_hp']-v>0){
+    if(player['max_hp']-v>=0){
       player['max_hp'] -= v;
       ws.send(secret+': max_hp='+player['max_hp']);
     }
@@ -244,7 +264,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['mods'][mod]-v>0){
+    if(player['mods'][mod]-v>=0){
       player['mods'][mod] -= v;
       ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
     }
@@ -269,7 +289,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['armors'][armor]['count']-v>0){
+    if(player['armors'][armor]['count']-v>=0){
       player['armors'][armor]['count'] -= v;
       ws.send(secret+': armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
     }
@@ -294,7 +314,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['things'][thing]['count']-v>0){
+    if(player['things'][thing]['count']-v>=0){
       player['things'][thing]['count'] -= v;
       ws.send(secret+': thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
     }
@@ -319,7 +339,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['weapons'][weap]['count']-v>0){
+    if(player['weapons'][weap]['count']-v>=0){
       player['weapons'][weap]['count'] -= v;
       ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
     }
@@ -345,7 +365,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    if(player['coins'][c]-v>0){
+    if(player['coins'][c]-v>=0){
       player['coins'][c] -= v;
       ws.send(secret+': coins='+JSON.stringify(player['coins']));
     }

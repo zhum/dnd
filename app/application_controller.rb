@@ -44,7 +44,7 @@ class BaseApp < Sinatra::Base
     I18n.backend.load_translations
 
     if env == 'development'
-      register Sinatra::Reloader 
+      #register Sinatra::Reloader 
       Dir.glob("#{root}/app/models/*.rb").each do |file|
         also_reload file
       end
@@ -55,9 +55,9 @@ class BaseApp < Sinatra::Base
         also_reload file
       end
 
-      after_reload do
-        logger.warn "Reloaded!"
-      end
+      # after_reload do
+      #   logger.warn "Reloaded!"
+      # end
     end
   end
 

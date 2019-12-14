@@ -42,8 +42,10 @@ class DNDLogic
           warn "Sent..."
 
         # buy
-        when /buy (\S+) (\d+)/
+        when /buy (\S+) (\d+)(\s*)(.*)/
           id = $2.to_i
+          type = $4.to_i
+          warn "----------------- TYPE=#{type}"
           case $1
           when 'things'
             t = Thing.find(id)
@@ -66,6 +68,10 @@ class DNDLogic
               return
             end
             player.weaponings << Weaponing.create(weapon: t, count: 1)
+          end
+          if type>0
+            warn "------------ Spent: #{t.cost}"
+            player.reduce_money(t.cost)
           end
           player.save
         # send chat history

@@ -50,6 +50,17 @@ class Player < ActiveRecord::Base
     weaponing.delete
   end
 
+  def reduce_money ammount
+    total = mcoins+10*scoins+100*gcoins+50*ecoins+1000*pcoins
+    total -= ammount
+    total = 0 if total<0
+    gc = total / 100
+    total %= 100
+    sc = total / 10
+    mc = total % 10
+    update(mcoins: mc, scoins: sc, gcoins: gc, ecoins: 0, pcoins: 0)
+  end
+
   def to_json
     h = ['id', 'name', 'klass', 'race', 'hp', 'max_hp', 'experience'].map{|name|
       [name, read_attribute(name)]
