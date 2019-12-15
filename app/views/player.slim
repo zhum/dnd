@@ -147,13 +147,14 @@ div.main.mui-container
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('skills');"
       = t('char.skills')
   div#skills
-    div.mui-row.mui--divider-bottom
-    - ['athletics','acrobatics','investigation','perception','survival','performance','intimidation','history','sleight_of_hands','arcana','medicine','deception','nature','insight','religion','stealth','persuasion','animal_handling'].each do |s|
-      div.mui-col-xs-4.mui--divider-left
-        = t("char.#{s}")
-        |:&nbsp;
-        span id="skill_#{s}"
-          | 0
+    - [['athletics','acrobatics'],['investigation','perception'],['survival','performance'],['intimidation','history'],['sleight_of_hands','arcana'],['medicine','deception'],['nature','insight'],['religion','stealth'],['persuasion','animal_handling']].each do |x|
+        div.mui-row.mui--divider-bottom
+          - x.each do |s|
+            div.mui-col-xs-4.mui--divider-left
+              = t("char.#{s}")
+              |:
+            div.mui-col-xs-2.mui--text-right id="skill_#{s}"
+              | ...
 
 
   div.dnd-flex-row.mui--z2.fullwidth

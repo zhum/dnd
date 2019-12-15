@@ -184,6 +184,13 @@ function render_weapons(mod=false){
   set_html('weapons',weap_html);
 }
 
+function render_skills(){
+  var v;
+  for(var i in player['skills']){
+    v = player['skills'][i];
+    set_html('skill_'+v['name'], '<i class="icon-'+(v['ready'] ? 'ok' : 'remove')+'"></i> '+v['mod']);
+  }
+}
 // function weapon_plus(weap){
 //   player['weapons'][weap]['count'] += 1;
 //   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
@@ -231,6 +238,8 @@ function render_player(data){
   render_weapons();//mod==='edit');
 
   render_things();
+
+  render_skills();
   
 }
 
@@ -286,6 +295,7 @@ function onoff_item(item,value){
     el.classList.add('mui--hide')  
 }
 
+//!!FIXME!
 function apply_prefs(){
   for (var i in prefs) {
     value = prefs[i];
@@ -303,6 +313,9 @@ function apply_prefs(){
     }
     else if(i=='ui_char'){
       onoff_item('char',value)
+    }
+    else if(i=='ui_skills'){
+      onoff_item('skills',value)
     }
   }
 }

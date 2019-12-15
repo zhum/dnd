@@ -65,6 +65,7 @@ class Player < ActiveRecord::Base
   end
 
   def to_json
+    #I18n.default_locale = :ru
     h = ['id', 'name', 'klass', 'race', 'hp', 'max_hp', 'experience'].map{|name|
       [name, read_attribute(name)]
     }
@@ -83,6 +84,11 @@ class Player < ActiveRecord::Base
     h << ['armors',Hash[armorings.all.map{|a|
       aa = a.armor; [a.id, {name: aa.name, count: a.count}]}]
     ]
+
+    h << ['skills',Hash[skillings.all.map { |e|
+        s = e.skill; [e.id,{name: s.name,ready: e.ready, base: s.base, mod: e.modifier}]
+      }
+    ]]
     warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s 
   end
