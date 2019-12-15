@@ -1,6 +1,9 @@
-development:
+development: &dev
     adapter: sqlite3
-    database: dnd.sqlite3
+    database: /home/serg/dnd/dnd.sqlite3
     pool: 50
     timeout: 5000
+
+default_env:
+    <<: *dev
 

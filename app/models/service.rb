@@ -44,6 +44,29 @@ class Service
         a.save
       }
     end
+    def create_skills
+      {'athletics' => 1,
+      'acrobatics' => 3,
+      'investigation' => 0,
+      'perception' => 4,
+      'survival' => 4,
+      'performance' => 5,
+      'intimidation' => 5,
+      'history' => 3,
+      'sleight_of_hands' => 1,
+      'arcana' => 3,
+      'medicine' => 4,
+      'deception' => 5,
+      'nature' => 3,
+      'insight' => 4,
+      'religion' => 3,
+      'stealth' => 1,
+      'persuasion' => 5,
+      'animal_handling' => 4}.each do |k,v|
+        Skill.create(name: k, base: v).save
+      end
+
+    end
   end
 end
 __END__

@@ -15,6 +15,9 @@ class Player < ActiveRecord::Base
   has_many :thingings
   has_many :things, through: :thingings
 
+  has_many :skillings
+  has_many :skills, through: :skillings
+
   belongs_to :user
   belongs_to :adventure
 

@@ -34,7 +34,9 @@ DatabaseTasks.root = root
 
 task :environment do
   ActiveRecord::Base.configurations = DatabaseTasks.database_configuration
+  warn "..."
   ActiveRecord::Base.establish_connection DatabaseTasks.env.to_sym
+  warn ":::"
 end
 
 load 'active_record/railties/databases.rake'
