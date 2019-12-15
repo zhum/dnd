@@ -289,34 +289,39 @@ function toggle_item(item){
 
 function onoff_item(item,value){
   var el = document.getElementById(item);
-  if(value=='1')
-    el.classList.remove('mui--hide')
-  else
-    el.classList.add('mui--hide')  
+  if(el){
+    if(value=='1')
+      el.classList.remove('mui--hide');
+    else
+      el.classList.add('mui--hide');
+  }
 }
 
 //!!FIXME!
 function apply_prefs(){
   for (var i in prefs) {
     value = prefs[i];
-    if(i=='ui_weapons'){
-      onoff_item('weapons',value)
+    if(i.substring(0,3)=='ui_'){
+      onoff_item(i.substring(3),value)
     }
-    else if(i=='ui_armor'){
-      onoff_item('armor',value)
-    }
-    else if(i=='ui_things'){
-      onoff_item('things',value)
-    }
-    else if(i=='ui_fight'){
-      onoff_item('fight',value)
-    }
-    else if(i=='ui_char'){
-      onoff_item('char',value)
-    }
-    else if(i=='ui_skills'){
-      onoff_item('skills',value)
-    }
+    // if(i=='ui_weapons'){
+    //   onoff_item('weapons',value)
+    // }
+    // else if(i=='ui_armor'){
+    //   onoff_item('armor',value)
+    // }
+    // else if(i=='ui_things'){
+    //   onoff_item('things',value)
+    // }
+    // else if(i=='ui_fight'){
+    //   onoff_item('fight',value)
+    // }
+    // else if(i=='ui_char'){
+    //   onoff_item('char',value)
+    // }
+    // else if(i=='ui_skills'){
+    //   onoff_item('skills',value)
+    // }
   }
 }
 
