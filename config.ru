@@ -3,8 +3,14 @@
 
 #require_relative './config/environment'
 #require_all 'app'
-ENV['SINATRA_ENV'] ||= "development"
-ENV['RACK_ENV'] ||= "development"
+env = if ENV['HEROKU']=='1'
+  'heroku'
+else
+  'development'
+end
+
+ENV['SINATRA_ENV'] ||= env
+ENV['RACK_ENV'] ||= env
 
 require 'bundler'
 
