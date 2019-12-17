@@ -23,4 +23,6 @@ end
 
 group :heroku do
     gem 'pg'
+    gem 'pry'
+    gem 'tux'
 end
