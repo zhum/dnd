@@ -15,4 +15,4 @@ heroku:
   #database: <%= ENV['DATABASE_NAME'] %>
   #username: <%= ENV['DATABASE_USER'] %>
   #password: <%= ENV['DATABASE_PASSWORD'] %>
-  url: <%= ENV['HEROKU_POSTGRESQL_CYAN_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
