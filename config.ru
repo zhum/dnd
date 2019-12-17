@@ -3,11 +3,6 @@
 
 #require_relative './config/environment'
 #require_all 'app'
-env = if ENV['HEROKU']=='1'
-  'heroku'
-else
-  'development'
-end
 
 ENV['SINATRA_ENV'] ||= env
 ENV['RACK_ENV'] ||= env
