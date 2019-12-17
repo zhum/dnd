@@ -23,7 +23,7 @@ end
 
 
 root = File.expand_path '..', __FILE__
-DatabaseTasks.env = ENV['ENV'] || 'development'
+DatabaseTasks.env = ENV['RACK_ENV'] || 'development'
 conf = File.join root, 'db/config.yml'
 DatabaseTasks.database_configuration = YAML.load(File.read(conf))
 DatabaseTasks.db_dir = File.join root, 'db'

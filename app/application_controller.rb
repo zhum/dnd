@@ -23,7 +23,7 @@ class BaseApp < Sinatra::Base
 
   # Configure ActiveRecord
 
-  env    = ENV['ENV'] || 'development'
+  env    = ENV['RACK_ENV'] || 'development'
   root   = File.expand_path '..', __FILE__
   config = YAML.load(File.read(File.join(settings.root,'../db/config.yml')))
 
