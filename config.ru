@@ -11,6 +11,7 @@ end
 
 ENV['SINATRA_ENV'] ||= env
 ENV['RACK_ENV'] ||= env
+ENV['RAILS_ENV'] ||= env
 
 require 'bundler'
 
