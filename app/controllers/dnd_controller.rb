@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra-websocket'
 require 'json'
+require "securerandom"
 
 class DNDController < BaseApp
   WSregex = Regexp.new '^(\S+): (.*)'
@@ -146,6 +147,8 @@ class DNDController < BaseApp
       name: params[:reg_name],
       email: params[:reg_email],
       password: params[:reg_pass]
+      active: true,
+      secret: SecureRandom.alphanumeric(32)
       )
     unless user.save
       flash[:warn] = 'Хм... Что-то пошло не так. Не получается зарегистрировать!..'

@@ -6,6 +6,8 @@
 
 require 'erb'
 
+env = ENV['HEROKU']==='1' ? 'heroku' : 'development'
+
 ENV['SINATRA_ENV'] ||= env
 ENV['RACK_ENV'] ||= env
 ENV['RAILS_ENV'] ||= env
