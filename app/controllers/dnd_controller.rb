@@ -146,7 +146,7 @@ class DNDController < BaseApp
     user = User.create(
       name: params[:reg_name],
       email: params[:reg_email],
-      password: params[:reg_pass]
+      password: params[:reg_pass],
       active: true,
       secret: SecureRandom.alphanumeric(32)
       )
