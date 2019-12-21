@@ -3,45 +3,19 @@
 #require './dnd'
 #
 #
-require 'yaml'
-require 'logger'
+require "./config/environment"
 require 'active_record'
 require 'sinatra/activerecord/rake'
-require 'erb'
-
-include ActiveRecord::Tasks
-
-class Seeder
-  def initialize(seed)
-    @seed = seed
-  end
-
-  def load_seed
-    raise "Seed file '#{@seed}' does not exist" unless File.file? @seed
-    load @seed
-  end
-end
-
-
-root = File.expand_path '..', __FILE__
-DatabaseTasks.env = ENV['RACK_ENV'] || 'development'
-conf = File.join root, 'db/config.yml'
-yml = ERB.new(File.read(conf)).result
-#warn "Conf=#{yml}"
-DatabaseTasks.root = root
-DatabaseTasks.database_configuration = YAML.load(yml)
-DatabaseTasks.db_dir = File.join root, 'db'
-DatabaseTasks.fixtures_path = File.join root, 'test/fixtures'
-DatabaseTasks.migrations_paths = [File.join(root, 'db/migrate')]
-DatabaseTasks.seed_loader = Seeder.new File.join root, 'db/seeds.rb'
-
-
-task :environment do
-  ActiveRecord::Base.configurations = DatabaseTasks.database_configuration
-  warn "..."
-  ActiveRecord::Base.establish_connection DatabaseTasks.env.to_sym
-  warn ":::"
-end
+require 'rake/testtask'
 
 load 'active_record/railties/databases.rake'
 
+namespace :db do
+  # task :load_config do
+  #   require File.expand_path('../app', __FILE__)
+  # end
+
+  # added these lines to work
+  task seed: :load_config do
+  end
+end

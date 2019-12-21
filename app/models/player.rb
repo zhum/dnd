@@ -3,7 +3,6 @@ class Player < ActiveRecord::Base
 
   has_many :resources
   has_many :chars
-  #has_many :equipments
   has_many :prefs
 
   has_many :weaponings
@@ -27,6 +26,30 @@ class Player < ActiveRecord::Base
   ]
   DTYPES=['none', 'дробящий', 'колющий', 'рубящий']
 
+  after_initialize :set_def, unless: :persisted?
+
+  def set_def
+    self.hp ||= 20
+    self.max_hp ||= 20
+    self.mcoins ||= 0
+    self.scoins ||= 0
+    self.gcoins ||= 0
+    self.ecoins ||= 0
+    self.pcoins ||= 0
+    self.is_master = false if self.is_master.nil?
+    self.mod_strength ||= 0
+    self.mod_dexterity ||= 0
+    self.mod_constitution ||= 0
+    self.mod_intellegence ||= 0
+    self.mod_wisdom ||= 0
+    self.mod_charisma ||= 0
+    self.experience ||= 0
+    MODS.map{ |c|
+      if read_attribute("mod_#{c}").nil?
+        write_attribute("mod_#{c}",1)
+      end
+    }
+  end
 
   def all_weapon
     weaponings.all.map{|w|
@@ -72,7 +95,6 @@ class Player < ActiveRecord::Base
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
     h << ['mods',Hash[MODS.map{|c| [c,read_attribute("mod_#{c}")]}]]
-    #h << ['equipments',Hash[equipments.all.map{|w| [w.id,'x' ]}]]
 
     h << ['weapons',Hash[all_weapon]]
     h << ['things',Hash[thingings.all.map{|t|

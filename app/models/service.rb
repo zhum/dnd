@@ -6,9 +6,10 @@ class Service
       Data
     end
 
-    def import_armor
+    def import_armor force=false
+      return if Armor.count>0 and !force
       json = load_json['armor']
-      json.each { |e|
+      json.each do |e|
         a = Armor.create(
           name: e['name'].strip,
           cost: e['cost'],
@@ -20,9 +21,10 @@ class Service
           weight: e['weight']
         )
         a.save
-      }
+      end
     end
-    def import_weapon
+    def import_weapon force=false
+      return if Weapon.count>0 && !force
       json = load_json['weapon']
       json.each { |e|
         a = Weapon.create(
@@ -38,7 +40,8 @@ class Service
         a.save
       }
     end
-    def import_things
+    def import_things force=false
+      return if Thing.count>0 && !force
       json = load_json['things']
       json.each { |e|
         a = Thing.create(
@@ -49,7 +52,8 @@ class Service
         a.save
       }
     end
-    def create_skills
+    def create_skills force=false
+      return if Skill.count>0 && !force
       {'athletics' => 1,
       'acrobatics' => 3,
       'investigation' => 0,
@@ -72,7 +76,10 @@ class Service
       end
     end
 
-    def create_adventure
+    def create_adventure force=false
+      if Adventure.count>0 && !force
+        return Adventure.first
+      end
       a = Adventure.create(name: 'Преключениэ!')
       a.save
       a
