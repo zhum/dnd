@@ -1,6 +1,6 @@
-#ENV['SINATRA_ENV'] ||= "development"
 ENV['RACK_ENV'] ||= "development"
 
+warn "============ #{ENV['RACK_ENV']} ================="
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
 
