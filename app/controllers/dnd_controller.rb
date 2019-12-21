@@ -82,16 +82,12 @@ class DNDController < BaseApp
     slim :player_select
   end
 
-  # get '/master/:id' do
-  #   master = Master.find(params[:id])
-  #   if master.user == @user
-  #     session[:master_id] = params[:master_id]
-  #     redirect '/master'
-  #   else
-  #     session[:user_id] = 0
-  #     redirect '/auth'
-  #   end
-  # end
+  # player or master creation
+  get '/player_create' do
+    logger.warn "PLAYER_CREATE"
+    @title = "Создайте игрока"
+    slim :player_create
+  end
 
   get '/logout' do
     session[:player_id]=0
@@ -156,7 +152,7 @@ class DNDController < BaseApp
       redirect '/auth'
     end
     session[:user_id] = user.id
-    redirect '/player_select'
+    redirect '/player_create'
   end
 
   get '/buy' do

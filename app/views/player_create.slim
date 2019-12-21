@@ -1,0 +1,11 @@
+== styled_flash
+div.main
+  form action='/player/new' method='post'
+    fieldset width='100%'
+      legend Создайте нового игрока:
+      p.flex-container
+        label.text-right for='reg_name' style='min-width: 20%'
+          | Имя:
+        input.fill-width name='reg_name' id='reg_name' type='text'
+      p.flex-container
+        input type='submit' value='Создать!'

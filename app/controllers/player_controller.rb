@@ -3,7 +3,7 @@ class PlayerController < BaseApp
     @player = Player.create(
       user: @user,
       name: params[:reg_name],
-      adventure: Adventure.last # FIXME!!!!!
+      adventure: Adventure.find(params[:adventure_id]) #last
       )
     unless @player.save
       flash[:warn] = 'Хм... Что-то пошло не так. Не получается зарегистрировать!'

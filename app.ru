@@ -8,7 +8,7 @@ ENV['RACK_ENV'] ||= "development"
 
 require 'bundler'
 
-Bundler.require(:default, ENV['SINATRA_ENV'])
+Bundler.require(:default, ENV['RACK_ENV'])
 
 Dir.glob('./app/*.rb').each { |file| require file }
 Dir.glob('./app/models/*.rb').each { |file| require file }

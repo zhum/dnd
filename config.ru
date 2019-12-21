@@ -14,7 +14,7 @@ ENV['RAILS_ENV'] ||= env
 
 require 'bundler'
 
-Bundler.require(:default, ENV['SINATRA_ENV'])
+Bundler.require(:default, ENV['RACK_ENV'])
 require 'sinatra/base'
 require 'sinatra/json'
 require 'sinatra/flash'
