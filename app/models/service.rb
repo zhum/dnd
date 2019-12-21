@@ -22,7 +22,7 @@ class Service
         a.save
       }
     end
-    def import_weapon filename
+    def import_weapon
       json = load_json['weapon']
       json.each { |e|
         a = Weapon.create(
@@ -38,7 +38,7 @@ class Service
         a.save
       }
     end
-    def import_things filename
+    def import_things
       json = load_json['things']
       json.each { |e|
         a = Thing.create(

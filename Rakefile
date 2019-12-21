@@ -18,7 +18,7 @@ class Seeder
 
   def load_seed
     raise "Seed file '#{@seed}' does not exist" unless File.file? @seed
-    load @seed_file
+    load @seed
   end
 end
 
@@ -28,12 +28,12 @@ DatabaseTasks.env = ENV['RACK_ENV'] || 'development'
 conf = File.join root, 'db/config.yml'
 yml = ERB.new(File.read(conf)).result
 #warn "Conf=#{yml}"
+DatabaseTasks.root = root
 DatabaseTasks.database_configuration = YAML.load(yml)
 DatabaseTasks.db_dir = File.join root, 'db'
 DatabaseTasks.fixtures_path = File.join root, 'test/fixtures'
 DatabaseTasks.migrations_paths = [File.join(root, 'db/migrate')]
 DatabaseTasks.seed_loader = Seeder.new File.join root, 'db/seeds.rb'
-DatabaseTasks.root = root
 
 
 task :environment do
