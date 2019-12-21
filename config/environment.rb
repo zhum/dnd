@@ -6,7 +6,7 @@ Bundler.require(:default, ENV['RACK_ENV'])
 
 case ENV['RACK_ENV']
 when 'heroku'
-	warn "Setup heroku"
+	warn "Setup heroku (#{ENV['DATABASE_URL']})"
   ActiveRecord::Base.establish_connection(
     :adapter => "postgresql",
     :encoding => 'unicode',
