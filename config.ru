@@ -1,5 +1,7 @@
 env = ENV['HEROKU']==='1' ? 'heroku' : 'development'
 
+warn "Using env=#{env}"
+
 ENV['SINATRA_ENV'] ||= env
 ENV['RACK_ENV'] ||= env
 ENV['RAILS_ENV'] ||= env
