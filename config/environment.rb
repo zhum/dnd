@@ -8,7 +8,7 @@ case ENV['RACK_ENV']
 when 'heroku'
 	warn "Setup heroku"
   ActiveRecord::Base.establish_connection(
-    :adapter => "pg",
+    :adapter => "postgresql",
     :encoding => 'unicode',
     :url => ENV['DATABASE_URL'],
     :pool => 50
