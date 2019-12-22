@@ -441,7 +441,7 @@ function mark_connection(on){
 }
 
 function try_connect(){
-  var proto = window.location.protocol=='http' ? 'ws' : 'wss'
+  var proto = window.location.protocol.substr(0,5)=='https' ? 'wss' : 'ws'
   ws = new WebSocket(proto+'://' + window.location.host+player_str);// + window.location.pathname);
   if(ws){
     clearTimeout(ws_timeout);

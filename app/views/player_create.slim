@@ -7,5 +7,91 @@ div.main
         label.text-right for='reg_name' style='min-width: 20%'
           | Имя:
         input.fill-width name='reg_name' id='reg_name' type='text'
+
+        label.text-right for='race' style='min-width: 20%'
+          | Раса:
+        select.fill-width name='race' id='race'
+          option value='dwarf_hill' label='#{t('char.dwarf_hill')}'
+            = t('char.dwarf_hill')
+          option value='dwarf_mountain' label='#{t('char.dwarf_mountain')}'
+            = t('char.dwarf_mountain')
+          option value='dwarf_gray' label='#{t('char.dwarf_gray')}'
+            = t('char.dwarf_gray')
+          option value='elf_high' label='#{t('char.elf_high')}'
+            = t('char.elf_high')
+          option value='elf_wood' label='#{t('char.elf_wood')}'
+            = t('char.elf_wood')
+          option value='elf_dark' label='#{t('char.elf_dark')}'
+            = t('char.elf_dark')
+          option value='halfling_lightfoot' label='#{t('char.halfling_lightfoot')}'
+            = t('char.halfling_lightfoot')
+          option value='halfling_stout' label='#{t('char.halfling_stout')}'
+            = t('char.halfling_stout')
+          option value='human' label='#{t('char.human')}'
+            = t('char.human')
+          option value='human_alternative' label='#{t('char.human_alternative')}'
+            = t('char.human_alternative')
+          option value='dragonborn' label='#{t('char.dragonborn')}'
+            = t('char.dragonborn')
+          option value='gnome_forest' label='#{t('char.gnome_forest')}'
+            = t('char.gnome_forest')
+          option value='gnome_rock' label='#{t('char.gnome_rock')}'
+            = t('char.gnome_rock')
+          option value='half-elf' label='#{t('char.half-elf')}' 
+            = t('char.half-elf')
+          option value='half-ork' label='#{t('char.half-ork')}' 
+            = t('char.half-ork')
+          option value='tiefling' label='#{t('char.tiefling')}'
+            = t('char.tiefling')
+
+
+        label.text-right for='klass' style='min-width: 20%'
+          | Класс:
+        select.fill-width name='klass' id='klass'
+          option label='#{t('char.barbarian')}' value='barbarian'
+            = t('char.barbarian')
+          option label='#{t('char.warior')}' value='warior'
+            = t('char.warior')
+          option label='#{t('char.rouge')}' value='rouge'
+            = t('char.rouge')
+          option label='#{t('char.monk')}' value='monk'
+            = t('char.monk')
+          option label='#{t('char.cleric')}' value='cleric'
+            = t('char.cleric')
+          option label='#{t('char.palladin')}' value='palladin'
+            = t('char.palladin')
+          option label='#{t('char.bard')}' value='bard'
+            = t('char.bard')
+          option label='#{t('char.druid')}' value='druid'
+            = t('char.druid')
+          option label='#{t('char.wizard')}' value='wizard'
+            = t('char.wizard')
+          option label='#{t('char.warlock')}' value='warlock'
+            = t('char.warlock')
+          option label='#{t('char.sorcerer')}' value='sorcerer'
+            = t('char.sorcerer')
+          option label='#{t('char.ranger')}' value='ranger'
+            = t('char.ranger')
+
+        label.text-right for='str' style='min-width: 20%'
+          = t('char.strength')
+        input.fill-width name='strength' id='strength' type='text'
+        label.text-right for='dexterity' style='min-width: 20%'
+          = t('char.dexterity')
+        input.fill-width name='dexterity' id='dexterity' type='text'
+        label.text-right for='constitution' style='min-width: 20%'
+          = t('char.constitution')
+        input.fill-width name='constitution' id='constitution' type='text'
+        label.text-right for='intellegence' style='min-width: 20%'
+          = t('char.intellegence')
+        input.fill-width name='intellegence' id='intellegence' type='text'
+        label.text-right for='wisdom' style='min-width: 20%'
+          = t('char.wisdom')
+        input.fill-width name='wisdom' id='wisdom' type='text'
+        label.text-right for='charisma' style='min-width: 20%'
+          = t('char.charisma')
+        input.fill-width name='charisma' id='charisma' type='text'
+
+
       p.flex-container
         input type='submit' value='Создать!'

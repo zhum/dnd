@@ -28,4 +28,34 @@ ru:
     persuasion: Убеждение (Хар)
     animal_handling: Уход за животными (Мдр)
 
+    barbarian: Варвар
+    fighter: Воин
+    rouge: Плут
+    monk: Монах
+    cleric: Жрец
+    palladin: Палладин
+    bard: Бард
+    druid: Друид
+    wizard: Волшебник
+    warlock: Колдун
+    sorcerer: Чародей
+    ranger: Следопыт
+
+    dwarf_hill: Холмовой дварф
+    dwarf_mountain: Горный дварф
+    dwarf_gray: Дуэргар
+    elf_high: Высший эльф
+    elf_wood: Лесной эльф
+    elf_dark: Тёмный эльф
+    halfling_lightfoot: Легконогий полурослик
+    halfling_stout: Коренастый полурослик
+    human: Человек
+    human_alternative: Крутой человек
+    dragonborn: Драконорождённый
+    gnome_forest: Лесной гном
+    gnome_rock: Скальный гном
+    half-elf: Полуэльф
+    half-ork: Полуорк
+    tiefling: Тифлинг
+    
 

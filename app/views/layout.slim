@@ -19,7 +19,7 @@ head
 body
   javascript:
     var secret="#{{@user && @user.secret}}";
-    var player_str='?player_id='+"#{{@player && @player.id}}";
+    var player_str='?player_id='+"#{{@player ? @player.id : 'none'}}";
   
   div#connected.disconnected
 

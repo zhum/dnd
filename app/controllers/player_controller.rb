@@ -22,6 +22,23 @@ class PlayerController < BaseApp
     slim :player_chat
   end
   
+  # player create
+  get '/create' do
+    @title = "Создайте персонажа"
+    slim :player_create
+  end
+  
+  # player interface
+  get '/' do
+    @player = Player.find(session[:player_id])
+    @title = "Игрок"
+    # @char_translation = {
+    #   'strength' => 'Сил.','constitution' => 'Телосл.',
+    #   'dexterity' => 'Ловк.','intellegence' => 'Интел.',
+    #   'wisdom' => 'Мудр.','charisma' => 'Харизма'}
+    slim :player
+  end
+
   get '/:player_id' do
     @player = Player.find(params[:player_id])
     # @char_translation = {
@@ -35,17 +52,6 @@ class PlayerController < BaseApp
       session[:user_id] = 0
       redirect '/auth'
     end
-  end
-
-  # player interface
-  get '/' do
-    @player = Player.find(session[:player_id])
-    @title = "Игрок"
-    # @char_translation = {
-    #   'strength' => 'Сил.','constitution' => 'Телосл.',
-    #   'dexterity' => 'Ловк.','intellegence' => 'Интел.',
-    #   'wisdom' => 'Мудр.','charisma' => 'Харизма'}
-    slim :player
   end
 
 end

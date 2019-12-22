@@ -163,6 +163,7 @@ div.main.mui-container
     span.mui--text-right
       a href="/buy?type=armor"
         i.icon-plus-sign
+      | &nbsp;&nbsp;
   div#armor.mui--hide
     i.iw-reload
 
@@ -172,6 +173,7 @@ div.main.mui-container
     span.mui--text-right
       a href="/buy?type=weapon"
         i.icon-plus-sign
+      | &nbsp;&nbsp;
   div#weapons.mui--hide
     span.loading
       i.iw-reload
@@ -182,6 +184,7 @@ div.main.mui-container
     span.mui--text-right
       a href="/buy?type=things"
         i.icon-plus-sign
+      | &nbsp;&nbsp;
   div#things.mui--hide
     span.loading
       i.iw-reload
@@ -195,7 +198,7 @@ div.main.mui-container
 
 javascript:
   var secret="#{{@user.secret}}";
-  var player_str='?player_id='+"#{{@player.id}}";
+  //var player_str='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
     ws.send(secret+': get_player');
     ws.send(secret+': get_prefs');

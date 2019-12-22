@@ -16,8 +16,8 @@ div.main
         li
           a href="/master/#{p.id}" = p.name
           | (#{p.adventure.name})
-
-  form action='/player/new' method='post'
+  a href="/player/create" Или создайте нового персонажа
+  /form action='/player/new' method='post'
     fieldset width='100%'
       legend Или создайте нового игрока:
       p.flex-container
