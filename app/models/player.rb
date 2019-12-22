@@ -24,7 +24,10 @@ class Player < ActiveRecord::Base
     'strength','dexterity','constitution',
     'intellegence','wisdom','charisma'
   ]
-  DTYPES=['none', 'дробящий', 'колющий', 'рубящий']
+  CHARS = ['armour_class', 'initiative', 'speed',
+           'pass_attentiveness', 'masterlevel','hit_dice','hit_dice_of']
+
+  DTYPES = ['none', 'дробящий', 'колющий', 'рубящий']
 
   after_initialize :set_def, unless: :persisted?
 
@@ -44,11 +47,43 @@ class Player < ActiveRecord::Base
     self.mod_wisdom ||= 0
     self.mod_charisma ||= 0
     self.experience ||= 0
-    MODS.map{ |c|
+    MODS.each{ |c|
       if read_attribute("mod_#{c}").nil?
         write_attribute("mod_#{c}",1)
       end
     }
+    CHARS.each_char { |c|
+      unless self.chars.find_by name: c
+        self.chars << Char.create(name: c, value: 1)
+      end
+    }
+    ['athletics',
+     'acrobatics',
+     'investigation',
+     'perception',
+     'survival',
+     'performance',
+     'intimidation',
+     'history',
+     'sleight_of_hands',
+     'arcana',
+     'medicine',
+     'deception',
+     'nature',
+     'insight',
+     'religion',
+     'stealth',
+     'persuasion',
+     'animal_handling'
+    ].each do |k|
+      unless self.skillings.find_by name: k
+        self.skillings << Skilling.create(
+          skill: Skill.find_by(name: k),
+          ready: false,
+          modifier: 1
+        )
+      end
+    end
   end
 
   def all_weapon
