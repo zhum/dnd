@@ -52,7 +52,7 @@ class Player < ActiveRecord::Base
         write_attribute("mod_#{c}",1)
       end
     }
-    CHARS.each_char { |c|
+    CHARS.each { |c|
       unless self.chars.find_by name: c
         self.chars << Char.create(name: c, value: 1)
       end
