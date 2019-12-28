@@ -4,6 +4,7 @@ Service.import_weapon
 Service.import_armor
 Service.import_things
 Service.create_skills
+Service.create_features
 a = Service.create_adventure
 
 u = if User.count==0

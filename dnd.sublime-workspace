@@ -4,272 +4,24 @@
 		"selected_items":
 		[
 			[
-				"str",
-				"strength\tabc"
+				"mui--",
+				"mui--text-left"
 			],
 			[
-				"Ski",
-				"Skill\t(service.rb)"
-			],
-			[
-				"fin",
-				"find_by_id\t(dnd_controller.rb)"
-			],
-			[
-				"П",
-				"Преключениэ\t(service.rb)"
-			],
-			[
-				"cre",
-				"create_andenture\t(service.rb)"
-			],
-			[
-				"im",
-				"import_things\t(service.rb)"
-			],
-			[
-				"loa",
-				"load_json\tabc"
-			],
-			[
-				"ski",
-				"skilling\t(20191214100145_create_skills.rb)"
-			],
-			[
-				"mod",
-				"modifier\t(logic.rb)"
-			],
-			[
-				"char",
-				"char_icons\tabc"
+				"skill",
+				"skillings"
 			],
 			[
 				"dama",
-				"damage_dice\tabc"
-			],
-			[
-				"th",
-				"thing\tabc"
-			],
-			[
-				"weap",
-				"weapon\tabc"
-			],
-			[
-				"logger",
-				"logger.warn\tabc"
-			],
-			[
-				"armo",
-				"armors\t(player.rb)"
-			],
-			[
-				"Ar",
-				"Armor\t(dnd_controller.rb)"
-			],
-			[
-				"arm",
-				"armor\tabc"
-			],
-			[
-				"bac",
-				"background-color\tabc"
-			],
-			[
-				"ar",
-				"armor\t(logic.rb)"
-			],
-			[
-				"class",
-				"classList\tabc"
-			],
-			[
-				"for",
-				"for\tfor (…) {…}"
-			],
-			[
-				"dam",
-				"dam_types\tabc"
+				"damage_type"
 			],
 			[
 				"play",
-				"player\tcommon.js"
+				"player_id"
 			],
 			[
-				"read",
-				"read_attribute\tabc"
-			],
-			[
-				"damage_",
-				"damage_dice\t(service.rb)"
-			],
-			[
-				"max",
-				"max_count\tabc"
-			],
-			[
-				"rea",
-				"read_attribute\tabc"
-			],
-			[
-				"da",
-				"damage\tabc"
-			],
-			[
-				"coun",
-				"countable\tabc"
-			],
-			[
-				"wea",
-				"weapon\t(logic.rb)"
-			],
-			[
-				"cou",
-				"countable"
-			],
-			[
-				"inte",
-				"integer\t(schema.rb)"
-			],
-			[
-				"fi",
-				"filename\tabc"
-			],
-			[
-				"create",
-				"create_table(:armors"
-			],
-			[
-				"belo",
-				"belongs_to\t(player.rb)"
-			],
-			[
-				"hi",
-				"hidden\t(dnd.css)"
-			],
-			[
-				"bo",
-				"bold\tabc"
-			],
-			[
-				"type",
-				"typeof\tabc"
-			],
-			[
-				"mui--",
-				"mui--divider-left\t(player.slim)"
-			],
-			[
-				"dnd-fle",
-				"dnd-flex-row\t(dnd.css)"
-			],
-			[
-				"dnd-",
-				"dnd-flex-row\t(dnd.css)"
-			],
-			[
-				"to_",
-				"to_i\tabc"
-			],
-			[
-				"hp_",
-				"hp_plus\tabc"
-			],
-			[
-				"hp",
-				"hp_plus\tabc"
-			],
-			[
-				"onclic",
-				"onClick(ev)\tmui.js"
-			],
-			[
-				"inn",
-				"innerHTML\t(common.js)"
-			],
-			[
-				"modal",
-				"modalEl\tabc"
-			],
-			[
-				"fle",
-				"flex"
-			],
-			[
-				"wra",
-				"wrap\tabc"
-			],
-			[
-				"cen",
-				"center\tabc"
-			],
-			[
-				"base",
-				"baseline\t(mui.css)"
-			],
-			[
-				"ali",
-				"align-items"
-			],
-			[
-				"spa",
-				"space-between\tabc"
-			],
-			[
-				"inli",
-				"inline-block\tabc"
-			],
-			[
-				"in",
-				"inline\tabc"
-			],
-			[
-				"eq",
-				"equip\t(common.js)"
-			],
-			[
-				"pa",
-				"parse\tabc"
-			],
-			[
-				"pad",
-				"padding"
-			],
-			[
-				"righ",
-				"right-pad\t(player.slim)"
-			],
-			[
-				"key",
-				"keys_visible\tabc"
-			],
-			[
-				"on",
-				"onclick\t(player.slim)"
-			],
-			[
-				"iw",
-				"iw-up\t(dnd.css)"
-			],
-			[
-				"mui-bt",
-				"mui-btn--small\t(player.slim)"
-			],
-			[
-				"mui-col",
-				"mui-col-xs-2\t(player.slim)"
-			],
-			[
-				"mui-x",
-				"mui-col-xs-2\t(player.slim)"
-			],
-			[
-				"mui",
-				"mui-row\t(player.slim)"
-			],
-			[
-				"no",
-				"normal"
+				"do",
+				"dob\tInsert do |variable| … end"
 			],
 			[
 				"af",
@@ -278,6 +30,10 @@
 			[
 				"try",
 				"try_connect()\tcommon.js"
+			],
+			[
+				"mui",
+				"mui--hide\t(player.slim)"
 			],
 			[
 				"cla",
@@ -296,12 +52,24 @@
 				"data-char-view\tabc"
 			],
 			[
+				"inte",
+				"intellegence\t(player.slim)"
+			],
+			[
 				"req",
 				"req\trequire \"..\""
 			],
 			[
+				"fi",
+				"fight\tabc"
+			],
+			[
 				"get",
 				"get_master"
+			],
+			[
+				"class",
+				"classList\t(common.js)"
 			],
 			[
 				"chat",
@@ -336,6 +104,10 @@
 				"player\tabc"
 			],
 			[
+				"to_",
+				"to_master\tabc"
+			],
+			[
 				"mess",
 				"messages\t(logic.rb)"
 			],
@@ -360,6 +132,10 @@
 				"column-1-5\t(dnd.css)"
 			],
 			[
+				"fle",
+				"flex-container\t(dnd.css)"
+			],
+			[
 				"mar",
 				"margin-left\tabc"
 			],
@@ -378,6 +154,10 @@
 			[
 				"inl",
 				"inline"
+			],
+			[
+				"hi",
+				"hidden\tabc"
 			],
 			[
 				"JSO",
@@ -422,10 +202,6 @@
 			[
 				"pass",
 				"password\tabc"
-			],
-			[
-				"do",
-				"downcase"
 			],
 			[
 				"na",
@@ -500,6 +276,18 @@
 				"padding-top"
 			],
 			[
+				"char",
+				"char-info\tabc"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
 				"Da",
 				"Date()"
 			],
@@ -514,6 +302,218 @@
 			[
 				"tomo",
 				"tomorrow_code\tabc"
+			],
+			[
+				"TODAY",
+				"today_code"
+			],
+			[
+				"now",
+				"now_feel\tabc"
+			],
+			[
+				"today",
+				"today_code\tabc"
+			],
+			[
+				"ICO",
+				"ICON_NAMES\tabc"
+			],
+			[
+				"da",
+				"day\tabc"
+			],
+			[
+				"lan",
+				"lang_code\t(rubysaver.conf)"
+			],
+			[
+				"re",
+				"req\trequire \"..\""
+			],
+			[
+				"Wea",
+				"WeatherDarkSky\tabc"
+			],
+			[
+				"top",
+				"topics\t(triggerd.rb)"
+			],
+			[
+				"Has",
+				"Hash\t(yaml2serials.rb)"
+			],
+			[
+				"topic",
+				"topic_actions\tabc"
+			],
+			[
+				"Y",
+				"Yd-\tYAML.dump(.., file)"
+			],
+			[
+				"Te",
+				"TeleLoop\tabc"
+			],
+			[
+				"chec",
+				"check_array"
+			],
+			[
+				"che",
+				"check_array〔function〕"
+			],
+			[
+				"Arra",
+				"Array〔class〕"
+			],
+			[
+				"eve",
+				"every_day"
+			],
+			[
+				"sub",
+				"subtitles"
+			],
+			[
+				"inde",
+				"index\t(disk2yaml.rb)"
+			],
+			[
+				"check",
+				"check_name"
+			],
+			[
+				"File",
+				"File\tFile.open(\"..\") { |file| .. }"
+			],
+			[
+				"ex",
+				"ext"
+			],
+			[
+				"def",
+				"def\tdef … end"
+			],
+			[
+				"Fil",
+				"File\tFile.open(\"..\") { |file| .. }"
+			],
+			[
+				"op",
+				"opt\toption(..)"
+			],
+			[
+				"dest",
+				"dest_height"
+			],
+			[
+				"inter",
+				"interpolation_type"
+			],
+			[
+				"x_",
+				"x_labels_h"
+			],
+			[
+				"dra",
+				"draw_h"
+			],
+			[
+				"bars",
+				"bars_interval"
+			],
+			[
+				"No",
+				"NorthWest"
+			],
+			[
+				"max_",
+				"max_bar〔variable〕"
+			],
+			[
+				"com",
+				"combine_options"
+			],
+			[
+				"fil",
+				"fill"
+			],
+			[
+				"set_",
+				"set_fill_colors"
+			],
+			[
+				"fill",
+				"fill_count"
+			],
+			[
+				"stro",
+				"stroke_colors"
+			],
+			[
+				"stroke",
+				"stroke_colors"
+			],
+			[
+				"lege",
+				"legenda_align"
+			],
+			[
+				"cal",
+				"calc_labels"
+			],
+			[
+				"val",
+				"vals_on_dia"
+			],
+			[
+				"ge",
+				"get_text_size"
+			],
+			[
+				"Sou",
+				"SouthWest"
+			],
+			[
+				"Nort",
+				"NorthWest"
+			],
+			[
+				"dr",
+				"draw"
+			],
+			[
+				"center",
+				"center_titles"
+			],
+			[
+				"cente",
+				"center_titles"
+			],
+			[
+				"lab",
+				"label_outline"
+			],
+			[
+				"ali",
+				"align_left"
+			],
+			[
+				"la",
+				"label_color"
+			],
+			[
+				"str",
+				"stroke"
+			],
+			[
+				"poly",
+				"polyline"
+			],
+			[
+				"kind_",
+				"kind_of?〔function〕"
 			]
 		]
 	},
@@ -529,10 +529,32 @@
 			}
 		},
 		{
-			"file": "app/views/player_create.slim",
+			"contents": "127.0.0.1 - -                                                                                                          \n                                                                                                                       \nserg@zhum-air ~/dnd $                                                                                                  \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n",
 			"settings":
 			{
-				"buffer_size": 4389,
+				"buffer_size": 3960,
+				"line_ending": "Unix",
+				"name": "Terminal (bash)",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "                                                                                                                       \nserg@zhum-air ~/dnd $ git commit -am 'wip'                                                                             \n[master fc21c45] wip                                                                                                   \n 10 files changed, 174 insertions(+), 201 deletions(-)                                                                 \n rewrite Rakefile (83%)                                                                                                \n delete mode 100644 app.ru                                                                                             \n rewrite config.ru (78%)                                                                                               \n rewrite db/seeds.rb (63%)                                                                                             \nserg@zhum-air ~/dnd $ git status                                                                                       \nНа ветке master                                                                                                        \nВаша ветка опережает ½origin/master╗ на 1 коммит.                                                                      \n  (используйте ½git push╗, чтобы опубликовать ваши локальные коммиты)                                                  \n                                                                                                                       \nНеотслеживаемые файлы:                                                                                                 \n  (используйте ½git add <файл>…╗, чтобы добавить в то, что будет включено в коммит)                                    \n                                                                                                                       \n        dnd.sqlite3.bak                                                                                                \n                                                                                                                       \nничего не добавлено в коммит, но есть неотслеживаемые файлы (используйте ½git add╗, чтобы отслеживать их)              \nserg@zhum-air ~/dnd $ git push                                                                                         \nПодсчет объектов: 15, готово.                                                                                          \nDelta compression using up to 4 threads.                                                                               \nСжатие объектов: 100% (15/15), готово.                                                                                 \nЗапись объектов: 100% (15/15), 7.13 KiB | 429.00 KiB/s, готово.                                                        \nTotal 15 (delta 10), reused 0 (delta 0)                                                                                \nremote: Resolving deltas: 100% (10/10), completed with 10 local objects.                                               \nremote:                                                                                                                \nremote: GitHub found 1 vulnerability on zhum/dnd's default branch (1 low). To find out more, visit:                    \nremote:      https://github.com/zhum/dnd/network/alerts                                                                \nremote:                                                                                                                \nTo github.com:zhum/dnd.git                                                                                             \n   2d2ca96..fc21c45  master -> master                                                                                  \nserg@zhum-air ~/dnd $                                                                                                  \n",
+			"settings":
+			{
+				"buffer_size": 3960,
+				"line_ending": "Unix",
+				"name": "Terminal (bash)",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "db/seeds.rb",
+			"settings":
+			{
+				"buffer_size": 898,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -541,75 +563,7 @@
 			"file": "app/models/player.rb",
 			"settings":
 			{
-				"buffer_size": 3845,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/controllers/player_controller.rb",
-			"settings":
-			{
-				"buffer_size": 1517,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/controllers/dnd_controller.rb",
-			"settings":
-			{
-				"buffer_size": 4851,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/thin-1.7.2/lib/thin/connection.rb:50:in `block in process'                                  \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/eventmachine-1.2.7/lib/eventmachine.rb:1077:in `block in spawn_threadpool'                  \nW, [2019-12-22T22:36:06.201938 #32551]  WARN -- : session: user_id=1; player_id=; master_id=; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r          \nD, [2019-12-22T22:36:06.207841 #32551] DEBUG -- :    (0.2ms)  SELECT sqlite_version(*)                                                                        \nD, [2019-12-22T22:36:06.208631 #32551] DEBUG -- :   User Load (0.3ms)  SELECT \"users\".* FROM \"users\" WHERE \"users\".\"id\" = ? LIMIT ?  [[\"id\", 1], [\"LIMIT\", 1]]\n127.0.0.1 - - [22/Dec/2019:22:36:06 +0300] \"GET /player/__sinatra__/500.png HTTP/1.1\" 304 - 0.0113                                                            \n^CStopping ...                                                                                                                                                \n                                                                                                                                                              \n                                                                                                                                                              \n |2.5.7| zh-home in ~/dnd                                                                                                                                     \n▒ |master ✗| $ ./run-app                                                                                                                                      \nUsing env=development                                                                                                                                         \n============ development =================                                                                                                                    \nSetup development                                                                                                                                             \nThin web server (v1.7.2 codename Bachmanity)                                                                                                                  \nMaximum connections set to 1024                                                                                                                               \nListening on 0.0.0.0:4567, CTRL+C to stop                                                                                                                     \nW, [2019-12-22T22:37:47.980194 #508]  WARN -- : session: user_id=1; player_id=; master_id=; secret=qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r            \nD, [2019-12-22T22:37:47.991253 #508] DEBUG -- :    (2.6ms)  SELECT sqlite_version(*)                                                                          \nD, [2019-12-22T22:37:48.017946 #508] DEBUG -- :   User Load (0.4ms)  SELECT \"users\".* FROM \"users\" WHERE \"users\".\"id\" = ? LIMIT ?  [[\"id\", 1], [\"LIMIT\", 1]]  \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /player/create HTTP/1.1\" 200 4800 0.1488                                                                      \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /files/icon-works.css HTTP/1.1\" 304 - 0.0014                                                                  \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /whhg-font/css/whhg.css HTTP/1.1\" 304 - 0.0012                                                                \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /mui/js/mui.min.js HTTP/1.1\" 304 - 0.0024                                                                     \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /mui/css/mui.min.css HTTP/1.1\" 304 - 0.0011                                                                   \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /files/dnd.css HTTP/1.1\" 304 - 0.0102                                                                         \n127.0.0.1 - - [22/Dec/2019:22:37:48 +0300] \"GET /files/common.js HTTP/1.1\" 304 - 0.0010                                                                       \nW, [2019-12-22T22:37:49.258842 #508]  WARN -- : session: user_id=; player_id=; master_id=; secret=                                                            \nD, [2019-12-22T22:37:49.261546 #508] DEBUG -- :    (0.1ms)  SELECT sqlite_version(*)                                                                          \nD, [2019-12-22T22:37:49.262319 #508] DEBUG -- :   User Load (0.3ms)  SELECT \"users\".* FROM \"users\" WHERE \"users\".\"id\" IS NULL LIMIT ?  [[\"LIMIT\", 1]]         \nW, [2019-12-22T22:37:49.262535 #508]  WARN -- : Websocket!                                                                                                    \nW, [2019-12-22T22:37:49.263183 #508]  WARN -- : Connection                                                                                                    \nW, [2019-12-22T22:37:49.425444 #508]  WARN -- : GOT: 'qewsadffyjytujoiuh98241764r5hbsdvytq73w64q7623r: hello'                                                 \nD, [2019-12-22T22:37:49.427254 #508] DEBUG -- :    (0.1ms)  SELECT sqlite_version(*)                                                                          \nD, [2019-12-22T22:37:49.428376 #508] DEBUG -- :   User Load (0.3ms)  SELECT \"users\".* FROM \"users\" WHERE \"users\".\"secret\" = ? LIMIT ?  [[\"secret\", \"qewsadffyj\nytujoiuh98241764r5hbsdvytq73w64q7623r\"], [\"LIMIT\", 1]]                                                                                                        \nD, [2019-12-22T22:37:49.431901 #508] DEBUG -- :   Player Load (0.3ms)  SELECT \"players\".* FROM \"players\" WHERE \"players\".\"id\" = ? LIMIT ?  [[\"id\", 0], [\"LIMIT\n\", 1]]                                                                                                                                                        \nW, [2019-12-22T22:37:49.432013 #508]  WARN -- : Bad player (0)                                                                                                \nW, [2019-12-23T07:24:24.389967 #508]  WARN -- : session: user_id=; player_id=; master_id=; secret=                                                            \n198.108.66.112 - - [23/Dec/2019:07:24:24 +0300] \"GET / HTTP/1.1\" 302 - 0.1498                                                                                 \n                                                                                                                                                              \n",
-			"settings":
-			{
-				"buffer_size": 6678,
-				"line_ending": "Unix",
-				"name": "Terminal (bash)",
-				"read_only": true,
-				"scratch": true
-			}
-		},
-		{
-			"contents": "remote:        https://floating-crag-27292.herokuapp.com/ deployed to Heroku                                                                                  \nremote:                                                                                                                                                       \nremote: Verifying deploy... done.                                                                                                                             \nTo https://git.heroku.com/floating-crag-27292.git                                                                                                             \n   cb7e2d0..f8b0a13  master -> master                                                                                                                         \nserg@zh-home:~/dnd$ heroku rake db:seed                                                                                                                       \nRunning rake db:seed on ⬢ floating-crag-27292... up, run.2190 (Free)                                                                                          \n============ heroku =================                                                                                                                         \nDEPRECATION WARNING: Setting `ActiveRecord::Base.configurations` with `[]=` is deprecated. Use `ActiveRecord::Base.configurations=` directly to set the config\nurations instead. (called from <top (required)> at /app/config/environment.rb:5)                                                                              \nSetup heroku (postgres://oksavbocirojav:aba4a027e2be90dc3f3e1f03b06b38bff3f65364a66e2667b01f288627c75702@ec2-54-83-55-125.compute-1.amazonaws.com:5432/dc1r2o2\npf96kdp)                                                                                                                                                      \nmaster=#<Player id: 1, name: \"God of Преключениэ\", klass: nil, race: nil, hp: 20, max_hp: 20, mcoins: 0, scoins: 0, gcoins: 0, ecoins: 0, pcoins: 0, secret: n\nil, user_id: 1, adventure_id: 1, is_master: true, mod_strength: 0, mod_dexterity: 0, mod_constitution: 0, mod_intellegence: 0, mod_wisdom: 0, mod_charisma: 0,\n experience: 0>                                                                                                                                               \nplayer=#<Player id: 2, name: \"Вассисуалий Пупкинс\", klass: nil, race: nil, hp: 20, max_hp: 20, mcoins: 0, scoins: 0, gcoins: 0, ecoins: 0, pcoins: 0, secret: \nnil, user_id: 2, adventure_id: 1, is_master: false, mod_strength: 0, mod_dexterity: 0, mod_constitution: 0, mod_intellegence: 0, mod_wisdom: 0, mod_charisma: \n0, experience: 0>                                                                                                                                             \nmaster=#<Player id: 1, name: \"God of Преключениэ\", klass: nil, race: nil, hp: 20, max_hp: 20, mcoins: 0, scoins: 0, gcoins: 0, ecoins: 0, pcoins: 0, secret: n\nil, user_id: 1, adventure_id: 1, is_master: true, mod_strength: 0, mod_dexterity: 0, mod_constitution: 0, mod_intellegence: 0, mod_wisdom: 0, mod_charisma: 0,\n experience: 0>                                                                                                                                               \nplayer=#<Player id: 2, name: \"Вассисуалий Пупкинс\", klass: nil, race: nil, hp: 20, max_hp: 20, mcoins: 0, scoins: 0, gcoins: 0, ecoins: 0, pcoins: 0, secret: \nnil, user_id: 2, adventure_id: 1, is_master: false, mod_strength: 0, mod_dexterity: 0, mod_constitution: 0, mod_intellegence: 0, mod_wisdom: 0, mod_charisma: \n0, experience: 0>                                                                                                                                             \nserg@zh-home:~/dnd$ git commpit -ac wip                                                                                                                       \ngit: ½commpit╗ не является командой git. Смотрите ½git --help╗.                                                                                               \n                                                                                                                                                              \nСамые похожие команды:                                                                                                                                        \n        commit                                                                                                                                                \nserg@zh-home:~/dnd$ git commit -ac wip                                                                                                                        \nfatal: не удалось запросить коммит wip                                                                                                                        \nserg@zh-home:~/dnd$ git commit -am wip                                                                                                                        \n[master 5c9cf9a] wip                                                                                                                                          \n 8 files changed, 142 insertions(+), 17 deletions(-)                                                                                                          \nserg@zh-home:~/dnd$ git status                                                                                                                                \nНа ветке master                                                                                                                                               \nВаша ветка опережает ½origin/master╗ на 8 коммитов.                                                                                                           \n  (используйте ½git push╗, чтобы опубликовать ваши локальные коммиты)                                                                                         \n                                                                                                                                                              \nнечего коммитить, нет изменений в рабочем каталоге                                                                                                            \nserg@zh-home:~/dnd$                                                                                                                                           \nserg@zh-home:~/dnd$                                                                                                                                           \n",
-			"settings":
-			{
-				"buffer_size": 6678,
-				"line_ending": "Unix",
-				"name": "Terminal (bash)",
-				"read_only": true,
-				"scratch": true
-			}
-		},
-		{
-			"file": "app/models/service.rb",
-			"settings":
-			{
-				"buffer_size": 22661,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "info.md",
-			"settings":
-			{
-				"buffer_size": 886,
-				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "Доспехи:"
-			}
-		},
-		{
-			"file": "app/static/files/common.js",
-			"settings":
-			{
-				"buffer_size": 15562,
+				"buffer_size": 3035,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -618,7 +572,25 @@
 			"file": "app/views/player.slim",
 			"settings":
 			{
-				"buffer_size": 12363,
+				"buffer_size": 12298,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/static/files/common.js",
+			"settings":
+			{
+				"buffer_size": 15483,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/service.rb",
+			"settings":
+			{
+				"buffer_size": 22661,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -636,16 +608,24 @@
 		"selected_items":
 		[
 			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Install Package Control"
+			],
+			[
 				"termi",
 				"Terminal View: Open Bash Terminal"
 			],
 			[
 				"git",
 				"Set Syntax: Git Commit"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
 			],
 			[
 				"Package Control:",
@@ -666,14 +646,6 @@
 			[
 				"Snippet: code",
 				"Snippet: code-xml"
-			],
-			[
-				"packa",
-				"Package Control: Remove Package"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"mark",
@@ -752,7 +724,7 @@
 	},
 	"console":
 	{
-		"height": 72.0,
+		"height": 414.0,
 		"history":
 		[
 			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
@@ -771,80 +743,56 @@
 	[
 		"/home/serg/dnd",
 		"/home/serg/dnd/app",
-		"/home/serg/dnd/app/locales",
-		"/home/serg/dnd/app/views"
+		"/home/serg/dnd/config",
+		"/home/serg/dnd/db",
+		"/home/serg/dnd/db/migrate"
 	],
 	"file_history":
 	[
-		"/home/serg/dnd/app/views/player_select.slim",
-		"/home/serg/dnd/app/views/layout.slim",
-		"/home/serg/dnd/app/locales/ru.yml",
-		"/home/serg/dnd/app/views/player.slim",
-		"/home/serg/dnd/app/views/buy.slim",
 		"/home/serg/dnd/config/environment.rb",
-		"/home/serg/dnd/Rakefile",
-		"/home/serg/dnd/db/seeds.rb",
-		"/home/serg/dnd/Gemfile",
-		"/home/serg/dnd/app/controllers/dnd_controller.rb",
-		"/home/serg/dnd/db/migrate/20191220163628_change_player_defaults.rb",
 		"/home/serg/dnd/config.ru",
-		"/home/serg/dnd/app.ru",
-		"/home/serg/dnd/things.json",
-		"/home/serg/dnd/weapon.json",
-		"/home/serg/dnd/armor.json",
-		"/home/serg/dnd/app/models/skill.rb",
-		"/home/serg/dnd/app/application_controller.rb",
-		"/home/serg/dnd/db/migrate/20191214100145_create_skills.rb",
-		"/home/serg/dnd/app/models/skilling.rb",
+		"/home/serg/dnd/Rakefile",
+		"/home/serg/dnd/Gemfile",
+		"/home/serg/Insync/sergzhum@gmail.com/Google Drive/bootinfo-ezh-book.txt",
 		"/home/serg/dnd/app/models/weapon.rb",
-		"/home/serg/dnd/app/models/thing.rb",
-		"/home/serg/dnd/app/models/armor.rb",
+		"/home/serg/dnd/app/models/skilling.rb",
+		"/home/serg/dnd/db/migrate/20191208104157_rename_thingsing.rb",
 		"/home/serg/dnd/app/models/thinging.rb",
-		"/home/serg/dnd/app/static/files/dnd.css",
-		"/home/serg/dnd/app/models/pref.rb",
-		"/home/serg/dnd/db/migrate/20191208191048_create_prefs.rb",
-		"/home/serg/.config/sublime-text-3/Packages/User/All Autocomplete.sublime-settings",
-		"/home/serg/.config/sublime-text-3/Packages/All Autocomplete/All Autocomplete.sublime-settings",
-		"/home/serg/dnd/rate/20191208191048_create_prefs.rb",
-		"/home/serg/dnd/app/models/service.rb",
-		"/home/serg/dnd/app/models/weaponing.rb",
-		"/home/serg/dnd/app/views/auth.slim",
-		"/home/serg/dnd/db/migrate/20191207185545_add_power_to_armor.rb",
-		"/home/serg/dnd/import_a.rb",
-		"/home/serg/dnd/conv.rb",
-		"/home/serg/dnd/db/migrate/20191207183650_rename_armoring.rb",
-		"/home/serg/dnd/app/models/armoring.rb",
-		"/home/serg/dnd/db/migrate/20191207181533_create_armoring.rb",
-		"/home/serg/dnd/db/migrate/20191205214646_create_armor.rb",
-		"/home/serg/dnd/src.html",
-		"/home/serg/dnd/t.json",
-		"/home/serg/dnd/log/development.log",
-		"/home/serg/dnd/log/thin.4567.log",
-		"/home/serg/dnd/db/migrate/20191205203604_add_exp_to_player.rb",
-		"/home/serg/dnd/mk-migration",
-		"/home/serg/dnd/app/static/mui-0.10.0/css/mui.css",
-		"/home/serg/dnd/app/helpers/app-helpers.rb",
-		"/home/serg/dnd/db/migrate/20191126193602_create_weapons.rb",
-		"/home/serg/dnd/db/migrate/20191125201200_add_full_description_to_equipments.rb",
-		"/home/serg/dnd/db/migrate/20191125195001_add_extras_to_equipment.rb",
-		"/opt/rubysaver/bundle/rs.rb",
-		"/home/serg/dnd/db/migrate/20191124114900_create_equipment.rb",
-		"/home/serg/dnd/app/views/master_chat.slim",
-		"/home/serg/dnd/app/views/master.slim",
-		"/home/serg/dnd/app/views/player_chat.slim",
-		"/home/serg/dnd/app/helpers/partition-helpers.rb",
-		"/home/serg/dnd/app/controllers/player_controller.rb",
+		"/home/serg/dnd/db/migrate/20191208095524_create_things.rb",
+		"/home/serg/dnd/things.json",
+		"/home/serg/dnd/app/models/thing.rb",
+		"/home/serg/dnd/db/schema.rb",
 		"/home/serg/dnd/app/models/player.rb",
+		"/home/serg/dnd/рубящий",
+		"/home/serg/dnd/колющий",
+		"/home/serg/dnd/none",
+		"/home/serg/dnd/DTYPES={дробящий",
+		"/home/serg/dnd/=",
+		"/home/serg/dnd/db/migrate/20191208093601_update_weapon.rb",
+		"/home/serg/dnd/app/controllers/dnd_controller.rb",
+		"/home/serg/dnd/app/static/files/dnd.css",
+		"/home/serg/dnd/app/static/files/common.js",
+		"/home/serg/dnd/app/controllers/player_controller.rb",
+		"/home/serg/dnd/app/views/layout.slim",
+		"/home/serg/dnd/app/models/equipment.rb",
+		"/home/serg/dnd/app/application_controller.rb",
+		"/home/serg/dnd/app/views/master.slim",
 		"/home/serg/dnd/db/migrate/20191123203702_rename_mods.rb",
 		"/home/serg/dnd/db/migrate/20191123203701_add_mods_to_player.rb",
 		"/home/serg/dnd/README.md",
+		"/home/serg/dnd/app/locales/ru.yml",
+		"/home/serg/dnd/app/views/master_chat.slim",
 		"/home/serg/dnd/db/migrate/20191123203700_delete_email_from_player.rb",
+		"/home/serg/dnd/app/helpers/app-helpers.rb",
+		"/home/serg/dnd/app/views/player_chat.slim",
 		"/home/serg/dnd/locales/ru.yml",
 		"/home/serg/dnd/app/controllers/master_controller.rb",
 		"/home/serg/dnd/app/models/adventure.rb",
+		"/home/serg/dnd/app/views/player_select.slim",
 		"/home/serg/dnd/app/models/user.rb",
 		"/home/serg/dnd/db/migrate/20191116114103_rename_master_to_player.rb",
 		"/home/serg/dnd/db/migrate/20191116114100_create_messages.rb",
+		"/home/serg/dnd/app/views/auth.slim",
 		"/home/serg/dnd/app/models/message.rb",
 		"/home/serg/dnd/db/migrate/20191105203902_create_adventures_table.rb",
 		"/home/serg/dnd/app/views/player.erb",
@@ -864,6 +812,7 @@
 		"/home/serg/dnd/db/migrate/20191107080500_create_master_table.rb",
 		"/home/serg/dnd/views/player.slim",
 		"/home/serg/dnd/app.rb",
+		"/home/serg/dnd/app.ru",
 		"/home/serg/Dropbox/besta-anime.txt",
 		"/home/serg/dnd/views/select_player.slim",
 		"/home/serg/dnd/db/migrate/20191105203903_add_secret_to_user.rb",
@@ -903,15 +852,39 @@
 		"/home/serg/Dropbox/triggerd.yaml",
 		"/home/serg/Dropbox/triggerd.rb",
 		"/media/serg/CONFIG/network/my-network",
-		"/tmp/rsub-mgpvk0/fb-adapter.rb"
+		"/tmp/rsub-mgpvk0/fb-adapter.rb",
+		"/tmp/rsub-3kd7qy/state_processor.rb",
+		"/tmp/rsub-6whrxn/telegram_adapter.rb",
+		"/tmp/rsub-_jx2ii/Gemfile",
+		"/tmp/rsub-b6oub8/tele_bot_async.rb",
+		"/tmp/rsub-_1f8e7/tele.log",
+		"/tmp/rsub-xz_2oa/telebot2.rb",
+		"/home/serg/ownCloud/названия моделей дома.txt",
+		"/home/serg/Dropbox/mm.rb",
+		"/home/serg/bin/mkv_jp_def",
+		"/home/serg/ownCloud/disks-ui.rb",
+		"/home/serg/tmp/lom_bot/lib/users.rb",
+		"/home/serg/services/telebot/lib/state_processors/exec-processor.rb",
+		"/home/serg/tmp/lom_bot/lib/state_processors/exec-processor.rb",
+		"/home/serg/tmp/lom_bot/lib/tele_loop.rb",
+		"/home/serg/tmp/lom_bot/lib/lomo_bot.rb",
+		"/home/serg/tmp/lom_bot/README.md",
+		"/home/serg/tmp/lom_bot/lib/adapters/telegram_adapter.rb",
+		"/home/serg/tmp/lom_bot/lib/tele_bot_async.rb",
+		"/home/serg/tmp/lom_bot/lib/adapters/fb-adapter.rb",
+		"/home/serg/tmp/lom_bot/tele_config.rb",
+		"/home/serg/tmp/lom_bot/telebot2.rb",
+		"/home/serg/tmp/lom_bot/lib/state_processor.rb",
+		"/home/serg/tmp/lom_bot/bot2.yaml",
+		"/home/serg/tmp/lom_bot/teleconfig.yaml"
 	],
 	"find":
 	{
-		"height": 44.0
+		"height": 221.0
 	},
 	"find_in_files":
 	{
-		"height": 125.0,
+		"height": 647.0,
 		"where_history":
 		[
 			"/home/serg/dnd",
@@ -921,137 +894,137 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
-			"= #{",
-			"#{",
-			"label='#{",
-			"t('",
+			"secret",
+			"master:",
+			"master",
+			"    change_column_default :players, :",
+			":database",
+			"pref",
+			"weapons",
+			"armor",
+			".mui-col-xs-4",
+			"mui-b",
+			"consti",
+			"constr",
+			"= mod",
+			"wisdom",
+			"primary",
+			"view",
+			"toggle_char_view",
+			"innerText",
+			"mods",
+			"data",
+			"mas",
+			"mod_",
+			",",
+			"integer",
+			"chars",
+			"ch",
+			"ch_",
+			"-3",
+			",",
 			"player_str",
-			"e='",
-			"='",
-			"' ",
-			":",
-			"klass",
-			"          option label='",
-			"race",
-			"reg_name",
-			"strength",
-			"str'",
-			"reg_name",
-			"      '",
-			" => ",
-			"Player.create",
-			"User.create",
-			"_ENV",
-			"ENV",
-			"\":",
-			"    ",
-			"          ",
-			"      {",
-			"change_column_default",
-			":",
-			", ",
-			"mod_intellegence",
-			"nil, mod_intellegence",
-			", ",
-			"register",
-			":",
-			",  ",
-			":",
-			"i.",
-			"CHAR_ICONS",
-			",",
-			"','",
-			",",
-			"dexterity",
-			"','",
-			",",
-			"name:",
-			"Armor",
-			"armor",
-			"Armor",
-			"armor",
-			"Armor",
-			"armor",
-			"things",
-			"95vw",
-			"fight",
-			"armor",
-			"weapon",
-			"send",
-			"toggle",
-			"']));\n",
-			"armor",
-			"arm_",
-			"arm",
-			"myfunc",
-			"arm",
-			"equi",
+			"toggleEls",
+			"chat_mess",
+			"chat_messages",
+			"sockets",
+			"do",
+			"/div",
+			">",
+			"<",
+			"{\n",
+			"receiver",
+			"from",
+			"receiver",
+			"correspondent",
+			"from",
+			"player",
+			"locals",
+			"title",
+			"Master",
+			"master",
+			"Master",
+			"m#{",
+			"slim",
+			"master",
+			"master_id",
+			"MASTER",
+			"md-",
+			"div..",
+			"mui-col-md-2",
+			"100",
+			"100&",
+			"coins",
+			"get_player",
+			"[",
+			"*",
+			"'",
 			"\"",
-			"equip",
-			"eq_",
-			"equipment",
-			"eq_",
-			"equip",
-			"equipments",
-			"eq_",
-			"add_sleight",
-			"bad_stealth",
-			"power",
-			"klass",
-			"damage\": \"",
-			" style='min-width: 20%'",
-			"weight\": \"",
-			"cost\": \"",
-			"Свойства",
-			"Вес\"",
-			"Тип урона",
-			"\"Урон\"",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"урон",
-			"Урон",
-			"Стоимость",
-			"Название",
-			"cost\": \"",
-			"weight\": \"",
-			"\"power\": \"-\"",
-			"power\": \"",
-			"klass\"",
-			" (макс. 2)",
-			"max_add_sleight\": 2",
-			" + модификатор ЛОВ",
-			"\"bad_stealth\": \"-\"",
-			"\"stealth\"",
-			"\"Помеха\"",
-			"add_sleight",
-			"{",
-			"         \"add_sleight\"\n",
-			"{",
-			"\"Вес\"",
-			"\"Скрытность\"",
-			"\"Сила\"",
-			"\"Класс доспеха (КД)\""
+			"master",
+			"player",
+			"name",
+			"data",
+			"master",
+			"WSReg",
+			"secret",
+			"player",
+			"Player",
+			"player",
+			"name",
+			"reg_email",
+			"player",
+			"name",
+			":id",
+			"player",
+			"contrib",
+			"id",
+			"h",
+			"'].",
+			":",
+			"span",
+			"name",
+			"1-6",
+			"span",
+			"mt",
+			"one-fifth",
+			"span",
+			"div",
+			"weather_cache",
+			"weathercache",
+			"weahercache",
+			"betwee",
+			"cache",
+			"now_weather_text2",
+			"now_weather",
+			"(%+3",
+			"warn",
+			"today_image",
+			"today_image_in",
+			"sunrise",
+			"DEB",
+			"WeatherDarkSky",
+			"now_cels",
+			"now_cel",
+			"temp",
+			"today",
+			",#",
+			"#",
+			"today",
+			"images_cache",
+			"now_image_ind",
+			"icon_path",
+			"IMG_",
+			",",
+			", ",
+			"get_wea",
+			"get_real",
+			"weatherc",
+			"get_wea",
+			"new",
+			"weather"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1059,13 +1032,6 @@
 		"regex": false,
 		"replace_history":
 		[
-			"\"weight\"",
-			"\"stealth\"",
-			"\"power\"",
-			"\"klass\"",
-			"\"cost\"",
-			"\"name\"",
-			"\"",
 			"</title>",
 			"</section>",
 			"<p><code>$1</code></p>",
@@ -1085,7 +1051,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1101,8 +1067,8 @@
 						"selection":
 						[
 							[
-								1313,
-								1313
+								1188,
+								1188
 							]
 						],
 						"settings":
@@ -1112,446 +1078,26 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/views/player_create.slim",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4389,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1984,
-								1984
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 726.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/models/player.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3845,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								515,
-								515
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 202.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/controllers/player_controller.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1517,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								737,
-								737
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 14.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "app/controllers/dnd_controller.rb",
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4851,
+						"buffer_size": 3960,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6678,
-						"regions":
-						{
-							"10,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1590,
-										1591
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"10,1":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1591,
-										1600
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"10,10":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1600,
-										1601
-									]
-								],
-								"scope": "terminalview.black_red"
-							},
-							"10,11":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1601,
-										1604
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"18,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										2912,
-										2920
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"18,60":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										2922,
-										2946
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"19,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3071,
-										3088
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"19,69":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										3090,
-										3150
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"28,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										4502,
-										4510
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"28,60":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										4512,
-										4536
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"29,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										4661,
-										4678
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"29,69":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										4680,
-										4744
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"3,52":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										529,
-										537
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"3,62":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										539,
-										563
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"33,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										5297,
-										5305
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							},
-							"33,60":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										5307,
-										5331
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"34,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										5456,
-										5473
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"34,69":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										5475,
-										5539
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"36,50":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										5774,
-										5793
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"36,71":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										5795,
-										5861
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"4,52":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										688,
-										705
-									]
-								],
-								"scope": "terminalview.black_cyan"
-							},
-							"4,71":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										707,
-										767
-									]
-								],
-								"scope": "terminalview.black_blue"
-							},
-							"9,0":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1431,
-										1440
-									]
-								],
-								"scope": "terminalview.black_brown"
-							},
-							"9,20":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1451,
-										1456
-									]
-								],
-								"scope": "terminalview.black_green"
-							},
-							"9,9":
-							{
-								"flags": 272,
-								"regions":
-								[
-									[
-										1440,
-										1448
-									]
-								],
-								"scope": "terminalview.black_magenta"
-							}
-						},
-						"selection":
-						[
-							[
-								6519,
-								6519
+								262,
+								262
 							]
 						],
 						"settings":
@@ -1579,8 +1125,8 @@
 							},
 							"terminal_view_last_cursor_pos":
 							[
-								41,
-								0
+								2,
+								22
 							],
 							"terminal_view_scroll": null,
 							"word_wrap": false
@@ -1589,47 +1135,83 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6678,
+						"buffer_size": 3960,
 						"regions":
 						{
-							"6,24":
+							"16,8":
 							{
 								"flags": 272,
 								"regions":
 								[
 									[
-										978,
-										999
+										1928,
+										1943
 									]
 								],
-								"scope": "terminalview.black_magenta"
+								"scope": "terminalview.black_red"
 							},
-							"6,8":
+							"34,24":
 							{
 								"flags": 272,
 								"regions":
 								[
 									[
-										962,
-										974
+										3960,
+										3960
 									]
 								],
-								"scope": "terminalview.black_cyan"
+								"scope": "terminalview.black_green"
+							},
+							"35,24":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3960,
+										3960
+									]
+								],
+								"scope": "terminalview.black_red"
+							},
+							"35,33":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3960,
+										3960
+									]
+								],
+								"scope": "terminalview.black_green"
+							},
+							"36,24":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3960,
+										3960
+									]
+								],
+								"scope": "terminalview.black_green"
 							}
 						},
 						"selection":
 						[
 							[
-								6539,
-								6539
+								3862,
+								3862
 							]
 						],
 						"settings":
@@ -1658,8 +1240,8 @@
 							},
 							"terminal_view_last_cursor_pos":
 							[
-								41,
-								20
+								32,
+								22
 							],
 							"terminal_view_scroll": null,
 							"word_wrap": false
@@ -1669,6 +1251,124 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "db/seeds.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 898,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								354,
+								354
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/models/player.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3035,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								105
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 889.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/player.slim",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12298,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6157,
+								6157
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3472.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/static/files/common.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9546,
+								9546
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7486.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1684,8 +1384,8 @@
 						"selection":
 						[
 							[
-								1995,
-								1995
+								510,
+								510
 							]
 						],
 						"settings":
@@ -1695,99 +1395,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 924.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "info.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								465,
-								465
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Доспехи:",
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "app/static/files/common.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15562,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14049,
-								14049
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9307.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/views/player.slim",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12363,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6224,
-								6224
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby Slim/Syntaxes/Ruby Slim.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2754.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1795,11 +1406,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 209.0
 	},
 	"input":
 	{
-		"height": 68.0
+		"height": 209.0
 	},
 	"layout":
 	{
@@ -1832,7 +1443,7 @@
 	"project": "dnd.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 414.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1870,7 +1481,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 286.0,
+	"side_bar_width": 193.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

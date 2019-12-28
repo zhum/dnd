@@ -80,6 +80,9 @@ class BaseApp < Sinatra::Base
       authenticate!
     end
     @user = User.find_by_id(session[:user_id])
+    if @user.nil?
+      redirect '/auth'
+    end
   end
 
   include ::AppHelpers

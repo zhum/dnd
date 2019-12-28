@@ -51,6 +51,18 @@ class Service
         a.save
       }
     end
+    def create_features force=false
+      return if Feature.count>0 && !force
+      json = load_json['features']
+      json.each { |e|
+        a = Feature.create(
+          name: e[:name],
+          description: e[:description],
+          max_count: e[:max_count].to_i
+        )
+        a.save
+      }
+    end
     def create_skills force=false
       return if Skill.count>0 && !force
       {'athletics' => 1,
@@ -1030,54 +1042,19 @@ class Service
         max_count: 0
       },
       {
-        name: "",
+        name: "Божественный канал",
         description: "",
-        max_count: 0
+        max_count: 1
       },
       {
-        name: "",
+        name: "Второе дыхание",
         description: "",
-        max_count: 0
+        max_count: 1
       },
       {
-        name: "",
+        name: "Всплеск действий",
         description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
-      },
-      {
-        name: "",
-        description: "",
-        max_count: 0
+        max_count: 1
       },
     ]
   }
