@@ -17,6 +17,9 @@ class Player < ActiveRecord::Base
   has_many :skillings
   has_many :skills, through: :skillings
 
+  has_many :featurings
+  has_many :features, through: :featurings
+
   belongs_to :user
   belongs_to :adventure
 
@@ -29,6 +32,12 @@ class Player < ActiveRecord::Base
 
   DTYPES = ['none', 'дробящий', 'колющий', 'рубящий']
 
+  AC_FORMULAS = {
+    "Защита без доспехов" => [
+      lambda { |x| 10+x.mod_dexterity+x.mod_constitution },
+      lambda { |x| nil}
+    ],
+  }
   after_initialize :set_def, unless: :persisted?
 
   def set_def
@@ -80,9 +89,64 @@ class Player < ActiveRecord::Base
         self.skillings << Skilling.create(
           skill: Skill.find_by(name: k),
           ready: false,
-          modifier: 1
+          modifier: 0
         )
       end
+    end
+  end
+
+  def get_mod name_or_index
+    attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
+      "mod_#{name_or_index.to_s}"
+    else
+      "mod_#{MODS[name_or_index.to_i]}"
+    end
+
+    # case attr_name
+    # when ''
+      
+    # end
+    read_attribute(attr_name)
+  end
+
+  def get_default_armour_class armors
+    if armors.size>0
+      armors.map{|a|
+        a.klass + [self.mod_dexterity, a.max_dexterity].min
+      }.sum
+    else
+      10+self.mod_dexterity
+    end    
+  end
+
+  def get_char name_or_index
+    attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
+      name_or_index.to_s
+    else
+      CHARS[name_or_index.to_i]
+    end
+
+    case attr_name
+    when 'armour_class'
+      armors = armorings.select {|a| a.wear}
+      wear = (armors.size > 0) ? 0 : 1
+      self.features.select{|f|
+        AC_FORMULAS.has_key? f.name
+      }.map{|f|
+        AC_FORMULAS[f.name][wear].call(self)
+      }.max
+    when 'initiative'
+      self.initiative
+    when 'speed'
+      self.speed
+    when 'masterlevel'
+      self.masterlevel
+    when 'hit_dice'
+      self.hit_dice
+    when 'hit_dice_of'
+      self.hit_dice_of
+    else
+      raise "BAD characheristic! (#{name_or_index})"
     end
   end
 

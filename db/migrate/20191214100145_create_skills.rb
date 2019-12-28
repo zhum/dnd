@@ -5,12 +5,5 @@ class CreateSkills < ActiveRecord::Migration[6.0]
       t.integer   :base
     end
 
-#    create_table :skilling do |t|
-#      t.belongs_to :player
-#      t.belongs_to :skill
-#
-#      t.boolean    :ready
-#      t.integer    :modifier
-#    end
   end
 end

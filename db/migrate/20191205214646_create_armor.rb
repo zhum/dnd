@@ -6,7 +6,7 @@ class CreateArmor < ActiveRecord::Migration[6.0]
       t.integer  :weight
       t.integer  :cost
       t.integer  :klass
-      t.boolean  :add_sleight
+      t.boolean  :add_sleight # max_dexterity
       t.string   :description
     end
   end

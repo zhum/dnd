@@ -16,8 +16,7 @@ class Service
           klass: e['klass'],
           power: e['power'],
           bad_stealth: e['bad_stealth'],
-          add_sleight: e['add_sleight'],
-          max_add_sleight: e['max_add_sleight'],
+          max_dexterity: e['max_dexterity'],
           weight: e['weight']
         )
         a.save
@@ -93,8 +92,7 @@ class Service
         "klass" => 11,
         "power" => 0,
         "bad_stealth" => true,
-        "add_sleight" => true,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 8
       },
       {
@@ -103,8 +101,7 @@ class Service
         "klass" => 11,
         "power" => 0,
         "bad_stealth" => false,
-        "add_sleight" => true,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 10
       },
       {
@@ -113,8 +110,7 @@ class Service
         "klass" => 12,
         "power" => 0,
         "bad_stealth" => false,
-        "add_sleight" => true,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 13
       },
       {
@@ -123,8 +119,7 @@ class Service
         "klass" => 12,
         "power" => 0,
         "bad_stealth" => false,
-        "add_sleight" => true,
-        "max_add_sleight" => 2,
+        "max_dexterity" => 2,
         "weight" => 12
       },
       {
@@ -133,8 +128,7 @@ class Service
         "klass" => 13,
         "power" => 0,
         "bad_stealth" => false,
-        "add_sleight" => true,
-        "max_add_sleight" => 2,
+        "max_dexterity" => 2,
         "weight" => 20
       },
       {
@@ -143,8 +137,7 @@ class Service
         "klass" => 14,
         "power" => 0,
         "bad_stealth" => true,
-        "add_sleight" => true,
-        "max_add_sleight" => 2,
+        "max_dexterity" => 2,
         "weight" => 45
       },
       {
@@ -153,8 +146,7 @@ class Service
         "klass" => 14,
         "power" => 0,
         "bad_stealth" => false,
-        "add_sleight" => true,
-        "max_add_sleight" => 2,
+        "max_dexterity" => 2,
         "weight" => 20
       },
       {
@@ -163,8 +155,7 @@ class Service
         "klass" => 15,
         "power" => 0,
         "bad_stealth" => true,
-        "add_sleight" => true,
-        "max_add_sleight" => 2,
+        "max_dexterity" => 2,
         "weight" => 40
       },
       {
@@ -173,38 +164,34 @@ class Service
         "klass" => 14,
         "power" => 0,
         "bad_stealth" => true,
-        "add_sleight" => false,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 40
       },
       {
         "name" => " Кольчуга",
         "cost" => 7500,
         "klass" => 16,
-        "power" => "13",
+        "power" => 13,
         "bad_stealth" => true,
-        "add_sleight" => false,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 55
       },
       {
         "name" => " Наборный",
         "cost" => 20000,
         "klass" => 17,
-        "power" => "15",
+        "power" => 15,
         "bad_stealth" => true,
-        "add_sleight" => false,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 60
       },
       {
         "name" => " Латы",
         "cost" => 150000,
         "klass" => 18,
-        "power" => "15",
+        "power" => 15,
         "bad_stealth" => true,
-        "add_sleight" => false,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 65
       },
       {
@@ -213,8 +200,7 @@ class Service
         "klass" => 2,
         "power" => -1,
         "bad_stealth" => false,
-        "add_sleight" => false,
-        "max_add_sleight" => 0,
+        "max_dexterity" => 0,
         "weight" => 6
       }
     ],
@@ -950,6 +936,149 @@ class Service
       "cost" => "10000",
       "weight" => 0
       }
+    ],
+    "features" => [
+      {
+        name: "Ярость",
+        description: "",
+        max_count: 1
+      },
+      {
+        name: "Защита без доспехов",
+        description: "Если вы не носите доспехов, ваш Класс Доспеха равен 10 + модификатор Ловкости + модификатор Телосложения. Вы можете использовать щит, не
+теряя этого преимущества.",
+        max_count: 0
+      },
+      {
+        name: "Безрассудная атака",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Чувство опасности",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Путь дикости",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Быстрое передвижение",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Дополнительная атака",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Дикий инстинкт",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Сильный критический удар",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Непреклонная ярость",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Непрерывня ярость",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Неукротимая мощь",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Дикий чемпион",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Бешенство",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Бездумная ярость",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Пугающее присутствие",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "Ответный удар",
+        description: "",
+        max_count: 0
+      },#######################!!!!!!!!!!!!!!!!!!!!!#######################
+      {
+        name: "Мастер на все руки",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
+      {
+        name: "",
+        description: "",
+        max_count: 0
+      },
     ]
   }
 end

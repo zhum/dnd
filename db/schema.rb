@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_20_163628) do
+ActiveRecord::Schema.define(version: 2019_12_25_185014) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_12_20_163628) do
     t.integer "armor_id"
     t.integer "count"
     t.integer "max_count"
+    t.boolean "wear"
     t.index ["armor_id"], name: "index_armorings_on_armor_id"
     t.index ["player_id"], name: "index_armorings_on_player_id"
   end
@@ -31,10 +32,10 @@ ActiveRecord::Schema.define(version: 2019_12_20_163628) do
     t.integer "weight"
     t.integer "cost"
     t.integer "klass"
-    t.boolean "add_sleight"
     t.string "description"
     t.integer "power"
     t.integer "max_add_sleight"
+    t.integer "max_dexterity"
   end
 
   create_table "chars", force: :cascade do |t|
@@ -51,6 +52,20 @@ ActiveRecord::Schema.define(version: 2019_12_20_163628) do
     t.string "description"
     t.integer "player_id"
     t.index ["player_id"], name: "index_equipment_on_player_id"
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "max_count"
+  end
+
+  create_table "featurings", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "feature_id"
+    t.integer "count"
+    t.index ["feature_id"], name: "index_featurings_on_feature_id"
+    t.index ["player_id"], name: "index_featurings_on_player_id"
   end
 
   create_table "masters", force: :cascade do |t|
