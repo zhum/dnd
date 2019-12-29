@@ -46,7 +46,7 @@ div.main
 
 
           label.text-right.mui-col-xs-4.mui-col-md-2 for='klass'
-            | Класс
+            = t('klass')
           select.mui-col-xs-8.mui-col-md-2 name='klass' id='klass'
             option label='#{t('char.barbarian')}' value='barbarian'
               = t('char.barbarian')
@@ -98,9 +98,43 @@ div.main
         div.mui-row
           label.text-right.mui-col-xs-4.mui-col-md-2 for='klass'
             = t('char.skills')
-          select.mui-col-xs-8.mui-col-md-2 name='klass' id='klass'
-            option label='#{t('char.barbarian')}' value='barbarian'
-              = t('char.barbarian')
+          select.mui-col-xs-8.mui-col-md-2 multiple=true name='skills' id='skills'
+            option label='#{t('char.athletics')}' value='char.athletics'
+              = t('char.athletics')
+            option label='#{t('char.acrobatics')}' value='char.acrobatics'
+              = t('char.acrobatics')
+            option label='#{t('char.investigation')}' value='char.investigation'
+              = t('char.investigation')
+            option label='#{t('char.perception')}' value='char.perception'
+              = t('char.perception')
+            option label='#{t('char.survival')}' value='char.survival'
+              = t('char.survival')
+            option label='#{t('char.performance')}' value='char.performance'
+              = t('char.performance')
+            option label='#{t('char.intimidation')}' value='char.intimidation'
+              = t('char.intimidation')
+            option label='#{t('char.history')}' value='char.history'
+              = t('char.history')
+            option label='#{t('char.sleight_of_hands')}' value='char.sleight_of_hands'
+              = t('char.sleight_of_hands')
+            option label='#{t('char.arcana')}' value='char.arcana'
+              = t('char.arcana')
+            option label='#{t('char.medicine')}' value='char.medicine'
+              = t('char.medicine')
+            option label='#{t('char.deception')}' value='char.deception'
+              = t('char.deception')
+            option label='#{t('char.nature')}' value='char.nature'
+              = t('char.nature')
+            option label='#{t('char.insight')}' value='char.insight'
+              = t('char.insight')
+            option label='#{t('char.religion')}' value='char.religion'
+              = t('char.religion')
+            option label='#{t('char.stealth')}' value='char.stealth'
+              = t('char.stealth')
+            option label='#{t('char.persuasion')}' value='char.persuasion'
+              = t('char.persuasion')
+            option label='#{t('char.animal_handling')}' value='char.animal_handling'
+              = t('char.animal_handling')
 
 
       p.flex-container

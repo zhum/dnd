@@ -23,8 +23,8 @@ class DNDController < BaseApp
   get '/' do
     if !request.websocket?
       player_id = session[:player_id].to_i
-      if player_id > 0 && Player.find(player_id)
-        if Player.find(session[:player_id].to_i).is_master
+      if player_id > 0 && Player.find_by_id(player_id)
+        if Player.find(player_id).is_master
           redirect '/master'
         else
           redirect '/player'

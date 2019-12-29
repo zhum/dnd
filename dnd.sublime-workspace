@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"max_",
+				"max_count"
+			],
+			[
+				"fe",
+				"features"
+			],
+			[
 				"mui--",
 				"mui--text-left"
 			],
@@ -428,10 +436,6 @@
 				"NorthWest"
 			],
 			[
-				"max_",
-				"max_bar〔variable〕"
-			],
-			[
 				"com",
 				"combine_options"
 			],
@@ -510,10 +514,6 @@
 			[
 				"poly",
 				"polyline"
-			],
-			[
-				"kind_",
-				"kind_of?〔function〕"
 			]
 		]
 	},
@@ -529,7 +529,7 @@
 			}
 		},
 		{
-			"contents": "127.0.0.1 - -                                                                                                          \n                                                                                                                       \nserg@zhum-air ~/dnd $                                                                                                  \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n",
+			"contents": "        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/rack-2.0.7/lib/rack/common_logger.rb:33:in `call'    \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:231:in `call'      \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:224:in `call'      \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/rack-2.0.7/lib/rack/head.rb:12:in `call'             \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/show_exceptions.rb:22:in `c\nall'                                                                                                                   \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:194:in `call'      \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:1950:in `call'     \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:1502:in `block in c\nall'                                                                                                                   \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:1729:in `synchroniz\ne'                                                                                                                     \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-2.0.7/lib/sinatra/base.rb:1502:in `call'     \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/rack-2.0.7/lib/rack/urlmap.rb:68:in `block in call'  \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/rack-2.0.7/lib/rack/urlmap.rb:53:in `each'           \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/rack-2.0.7/lib/rack/urlmap.rb:53:in `call'           \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/thin-1.7.2/lib/thin/connection.rb:86:in `block in pre\n_process'                                                                                                              \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/thin-1.7.2/lib/thin/connection.rb:84:in `catch'      \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/thin-1.7.2/lib/thin/connection.rb:84:in `pre_process'\n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/sinatra-websocket-0.3.1/lib/sinatra-websocket/ext/thi\nn/connection.rb:26:in `pre_process_with_websocket'                                                                     \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/thin-1.7.2/lib/thin/connection.rb:50:in `block in pro\ncess'                                                                                                                  \n        /home/serg/.rbenv/versions/2.5.7/lib/ruby/gems/2.5.0/gems/eventmachine-1.2.7/lib/eventmachine.rb:1077:in `block\n in spawn_threadpool'                                                                                                  \nW, [2019-12-28T17:54:28.026174 #14288]  WARN -- : session: user_id=2; player_id=2; master_id=; secret=dqZnAeaqz0Rqt9dRY\nOgkUYQ7L7UDd0QK                                                                                                        \nD, [2019-12-28T17:54:28.027368 #14288] DEBUG -- :    (0.1ms)  SELECT sqlite_version(*)                                 \nD, [2019-12-28T17:54:28.027941 #14288] DEBUG -- :   User Load (0.1ms)  SELECT \"users\".* FROM \"users\" WHERE \"users\".\"id\"\n = ? LIMIT ?  [[\"id\", 2], [\"LIMIT\", 1]]                                                                                \n127.0.0.1 - - [28/Dec/2019:17:54:28 +0300] \"GET /__sinatra__/500.png HTTP/1.1\" 304 - 0.0112                            \n                                                                                                                       \n",
 			"settings":
 			{
 				"buffer_size": 3960,
@@ -540,30 +540,30 @@
 			}
 		},
 		{
-			"contents": "                                                                                                                       \nserg@zhum-air ~/dnd $ git commit -am 'wip'                                                                             \n[master fc21c45] wip                                                                                                   \n 10 files changed, 174 insertions(+), 201 deletions(-)                                                                 \n rewrite Rakefile (83%)                                                                                                \n delete mode 100644 app.ru                                                                                             \n rewrite config.ru (78%)                                                                                               \n rewrite db/seeds.rb (63%)                                                                                             \nserg@zhum-air ~/dnd $ git status                                                                                       \nНа ветке master                                                                                                        \nВаша ветка опережает ½origin/master╗ на 1 коммит.                                                                      \n  (используйте ½git push╗, чтобы опубликовать ваши локальные коммиты)                                                  \n                                                                                                                       \nНеотслеживаемые файлы:                                                                                                 \n  (используйте ½git add <файл>…╗, чтобы добавить в то, что будет включено в коммит)                                    \n                                                                                                                       \n        dnd.sqlite3.bak                                                                                                \n                                                                                                                       \nничего не добавлено в коммит, но есть неотслеживаемые файлы (используйте ½git add╗, чтобы отслеживать их)              \nserg@zhum-air ~/dnd $ git push                                                                                         \nПодсчет объектов: 15, готово.                                                                                          \nDelta compression using up to 4 threads.                                                                               \nСжатие объектов: 100% (15/15), готово.                                                                                 \nЗапись объектов: 100% (15/15), 7.13 KiB | 429.00 KiB/s, готово.                                                        \nTotal 15 (delta 10), reused 0 (delta 0)                                                                                \nremote: Resolving deltas: 100% (10/10), completed with 10 local objects.                                               \nremote:                                                                                                                \nremote: GitHub found 1 vulnerability on zhum/dnd's default branch (1 low). To find out more, visit:                    \nremote:      https://github.com/zhum/dnd/network/alerts                                                                \nremote:                                                                                                                \nTo github.com:zhum/dnd.git                                                                                             \n   2d2ca96..fc21c45  master -> master                                                                                  \nserg@zhum-air ~/dnd $                                                                                                  \n",
+			"file": "app/controllers/dnd_controller.rb",
 			"settings":
 			{
-				"buffer_size": 3960,
-				"line_ending": "Unix",
-				"name": "Terminal (bash)",
-				"read_only": true,
-				"scratch": true
-			}
-		},
-		{
-			"file": "db/seeds.rb",
-			"settings":
-			{
-				"buffer_size": 898,
+				"buffer_size": 4905,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#       изменено:      dnd.sqlite3                                                                                     \n#       изменено:      dnd.sublime-workspace                                                                           \n#                                                                                                                      \n# Неотслеживаемые файлы:                                                                                               \n#       dnd.sqlite3.bak                                                                                                \n#                                                                                                                      \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n                                                                                                                       \n[master b3f2422] wip                                                                                                   \n 6 files changed, 652 insertions(+), 1059 deletions(-)                                                                 \nserg@zhum-air ~/dnd $ git push                                                                                         \nПодсчет объектов: 12, готово.                                                                                          \nDelta compression using up to 4 threads.                                                                               \nСжатие объектов: 100% (12/12), готово.                                                                                 \nЗапись объектов: 100% (12/12), 7.08 KiB | 604.00 KiB/s, готово.                                                        \nTotal 12 (delta 10), reused 0 (delta 0)                                                                                \nremote: Resolving deltas: 100% (10/10), completed with 10 local objects.                                               \nremote:                                                                                                                \nremote: GitHub found 1 vulnerability on zhum/dnd's default branch (1 low). To find out more, visit:                    \nremote:      https://github.com/zhum/dnd/network/alerts                                                                \nremote:                                                                                                                \nTo github.com:zhum/dnd.git                                                                                             \n   360e636..b3f2422  master -> master                                                                                  \nserg@zhum-air ~/dnd $                                                                                                  \n",
+			"settings":
+			{
+				"buffer_size": 3960,
+				"line_ending": "Unix",
+				"name": "Terminal (bash)",
+				"read_only": true,
+				"scratch": true
 			}
 		},
 		{
 			"file": "app/models/player.rb",
 			"settings":
 			{
-				"buffer_size": 3035,
+				"buffer_size": 5287,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -572,7 +572,7 @@
 			"file": "app/views/player.slim",
 			"settings":
 			{
-				"buffer_size": 12298,
+				"buffer_size": 12363,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -581,7 +581,7 @@
 			"file": "app/static/files/common.js",
 			"settings":
 			{
-				"buffer_size": 15483,
+				"buffer_size": 15562,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -590,7 +590,16 @@
 			"file": "app/models/service.rb",
 			"settings":
 			{
-				"buffer_size": 22661,
+				"buffer_size": 24782,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "db/seeds.rb",
+			"settings":
+			{
+				"buffer_size": 922,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -743,12 +752,12 @@
 	[
 		"/home/serg/dnd",
 		"/home/serg/dnd/app",
-		"/home/serg/dnd/config",
-		"/home/serg/dnd/db",
-		"/home/serg/dnd/db/migrate"
+		"/home/serg/dnd/app/controllers"
 	],
 	"file_history":
 	[
+		"/home/serg/dnd/app/application_controller.rb",
+		"/home/serg/dnd/db/seeds.rb",
 		"/home/serg/dnd/config/environment.rb",
 		"/home/serg/dnd/config.ru",
 		"/home/serg/dnd/Rakefile",
@@ -775,7 +784,6 @@
 		"/home/serg/dnd/app/controllers/player_controller.rb",
 		"/home/serg/dnd/app/views/layout.slim",
 		"/home/serg/dnd/app/models/equipment.rb",
-		"/home/serg/dnd/app/application_controller.rb",
 		"/home/serg/dnd/app/views/master.slim",
 		"/home/serg/dnd/db/migrate/20191123203702_rename_mods.rb",
 		"/home/serg/dnd/db/migrate/20191123203701_add_mods_to_player.rb",
@@ -875,12 +883,11 @@
 		"/home/serg/tmp/lom_bot/tele_config.rb",
 		"/home/serg/tmp/lom_bot/telebot2.rb",
 		"/home/serg/tmp/lom_bot/lib/state_processor.rb",
-		"/home/serg/tmp/lom_bot/bot2.yaml",
-		"/home/serg/tmp/lom_bot/teleconfig.yaml"
+		"/home/serg/tmp/lom_bot/bot2.yaml"
 	],
 	"find":
 	{
-		"height": 221.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -1051,7 +1058,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1081,7 +1088,7 @@
 						"translation.y": 14.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -1092,12 +1099,72 @@
 						"buffer_size": 3960,
 						"regions":
 						{
+							"28,52":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3412,
+										3420
+									]
+								],
+								"scope": "terminalview.black_magenta"
+							},
+							"28,62":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3422,
+										3446
+									]
+								],
+								"scope": "terminalview.black_blue"
+							},
+							"29,52":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3532,
+										3549
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
+							"29,71":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3551,
+										3599
+									]
+								],
+								"scope": "terminalview.black_blue"
+							},
+							"30,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										3600,
+										3612
+									]
+								],
+								"scope": "terminalview.black_blue"
+							}
 						},
 						"selection":
 						[
 							[
-								262,
-								262
+								3840,
+								3840
 							]
 						],
 						"settings":
@@ -1125,8 +1192,8 @@
 							},
 							"terminal_view_last_cursor_pos":
 							[
-								2,
-								22
+								32,
+								0
 							],
 							"terminal_view_scroll": null,
 							"word_wrap": false
@@ -1135,28 +1202,106 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "app/controllers/dnd_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								720,
+								720
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 420.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 3960,
 						"regions":
 						{
+							"0,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										0,
+										34
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
+							"1,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										120,
+										164
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
 							"16,8":
 							{
 								"flags": 272,
 								"regions":
 								[
 									[
-										1928,
-										1943
+										3960,
+										3960
 									]
 								],
 								"scope": "terminalview.black_red"
+							},
+							"2,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										240,
+										241
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
+							"3,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										360,
+										384
+									]
+								],
+								"scope": "terminalview.black_cyan"
 							},
 							"34,24":
 							{
@@ -1205,6 +1350,30 @@
 									]
 								],
 								"scope": "terminalview.black_green"
+							},
+							"4,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										480,
+										503
+									]
+								],
+								"scope": "terminalview.black_cyan"
+							},
+							"5,0":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										600,
+										601
+									]
+								],
+								"scope": "terminalview.black_cyan"
 							}
 						},
 						"selection":
@@ -1254,40 +1423,12 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "db/seeds.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 898,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								354,
-								354
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
 					"buffer": 4,
 					"file": "app/models/player.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3035,
+						"buffer_size": 5287,
 						"regions":
 						{
 						},
@@ -1305,10 +1446,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 889.0,
+						"translation.y": 21.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1317,7 +1458,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12298,
+						"buffer_size": 12363,
 						"regions":
 						{
 						},
@@ -1338,7 +1479,7 @@
 						"translation.y": 3472.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1347,7 +1488,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15483,
+						"buffer_size": 15562,
 						"regions":
 						{
 						},
@@ -1365,10 +1506,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7486.0,
+						"translation.y": 10.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1377,15 +1518,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22661,
+						"buffer_size": 24782,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								510,
-								510
+								1592,
+								1592
 							]
 						],
 						"settings":
@@ -1395,10 +1536,39 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+						"translation.y": 1240.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "db/seeds.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 922,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								122,
+								122
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1406,7 +1576,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 209.0
+		"height": 37.0
 	},
 	"input":
 	{
@@ -1443,7 +1613,7 @@
 	"project": "dnd.sublime-project",
 	"replace":
 	{
-		"height": 414.0
+		"height": 70.0
 	},
 	"save_all_on_build": true,
 	"select_file":
