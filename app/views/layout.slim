@@ -18,8 +18,9 @@ head
 
 body
   javascript:
-    var secret="#{{@user && @user.secret}}";
-    var player_str='?player_id='+"#{{@player ? @player.id : 'none'}}";
+    var secret = "#{{@user && @user.secret}}";
+    var player_str = '?player_id='+"#{{@player ? @player.id : 'none'}}";;
+    var player_active = #{{@player ? true : false}};
   
   div#connected.disconnected
 

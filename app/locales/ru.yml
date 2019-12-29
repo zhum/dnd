@@ -1,4 +1,7 @@
 ru:
+  name: Имя
+  klass: Класс
+  race: Раса
   char:
     characheristics: Характеристики
     strength: 'Сил'
