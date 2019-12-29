@@ -136,6 +136,13 @@ div.main
             option label='#{t('char.animal_handling')}' value='char.animal_handling'
               = t('char.animal_handling')
 
+          label.text-right.mui-col-xs-4.mui-col-md-2 for='klass'
+            = t('char.skills')
+          select.mui-col-xs-8.mui-col-md-2 name='klass' id='klass'
+            option label='#{t('char.barbarian')}' value='barbarian'
+              = t('char.barbarian')
+          
+
 
       p.flex-container
         input type='submit' value='Создать!'
