@@ -124,6 +124,24 @@ class DNDLogic
           end
           send_player ws, player
 
+        when /^skills=(.*)/
+          warn ">>>> #{$1}"
+          id = $1.to_i
+          count = $2.to_i
+          w = Weaponing.find(id)
+          if w.player != player
+            logger.warn "Bad weapon - not belongs to player!"
+            return
+          end
+          if count<1
+            logger.warn "Deleting this weapon"
+            w.destroy
+          else
+            w.count = count
+            w.save
+            logger.info "Weapon: #{w}"
+          end
+          send_player ws, player
         # armor change
         when /^armor (\d+)=(\d+)/
           id = $1.to_i
