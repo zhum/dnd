@@ -213,4 +213,41 @@ class Player < ActiveRecord::Base
     warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s 
   end
+
+  def self.try_create user, params
+    warn "params: #{params.inspect}"
+    # skills = Skill.find_by_id(params[:skills])
+    # features = Feature.find_by_id(params[:features])
+    player = self.create(
+      name: params[:reg_name],
+      user: user,
+      adventure: Adventure.find_by_id(params[:adventure]),
+      race: params[:race],
+      klass: params[:klass],
+      mod_strength: params[:strength].to_i,
+      mod_dexterity: params[:dexterity].to_i,
+      mod_constitution: params[:constitution].to_i,
+      mod_intellegence: params[:intellegence].to_i,
+      mod_wisdom: params[:wisdom].to_i,
+      mod_charisma: params[:charisma].to_i,
+
+      hp: params[:hp].to_i,
+      max_hp: params[:max_hp].to_i,
+      experience: params[:experience].to_i,
+      mcoins: 1,
+      scoins: 1,
+      gcoins: 1,
+      ecoins: 1,
+      pcoins: 1,
+      is_master: false
+    )
+    player.skillings = Skill.all.map{|s|
+      Skilling.create(skill: s, modifier: 1, ready: params[:skills].include?(s.id.to_s))
+    }
+    player.featurings = Feature.where(id: params[:features]).map {|f|
+      Featuring.create(feature: f, count: 1)
+    }
+    player.save!
+    player
+  end
 end

@@ -76,7 +76,9 @@ class BaseApp < Sinatra::Base
     logger.warn "session: user_id=#{session[:user_id]}; player_id=#{session[:player_id]}; master_id=#{session[:master_id]}; secret=#{session[:secret]}"
     return if request.path=='/auth' or request.path=='/register'
     I18n.locale = 'ru' || params[:locale]
-    unless request.websocket? #!!!!!!!!! FIXME! Do auth for websocket too
+    if request.websocket? #!!!!!!!!! FIXME! Do auth for websocket too
+      return
+    else
       authenticate!
     end
     @user = User.find_by_id(session[:user_id])

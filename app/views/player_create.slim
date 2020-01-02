@@ -1,148 +1,166 @@
 == styled_flash
 div.main
-  form action='/player/new' method='post'
-    fieldset width='100%'
-      legend Создайте нового персонажа:
+  form.mui-form action='/player/new' method='post'
+    legend
+      | Создайте нового персонажа:
       div.mui-container-fluid
         div.mui-row
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='reg_name'
-            = t('name')
-          input.mui-col-xs-8.mui-col-md-2 name='reg_name' id='reg_name' type='text'
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='race'
-            = t('race')
-          select.mui-col-xs-8.mui-col-md-2 name='race' id='race'
-            option value='dwarf_hill' label='#{t('char.dwarf_hill')}'
-              = t('char.dwarf_hill')
-            option value='dwarf_mountain' label='#{t('char.dwarf_mountain')}'
-              = t('char.dwarf_mountain')
-            option value='dwarf_gray' label='#{t('char.dwarf_gray')}'
-              = t('char.dwarf_gray')
-            option value='elf_high' label='#{t('char.elf_high')}'
-              = t('char.elf_high')
-            option value='elf_wood' label='#{t('char.elf_wood')}'
-              = t('char.elf_wood')
-            option value='elf_dark' label='#{t('char.elf_dark')}'
-              = t('char.elf_dark')
-            option value='halfling_lightfoot' label='#{t('char.halfling_lightfoot')}'
-              = t('char.halfling_lightfoot')
-            option value='halfling_stout' label='#{t('char.halfling_stout')}'
-              = t('char.halfling_stout')
-            option value='human' label='#{t('char.human')}'
-              = t('char.human')
-            option value='human_alternative' label='#{t('char.human_alternative')}'
-              = t('char.human_alternative')
-            option value='dragonborn' label='#{t('char.dragonborn')}'
-              = t('char.dragonborn')
-            option value='gnome_forest' label='#{t('char.gnome_forest')}'
-              = t('char.gnome_forest')
-            option value='gnome_rock' label='#{t('char.gnome_rock')}'
-              = t('char.gnome_rock')
-            option value='half-elf' label='#{t('char.half-elf')}' 
-              = t('char.half-elf')
-            option value='half-ork' label='#{t('char.half-ork')}' 
-              = t('char.half-ork')
-            option value='tiefling' label='#{t('char.tiefling')}'
-              = t('char.tiefling')
+          div.mui-select.mui-col-xs-12
+            label for='adventure'
+              = t('adventure')
+            select name='adventure' id='adventure'
+              - Adventure.all.order(:name).map do |a|
+                option label="#{a.name}" value="#{a.id}"
+                  = a.name
 
+          div.mui-textfield.mui-col-xs-12.mui-col-md-4
+            label for='reg_name'
+              = t('name')
+            input name='reg_name' id='reg_name' type='text'
+          div.mui-select.mui-col-xs-12.mui-col-md-4
+            label for='race'
+              = t('race')
+            select name='race' id='race'
+              option value='dwarf_hill' label='#{t('char.dwarf_hill')}'
+                = t('char.dwarf_hill')
+              option value='dwarf_mountain' label='#{t('char.dwarf_mountain')}'
+                = t('char.dwarf_mountain')
+              option value='dwarf_gray' label='#{t('char.dwarf_gray')}'
+                = t('char.dwarf_gray')
+              option value='elf_high' label='#{t('char.elf_high')}'
+                = t('char.elf_high')
+              option value='elf_wood' label='#{t('char.elf_wood')}'
+                = t('char.elf_wood')
+              option value='elf_dark' label='#{t('char.elf_dark')}'
+                = t('char.elf_dark')
+              option value='halfling_lightfoot' label='#{t('char.halfling_lightfoot')}'
+                = t('char.halfling_lightfoot')
+              option value='halfling_stout' label='#{t('char.halfling_stout')}'
+                = t('char.halfling_stout')
+              option value='human' label='#{t('char.human')}'
+                = t('char.human')
+              option value='human_alternative' label='#{t('char.human_alternative')}'
+                = t('char.human_alternative')
+              option value='dragonborn' label='#{t('char.dragonborn')}'
+                = t('char.dragonborn')
+              option value='gnome_forest' label='#{t('char.gnome_forest')}'
+                = t('char.gnome_forest')
+              option value='gnome_rock' label='#{t('char.gnome_rock')}'
+                = t('char.gnome_rock')
+              option value='half-elf' label='#{t('char.half-elf')}' 
+                = t('char.half-elf')
+              option value='half-ork' label='#{t('char.half-ork')}' 
+                = t('char.half-ork')
+              option value='tiefling' label='#{t('char.tiefling')}'
+                = t('char.tiefling')
 
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='klass'
-            = t('klass')
-          select.mui-col-xs-8.mui-col-md-2 name='klass' id='klass'
-            option label='#{t('char.barbarian')}' value='barbarian'
-              = t('char.barbarian')
-            option label='#{t('char.fighter')}' value='fighter'
-              = t('char.fighter')
-            option label='#{t('char.rouge')}' value='rouge'
-              = t('char.rouge')
-            option label='#{t('char.monk')}' value='monk'
-              = t('char.monk')
-            option label='#{t('char.cleric')}' value='cleric'
-              = t('char.cleric')
-            option label='#{t('char.palladin')}' value='palladin'
-              = t('char.palladin')
-            option label='#{t('char.bard')}' value='bard'
-              = t('char.bard')
-            option label='#{t('char.druid')}' value='druid'
-              = t('char.druid')
-            option label='#{t('char.wizard')}' value='wizard'
-              = t('char.wizard')
-            option label='#{t('char.warlock')}' value='warlock'
-              = t('char.warlock')
-            option label='#{t('char.sorcerer')}' value='sorcerer'
-              = t('char.sorcerer')
-            option label='#{t('char.ranger')}' value='ranger'
-              = t('char.ranger')
-
-        div.mui-row
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='str'
-            = t('char.strength')
-          input.mui-col-xs-8.mui-col-md-2 name='strength' id='strength' type='text'
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='dexterity'
-            = t('char.dexterity')
-          input.mui-col-xs-8.mui-col-md-2 name='dexterity' id='dexterity' type='text'
-
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='constitution'
-            = t('char.constitution')
-          input.mui-col-xs-8.mui-col-md-2 name='constitution' id='constitution' type='text'
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='intellegence'
-            = t('char.intellegence')
-          input.mui-col-xs-8.mui-col-md-2 name='intellegence' id='intellegence' type='text'
-
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='wisdom'
-            = t('char.wisdom')
-          input.mui-col-xs-8.mui-col-md-2 name='wisdom' id='wisdom' type='text'
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='charisma'
-            = t('char.charisma')
-          input.mui-col-xs-8.mui-col-md-2 name='charisma' id='charisma' type='text'
+          div.mui-select.mui-col-xs-12.mui-col-md-4
+            label for='klass'
+              = t('klass')
+            select name='klass' id='klass'
+              option label='#{t('char.barbarian')}' value='barbarian'
+                = t('char.barbarian')
+              option label='#{t('char.fighter')}' value='fighter'
+                = t('char.fighter')
+              option label='#{t('char.rouge')}' value='rouge'
+                = t('char.rouge')
+              option label='#{t('char.monk')}' value='monk'
+                = t('char.monk')
+              option label='#{t('char.cleric')}' value='cleric'
+                = t('char.cleric')
+              option label='#{t('char.palladin')}' value='palladin'
+                = t('char.palladin')
+              option label='#{t('char.bard')}' value='bard'
+                = t('char.bard')
+              option label='#{t('char.druid')}' value='druid'
+                = t('char.druid')
+              option label='#{t('char.wizard')}' value='wizard'
+                = t('char.wizard')
+              option label='#{t('char.warlock')}' value='warlock'
+                = t('char.warlock')
+              option label='#{t('char.sorcerer')}' value='sorcerer'
+                = t('char.sorcerer')
+              option label='#{t('char.ranger')}' value='ranger'
+                = t('char.ranger')
 
         div.mui-row
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='klass'
-            = t('char.skills')
-          select.mui-col-xs-8.mui-col-md-2 multiple=true name='skills' id='skills'
-            option label='#{t('char.athletics')}' value='char.athletics'
-              = t('char.athletics')
-            option label='#{t('char.acrobatics')}' value='char.acrobatics'
-              = t('char.acrobatics')
-            option label='#{t('char.investigation')}' value='char.investigation'
-              = t('char.investigation')
-            option label='#{t('char.perception')}' value='char.perception'
-              = t('char.perception')
-            option label='#{t('char.survival')}' value='char.survival'
-              = t('char.survival')
-            option label='#{t('char.performance')}' value='char.performance'
-              = t('char.performance')
-            option label='#{t('char.intimidation')}' value='char.intimidation'
-              = t('char.intimidation')
-            option label='#{t('char.history')}' value='char.history'
-              = t('char.history')
-            option label='#{t('char.sleight_of_hands')}' value='char.sleight_of_hands'
-              = t('char.sleight_of_hands')
-            option label='#{t('char.arcana')}' value='char.arcana'
-              = t('char.arcana')
-            option label='#{t('char.medicine')}' value='char.medicine'
-              = t('char.medicine')
-            option label='#{t('char.deception')}' value='char.deception'
-              = t('char.deception')
-            option label='#{t('char.nature')}' value='char.nature'
-              = t('char.nature')
-            option label='#{t('char.insight')}' value='char.insight'
-              = t('char.insight')
-            option label='#{t('char.religion')}' value='char.religion'
-              = t('char.religion')
-            option label='#{t('char.stealth')}' value='char.stealth'
-              = t('char.stealth')
-            option label='#{t('char.persuasion')}' value='char.persuasion'
-              = t('char.persuasion')
-            option label='#{t('char.animal_handling')}' value='char.animal_handling'
-              = t('char.animal_handling')
+          div.mui-textfield.mui-col-xs-4
+            label for='hp'
+              = t('hp')
+            input name='hp' id='hp' type='number' min='1' value='1'
+          div.mui-textfield.mui-col-xs-4
+            label for='max_hp'
+              = t('max_hp')
+            input name='max_hp' id='max_hp' type='number' min='1' value='1'
+          div.mui-textfield.mui-col-xs-4
+            label for='experience'
+              = t('experience')
+            input name='experience' id='experience' type='number' min='1' value='1'
 
-          label.text-right.mui-col-xs-4.mui-col-md-2 for='klass'
-            = t('char.skills')
-          select.mui-col-xs-8.mui-col-md-2 name='klass' id='klass'
-            option label='#{t('char.barbarian')}' value='barbarian'
-              = t('char.barbarian')
-          
+        div.mui-row
+          div.mui-textfield.mui-col-xs-6.mui-col-md-4
+            label for='strength'
+              = t('char.strength')
+            input name='strength' id='strength' type='number' min='1' value='1'
+          div.mui-textfield.mui-col-xs-6.mui-col-md-4
+            label for='dexterity'
+              = t('char.dexterity')
+            input name='dexterity' id='dexterity' type='number' min='1' value='1'
 
+          div.mui-textfield.mui-col-xs-6.mui-col-md-4
+            label for='constitution'
+              = t('char.constitution')
+            input name='constitution' id='constitution' type='number' min='1' value='1'
+          div.mui-textfield.mui-col-xs-6.mui-col-md-4
+            label for='intellegence'
+              = t('char.intellegence')
+            input name='intellegence' id='intellegence' type='number' min='1' value='1'
+
+          div.mui-textfield.mui-col-xs-6.mui-col-md-4
+            label for='wisdom'
+              = t('char.wisdom')
+            input name='wisdom' id='wisdom' type='number' min='1' value='1'
+          div.mui-textfield.mui-col-xs-6.mui-col-md-4
+            label for='charisma'
+              = t('char.charisma')
+            input name='charisma' id='charisma' type='number' min='1' value='1'
+
+          div.mui-textfield.mui-col-xs-4.mui-col-md-4
+            label for='hit'
+              = t('hit_dice')
+            input name='hit' id='hit' type="number" min='1' value='1'
+
+          div.mui-select.mui-col-xs-4.mui-col-md-4
+            label for='hit_of'
+              = t('hit_dice_of')
+            select name='hit_of' id='hit_of'
+              option label='6' value='6' 6
+              option label='8' value='8' 8
+              option label='10' value='10' 10
+              option label='12' value='12' 12
+
+          div.mui-textfield.mui-col-xs-4.mui-col-md-4
+            label for='masterlevel'
+              = t('masterlevel')
+            input name='masterlevel' id='masterlevel' type='number' min='1' value='1'
+
+
+        div.mui-row
+          div.mui-col-xs-6.mui-col-md-6
+            = t('char.skills')
+            - Skill.all.order(:name).map do |s|
+              div.mui-checkbox
+                input type="checkbox" name='skills[]' value="#{s.id}"
+                  = t("char.#{s.name}")
+
+          div.mui-col-xs-6.mui-col-md-6
+            = t('features')
+            - Feature.all.map do |f|
+              div.mui-checkbox
+                input type="checkbox" name="features[]" value="#{f.id}"
+                  = f.name
 
       p.flex-container
-        input type='submit' value='Создать!'
+        input.mui-btn.mui-btn--primary type='submit' value='Создать!'
+        a.mui-btn href='/auth'
+          | Передумал

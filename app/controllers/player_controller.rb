@@ -1,17 +1,13 @@
 class PlayerController < BaseApp
   post '/new' do
-    @player = Player.create(
-      user: @user,
-      name: params[:reg_name],
-      adventure: Adventure.find(params[:adventure_id]) #last
-      )
-    unless @player.save
+    @player = Player.try_create @user, params
+    unless @player
       flash[:warn] = 'Хм... Что-то пошло не так. Не получается зарегистрировать!'
-      logger.warn "Register fail. #{@player.errors.full_messages}"
+      logger.warn "Register fail."
       redirect '/auth'
     end
     session[:player_id] = @player.id
-    flash[:info]='Успешный вход!'
+    flash[:info]='Поздравляем с созданием!'
     redirect '/player'
   end
 

@@ -2,14 +2,23 @@ ru:
   name: Имя
   klass: Класс
   race: Раса
+  hit_dice: Костей хитов
+  hit_dice_of: Кость хитов
+  masterlevel: Бонус мастерства
+  features: Умения
+  adventure: Приключение
+  hp: ХП
+  max_hp: Макс. ХП
+  experience: Опыт
+
   char:
     characheristics: Характеристики
-    strength: 'Сил'
-    constitution: 'Тел'
-    dexterity: 'Лов'
-    intellegence: 'Инт'
-    wisdom: 'Мдр'
-    charisma: 'Хар'
+    strength: Сил
+    constitution: Тел
+    dexterity: Лов
+    intellegence: Инт
+    wisdom: Мдр
+    charisma: Хар
 
     skills: Навыки
     athletics: Атлетика(Сил)
