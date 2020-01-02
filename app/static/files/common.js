@@ -387,8 +387,8 @@ function formEnter(){
 }
 
 function xover(){
-  mui.overlay('off');
   document.getElementById('mui-overlay').classList.remove('modal-form')
+  mui.overlay('off');
 }
 
 function overForm3(f1,f2,f3,arg){

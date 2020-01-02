@@ -124,24 +124,24 @@ class DNDLogic
           end
           send_player ws, player
 
-        when /^skills=(.*)/
-          warn ">>>> #{$1}"
+        when /^skill\[(\d+)\]=(\d+)/
+#          warn ">>>> #{$1}/#{$2}"
           id = $1.to_i
-          count = $2.to_i
-          w = Weaponing.find(id)
-          if w.player != player
-            logger.warn "Bad weapon - not belongs to player!"
-            return
-          end
-          if count<1
-            logger.warn "Deleting this weapon"
-            w.destroy
+          mod = $2.to_i
+          w = player.skillings.where(id: id).take
+          warn "!!!!!!!!!!!!!!!!!! skilling=#{w}"
+          if mod<1
+            logger.warn "Bad skill mod"
           else
-            w.count = count
+            warn "!!!!!!!!!!!!!!!!!! ...."
+            w.modifier = mod
+            warn "!!!!!!!!!!!!!!!!!! 2"
             w.save
-            logger.info "Weapon: #{w}"
+            warn "!!!!!!!!!!!!!!!!!! 3"
+            logger.info "Skill: #{w}"
           end
           send_player ws, player
+
         # armor change
         when /^armor (\d+)=(\d+)/
           id = $1.to_i
@@ -243,7 +243,7 @@ class DNDLogic
           end
         else
           #settings.sockets.each{|s| s.send(msg) }
-          warn 'oops!'
+          warn "Oops! Message '#{text}' doesnt seems to be parseable...."
         end
       end
     rescue => e

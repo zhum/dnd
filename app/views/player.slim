@@ -146,8 +146,9 @@ div.main.mui-container
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('skills');"
       = t('char.skills')
-    span.dnd.dnd-flex-grow1.mui--text-right onclick="toggle_edit_skills();"
-      i.icon-pen.dnd-btn.dnd-btn--primary
+    span.mui--text-right
+      a.dnd-btn.dnd-btn--primary onclick="toggle_edit_skills();"
+        i.icon-pen.dnd-btn.dnd-btn--primary
   div#skills
     - ['athletics','acrobatics','investigation','perception','survival','performance','intimidation','history','sleight_of_hands','arcana','medicine','deception','nature','insight','religion','stealth','persuasion','animal_handling'].each do |s|
         div.mui-col-xs-6.mui-col-md-4.mui--divider-left
@@ -394,32 +395,78 @@ javascript:
 
   function get_skill_id_by_name(name){
     for (var i in player['skills']) {
-      Things[i]
+      if(player['skills'][i]['name']==name){
+        return i;
+      }
     }
+    return -1;
   }
-  function skill_plus(c){
+
+  function skill_modify(c,mod){
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
-    player['skills'][c]['mod'] += v;
-    ws.send(secret+': skills['+c+']='+JSON.stringify(player['skills'][c]['mod']));
+    var skill = get_skill_id_by_name(c);
+    if(skill<0){
+      console.log("Oooops! I don't know about skill '"+c+"'!");
+      return;
+    }
+    if(mod=='+'){
+      player['skills'][skill]['mod'] += v;
+    }
+    else if(mod=='-'){
+      if(player['skills'][skill]['mod']-v>=0){
+        player['skills'][skill]['mod'] -= v;
+      }      
+    }
+    else{
+      player['skills'][skill]['mod'] = v;
+    }
+    ws.send(secret+': skill['+skill+']='+JSON.stringify(player['skills'][skill]['mod']));      
   }
 
-  function skill_minus(c){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
-    if(player['skills'][c]-v>=0){
-      player['skills'][c]['mod'] -= v;
-      ws.send(secret+': skills['+c+']='+JSON.stringify(player['skills'][c]['mod']));
-    }
-  }
+  function skill_plus(c) { skill_modify(c,'+') }
+  function skill_minus(c){ skill_modify(c,'-') }
+  function skill_set(c)  { skill_modify(c,'=') }
 
-  function skill_set(c){
-    var v = get_int_value('over_value');
-    if(!Number.isNaN(v) && v>=0){
-      player['skills'][c]['mod'] = v;
-      ws.send(secret+': skills['+c+']='+JSON.stringify(player['skills'][c]['mod']));
-    }
-  }
+  // function skill_plus(c){
+  //   var v = get_int_value('over_value');
+  //   if(Number.isNaN(v))
+  //     v = 1;
+  //   var skill = get_skill_id_by_name(c);
+  //   if(skill<0){
+  //     Console.log("Oooops! I don't know about skill '"+c+"'!");
+  //     return;
+  //   }
+  //   player['skills'][skill]['mod'] += v;
+  //   ws.send(secret+': skills['+skill+']='+JSON.stringify(player['skills'][skill]['mod']));
+  // }
+
+  // function skill_minus(c){
+  //   var v = get_int_value('over_value');
+  //   if(Number.isNaN(v))
+  //     v = 1;
+  //   var skill = get_skill_id_by_name(c);
+  //   if(skill<0){
+  //     Console.log("Oooops! I don't know about skill '"+c+"'!");
+  //     return;
+  //   }
+  //   if(player['skills'][c]-v>=0){
+  //     player['skills'][c]['mod'] -= v;
+  //     ws.send(secret+': skills['+c+']='+JSON.stringify(player['skills'][c]['mod']));
+  //   }
+  // }
+
+  // function skill_set(c){
+  //   var v = get_int_value('over_value');
+  //   var skill = get_skill_id_by_name(c);
+  //   if(skill<0){
+  //     Console.log("Oooops! I don't know about skill '"+c+"'!");
+  //     return;
+  //   }
+  //   if(!Number.isNaN(v) && v>=0){
+  //     player['skills'][c]['mod'] = v;
+  //     ws.send(secret+': skills['+c+']='+JSON.stringify(player['skills'][c]['mod']));
+  //   }
+  // }
 
