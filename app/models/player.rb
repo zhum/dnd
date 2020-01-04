@@ -22,6 +22,8 @@ class Player < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :adventure
+  belongs_to :race
+  belongs_to :klass
 
   MODS = [
     'strength','dexterity','constitution',
@@ -188,10 +190,12 @@ class Player < ActiveRecord::Base
 
   def to_json
     #I18n.default_locale = :ru
-    h = ['id', 'name', 'klass', 'race', 'hp', 'max_hp',\
+    h = ['id', 'name', 'hp', 'max_hp',\
          'experience', 'weapon_proficiency'].map{|name|
       [name, read_attribute(name)]
     }
+    h << ['race',self.race.name]
+    h << ['klass', self.klass.name]
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
     h << ['mods',Hash[MODS.map{|c| [c,read_attribute("mod_#{c}")]}]]

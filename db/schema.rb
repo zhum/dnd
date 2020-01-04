@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_04_080223) do
+ActiveRecord::Schema.define(version: 2020_01_04_134329) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -68,6 +68,11 @@ ActiveRecord::Schema.define(version: 2020_01_04_080223) do
     t.index ["player_id"], name: "index_featurings_on_player_id"
   end
 
+  create_table "klasses", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+  end
+
   create_table "masters", force: :cascade do |t|
     t.string "name"
     t.integer "adventure_id"
@@ -87,8 +92,6 @@ ActiveRecord::Schema.define(version: 2020_01_04_080223) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.string "klass"
-    t.string "race"
     t.integer "hp"
     t.integer "max_hp"
     t.integer "mcoins"
@@ -107,8 +110,11 @@ ActiveRecord::Schema.define(version: 2020_01_04_080223) do
     t.integer "mod_wisdom"
     t.integer "mod_charisma"
     t.integer "experience"
-    t.integer "weapon_proficiency"
+    t.integer "race_id"
+    t.integer "klass_id"
     t.index ["adventure_id"], name: "index_players_on_adventure_id"
+    t.index ["klass_id"], name: "index_players_on_klass_id"
+    t.index ["race_id"], name: "index_players_on_race_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -117,6 +123,11 @@ ActiveRecord::Schema.define(version: 2020_01_04_080223) do
     t.string "name"
     t.string "value"
     t.index ["player_id"], name: "index_prefs_on_player_id"
+  end
+
+  create_table "races", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
   end
 
   create_table "resources", force: :cascade do |t|
@@ -183,4 +194,5 @@ ActiveRecord::Schema.define(version: 2020_01_04_080223) do
     t.integer "weight"
   end
 
+  add_foreign_key "players", "races"
 end

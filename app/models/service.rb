@@ -95,6 +95,27 @@ class Service
       a.save
       a
     end
+
+    def create_races force=false
+      return if Race.count>0 && !force
+      [
+    'dwarf_hill',
+    'dwarf_mountain',
+    'dwarf_gray',
+    'elf_high',
+    'elf_wood',
+    'elf_dark',
+    'halfling_lightfoot',
+    'halfling_stout',
+    'human',
+    'human_alternative',
+    'dragonborn',
+    'gnome_forest',
+    'gnome_rock',
+    'half-elf',
+    'half-ork',
+    'tiefling']
+    end
   end
   Data={
     "armor" => [
