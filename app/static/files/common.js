@@ -152,19 +152,6 @@ function render_things(mod=false){
 }
 
 function push_to_weap(str,x,id,keys_visible){
-  // str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
-  //   x['name']+'</div><div class="mui-col-xs-5">'+
-  //   x['description']+'</div>';
-  //   str += '<div class="mui-col-xs-1">'+x['count']+
-  //   '</div><div class="mui-col-xs-1">'+x['dice']+'d'+x['of_dice']+
-  //   '</div><div class="mui-col-xs-3">'+
-  //     '<span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
-  //     ' data-weapon-plus="'+x['id']+'" onclick="weapon_plus('+x['id']+');">'+
-  //     '<i class="iw-up"></i>'+
-  //     '</span><span class="dnd-btn dnd-btn--small dnd-btn--accent'+(keys_visible ? '' : ' mui--hide')+'"'+
-  //     ' data-weapon-minus="'+x['id']+'" onclick="weapon_minus('+x['id']+');">'+
-  //     '<i class="iw-down"></i>'+
-  //   '</span></div></div>';
   str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
     '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\','+id+'));">'+
     x['name']+'</a></div>'+
@@ -188,9 +175,34 @@ function render_skills(){
   var v;
   for(var i in player['skills']){
     v = player['skills'][i];
-    set_html('skill_'+v['name'], '<i class="icon-'+(v['ready'] ? 'ok' : 'remove')+'"></i> '+v['mod']);
+    set_html('skill_'+v['name'], '<i class="icon-'+(v['ready'] ? 'ok-circle' : 'circleloaderempty')+'"></i> '+v['mod']);
   }
 }
+
+function push_to_features(str,x,id,keys_visible){
+  str += '&nbsp;<span class="mui--divider-left">'+
+    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'feature_plus\',\'feature_minus\',\'feature_set\','+id+'));">'+
+    x['name']+'</a>&nbsp;'+x['count']+'('+x['max_count']+
+    ')</span>';
+  return str;
+}
+
+function render_features(mod=false){
+  var features_html='';
+  for(var i in player['features']){
+    features_html = push_to_features(features_html, player['features'][i], i, mod);
+  };
+  set_html('features',features_html);
+}
+      // div.mui-col-xs-6.mui-col-md-4.mui--divider-left
+      //   span id="feature_#{f.id}"
+      //     a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('feature_plus','feature_minus','feature_set','#{f.id}'));"
+      //       = ff.name
+      //     | &nbsp;
+      //     = f.count
+      //     | (
+      //     = ff.max_count
+      //     | )
 // function weapon_plus(weap){
 //   player['weapons'][weap]['count'] += 1;
 //   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
@@ -225,7 +237,7 @@ function render_player(data){
   for( var ch in data.chars){
     set_html('ch_'+ch, data.chars[ch]);
   }
-  set_html('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
+  //set_html('ch_hit_dice_full',data.chars.hit_dice+' K'+data.chars.hit_dice_of)
 
   render_chars();
   
@@ -240,6 +252,8 @@ function render_player(data){
   render_things();
 
   render_skills();
+
+  render_features();
   
 }
 

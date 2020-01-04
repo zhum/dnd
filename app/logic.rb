@@ -129,16 +129,43 @@ class DNDLogic
           id = $1.to_i
           mod = $2.to_i
           w = player.skillings.where(id: id).take
-          warn "!!!!!!!!!!!!!!!!!! skilling=#{w}"
+          #warn "!!!!!!!!!!!!!!!!!! skilling=#{w}"
           if mod<1
             logger.warn "Bad skill mod"
           else
-            warn "!!!!!!!!!!!!!!!!!! ...."
+            #warn "!!!!!!!!!!!!!!!!!! ...."
             w.modifier = mod
-            warn "!!!!!!!!!!!!!!!!!! 2"
+            #warn "!!!!!!!!!!!!!!!!!! 2"
             w.save
-            warn "!!!!!!!!!!!!!!!!!! 3"
+            #warn "!!!!!!!!!!!!!!!!!! 3"
             logger.info "Skill: #{w}"
+          end
+          send_player ws, player
+
+        when /^feature\[(\d+)\]=(\d+)/
+#          warn ">>>> #{$1}/#{$2}"
+          id = $1.to_i
+          count = $2.to_i
+          w = player.featurings.where(id: id).take
+          if count<1
+            logger.warn "Bad feature count (#{count})"
+          else
+            w.count = count
+            w.save
+            logger.info "Feature: #{w}"
+          end
+          send_player ws, player
+
+        when /^char\[(\S+)\]=(\d+)/
+          name = $1
+          count = $2.to_i
+          w = player.chars.where(name: name).take
+          if count<1
+            logger.warn "Bad main char count (#{count})"
+          else
+            w.value = count
+            w.save
+            logger.info "Main char #{name}: #{w}"
           end
           send_player ws, player
 
