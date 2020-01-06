@@ -1,7 +1,9 @@
 class PlayerController < BaseApp
   post '/new' do
-    @player = Player.try_create @user, params
-    unless @player
+    klass = Klass.find(params.delete(:klass_id))
+    race = Race.find(params.delete(:race_id))
+    @player = Player.try_create @user, params.merge(klass: klass, race: race)
+    unless @player.save
       flash[:warn] = 'Хм... Что-то пошло не так. Не получается зарегистрировать!'
       logger.warn "Register fail."
       redirect '/auth'

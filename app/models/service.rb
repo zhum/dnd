@@ -98,24 +98,49 @@ class Service
 
     def create_races force=false
       return if Race.count>0 && !force
-      [
-    'dwarf_hill',
-    'dwarf_mountain',
-    'dwarf_gray',
-    'elf_high',
-    'elf_wood',
-    'elf_dark',
-    'halfling_lightfoot',
-    'halfling_stout',
-    'human',
-    'human_alternative',
-    'dragonborn',
-    'gnome_forest',
-    'gnome_rock',
-    'half-elf',
-    'half-ork',
-    'tiefling']
+      [ 'dwarf_hill',
+        'dwarf_mountain',
+        'dwarf_gray',
+        'elf_high',
+        'elf_wood',
+        'elf_dark',
+        'halfling_lightfoot',
+        'halfling_stout',
+        'human',
+        'human_alternative',
+        'dragonborn',
+        'gnome_forest',
+        'gnome_rock',
+        'half-elf',
+        'half-ork',
+        'tiefling'
+      ].each do |name|
+        r = Race.create(name: name, description: '')
+        r.save
+      end
     end
+
+    def create_klasses force=false
+      return if Klass.count>0 && !force
+      [
+        'barbarian',
+        'fighter',
+        'rouge',
+        'monk',
+        'cleric',
+        'palladin',
+        'bard',
+        'druid',
+        'wizard',
+        'warlock',
+        'sorcerer',
+        'ranger',
+      ].each do |name|
+        r = Klass.create(name: name, description: '')
+        r.save
+      end
+    end
+
   end
   Data={
     "armor" => [

@@ -15,7 +15,7 @@ class DNDLogic
     end
 
     def process_message ws,user,player,text,opts={}
-      warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
+      logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       begin
         case text
         when 'hello'
@@ -45,7 +45,7 @@ class DNDLogic
         when /buy (\S+) (\d+)(\s*)(.*)/
           id = $2.to_i
           type = $4.to_i
-          warn "----------------- TYPE=#{type}"
+          logger.warn "----------------- TYPE=#{type}"
           case $1
           when 'things'
             t = Thing.find(id)
@@ -68,10 +68,13 @@ class DNDLogic
               return
             end
             player.weaponings << Weaponing.create(weapon: t, count: 1)
-          end
-          if type>0
-            warn "------------ Spent: #{t.cost}"
-            player.reduce_money(t.cost)
+          when 'feature'
+            t = Feature.find(id)
+            if player.features.include? t
+              logger.warn "Feature is already bought"
+              return
+            end
+            player.featurings << Featuring.create(feature: t, count: 1)
           end
           player.save
         # send chat history
@@ -164,8 +167,8 @@ class DNDLogic
             logger.warn "Bad main char count (#{count})"
           else
             w.value = count
-            w.save
-            logger.info "Main char #{name}: #{w}"
+            w.save!
+            logger.info "Main char #{name}: #{w.inspect}"
           end
           send_player ws, player
 
@@ -262,15 +265,15 @@ class DNDLogic
           message = nil
           begin
             message = JSON.parse($1);
-            warn "L1: msg=#{message.inspect}"
+            logger.warn "L1: msg=#{message.inspect}"
             #ws.send({got_message: {id: message['id']}}.to_json)
             LogicChat.message_process ws,user,player,message,opts
           rescue => e
-            warn "Cannot process chat message '#{$1}' (#{e.message})"
+            logger.warn "Cannot process chat message '#{$1}' (#{e.message})"
           end
         else
           #settings.sockets.each{|s| s.send(msg) }
-          warn "Oops! Message '#{text}' doesnt seems to be parseable...."
+          logger.warn "Oops! Message '#{text}' doesnt seems to be parseable...."
         end
       end
     rescue => e

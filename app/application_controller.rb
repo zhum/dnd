@@ -36,9 +36,11 @@ class BaseApp < Sinatra::Base
   configure do
     #enable :logging
     $logger = Logger.new("#{settings.root}/../log/#{settings.environment}.log", 10, 10_240_000)
+    $logger.level= Logger::INFO
     #logfile.sync = true
     use Rack::CommonLogger, $logger
     set :logger, $logger
+    ActiveRecord::Base.logger = $logger
 
     I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
     I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]

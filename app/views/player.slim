@@ -140,7 +140,7 @@ div.main.mui-container
       - ['strength','constitution','dexterity'].each do |i|
         div.mui-col-xs-4.mui--divider-left
           i class="#{char_icons[i]}"
-          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
+          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
           span id="mod_#{i}"
             i.iw-reload
@@ -148,7 +148,7 @@ div.main.mui-container
       - ['intellegence','wisdom','charisma'].each do |i|
         div.mui-col-xs-4.mui--divider-left
           i class="#{char_icons[i]}"
-          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','#{i}'));"
+          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
           span id="mod_#{i}"
             i.iw-reload
@@ -175,9 +175,9 @@ div.main.mui-container
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('features');"
       = t('features')
     span.mui--text-right
-      a.mui--invisible href='#' onclick="toggle_edit_skills();"
-        i.icon-pencil
-      | &nbsp;
+      a href="/buy?type=feature"
+        i.icon-plus-sign
+      | &nbsp;&nbsp;
   div#features ...
 
   div.dnd-flex-row.mui--z2.fullwidth
@@ -227,18 +227,21 @@ javascript:
     ws.send(secret+': get_prefs');
   }
 
-  function hp_plus(){
+  function get_over_value(){
     var v = get_int_value('over_value');
     if(Number.isNaN(v))
       v = 1;
+    return v;    
+  }
+
+  function hp_plus(){
+    var v = get_over_value();
     player['hp'] += v;
     ws.send(secret+': hp='+player['hp']);
   }
 
   function hp_minus(){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(player['hp']-v>=0){
       player['hp'] -= v;
       ws.send(secret+': hp='+player['hp']);
@@ -254,17 +257,13 @@ javascript:
   }
 
   function maxhp_plus(){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     player['max_hp'] += v;
     ws.send(secret+': max_hp='+player['max_hp']);
   }
 
   function maxhp_minus(){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(player['max_hp']-v>=0){
       player['max_hp'] -= v;
       ws.send(secret+': max_hp='+player['max_hp']);
@@ -279,25 +278,21 @@ javascript:
     }
   }
 
-  function char_plus(mod){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+  function mod_plus(mod){
+    var v = get_over_value();
     player['mods'][mod] += v;
     ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
   }
 
-  function char_minus(mod){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+  function mod_minus(mod){
+    var v = get_over_value();
     if(player['mods'][mod]-v>=0){
       player['mods'][mod] -= v;
       ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
     }
   }
 
-  function char_set(mod){
+  function mod_set(mod){
     var v = get_int_value('over_value');
     if(Number.isNaN(v)){return;}
     player['mods'][mod] = v;
@@ -305,17 +300,13 @@ javascript:
   }
 
   function arm_plus(armor){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     player['armors'][armor]['count'] += v;
     ws.send(secret+': armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
   }
 
   function arm_minus(armor){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(player['armors'][armor]['count']-v>=0){
       player['armors'][armor]['count'] -= v;
       ws.send(secret+': armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
@@ -338,9 +329,7 @@ javascript:
   }
 
   function thing_minus(thing){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(player['things'][thing]['count']-v>=0){
       player['things'][thing]['count'] -= v;
       ws.send(secret+': thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
@@ -349,23 +338,20 @@ javascript:
 
   function thing_set(thing){
     var v = get_int_value('over_value');
-    if(Number.isNaN(v)){return;}
+    if(Number.isNaN(v))
+      return;
     player['things'][thing]['count'] = v;
     ws.send(secret+': thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
   }
 
   function weap_plus(weap){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     player['weapons'][weap]['count'] += v;
     ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
   }
 
   function weap_minus(weap){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(player['weapons'][weap]['count']-v>=0){
       player['weapons'][weap]['count'] -= v;
       ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
@@ -374,24 +360,21 @@ javascript:
 
   function weap_set(weap){
     var v = get_int_value('over_value');
-    if(Number.isNaN(v)){return;}
+    if(Number.isNaN(v))
+      return;
     player['weapons'][weap]['count'] = v;
     ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
   }
 
 
   function coins_plus(c){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     player['coins'][c] += v;
     ws.send(secret+': coins='+JSON.stringify(player['coins']));
   }
 
   function coins_minus(c){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(player['coins'][c]-v>=0){
       player['coins'][c] -= v;
       ws.send(secret+': coins='+JSON.stringify(player['coins']));
@@ -422,9 +405,7 @@ javascript:
   }
 
   function skill_modify(c,mod){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     var skill = get_skill_id_by_name(c);
     if(skill<0){
       console.log("Oooops! I don't know about skill '"+c+"'!");
@@ -449,9 +430,7 @@ javascript:
   function skill_set(c)  { skill_modify(c,'=') }
 
   function feature_modify(c,mod){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(mod=='+'){
       player['features'][c]['count'] += v;
     }
@@ -471,21 +450,19 @@ javascript:
   function feature_set(c)  { feature_modify(c,'=') }
 
   function char_modify(c,mod){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
+    var v = get_over_value();
     if(mod=='+'){
-      player['mods'][c] += v;
+      player['chars'][c] += v;
     }
     else if(mod=='-'){
-      if(player['mods'][c]-v>=0){
-        player['mods'][c] -= v;
+      if(player['chars'][c]-v>=0){
+        player['chars'][c] -= v;
       }      
     }
     else{
-      player['mods'][c] = v;
+      player['chars'][c] = v;
     }
-    ws.send(secret+': char['+c+']='+JSON.stringify(player['mods'][c]));      
+    ws.send(secret+': char['+c+']='+JSON.stringify(player['chars'][c]));      
   }
 
   function char_plus(c) { char_modify(c,'+') }

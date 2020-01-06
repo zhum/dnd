@@ -189,15 +189,15 @@ class Player < ActiveRecord::Base
   end
 
   def to_json
-    #I18n.default_locale = :ru
-    h = ['id', 'name', 'hp', 'max_hp',\
+    I18n.default_locale = :ru
+    h = ['id', 'name', 'hp', 'max_hp',
          'experience', 'weapon_proficiency'].map{|name|
       [name, read_attribute(name)]
     }
-    h << ['race',self.race.name]
-    h << ['klass', self.klass.name]
+    h << ['race',I18n.t("char.#{self.race.name}")]
+    h << ['klass', I18n.t("char.#{self.klass.name}")]
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
-    h << ['chars',Hash[chars.map{|c| [c.name,c.value]}]]
+    h << ['chars',Hash[chars.map{|c| [c.name,c.value.to_i]}]]
     h << ['mods',Hash[MODS.map{|c| [c,read_attribute("mod_#{c}")]}]]
 
     h << ['weapons',Hash[all_weapon]]

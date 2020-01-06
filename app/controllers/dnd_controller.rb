@@ -10,7 +10,7 @@ class DNDController < BaseApp
   get '/img/player/:player_id' do
     id = params[:player_id].to_i
     if id == 0
-      warn "Bad id (#{params[:player_id].inspect}!"
+      logger.warn "Bad id (#{params[:player_id].inspect}!"
     end
     redirect "/img/player_#{id}.png"
   end
@@ -103,34 +103,34 @@ class DNDController < BaseApp
   end
 
   post '/auth' do
-    warn "auth: #{params[:email].downcase} / #{params[:password]}"
+    logger.warn "auth: #{params[:email].downcase} / #{params[:password]}"
     @user = User.find_by_email(params[:email].downcase)
-    if params[:email].downcase=='admin' && params[:password]=='admin'
+    if params[:email].downcase=='admin' && params[:password]=='admin!'
       session[:user_id]=1
       session[:player_id]=1001
       session[:secret]=Player.find(1001).secret
       flash[:info]='Вход читера!'
-      warn "admin/admin"
+      logger.warn "admin/admin"
       redirect '/'
     elsif @user && @user.authorize(params[:password])
       session[:user_id]=@user.id
       session[:secret]=@user.secret
       players = @user.players.where(is_master: false)
       masters = @user.players.where(is_master: true)
-      if players.size+masters.size>0
-        warn "User=#{@user.inspect}"
-        warn "player_select! (#{session.inspect})"
+      if players.size+masters.size>=0
+        logger.warn "User=#{@user.inspect}"
+        logger.warn "player_select! (#{session.inspect})"
         redirect '/player_select'
       else
         @player = players.first
         session[:player_id]=@player.id
         flash[:info]='Успешный вход!'
-        warn "OK!"
+        logger.warn "OK!"
         redirect '/'
       end
     else
       flash[:warn]='Неверное сочетание логина и пароля.'
-      warn "Bad auth :("
+      logger.warn "Bad auth :("
       redirect '/auth'
     end
   end
@@ -166,6 +166,8 @@ class DNDController < BaseApp
       @items = Weapon.all.map{|x| {cost: x.cost, id: x.id, name: x.name, description: x.short_description}}
     when 'armor'
       @items = Armor.all.map{|x| {cost: x.cost, id: x.id, name: x.name, description: x.short_description}}
+    when 'feature'
+      @items = Feature.all.map{|x| {cost: 0, id: x.id, name: x.name, description: x.description}}
     else
       @items = []
     end

@@ -34,74 +34,7 @@ function get_int_value(id){
     return Number.NaN;
   return Number(v);
 }
-/*
-  Change characheristics view: absolute or as modifier
-function toggle_char_edit(){
-  var el = document.querySelector('[data-char-edit]');
-  var mod = el.getAttribute('data-char-edit');
-  if(mod=='view'){
-    el.innerHTML='<i class="iw-eye"></i>';
-    el.setAttribute('data-char-edit','edit');
-  }
-  else{    
-    el.innerHTML='<i class="iw-edit"></i>';
-    el.setAttribute('data-char-edit','view');
-  }
-  document.querySelectorAll('[data-char-plus]').forEach(function(el){
-    el.classList.toggle('mui--hide');
-  });
-  document.querySelectorAll('[data-char-minus]').forEach(function(el){
-    el.classList.toggle('mui--hide');
-  });
-  render_chars();
-}
- */
 
-/*
-  
-function toggle_equipment_edit(){
-  var el = document.querySelector('[data-equipment-edit]');
-  var mod = el.getAttribute('data-equipment-edit');
-  if(mod=='view'){
-    el.innerHTML='<i class="iw-eye"></i>';
-    el.setAttribute('data-equipment-edit','edit');
-  }
-  else{    
-    el.innerHTML='<i class="iw-edit"></i>';
-    el.setAttribute('data-equipment-edit','view');
-  }
-  document.querySelectorAll('[data-equipment-plus]').forEach(function(el){
-    el.classList.toggle('mui--hide');
-  });
-  document.querySelectorAll('[data-equipment-minus]').forEach(function(el){
-    el.classList.toggle('mui--hide');
-  });
-  render_chars(mod==='view'); // previous value!
-}
- */
-
-/*
-  
-function toggle_weapon_edit(){
-  var el = document.querySelector('[data-weapon-edit]');
-  var mod = el.getAttribute('data-weapon-edit');
-  if(mod=='view'){
-    el.innerHTML='<i class="iw-eye"></i>';
-    el.setAttribute('data-weapon-edit','edit');
-  }
-  else{    
-    el.innerHTML='<i class="iw-edit"></i>';
-    el.setAttribute('data-weapon-edit','view');
-  }
-  document.querySelectorAll('[data-weapon-plus]').forEach(function(el){
-    el.classList.toggle('mui--hide');
-  });
-  document.querySelectorAll('[data-weapon-minus]').forEach(function(el){
-    el.classList.toggle('mui--hide');
-  });
-  render_weapons(mod==='view'); // previous value!
-}
-*/
 function render_chars(){
   for( var mod in player['mods']){
     var n = Math.floor((player['mods'][mod]-10.0)/2);
@@ -110,15 +43,6 @@ function render_chars(){
 }
 
 function push_to_arm(str,x,id,keys_visible=false){
-  //*** columns version
-  // str += '<div class="mui-row mui--divider-bottom equipment"><div class="mui-col-xs-3 mui--text-left">'+
-  //  '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'eq_plus\',\'eq_minus\',\'eq_set\',\''+x['id']+'\'));">'+
-  //   x['name']+'</a></div><span class="mui-col-xs-3">'+
-  //   x['description']+'</span>';
-  //   str += '<span class="mui-col-xs-1">'+x['count']+
-  //   '</span></div>';
-  //   
-  //*** flex version
   str += '<span class="mui--text-left">'+
    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'arm_plus\',\'arm_minus\',\'arm_set\','+id+'));">'+
     x['name']+'</a><span> '+x['count']+'</span></span>';
@@ -194,24 +118,7 @@ function render_features(mod=false){
   };
   set_html('features',features_html);
 }
-      // div.mui-col-xs-6.mui-col-md-4.mui--divider-left
-      //   span id="feature_#{f.id}"
-      //     a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('feature_plus','feature_minus','feature_set','#{f.id}'));"
-      //       = ff.name
-      //     | &nbsp;
-      //     = f.count
-      //     | (
-      //     = ff.max_count
-      //     | )
-// function weapon_plus(weap){
-//   player['weapons'][weap]['count'] += 1;
-//   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
-// }
 
-// function weapon_minus(weap){
-//   player['weapons'][weap]['count'] -= 1;
-//   ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]));
-// }
 
 function set_num(value,id){
   var v = Number(value);
