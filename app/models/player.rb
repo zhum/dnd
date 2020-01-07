@@ -121,6 +121,15 @@ class Player < ActiveRecord::Base
     end    
   end
 
+  def set_char name_or_index, value
+    attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
+      name_or_index.to_s
+    else
+      CHARS[name_or_index.to_i]
+    end
+    self.write_attribute(attr_name,value)    
+  end
+
   def get_char name_or_index
     attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
       name_or_index.to_s

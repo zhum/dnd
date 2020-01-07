@@ -170,6 +170,7 @@ class DNDLogic
             w.save!
             logger.info "Main char #{name}: #{w.inspect}"
           end
+          logger.info "Player chars: #{player.chars.inspect}"
           send_player ws, player
 
         # armor change
