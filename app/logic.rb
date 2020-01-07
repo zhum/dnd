@@ -127,7 +127,7 @@ class DNDLogic
           end
           send_player ws, player
 
-        when /^skill\[(\d+)\]=(\d+)/
+        when /^skill\[(\d+)\]=(-?\d+)/
 #          warn ">>>> #{$1}/#{$2}"
           id = $1.to_i
           mod = $2.to_i
@@ -159,18 +159,16 @@ class DNDLogic
           end
           send_player ws, player
 
-        when /^char\[(\S+)\]=(\d+)/
+        when /^char\[(\S+)\]=(-?\d+)/
           name = $1
           count = $2.to_i
           w = player.chars.where(name: name).take
-          if count<1
-            logger.warn "Bad main char count (#{count})"
-          else
+          # if count<1
+          #   logger.warn "Bad main char count (#{count})"
+          # else
             w.value = count
             w.save!
             logger.info "Main char #{name}: #{w.inspect}"
-          end
-          logger.info "Player chars: #{player.chars.inspect}"
           send_player ws, player
 
         # armor change
