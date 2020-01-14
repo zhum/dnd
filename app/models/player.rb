@@ -20,6 +20,8 @@ class Player < ActiveRecord::Base
   has_many :featurings
   has_many :features, through: :featurings
 
+  has_many :save_throws
+
   belongs_to :user
   belongs_to :adventure
   belongs_to :race
@@ -216,24 +218,31 @@ class Player < ActiveRecord::Base
         ['name','cost','weight'].map{|x| [x,tt.read_attribute(x)]}])
       ]
     }]]
-    h << ['armors',Hash[armorings.all.map{|a|
-      aa = a.armor; [a.id, {name: aa.name, count: a.count}]}]
+    h << ['armors',Hash[self.armorings.all.map{|a|
+      logger.warn "A=#{a.inspect}"
+      aa = a.armor
+      [a.id, {name: aa.name, count: a.count}]}]
     ]
 
-    h << ['skills',Hash[skillings.all.map { |e|
-        s = e.skill; [e.id, {name: s.name,
-                             ready: e.ready,
-                             base: s.base,
-                             mod: e.modifier}]
+    h << ['skills',Hash[self.skillings.all.map { |e|
+        s = e.skill
+        [e.id, {name: s.name,
+                ready: e.ready,
+                base: s.base,
+                mod: e.modifier}]
       }
     ]]
-    h << ['features',Hash[featurings.all.map { |e|
-        s = e.feature; [e.id, {name: s.name,
-                               max_count: s.max_count,
-                               description: s.description,
-                               count: e.count}]
+    h << ['features',Hash[self.featurings.all.map { |e|
+        s = e.feature
+        [e.id, {name: s.name,
+                max_count: s.max_count,
+                description: s.description,
+                count: e.count}]
       }
     ]]
+    h << [:savethrows1, save_throws.where(kind: 1).take.count]
+    h << [:savethrows2, save_throws.where(kind: 2).take.count]
+
     #warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s 
   end
@@ -271,6 +280,8 @@ class Player < ActiveRecord::Base
     player.featurings = Feature.where(id: params[:features]).map {|f|
       Featuring.create(feature: f, count: 1)
     }
+    player.save_throws << SaveThrow.create(kind: 1, count: 0)
+    player.save_throws << SaveThrow.create(kind: 2, count: 0)
     player.save!
     player
   end

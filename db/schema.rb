@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_04_134329) do
+ActiveRecord::Schema.define(version: 2020_01_13_164146) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -135,6 +135,13 @@ ActiveRecord::Schema.define(version: 2020_01_04_134329) do
     t.string "name"
     t.string "value"
     t.index ["player_id"], name: "index_resources_on_player_id"
+  end
+
+  create_table "save_throws", force: :cascade do |t|
+    t.integer "kind"
+    t.integer "count"
+    t.integer "player_id"
+    t.index ["player_id"], name: "index_save_throws_on_player_id"
   end
 
   create_table "skillings", force: :cascade do |t|

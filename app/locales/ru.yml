@@ -10,6 +10,10 @@ ru:
   hp: ХП
   max_hp: Макс. ХП
   experience: Опыт
+  main-chars: Основные характеристики
+  savethrows: Спасброски от смерти
+  savethrows_ok: удачные
+  savethrows_fail: неудачные
 
   char:
     characheristics: Характеристики

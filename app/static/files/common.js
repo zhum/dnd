@@ -119,6 +119,11 @@ function render_features(mod=false){
   set_html('features',features_html);
 }
 
+function render_savethrows(mod=false){
+  set_html('savethrows1',player['savethrows1']);
+  set_html('savethrows2',player['savethrows2']);
+}
+
 
 function set_num(value,id){
   var v = Number(value);
@@ -161,6 +166,8 @@ function render_player(data){
   render_skills();
 
   render_features();
+
+  render_savethrows();
   
 }
 
@@ -297,7 +304,8 @@ function formModal(form) {
   // show modal
   mui.overlay('on', modalEl);
   //modalEl.classList.add = 'modal-form';
-  document.getElementById('mui-overlay').classList.add('modal-form')
+  document.getElementById('mui-overlay').classList.add('modal-form');
+  document.getElementById('over_value').focus();
 }
 
 function formEnter(){
@@ -316,7 +324,7 @@ function overForm3(f1,f2,f3,arg){
   return '<form class="mui--text-center"><div class="dnd-flex-row fullwidth">'+
     '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f1+"('"+arg+"');xover();\"> + </a>"+
     '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f2+"('"+arg+"');xover();\"> - </a>"+
-    '<input type="text" class="dnd-flex-grow2" id="over_value"></input>'+
+    '<input type="text" autofocus class="dnd-flex-grow2" id="over_value" onkeydown="if(event.keyCode==13){'+f3+"('"+arg+"');xover();}\"></input>"+
     '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f3+"('"+arg+"');xover();\">OK</a>"+
   '</div></form>'
 }

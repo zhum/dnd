@@ -209,6 +209,19 @@ class DNDLogic
           end
           send_player ws, player
 
+        # savethrow change
+        when /^savethrows(\d+)=(\d+)/
+          kind = $1.to_i
+          count = $2.to_i
+          w = player.save_throws.where(kind: kind).take
+          if w
+            w.count = count
+            w.save
+          else
+            logger.warn "Cannot find savethrow of kind '#{kind}'"
+          end
+          send_player ws, player
+
         # set preferences
         when /^pref ([^=]+)=(\S+)/
           name = $1
@@ -276,7 +289,7 @@ class DNDLogic
         end
       end
     rescue => e
-      logger.warn "BAD message, got error: #{e.message} (#{e.backtrace[0..4].join("\n")})"
+      logger.warn "BAD message, got error: #{e.message} (#{e.backtrace[0..10].join("\n")})"
     end
   end
 end
