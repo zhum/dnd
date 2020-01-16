@@ -152,6 +152,7 @@ div.main.mui-container
     div.mui-row.mui--divider-bottom
       - ['strength','constitution','dexterity'].each do |i|
         div.mui-col-xs-4.mui--divider-left
+          span id="mod_prof_#{i}"
           i class="#{char_icons[i]}"
           a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
@@ -160,6 +161,7 @@ div.main.mui-container
       div.mui-row.mui--divider-bottom
       - ['intellegence','wisdom','charisma'].each do |i|
         div.mui-col-xs-4.mui--divider-left
+          span id="mod_prof_#{i}"
           i class="#{char_icons[i]}"
           a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
@@ -173,7 +175,7 @@ div.main.mui-container
         i.icon-pencil
       | &nbsp;
   div#skills
-    - ['athletics','acrobatics','investigation','perception','survival','performance','intimidation','history','sleight_of_hands','arcana','medicine','deception','nature','insight','religion','stealth','persuasion','animal_handling'].each do |s|
+    - ['athletics','acrobatics','stealth','sleight_of_hands','investigation','history','arcana','religion','nature','perception','survival','medicine','insight','animal_handling','persuasion','performance','intimidation','deception'].each do |s|
         div.mui-col-xs-6.mui-col-md-4.mui--divider-left
           a.skill_edit.mui--hide href='#' onclick="formModal(overForm3('skill_plus','skill_minus','skill_set','#{s}'));"
             i.icon-pencil

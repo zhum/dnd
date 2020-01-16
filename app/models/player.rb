@@ -209,7 +209,7 @@ class Player < ActiveRecord::Base
     h << ['klass', I18n.t("char.#{self.klass.name}")]
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
     h << ['chars',Hash[chars.map{|c| [c.name,c.value.to_i]}]]
-    h << ['mods',Hash[MODS.map{|c| [c,read_attribute("mod_#{c}")]}]]
+    h << ['mods',Hash[MODS.map{|c| [c,[read_attribute("mod_#{c}"),read_attribute("mod_prof_#{c}") ? '1' : '0']]}]]
 
     h << ['weapons',Hash[all_weapon]]
     h << ['things',Hash[thingings.all.map{|t|
@@ -240,11 +240,17 @@ class Player < ActiveRecord::Base
                 count: e.count}]
       }
     ]]
-    h << [:savethrows1, save_throws.where(kind: 1).take.count]
-    h << [:savethrows2, save_throws.where(kind: 2).take.count]
+    s = get_save_throws 1
+    h << [:savethrows1, s ? s.count : 0]
+    s = get_save_throws 2
+    h << [:savethrows2, s ? s.count : 0]
 
     #warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s 
+  end
+
+  def get_save_throws kind
+    save_throws.where(kind: kind).take
   end
 
   def self.try_create user, params

@@ -37,8 +37,14 @@ function get_int_value(id){
 
 function render_chars(){
   for( var mod in player['mods']){
-    var n = Math.floor((player['mods'][mod]-10.0)/2);
-    set_html('mod_'+mod, n+' ('+player['mods'][mod]+')');
+    var n = Math.floor((player['mods'][mod][0]-10.0)/2);
+    set_html('mod_'+mod, n+' ('+player['mods'][mod][0]+')');
+    set_html(
+      'mod_prof_'+mod,
+      player['mods'][mod][1]=='1' ?
+        '<i class="icon-ok-circle"></i>' :
+        '<i class="icon-circleloaderempty"></i>'
+    );
   }
 }
 
