@@ -128,21 +128,25 @@ class DNDLogic
           send_player ws, player
 
         when /^skill\[(\d+)\]=(-?\d+)/
-#          warn ">>>> #{$1}/#{$2}"
           id = $1.to_i
           mod = $2.to_i
           w = player.skillings.where(id: id).take
-          #warn "!!!!!!!!!!!!!!!!!! skilling=#{w}"
           if mod<1
             logger.warn "Bad skill mod"
           else
-            #warn "!!!!!!!!!!!!!!!!!! ...."
             w.modifier = mod
-            #warn "!!!!!!!!!!!!!!!!!! 2"
             w.save
-            #warn "!!!!!!!!!!!!!!!!!! 3"
             logger.info "Skill: #{w}"
           end
+          send_player ws, player
+
+        when /^skill_prof\[(\d+)\]=(\d+)/
+          id = $1.to_i
+          mod = $2=='1'
+          w = player.skillings.where(id: id).take
+          w.ready = mod
+          w.save
+          logger.info "Skill prof: #{w}"
           send_player ws, player
 
         when /^feature\[(\d+)\]=(\d+)/
@@ -269,7 +273,29 @@ class DNDLogic
             logger.warn "Bad modifier #{mod}"
           end
           player.save
-          logger.warn "mod_intellegence #{player.mod_intellegence}"
+          send_player ws, player
+
+        # modifier proficiency change
+        when /^mod_prof ([a-z]+)=(.*)/
+          mod = $1
+          value = $2=='1'
+          case mod
+          when 'wisdom'
+            player.mod_prof_wisdom = value
+          when 'intellegence'
+            player.mod_prof_intellegence = value
+          when 'strength'
+            player.mod_prof_strength = value
+          when 'dexterity'
+            player.mod_prof_dexterity = value
+          when 'constitution'
+            player.mod_prof_constitution = value
+          when 'charisma'
+            player.mod_prof_charisma = value
+          else
+            logger.warn "Bad modifier proficiency #{mod}"
+          end
+          player.save
           send_player ws, player
 
         #chat message

@@ -20,6 +20,21 @@ function get_html(id){
   return null;
 }
 
+function set_attr(id,name,value){
+  var el = document.getElementById(id);
+  if(el){
+    el.setAttribute(name,value);
+  }
+}
+
+function get_attr(id,name){
+  var el = document.getElementById(id);
+  if(el){
+    return el.getAttribute(name);
+  }
+  return null;
+}
+
 function get_value(id){
   var el = document.getElementById(id)
   if(el){
@@ -45,6 +60,7 @@ function render_chars(){
         '<i class="icon-ok-circle"></i>' :
         '<i class="icon-circleloaderempty"></i>'
     );
+    set_attr('mod_prof_'+mod, 'prof', player['mods'][mod][1]);
   }
 }
 

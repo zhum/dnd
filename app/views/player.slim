@@ -152,7 +152,7 @@ div.main.mui-container
     div.mui-row.mui--divider-bottom
       - ['strength','constitution','dexterity'].each do |i|
         div.mui-col-xs-4.mui--divider-left
-          span id="mod_prof_#{i}"
+          span.dnd-btn id="mod_prof_#{i}" onclick="mod_prof('#{i}');"
           i class="#{char_icons[i]}"
           a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
@@ -161,7 +161,7 @@ div.main.mui-container
       div.mui-row.mui--divider-bottom
       - ['intellegence','wisdom','charisma'].each do |i|
         div.mui-col-xs-4.mui--divider-left
-          span id="mod_prof_#{i}"
+          span.dnd-btn id="mod_prof_#{i}" onclick="mod_prof('#{i}');"
           i class="#{char_icons[i]}"
           a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
@@ -180,7 +180,7 @@ div.main.mui-container
           a.skill_edit.mui--hide href='#' onclick="formModal(overForm3('skill_plus','skill_minus','skill_set','#{s}'));"
             i.icon-pencil
           | &nbsp;
-          span id="skill_#{s}"
+          span.dnd-btn.skill_prof_btn id="skill_#{s}" onclick="skill_prof('#{s}');"
             | ...
           | &nbsp;
           span
@@ -314,6 +314,24 @@ javascript:
     ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
   }
 
+  function mod_prof(mod){
+    var v = get_attr('mod_prof_'+mod,'prof');
+    var new_val = '1';
+    if(v=='1'){ new_val = '0'; }
+    ws.send(secret+': mod_prof '+mod+'='+new_val);
+  }
+
+  function skill_prof(mod){
+    var el = document.getElementById('skill_'+mod);
+    if(el){
+      if(el.classList.contains('dnd-btn--primary')){
+        var skill = get_skill_id_by_name(mod);
+        var v = player['skills'][skill]['ready'];
+        ws.send(secret+': skill_prof['+skill+']='+(v ? '0' : '1'));
+      }
+    }
+  }
+
   function arm_plus(armor){
     var v = get_over_value();
     player['armors'][armor]['count'] += v;
@@ -407,6 +425,9 @@ javascript:
   function toggle_edit_skills(){
     document.querySelectorAll('.skill_edit').forEach(function(el){
       el.classList.toggle('mui--hide');
+    });
+    document.querySelectorAll('.skill_prof_btn').forEach(function(el){
+      el.classList.toggle('dnd-btn--primary');
     });
   }
 
