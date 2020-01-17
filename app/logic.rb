@@ -131,13 +131,13 @@ class DNDLogic
           id = $1.to_i
           mod = $2.to_i
           w = player.skillings.where(id: id).take
-          if mod<1
-            logger.warn "Bad skill mod"
-          else
+          # if mod<1
+          #   logger.warn "Bad skill mod"
+          # else
             w.modifier = mod
             w.save
             logger.info "Skill: #{w}"
-          end
+          # end
           send_player ws, player
 
         when /^skill_prof\[(\d+)\]=(\d+)/
@@ -147,6 +147,15 @@ class DNDLogic
           w.ready = mod
           w.save
           logger.info "Skill prof: #{w}"
+          send_player ws, player
+
+        when /^wear_armor (\d+)=(\d+)/
+          id = $1.to_i
+          mod = $2=='1'
+          w = player.armorings.where(id: id).take
+          w.wear = mod
+          w.save
+          logger.info "Armoring: #{w}"
           send_player ws, player
 
         when /^feature\[(\d+)\]=(\d+)/

@@ -37,10 +37,23 @@ class Player < ActiveRecord::Base
   DTYPES = ['none', 'дробящий', 'колющий', 'рубящий']
 
   AC_FORMULAS = {
-    "Защита без доспехов" => [
-      lambda { |x| 10+x.mod_dexterity+x.mod_constitution },
-      lambda { |x| nil}
-    ],
+    "Обычная защита" => 
+      lambda { |x,wear|
+        dex = x.mod_dexterity
+        logger.warn wear.inspect
+        base = 10+(wear.map{|e| e.klass}.reduce(:+) || 0) +
+               (wear.map{|w| w.max_dexterity} << dex).min
+
+        base + case x.klass.name
+        when 'barbarian'
+          # add constitution and shield af any
+          wear.any?{|w| w.power != -1} ? 0 : x.mod_constitution
+        when 'monk'
+          wear.size>0 ? 0 : mod_wisdom
+        else
+          0
+        end
+      }
   }
   after_initialize :set_def, unless: :persisted?
 
@@ -141,25 +154,30 @@ class Player < ActiveRecord::Base
 
     case attr_name
     when 'armour_class'
-      armors = armorings.select {|a| a.wear}
-      wear = (armors.size > 0) ? 0 : 1
-      self.features.select{|f|
-        AC_FORMULAS.has_key? f.name
-      }.map{|f|
-        AC_FORMULAS[f.name][wear].call(self)
-      }.max
-    when 'initiative'
-      self.initiative
-    when 'speed'
-      self.speed
-    when 'masterlevel'
-      self.masterlevel
-    when 'hit_dice'
-      self.hit_dice
-    when 'hit_dice_of'
-      self.hit_dice_of
+      w_armors = armorings.select {|a| a.wear}.map{|w| w.armor}
+      #wear = (w_armors.size > 0) ? 0 : 1
+      (
+        features.select{|f|
+          AC_FORMULAS.has_key? f.name
+        }.map{|f|
+          AC_FORMULAS[f.name].call(self,w_armors)
+        } << AC_FORMULAS['Обычная защита'].call(self,w_armors)
+      ).max
     else
-      raise "BAD characheristic! (#{name_or_index})"
+      warn attr_name
+      chars.where(name: attr_name).take.value
+    # when 'initiative'
+    #   chars.where(name: 'initiative').take.value
+    # when 'speed'
+    #   chars.where(name: 'speed').take.value
+    # when 'masterlevel'
+    #   chars.where(name: 'masterlevel').take.value
+    # when 'hit_dice'
+    #   chars.where(name: 'hit_dice').take.value
+    # when 'hit_dice_of'
+    #   chars.where(name: 'hit_dice_of').take.value
+    # else
+    #   raise "BAD characheristic! (#{name_or_index})"
     end
   end
 
@@ -205,10 +223,11 @@ class Player < ActiveRecord::Base
          'experience', 'weapon_proficiency'].map{|name|
       [name, read_attribute(name)]
     }
+    #h << ['armour_class', get_char('armour_class')]
     h << ['race',I18n.t("char.#{self.race.name}")]
     h << ['klass', I18n.t("char.#{self.klass.name}")]
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
-    h << ['chars',Hash[chars.map{|c| [c.name,c.value.to_i]}]]
+    h << ['chars',Hash[chars.map{|c| [c.name,self.get_char(c.name)]}]] #c.value.to_i
     h << ['mods',Hash[MODS.map{|c| [c,[read_attribute("mod_#{c}"),read_attribute("mod_prof_#{c}") ? '1' : '0']]}]]
 
     h << ['weapons',Hash[all_weapon]]
@@ -219,9 +238,9 @@ class Player < ActiveRecord::Base
       ]
     }]]
     h << ['armors',Hash[self.armorings.all.map{|a|
-      logger.warn "A=#{a.inspect}"
+      #logger.warn "A=#{a.inspect}"
       aa = a.armor
-      [a.id, {name: aa.name, count: a.count}]}]
+      [a.id, {name: aa.name, count: a.count, wear: a.wear}]}]
     ]
 
     h << ['skills',Hash[self.skillings.all.map { |e|
@@ -245,6 +264,7 @@ class Player < ActiveRecord::Base
     s = get_save_throws 2
     h << [:savethrows2, s ? s.count : 0]
 
+    h << [:bad_stealth, self.get_bad_stealth]
     #warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s 
   end
@@ -290,5 +310,12 @@ class Player < ActiveRecord::Base
     player.save_throws << SaveThrow.create(kind: 2, count: 0)
     player.save!
     player
+  end
+
+  def get_bad_stealth
+    bad = Armoring.all.any?{ |a|
+      logger.warn "#{a.armor.bad_stealth} && #{a.wear}"
+      a.armor.bad_stealth && a.wear
+    }
   end
 end

@@ -185,6 +185,8 @@ div.main.mui-container
           | &nbsp;
           span
             = t("char.#{s}")
+            - if s=='stealth'
+              span#bad_stealth
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('features');"
@@ -321,6 +323,12 @@ javascript:
     ws.send(secret+': mod_prof '+mod+'='+new_val);
   }
 
+  function wear_armor(mod){
+    var v = player['armors'][mod]['wear'];
+    var new_val = v ? '0' : '1';
+    ws.send(secret+': wear_armor '+mod+'='+new_val);
+  }
+
   function skill_prof(mod){
     var el = document.getElementById('skill_'+mod);
     if(el){
@@ -451,9 +459,9 @@ javascript:
       player['skills'][skill]['mod'] += v;
     }
     else if(mod=='-'){
-      if(player['skills'][skill]['mod']-v>=0){
+      //if(player['skills'][skill]['mod']-v>=0){
         player['skills'][skill]['mod'] -= v;
-      }      
+      //}      
     }
     else{
       player['skills'][skill]['mod'] = v;

@@ -65,9 +65,11 @@ function render_chars(){
 }
 
 function push_to_arm(str,x,id,keys_visible=false){
-  str += '<span class="mui--text-left">'+
-   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'arm_plus\',\'arm_minus\',\'arm_set\','+id+'));">'+
-    x['name']+'</a><span> '+x['count']+'</span></span>';
+  str += '&nbsp;<span class="mui--text-left mui--divider-left">'+
+    '<i class="icon-ok-'+(x['wear'] ? 'sign' : 'circle')+'" onclick="wear_armor('+id+')"></i>'+
+    '<span> '+x['count']+'</span>'+
+    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'arm_plus\',\'arm_minus\',\'arm_set\','+id+'));">'+
+     x['name']+'</a></span>';
   return str;
 }
 
@@ -123,6 +125,7 @@ function render_skills(){
     v = player['skills'][i];
     set_html('skill_'+v['name'], '<i class="icon-'+(v['ready'] ? 'ok-circle' : 'circleloaderempty')+'"></i> '+v['mod']);
   }
+  set_html('bad_stealth', player['bad_stealth'] ? '&nbsp;<i class="icon-exclamation-sign"></i>' : '')
 }
 
 function push_to_features(str,x,id,keys_visible){

@@ -147,34 +147,34 @@ class Service
       {
         "name" => " Стеганый",
         "cost" => 500,
-        "klass" => 11,
+        "klass" => 1,
         "power" => 0,
         "bad_stealth" => true,
-        "max_dexterity" => 0,
+        "max_dexterity" => 1_000_000,
         "weight" => 8
       },
       {
         "name" => " Кожаный",
         "cost" => 1000,
-        "klass" => 11,
+        "klass" => 1,
         "power" => 0,
         "bad_stealth" => false,
-        "max_dexterity" => 0,
+        "max_dexterity" => 1_000_000,
         "weight" => 10
       },
       {
         "name" => " Проклепанная кожа",
         "cost" => 4500,
-        "klass" => 12,
+        "klass" => 2,
         "power" => 0,
         "bad_stealth" => false,
-        "max_dexterity" => 0,
+        "max_dexterity" => 1_000_000,
         "weight" => 13
       },
       {
         "name" => " Шкурный",
         "cost" => 1000,
-        "klass" => 12,
+        "klass" => 2,
         "power" => 0,
         "bad_stealth" => false,
         "max_dexterity" => 2,
@@ -183,7 +183,7 @@ class Service
       {
         "name" => " Кольчужная рубаха",
         "cost" => 5000,
-        "klass" => 13,
+        "klass" => 3,
         "power" => 0,
         "bad_stealth" => false,
         "max_dexterity" => 2,
@@ -192,7 +192,7 @@ class Service
       {
         "name" => " Чешуйчатый",
         "cost" => 5000,
-        "klass" => 14,
+        "klass" => 4,
         "power" => 0,
         "bad_stealth" => true,
         "max_dexterity" => 2,
@@ -201,7 +201,7 @@ class Service
       {
         "name" => " Кираса",
         "cost" => 40000,
-        "klass" => 14,
+        "klass" => 4,
         "power" => 0,
         "bad_stealth" => false,
         "max_dexterity" => 2,
@@ -210,7 +210,7 @@ class Service
       {
         "name" => " Полулаты",
         "cost" => 75000,
-        "klass" => 15,
+        "klass" => 5,
         "power" => 0,
         "bad_stealth" => true,
         "max_dexterity" => 2,
@@ -219,7 +219,7 @@ class Service
       {
         "name" => " Колечный",
         "cost" => 3000,
-        "klass" => 14,
+        "klass" => 4,
         "power" => 0,
         "bad_stealth" => true,
         "max_dexterity" => 0,
@@ -228,7 +228,7 @@ class Service
       {
         "name" => " Кольчуга",
         "cost" => 7500,
-        "klass" => 16,
+        "klass" => 6,
         "power" => 13,
         "bad_stealth" => true,
         "max_dexterity" => 0,
@@ -237,7 +237,7 @@ class Service
       {
         "name" => " Наборный",
         "cost" => 20000,
-        "klass" => 17,
+        "klass" => 7,
         "power" => 15,
         "bad_stealth" => true,
         "max_dexterity" => 0,
@@ -246,7 +246,7 @@ class Service
       {
         "name" => " Латы",
         "cost" => 150000,
-        "klass" => 18,
+        "klass" => 8,
         "power" => 15,
         "bad_stealth" => true,
         "max_dexterity" => 0,
@@ -258,7 +258,7 @@ class Service
         "klass" => 2,
         "power" => -1,
         "bad_stealth" => false,
-        "max_dexterity" => 0,
+        "max_dexterity" => 1_000_000,
         "weight" => 6
       }
     ],
