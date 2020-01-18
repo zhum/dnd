@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_18_114447) do
+ActiveRecord::Schema.define(version: 2020_01_18_161559) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 2020_01_18_114447) do
     t.integer "power"
     t.integer "max_add_sleight"
     t.integer "max_dexterity"
+    t.boolean "is_light", default: false
+    t.boolean "is_heavy", default: false
+    t.boolean "is_fencing", default: false
+    t.boolean "is_universal", default: false
+    t.boolean "is_twohand", default: false
+    t.boolean "is_throwable", default: false
   end
 
   create_table "chars", force: :cascade do |t|
@@ -102,7 +108,7 @@ ActiveRecord::Schema.define(version: 2020_01_18_114447) do
     t.integer "secret"
     t.integer "user_id"
     t.integer "adventure_id"
-    t.boolean "is_master", default: false
+    t.boolean "is_master", default: true
     t.integer "mod_strength"
     t.integer "mod_dexterity"
     t.integer "mod_constitution"
@@ -118,6 +124,15 @@ ActiveRecord::Schema.define(version: 2020_01_18_114447) do
     t.boolean "mod_prof_strength"
     t.boolean "mod_prof_intellegence"
     t.boolean "mod_prof_charisma"
+    t.integer "spell_slots_1", default: 0
+    t.integer "spell_slots_2", default: 0
+    t.integer "spell_slots_3", default: 0
+    t.integer "spell_slots_4", default: 0
+    t.integer "spell_slots_5", default: 0
+    t.integer "spell_slots_6", default: 0
+    t.integer "spell_slots_7", default: 0
+    t.integer "spell_slots_8", default: 0
+    t.integer "spell_slots_9", default: 0
     t.index ["adventure_id"], name: "index_players_on_adventure_id"
     t.index ["klass_id"], name: "index_players_on_klass_id"
     t.index ["race_id"], name: "index_players_on_race_id"
@@ -205,12 +220,6 @@ ActiveRecord::Schema.define(version: 2020_01_18_114447) do
     t.integer "cost"
     t.integer "damage_type"
     t.integer "weight"
-    t.boolean "is_light", default: false
-    t.boolean "is_heavy", default: false
-    t.boolean "is_fencing", default: false
-    t.boolean "is_universal", default: false
-    t.boolean "is_twohand", default: false
-    t.boolean "is_throwable", default: false
   end
 
   add_foreign_key "players", "races"

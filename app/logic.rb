@@ -185,6 +185,17 @@ class DNDLogic
           end
           send_player ws, player
 
+        when /^spells_(\d+)=(\d+)/
+          i = $1.to_i
+          count = $2.to_i
+          if count<1
+            logger.warn "Bad spell slots count (#{count})"
+          else
+            player.write_attribute("spell_slots_#{i}",count)
+            player.save
+          end
+          send_player ws, player
+
         when /^char\[(\S+)\]=(-?\d+)/
           name = $1
           count = $2.to_i

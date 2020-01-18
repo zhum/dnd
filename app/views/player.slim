@@ -236,6 +236,22 @@ div.main.mui-container
       i.iw-reload
 
   div.dnd-flex-row.mui--z2.fullwidth
+    span.dnd-flex-grow1.mui--text-center onclick="toggle_item('spells');"
+      = t('spells')
+    span.mui--text-right
+      a href="/buy?type=spells"
+        i.icon-plus-sign
+      | &nbsp;&nbsp;
+  div#spells.mui--hide
+    - 1.upto(9) do |i|
+      span.mui--divider-left.mui--divider-bottom.mui-col-xs-4.mui-col-xs-3
+        span.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('spell_plus','spell_minus','spell_set','#{i}'));"
+          = i
+        |:&nbsp;
+        span id="spells_#{i}"
+          i.iw-reload
+
+  div.dnd-flex-row.mui--z2.fullwidth
     span.fullwidth.mui--text-center onclick="toggle_item('fight');"
       | Бой
       span.mui-caret.mui-caret--right
@@ -536,4 +552,22 @@ javascript:
   function saveth_plus(c) { saveth_modify(c,'+') }
   function saveth_minus(c){ saveth_modify(c,'-') }
   function saveth_set(c)  { saveth_modify(c,'=') }
+
+  function spell_modify(c,mod){
+    var v = get_over_value();
+    if(mod=='+'){
+      player['spells_'+c] += v;
+    }
+    else if(mod=='-'){
+      player['spells_'+c] -= v;
+    }
+    else{
+      player['spells_'+c] = v;
+    }
+    ws.send(secret+': spells_'+c+'='+JSON.stringify(player['spells_'+c]));      
+  }
+
+  function spell_plus(c) { spell_modify(c,'+') }
+  function spell_minus(c){ spell_modify(c,'-') }
+  function spell_set(c)  { spell_modify(c,'=') }
 

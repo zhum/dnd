@@ -209,7 +209,6 @@ class Player < ActiveRecord::Base
     # else
     #   raise "BAD characheristic! (#{name_or_index})"
     end
-      }
   end
 
   def all_weapon
@@ -274,6 +273,7 @@ class Player < ActiveRecord::Base
       [a.id, {name: aa.name, count: a.count, wear: a.wear}]}]
     ]
 
+    1.upto(9) { |n| h << ["spells_#{n}", self.read_attribute("spell_slots_#{n}")]}
     h << ['skills',Hash[self.skillings.all.map { |e|
         s = e.skill
         [e.id, {name: s.name,
@@ -362,10 +362,9 @@ class Player < ActiveRecord::Base
   end
 
   def total_weight
-    w = 
-      armors.all.inject(0) { |mem, var| mem += var.weight} +
-      things.all.inject(0.0) { |mem, var| mem += var.weight/10.0} +
-      weapons.inject(0) { |mem, var| mem += var.weight} +
+    w = armors.all.inject(0){ |mem, var| mem += var.weight } +
+      things.all.inject(0.0){ |mem, var| mem += var.weight/10.0 } +
+      weapons.inject(0){ |mem, var| mem += var.weight } +
       (mcoins+scoins+gcoins+pcoins+ecoins)/50.0
     "%0.2f" % w
   end

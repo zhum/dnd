@@ -174,6 +174,9 @@ function render_player(data){
   set_html('total-gold', (data.coins[0]+data.coins[1]*10+data.coins[2]*100+
                            data.coins[3]*50+data.coins[4]*1000)/100);
   set_html('total-weight', data.total_weight);
+  for (var i = 1; i<=9; i+=1) {
+    set_html('spells_'+i, data['spells_'+i])
+  }
   for( var ch in data.chars){
     set_html('ch_'+ch, data.chars[ch]);
   }
