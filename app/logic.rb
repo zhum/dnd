@@ -14,6 +14,12 @@ class DNDLogic
       ws.send(m)
     end
 
+    def send_flash ws, flash, logit=false
+      m = "{\"flash\": \"#{flash}\"}"
+      logger.warn "flash: #{m}" if logit
+      ws.send(m)
+    end
+
     def process_message ws,user,player,text,opts={}
       logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       begin
@@ -153,11 +159,18 @@ class DNDLogic
           id = $1.to_i
           mod = $2=='1'
           w = player.armorings.where(id: id).take
-          w.wear = mod
-          w.save
-          logger.info "Armoring: #{w}"
+          if mod
+            result = player.wear_armor w
+            if result
+              send_flash ws, result
+              return
+            end
+          else
+            w.wear = false
+            w.save
+          end
           send_player ws, player
-
+  
         when /^feature\[(\d+)\]=(\d+)/
 #          warn ">>>> #{$1}/#{$2}"
           id = $1.to_i

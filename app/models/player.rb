@@ -1,3 +1,28 @@
+#
+# t.string "name"
+# t.integer "hp"
+# t.integer "max_hp"
+# t.integer "mcoins"
+# t.integer "scoins"
+# t.integer "gcoins"
+# t.integer "ecoins"
+# t.integer "pcoins"
+# t.integer "secret"
+# t.boolean "is_master", default: false
+# t.integer "mod_strength"
+# t.integer "mod_dexterity"
+# t.integer "mod_constitution"
+# t.integer "mod_intellegence"
+# t.integer "mod_wisdom"
+# t.integer "mod_charisma"
+# t.integer "experience"
+# t.boolean "mod_prof_dexterity"
+# t.boolean "mod_prof_wisdom"
+# t.boolean "mod_prof_constitution"
+# t.boolean "mod_prof_strength"
+# t.boolean "mod_prof_intellegence"
+# t.boolean "mod_prof_charisma"
+
 class Player < ActiveRecord::Base
   validates_presence_of :name
 
@@ -119,10 +144,6 @@ class Player < ActiveRecord::Base
       "mod_#{MODS[name_or_index.to_i]}"
     end
 
-    # case attr_name
-    # when ''
-      
-    # end
     read_attribute(attr_name)
   end
 
@@ -163,6 +184,15 @@ class Player < ActiveRecord::Base
           AC_FORMULAS[f.name].call(self,w_armors)
         } << AC_FORMULAS['Обычная защита'].call(self,w_armors)
       ).max
+    when 'speed'
+      base = chars.where(name: 'speed').take.value
+      if armorings.all.any?{|x| x.wear && x.armor.is_heavy}
+        if self.race.name != 'dwarf_mountain' && self.race.name != 'dwarf_hill' &&
+           self.race.name != 'dwarf_gray'
+          return base - 10 if x.armor.power < self.mod_strength
+        end
+      end
+      base
     else
       warn attr_name
       chars.where(name: attr_name).take.value
@@ -179,6 +209,7 @@ class Player < ActiveRecord::Base
     # else
     #   raise "BAD characheristic! (#{name_or_index})"
     end
+      }
   end
 
   def all_weapon
@@ -265,6 +296,7 @@ class Player < ActiveRecord::Base
     h << [:savethrows2, s ? s.count : 0]
 
     h << [:bad_stealth, self.get_bad_stealth]
+    h << [:total_weight, total_weight]
     #warn "===> #{Hash[h].inspect}"
     Hash[h].to_json.to_s 
   end
@@ -318,4 +350,24 @@ class Player < ActiveRecord::Base
       a.armor.bad_stealth && a.wear
     }
   end
+
+  def wear_armor a
+    if a.armor.power > self.mod_strength
+      'Слишком тяжело, не могу надеть'
+    else
+      a.wear = true
+      a.save
+      nil
+    end
+  end
+
+  def total_weight
+    w = 
+      armors.all.inject(0) { |mem, var| mem += var.weight} +
+      things.all.inject(0.0) { |mem, var| mem += var.weight/10.0} +
+      weapons.inject(0) { |mem, var| mem += var.weight} +
+      (mcoins+scoins+gcoins+pcoins+ecoins)/50.0
+    "%0.2f" % w
+  end
+
 end

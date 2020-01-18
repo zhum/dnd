@@ -1,6 +1,8 @@
 var chat_messages={};
 var ws;
 var ws_timeout=null;
+var flash_timeout=null;
+var flash_timeout_ms = 3000;
 var player;
 var prefs={};
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
@@ -171,6 +173,7 @@ function render_player(data){
   set_html('pcoins', data.coins[4]);
   set_html('total-gold', (data.coins[0]+data.coins[1]*10+data.coins[2]*100+
                            data.coins[3]*50+data.coins[4]*1000)/100);
+  set_html('total-weight', data.total_weight);
   for( var ch in data.chars){
     set_html('ch_'+ch, data.chars[ch]);
   }
@@ -451,6 +454,18 @@ function try_connect(){
         }
         chat_messages[id] = msg['chat_history'];
         render_chat(id);
+      }
+      else if(msg['flash']){
+        var el = document.getElementById('dnd-flash')
+        if(el){
+          clearTimeout(flash_timeout);
+          el.innerHTML = msg['flash'];
+          el.classList.remove('no-messages');
+          flash_timeout = setTimeout(function(){
+            //fade back
+            el.classList.add('no-messages');
+          }, flash_timeout_ms);
+        }
       }
     }
   }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_161528) do
+ActiveRecord::Schema.define(version: 2020_01_18_114447) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_161528) do
     t.integer "secret"
     t.integer "user_id"
     t.integer "adventure_id"
-    t.boolean "is_master", default: true
+    t.boolean "is_master", default: false
     t.integer "mod_strength"
     t.integer "mod_dexterity"
     t.integer "mod_constitution"
@@ -205,6 +205,12 @@ ActiveRecord::Schema.define(version: 2020_01_16_161528) do
     t.integer "cost"
     t.integer "damage_type"
     t.integer "weight"
+    t.boolean "is_light", default: false
+    t.boolean "is_heavy", default: false
+    t.boolean "is_fencing", default: false
+    t.boolean "is_universal", default: false
+    t.boolean "is_twohand", default: false
+    t.boolean "is_throwable", default: false
   end
 
   add_foreign_key "players", "races"

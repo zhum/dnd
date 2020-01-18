@@ -35,6 +35,12 @@ class Service
           weight: e['weight'],
           countable: false,
           description: e['description'].strip,
+          is_twohand: e['is_twohand']==true,
+          is_throwable: e['is_throwable']==true,
+          is_light: e['is_light']==true,
+          is_heavy: e['is_heavy']==true,
+          is_fencing: e['is_fencing']==true,
+          is_universal: e['is_universal']==true,
         )
         a.save
       }
@@ -270,7 +276,8 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "дробящий",
         "weight" => 4,
-        "description" => "Универсальное (1d8)"
+        "description" => "Универсальное (1d8)",
+        "is_universal" => true
       },
       {
         "name" => "Булава",
@@ -288,7 +295,8 @@ class Service
         "damage_dice" => "4",
         "damage_type" => "дробящий",
         "weight" => 2,
-        "description" => "Легкое "
+        "description" => "Легкое ",
+        "is_light" => true
       },
       {
         "name" => " Кинжал",
@@ -297,7 +305,10 @@ class Service
         "damage_dice" => "4",
         "damage_type" => "колющий",
         "weight" => 1,
-        "description" => "Легкое"
+        "description" => "Легкое, метательное (20/60),фехтовальное",
+        "is_light" => true,
+        "is_throwable" => true,
+        "is_fencing" => true,
       },
       {
         "name" => " Копье",
@@ -306,7 +317,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "колющий",
         "weight" => 3,
-        "description" => "Метательное (дис. 20/60)"
+        "description" => "Метательное (20/60), Универсальное(1d8)",
+        "is_throwable" => true,
+        "is_universal" => true,
       },
       {
         "name" => " Легкий молот",
@@ -315,7 +328,9 @@ class Service
         "damage_dice" => "4",
         "damage_type" => "дробящий",
         "weight" => 2,
-        "description" => "Легкое"
+        "description" => "Легкое, метательное (20/60)",
+        "is_light" => true,
+        "is_throwable" => true,
       },
       {
         "name" => " Метательное копье",
@@ -324,7 +339,8 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "колющий",
         "weight" => 2,
-        "description" => "Метательное (дис. 30/120) "
+        "description" => "Метательное (дис. 30/120) ",
+        "is_throwable" => true
       },
       {
         "name" => " Палица",
@@ -333,7 +349,8 @@ class Service
         "damage_dice" => "8",
         "damage_type" => "дробящий",
         "weight" => 10,
-        "description" => "Двуручное"
+        "description" => "Двуручное",
+        "is_twohand" => true,
       },
       {
         "name" => " Ручной топор",
@@ -342,7 +359,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "рубящий",
         "weight" => 2,
-        "description" => "Легкое"
+        "description" => "Легкое, метательное",
+        "is_light" => true,
+        "is_throwable" => true,
       },
       {
         "name" => " Серп",
@@ -351,7 +370,8 @@ class Service
         "damage_dice" => "4",
         "damage_type" => "рубящий",
         "weight" => 2,
-        "description" => "Легкое "
+        "description" => "Легкое",
+        "is_light" => true
       },
       {
         "name" => "Арбалет легкий",
@@ -360,7 +380,8 @@ class Service
         "damage_dice" => "8",
         "weight" => 5,
         "damage_type" => "колющий",
-        "description" => "Боеприпас (дис. 80/320), двуручное, перезарядка"
+        "description" => "Боеприпас (дис. 80/320), двуручное, перезарядка",
+        "is_twohand" => true,
       },
       {
         "name" => "Дротик",
@@ -369,7 +390,9 @@ class Service
         "damage_dice" => "4",
         "damage_type" => "колющий",
         "weight" => 14,
-        "description" => "Метательное (дис. 20/60)"
+        "description" => "Метательное (дис. 20/60), фехтовальное",
+        "is_throwable" => true,
+        "is_fencing" => true,
       },
       {
         "name" => " Короткий лук",
@@ -378,7 +401,8 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "колющий",
         "weight" => 2,
-        "description" => "Боеприпас (дис. 80/320)"
+        "description" => "Боеприпас (дис. 80/320), двуручное",
+        "is_twohand" => true,
       },
       {
         "name" => " Праща",
@@ -396,7 +420,9 @@ class Service
         "damage_dice" => "10",
         "damage_type" => "рубящий",
         "weight" => 6,
-        "description" => "Двуручное"
+        "description" => "Двуручное",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Боевая кирка",
@@ -414,7 +440,8 @@ class Service
         "damage_dice" => "8",
         "damage_type" => "дробящий",
         "weight" => 2,
-        "description" => "Универсальное (1d10) "
+        "description" => "Универсальное (1d10)",
+        "is_universal" => true,
       },
       {
         "name" => " Боевой топор",
@@ -423,7 +450,8 @@ class Service
         "damage_dice" => "8",
         "damage_type" => "рубящий",
         "weight" => 4,
-        "description" => "Универсальное (1d10) "
+        "description" => "Универсальное (1d10) ",
+        "is_universal" => true,
       },
       {
         "name" => " Глефа",
@@ -432,7 +460,9 @@ class Service
         "damage_dice" => "10",
         "damage_type" => "рубящий",
         "weight" => 6,
-        "description" => "Двуручное"
+        "description" => "Двуручное",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Двуручный меч",
@@ -441,7 +471,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "рубящий",
         "weight" => 6,
-        "description" => "Двуручное"
+        "description" => "Двуручное",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Длинное копье",
@@ -450,7 +482,7 @@ class Service
         "damage_dice" => "12",
         "damage_type" => "колющий",
         "weight" => 6,
-        "description" => "Досягаемость"
+        "description" => "Досягаемость, особое"
       },
       {
         "name" => " Длинный меч",
@@ -459,7 +491,8 @@ class Service
         "damage_dice" => "8",
         "damage_type" => "рубящий",
         "weight" => 3,
-        "description" => "Универсальное (1d10) "
+        "description" => "Универсальное (1d10) ",
+        "is_universal" => true,
       },
       {
         "name" => " Кнут",
@@ -468,7 +501,8 @@ class Service
         "damage_dice" => "4",
         "damage_type" => "рубящий",
         "weight" => 3,
-        "description" => "Досягаемость"
+        "description" => "Досягаемость,фехтовальное",
+        "is_fencing" => true,
       },
       {
         "name" => " Короткий меч",
@@ -477,7 +511,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "колющий",
         "weight" => 2,
-        "description" => "Легкое"
+        "description" => "Легкое,фехтовальное",
+        "is_light" => true,
+        "is_fencing" => true,
       },
       {
         "name" => " Молот",
@@ -486,7 +522,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "дробящий",
         "weight" => 10,
-        "description" => "Двуручное"
+        "description" => "Двуручное, тяжёлое",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Моргентштерн",
@@ -504,7 +542,9 @@ class Service
         "damage_dice" => "10",
         "damage_type" => "колющий",
         "weight" => 18,
-        "description" => "Двуручное"
+        "description" => "Двуручное",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Рапира",
@@ -513,7 +553,8 @@ class Service
         "damage_dice" => "8",
         "damage_type" => "колющий",
         "weight" => 2,
-        "description" => "Фехтовальное"
+        "description" => "Фехтовальное",
+        "is_fencing" => true,
       },
       {
         "name" => " Секира",
@@ -522,7 +563,9 @@ class Service
         "damage_dice" => "12",
         "damage_type" => "рубящий",
         "weight" => 7,
-        "description" => "Двуручное"
+        "description" => "Двуручное, тяжёлое",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Скимитар",
@@ -531,7 +574,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "рубящий",
         "weight" => 3,
-        "description" => "Легкое"
+        "description" => "Легкое",
+        "is_light" => true,
+        "is_fencing" => true,
       },
       {
         "name" => " Трезубец",
@@ -540,7 +585,9 @@ class Service
         "damage_dice" => "6",
         "damage_type" => "колющий",
         "weight" => 4,
-        "description" => "Метательное (дис. 20/60)"
+        "description" => "Метательное (дис. 20/60), Универсальное(1d8)",
+        "is_throwable" => true,
+        "is_universal" => true,
       },
       {
         "name" => " Цеп",
@@ -558,7 +605,8 @@ class Service
         "damage_dice" => "6",
         "weight" => 3,
         "damage_type" => "колющий",
-        "description" => "Боеприпас (дис. 30/120), лёгкое, перезарядка"
+        "description" => "Боеприпас (дис. 30/120), лёгкое, перезарядка",
+        "is_light" => true,
       },
       {
         "name" => "Арбалет тяжелый",
@@ -567,7 +615,9 @@ class Service
         "damage_dice" => "10",
         "weight" => 18,
         "damage_type" => "колющий",
-        "description" => "Боеприпас (дис. 100/400), двуручное, перезарядка, тяжёлое"
+        "description" => "Боеприпас (дис. 100/400), двуручное, перезарядка, тяжёлое",
+        "is_twohand" => true,
+        "is_heavy" => true,
       },
       {
         "name" => " Длинный лук",
@@ -576,7 +626,9 @@ class Service
         "damage_dice" => "8",
         "damage_type" => "колющий",
         "weight" => 2,
-        "description" => "Боеприпас (дис. 150/600)"
+        "description" => "Боеприпас (дис. 150/600), двуручное, тяжёлое",
+        "is_heavy" => true,
+        "is_twohand" => true,
       },
       {
         "name" => " Духовая трубка",
@@ -594,7 +646,8 @@ class Service
         "damage_dice" => "0",
         "damage_type" => "none",
         "weight" => 3,
-        "description" => "Метательное (дис. 5/15)"
+        "description" => "Метательное (дис. 5/15), особое",
+        "is_throwable" => true
       }
     ],
     "things" => [

@@ -1,4 +1,6 @@
 == styled_flash
+div#dnd-flash.dnd-flash.no-messages
+
 - char_icons= {'strength' => 'icon-hammeralt','constitution' => 'icon-bone','dexterity' => 'icon-cat','intellegence' => 'icon-student-school','wisdom' => 'icon-bookalt','charisma' => 'icon-star'}
 
 div.main.mui-container
@@ -51,6 +53,10 @@ div.main.mui-container
             i.iw-reload
           span.coins-total
             | &nbsp;золота 
+          span.coins-total.mui--divider-left#total-weight
+            i.iw-reload
+          span.coins-total
+            | &nbsp;фнт.
       div.coins.fullwidth.dnd-flex-row
           span.center
             a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',0));"
