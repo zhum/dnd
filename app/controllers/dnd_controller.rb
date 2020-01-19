@@ -168,6 +168,8 @@ class DNDController < BaseApp
       @items = Armor.all.map{|x| {cost: x.cost, id: x.id, name: x.name, description: x.short_description}}
     when 'feature'
       @items = Feature.all.map{|x| {cost: 0, id: x.id, name: x.name, description: x.description}}
+    when 'spells'
+      @items = Spell.all.map{|x| {cost: 0, id: x.id, name: x.name, description: x.description}}
     else
       @items = []
     end

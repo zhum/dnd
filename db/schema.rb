@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_18_161559) do
+ActiveRecord::Schema.define(version: 2020_01_18_170342) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -179,6 +179,33 @@ ActiveRecord::Schema.define(version: 2020_01_18_161559) do
     t.integer "base"
   end
 
+  create_table "spell_affects", force: :cascade do |t|
+    t.integer "spelling_id"
+    t.integer "player_id"
+    t.integer "owner_id"
+    t.index ["player_id"], name: "index_spell_affects_on_player_id"
+    t.index ["spelling_id"], name: "index_spell_affects_on_spelling_id"
+  end
+
+  create_table "spellings", force: :cascade do |t|
+    t.integer "spell_id"
+    t.integer "player_id"
+    t.boolean "ready"
+    t.index ["player_id"], name: "index_spellings_on_player_id"
+    t.index ["spell_id"], name: "index_spellings_on_spell_id"
+  end
+
+  create_table "spells", force: :cascade do |t|
+    t.string "name"
+    t.string "lasting_time"
+    t.string "spell_time"
+    t.integer "level"
+    t.integer "slot"
+    t.string "description"
+    t.string "components"
+    t.integer "distance"
+  end
+
   create_table "thingings", force: :cascade do |t|
     t.integer "player_id"
     t.integer "thing_id"
@@ -223,4 +250,8 @@ ActiveRecord::Schema.define(version: 2020_01_18_161559) do
   end
 
   add_foreign_key "players", "races"
+  add_foreign_key "spell_affects", "players"
+  add_foreign_key "spell_affects", "spellings"
+  add_foreign_key "spellings", "players"
+  add_foreign_key "spellings", "spells"
 end

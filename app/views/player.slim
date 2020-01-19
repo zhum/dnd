@@ -243,13 +243,15 @@ div.main.mui-container
         i.icon-plus-sign
       | &nbsp;&nbsp;
   div#spells.mui--hide
-    - 1.upto(9) do |i|
-      span.mui--divider-left.mui--divider-bottom.mui-col-xs-4.mui-col-xs-3
-        span.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('spell_plus','spell_minus','spell_set','#{i}'));"
-          = i
-        |:&nbsp;
-        span id="spells_#{i}"
-          i.iw-reload
+    dev.mui-row
+      - 1.upto(9) do |i|
+        span.mui--divider-left.mui--divider-bottom.mui-col-md-1.mui-col-xs-3
+          span.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('spell_plus','spell_minus','spell_set','#{i}'));"
+            = i
+          |:&nbsp;
+          span id="spells_#{i}"
+            i.iw-reload
+    div#spell-list.dnd-flex-row
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.fullwidth.mui--text-center onclick="toggle_item('fight');"

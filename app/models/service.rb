@@ -147,6 +147,17 @@ class Service
       end
     end
 
+    def create_spells force=false
+      return if Spell.count>0 && !force
+      json = load_json['spells']
+      json.each { |e|
+        a = Spell.create(e)
+        a.save
+      }
+    end
+
+
+
   end
   Data={
     "armor" => [
@@ -1155,6 +1166,18 @@ class Service
         description: "",
         max_count: 1
       },
+    ],
+    "spells" => [
+      {
+        name: "Божественное оружие",
+        description: "",
+        level: 2,
+        slot: 2,
+        spell_time: '1 бонусное действие',
+        lasting_time: '1 минута',
+        distance: '60 фт.',
+
+      }
     ]
   }
 end

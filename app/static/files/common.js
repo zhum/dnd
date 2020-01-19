@@ -84,6 +84,24 @@ function render_armors(mod=false){
   set_html('armor',arm_html+'</div>');
 }
 
+function push_to_spells(str,x,id,keys_visible=false){
+  str += '<span class="mui--text-left mui--divider-left mui--divider-bottom">'+
+    '&nbsp;<i class="icon-'+(x['ready'] ? '-ok-sign' : 'circleloaderempty')+'"></i> '+
+    +x['level']+
+    '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')+
+    '" href="#" onclick="activate_spell('+id+')">'+
+     x['name']+'</a></span>';
+  return str;
+}
+
+function render_spells(mod=false){
+  var arm_html='';
+  for (var i in player['spells']) {
+    arm_html = push_to_spells(arm_html, player['spells'][i], i, mod);
+  };
+  set_html('spell-list',arm_html);
+}
+
 function push_to_thing(str,x,id,keys_visible=false){
   str += '<span class="mui--text-left">'+
    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'thing_plus\',\'thing_minus\',\'thing_set\','+id+'));">'+
@@ -199,6 +217,8 @@ function render_player(data){
   render_features();
 
   render_savethrows();
+
+  render_spells();
   
 }
 
