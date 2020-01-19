@@ -81,6 +81,13 @@ class DNDLogic
               return
             end
             player.featurings << Featuring.create(feature: t, count: 1)
+          when 'spells'
+            t = Spell.find(id)
+            if player.spells.include? t
+              logger.warn "Spell is already bought"
+              return
+            end
+            player.spellings << Spelling.create(spell: t)
           end
           player.save
         # send chat history

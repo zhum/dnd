@@ -45,6 +45,11 @@ class Player < ActiveRecord::Base
   has_many :featurings
   has_many :features, through: :featurings
 
+  has_many :spellings
+  has_many :spells, through: :spellings
+  has_many :spell_affects
+  has_many :spell_actives, class_name: "SpellAffect", foreign_key: "owner_id"
+
   has_many :save_throws
 
   belongs_to :user
@@ -65,7 +70,7 @@ class Player < ActiveRecord::Base
     "Обычная защита" => 
       lambda { |x,wear|
         dex = x.mod_dexterity
-        logger.warn wear.inspect
+        #logger.warn wear.inspect
         base = 10+(wear.map{|e| e.klass}.reduce(:+) || 0) +
                (wear.map{|w| w.max_dexterity} << dex).min
 
@@ -194,20 +199,8 @@ class Player < ActiveRecord::Base
       end
       base
     else
-      warn attr_name
+      #warn attr_name
       chars.where(name: attr_name).take.value
-    # when 'initiative'
-    #   chars.where(name: 'initiative').take.value
-    # when 'speed'
-    #   chars.where(name: 'speed').take.value
-    # when 'masterlevel'
-    #   chars.where(name: 'masterlevel').take.value
-    # when 'hit_dice'
-    #   chars.where(name: 'hit_dice').take.value
-    # when 'hit_dice_of'
-    #   chars.where(name: 'hit_dice_of').take.value
-    # else
-    #   raise "BAD characheristic! (#{name_or_index})"
     end
   end
 
@@ -290,6 +283,22 @@ class Player < ActiveRecord::Base
                 count: e.count}]
       }
     ]]
+
+    h << ['spells',Hash[self.spellings.all.map { |e|
+        s = e.spell
+        [s.id, {name: s.name,
+                description: s.description,
+                ready: e.ready ? true : false,
+                level: s.level,
+                spell_time: s.spell_time,
+                lasting_time: s.lasting_time,
+                components: s.components,
+                distance: s.distance,
+                active: (self.spell_actives.where(spelling: e).count > 0),
+        }]
+      }
+    ]]
+
     s = get_save_throws 1
     h << [:savethrows1, s ? s.count : 0]
     s = get_save_throws 2
@@ -346,7 +355,7 @@ class Player < ActiveRecord::Base
 
   def get_bad_stealth
     bad = Armoring.all.any?{ |a|
-      logger.warn "#{a.armor.bad_stealth} && #{a.wear}"
+      #logger.warn "#{a.armor.bad_stealth} && #{a.wear}"
       a.armor.bad_stealth && a.wear
     }
   end
