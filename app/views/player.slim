@@ -245,7 +245,7 @@ div.main.mui-container
   div#spells.mui--hide
     dev.mui-row
       - 1.upto(9) do |i|
-        span.mui--divider-left.mui--divider-bottom.mui-col-md-1.mui-col-xs-3
+        span.mui--divider-left.mui--divider-bottom.mui-col-md-1.mui-col-xs-4
           span.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('spell_plus','spell_minus','spell_set','#{i}'));"
             = i
           |:&nbsp;
@@ -573,3 +573,6 @@ javascript:
   function spell_minus(c){ spell_modify(c,'-') }
   function spell_set(c)  { spell_modify(c,'=') }
 
+  function activate_spell(c){
+    ws.send(secret+': activate_spell='+c);
+  }

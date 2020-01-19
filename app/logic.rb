@@ -203,6 +203,13 @@ class DNDLogic
           end
           send_player ws, player
 
+        when /^activate_spell=(\d+)/
+          i = $1.to_i
+          spell = player.spellings.where(spell_id: i)
+            player.write_attribute("spell_slots_#{i}",count)
+            player.save
+          send_player ws, player
+
         when /^char\[(\S+)\]=(-?\d+)/
           name = $1
           count = $2.to_i
