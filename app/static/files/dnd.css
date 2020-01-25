@@ -521,6 +521,26 @@ div.inventory{
   padding: 5px;
   background-color: #fff;
 }
+.modal-help-form {
+  width: 95vw;
+  height: 33vh;
+  margin: 33vh auto;
+  padding: 5px;
+  background-color: rgba(135, 206, 235,0.9) !important;
+  display:  flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.align-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.padleft-2pc{
+  padding-left: 2%;
+}
 /* old phones */
 @media all and (max-width: 320px){
   div{

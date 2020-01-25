@@ -7,6 +7,10 @@ var player;
 var prefs={};
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 
+function txt_or_empty(txt){
+  return txt==null ? '' : txt;
+}
+
 function set_html(id,value){
   var el = document.getElementById(id)
   if(el){
@@ -84,14 +88,23 @@ function render_armors(mod=false){
   set_html('armor',arm_html+'</div>');
 }
 
+function get_spell_help(id){
+  var sp = player.spells[id];
+  return '<p>Наложение: '+txt_or_empty(sp.spell_time)+'</p>'
+    +'<p>Длительность: '+txt_or_empty(sp.lasting_time)+'</p>'
+    +'<p>Дистанция: '+txt_or_empty(sp.distance)+'</p>'
+    +'<p>Компоненты: '+txt_or_empty(sp.components)+'</p>'
+    +txt_or_empty(sp['description']);
+}
 function push_to_spells(str,x,id,keys_visible=false){
-  str += '<div class="mui--divider-right mui--divider-bottom">'+
-    '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')+
-    '" href="#" onclick="activate_spell('+id+')">'+
-     x['name']+'</a>'+
-    '&nbsp;<i class="icon-'+(x['ready'] ? 'ok-sign' : 'circleloaderempty')+'" onclick="ready_spell('+id+')"></i> '+
-    +x['level']+
-     '</div>';
+  str += '<div class="mui--divider-right mui--divider-bottom">'
+    +  '<i class="icon-question-sign" onclick="formModalHelp(spellFormHelp('+id+'))"></i>'
+    +  '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')
+    +    '" href="#" onclick="activate_spell('+id+')">'
+    +    x['name']+'</a>'
+    +  '&nbsp;<i class="icon-'+(x['ready'] ? 'ok-sign' : 'circleloaderempty')+'" onclick="ready_spell('+id+')"></i> '
+    +  x['level']
+    +'</div>';
   return str;
 }
 
@@ -121,13 +134,18 @@ function render_things(mod=false){
 }
 
 function push_to_weap(str,x,id,keys_visible){
-  str += '<div class="mui-row mui--divider-bottom weapon"><div class="mui-col-xs-2 mui--text-left">'+
-    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\','+id+'));">'+
-    x['name']+'</a></div>'+
-    '<div class="mui-col-xs-1">'+x['count']+'</div><div class="mui-col-xs-5 mui--divider-left">'+
-    x['description']+
-    '</div><div class="mui-col-xs-1 mui--divider-left">'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+
-    ')</div></div>';
+  str += '<div class="mui-row mui--divider-bottom weapon">'
+    +  '<div class="mui-col-xs-6 mui--text-left">'
+    +    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\','+id+'));">'
+    +      x['name']
+    +    '&nbsp;'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+')</a>'
+    +  '</div>'
+    +  '<div class="mui-col-xs-1">'+x['count']+'</div>'
+    +  '<div class="mui-col-xs-5 mui--divider-left">'
+    +    x['description']
+    //'</div><div class="mui-col-xs-1 mui--divider-left">'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+
+    +  '</div>'
+    +'</div>';
   return str;
 }
 
@@ -342,21 +360,24 @@ function modalEnter(){
 function formModal(form) {
   // initialize modal element
   var modalEl = document.createElement('div');
-  // modalEl.style.width = '95vw';
-  // modalEl.style.height = '3em';
-  // modalEl.style.margin = '50vh auto';
-  // modalEl.style.padding = '5px 5px';
-  // modalEl.style.backgroundColor = '#fff';
   modalEl.innerHTML = form;
-  // modal_function = f;
-  // modal_arg = arg;
-  // var el = modalEl.children[0];
-  // el.setAttribute('data-function',f);
 
   // show modal
   mui.overlay('on', modalEl);
   //modalEl.classList.add = 'modal-form';
   document.getElementById('mui-overlay').classList.add('modal-form');
+  document.getElementById('over_value').focus();
+}
+
+function formModalHelp(form) {
+  // initialize modal element
+  var modalEl = document.createElement('div');
+  modalEl.innerHTML = form;
+
+  // show modal
+  mui.overlay('on', modalEl);
+  modalEl.classList.add('align-vertical');
+  document.getElementById('mui-overlay').classList.add('modal-help-form');
   document.getElementById('over_value').focus();
 }
 
@@ -367,8 +388,8 @@ function formEnter(){
   mui.overlay('off');
 }
 
-function xover(){
-  document.getElementById('mui-overlay').classList.remove('modal-form')
+function xover(classname='modal-form'){
+  document.getElementById('mui-overlay').classList.remove(classname);
   mui.overlay('off');
 }
 
@@ -381,6 +402,13 @@ function overForm3(f1,f2,f3,arg){
   '</div></form>'
 }
 
+function spellFormHelp(id){
+  var str = '<div class="fullwidth">'
+    +get_spell_help(id)
+    +'<br><a class="dnd-btn dnd-btn--primary" href="#" onclick="xover('+"'modal-help-form'"+')";>Close</a>'
+    +"</div>";
+  return str;
+}
 // function overForm5(fp1,fp5,fm1,fm5,fs,arg){
 //   return '<form class="mui--text-center">'+
 //     '<a class="dnd-btn dnd-btn--primary" href="#" onclick="'+f1+"('"+arg+"');xover();\">+</a>"+
