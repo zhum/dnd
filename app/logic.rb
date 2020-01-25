@@ -205,9 +205,19 @@ class DNDLogic
 
         when /^activate_spell=(\d+)/
           i = $1.to_i
-          spell = player.spellings.where(spell_id: i)
-            player.write_attribute("spell_slots_#{i}",count)
-            player.save
+          spell = player.spellings.where(id: i).take
+          if spell.nil?
+            logger.warn "Bad spell activate (#{id})"
+            return
+          end
+          affect = SpellAffect.where(spelling_id: i, owner_id: player.id).take
+          if affect
+            affect.delete
+          else
+            affect = SpellAffect.create(spelling: spell, owner: player)
+            affect.save
+          end
+          #player.save
           send_player ws, player
 
         when /^char\[(\S+)\]=(-?\d+)/

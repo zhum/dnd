@@ -69,11 +69,17 @@ class Service
         a.save
       }
     end
+
+   # MODS = [
+     # 'strength','dexterity','constitution',
+     # 'intellegence','wisdom','charisma'
+   # ]
+   
     def create_skills force=false
       return if Skill.count>0 && !force
-      {'athletics' => 1,
-      'acrobatics' => 3,
-      'investigation' => 0,
+      {'athletics' => 0,
+      'acrobatics' => 1,
+      'investigation' => 3,
       'perception' => 4,
       'survival' => 4,
       'performance' => 5,

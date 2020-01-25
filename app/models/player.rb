@@ -272,7 +272,7 @@ class Player < ActiveRecord::Base
         [e.id, {name: s.name,
                 ready: e.ready,
                 base: s.base,
-                mod: e.modifier}]
+                mod: e.value}]
       }
     ]]
     h << ['features',Hash[self.featurings.all.map { |e|
