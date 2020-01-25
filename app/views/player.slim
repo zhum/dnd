@@ -250,7 +250,7 @@ div.main.mui-container
           |:&nbsp;
           span id="spells_#{i}"
             i.iw-reload
-    div#spell-list.xdnd-flex-row
+    div#spell-list.dnd-flex-row
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.fullwidth.mui--text-center onclick="toggle_item('fight');"
@@ -574,4 +574,7 @@ javascript:
 
   function activate_spell(c){
     ws.send(secret+': activate_spell='+c);
+  }
+  function ready_spell(c){
+    ws.send(secret+': ready_spell='+c);
   }
