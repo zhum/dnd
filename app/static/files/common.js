@@ -85,12 +85,13 @@ function render_armors(mod=false){
 }
 
 function push_to_spells(str,x,id,keys_visible=false){
-  str += '<span class="mui--text-left mui--divider-left mui--divider-bottom">'+
-    '&nbsp;<i class="icon-'+(x['ready'] ? '-ok-sign' : 'circleloaderempty')+'"></i> '+
-    +x['level']+
+  str += '<span class="mui--divider-left mui--divider-bottom">'+
     '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')+
     '" href="#" onclick="activate_spell('+id+')">'+
-     x['name']+'</a></span>';
+     x['name']+'</a>'+
+    '&nbsp;<i class="icon-'+(x['ready'] ? '-ok-sign' : 'circleloaderempty')+'"></i> '+
+    +x['level']+
+     '</span>';
   return str;
 }
 

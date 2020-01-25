@@ -1181,8 +1181,106 @@ class Service
         slot: 2,
         spell_time: '1 бонусное действие',
         lasting_time: '1 минута',
-        distance: '60 фт.',
-
+        distance: '60 фт.'
+      },
+      {
+        name: "Волшебная рука",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: '1 минута',
+        distance: '30 фт'
+      },
+      {
+        name: "Дружба",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: 'концентрация, 1 минута',
+        distance: 'на себя'
+      },
+      {
+        name: "Защита от оружия",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: '1 раунд',
+        distance: 'на себя'
+      },
+      {
+        name: "Злая насмешка",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: 'мгновенная',
+        distance: '60 фт'
+      },
+      {
+        name: "Малая иллюзия",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: '1 минута',
+        distance: '30 фт'
+      },
+      {
+        name: "Меткий удар",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: 'концентрация, 1 раунд',
+        distance: '30 фт'
+      },
+      {
+        name: "Пляшущие огоньки",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: 'концентрация, 1 минута',
+        distance: '120 фт'
+      },
+      {
+        name: "Починка",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 минута',
+        lasting_time: 'мгновенная',
+        distance: 'касание'
+      },
+      {
+        name: "Свет",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: '1 час',
+        distance: 'касание'
+      },
+      {
+        name: "Сообщение",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: '1 раунд',
+        distance: '120 фт'
+      },
+      {
+        name: "Фокусы",
+        description: '',
+        level: 0,
+        slot: 0,
+        spell_time: '1 действие',
+        lasting_time: '1 час',
+        distance: '10 фт'
       }
     ]
   }
