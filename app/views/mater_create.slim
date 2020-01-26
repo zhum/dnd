@@ -1,0 +1,21 @@
+== styled_flash
+div.main
+  form.mui-form action='/mater/new' method='post'
+    legend
+      | Создайте нового мастера и приключение:
+      div.mui-container-fluid
+        div.mui-row
+          div.mui-textfield.mui-col-xs-12
+            label for='adventure'
+              = t('adventure')
+            input name='adventure' id='adventure' type='text'
+
+          div.mui-textfield.mui-col-xs-12.mui-col-md-4
+            label for='reg_name'
+              = t('name')
+            input name='reg_name' id='reg_name' type='text'
+
+      p.flex-container
+        input.mui-btn.mui-btn--primary type='submit' value='Создать!'
+        a.mui-btn href='/auth'
+          | Передумал
