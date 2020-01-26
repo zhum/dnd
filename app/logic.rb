@@ -66,7 +66,7 @@ class DNDLogic
               logger.warn "Armor is already bought"
               return
             end
-            player.armorings << Armoring.create(armor: t, count: 1)
+            Armoring.create(player: player, armor: t, count: 1).save
           when 'weapon'
             t = Weapon.find(id)
             if player.weapons.include? t

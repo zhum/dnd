@@ -2,7 +2,7 @@ class Armoring < ActiveRecord::Base
   belongs_to :player
   belongs_to :armor
 
-  after_cereate :update_proficiency
+  before_create :update_proficiency
 
   def update_proficiency
     if ['dwarf_hill','dwarf_mountain','dwarf_gray'].include? self.player.race.name && !self.armor.is_heavy

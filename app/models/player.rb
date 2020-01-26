@@ -375,6 +375,7 @@ class Player < ActiveRecord::Base
 
   def get_bads_from_wear
     bad = Armoring.all.any?{ |a|
+      logger.warn "--- #{a.armor.name}/#{a.wear}/#{a.proficiency}"
       a.wear && ! a.proficiency
     }
     if bad
