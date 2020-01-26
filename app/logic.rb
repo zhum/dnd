@@ -166,16 +166,13 @@ class DNDLogic
           id = $1.to_i
           mod = $2=='1'
           w = player.armorings.where(id: id).take
-          if mod
-            result = player.wear_armor w
-            if result
-              send_flash ws, result
-              return
-            end
+          if w
+            w.wear = mod
           else
-            w.wear = false
-            w.save
+            logger.info "Now such armor! (#{id})"
+            return
           end
+          w.save
           send_player ws, player
   
         when /^feature\[(\d+)\]=(\d+)/

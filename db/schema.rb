@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_18_170342) do
+ActiveRecord::Schema.define(version: 2020_01_26_095047) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
+    t.boolean "opened"
   end
 
   create_table "armorings", force: :cascade do |t|
@@ -22,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_01_18_170342) do
     t.integer "count"
     t.integer "max_count"
     t.boolean "wear"
+    t.boolean "proficiency"
     t.index ["armor_id"], name: "index_armorings_on_armor_id"
     t.index ["player_id"], name: "index_armorings_on_player_id"
   end

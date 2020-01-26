@@ -371,20 +371,10 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def 
+  def get_bads_from_wear
     bad = Armoring.all.any?{ |a|
-      a.armor.is_heavy && a.wear && 
+      a.wear && ! a.proficiency
     }
-  end
-
-  def wear_armor a
-    if a.armor.power > self.mod_strength
-      'Слишком тяжело, не могу надеть'
-    else
-      a.wear = true
-      a.save
-      nil
-    end
   end
 
   def total_weight
