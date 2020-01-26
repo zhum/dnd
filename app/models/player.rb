@@ -307,6 +307,8 @@ class Player < ActiveRecord::Base
     h << [:bad_stealth, self.get_bad_stealth]
     h << [:total_weight, total_weight]
     #warn "===> #{Hash[h].inspect}"
+    bads = [get_bads_from_wear].reject{|x| x.nil?}
+    h << [:bads, bads]
     Hash[h].to_json.to_s 
   end
 
@@ -375,6 +377,11 @@ class Player < ActiveRecord::Base
     bad = Armoring.all.any?{ |a|
       a.wear && ! a.proficiency
     }
+    if bad
+      "Помехи к Силе и Ловкости, нельзя использовать заклинания"
+    else
+      nil
+    end
   end
 
   def total_weight
