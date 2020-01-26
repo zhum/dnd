@@ -526,7 +526,8 @@ div.inventory{
   height: 33vh;
   margin: 33vh auto;
   padding: 5px;
-  background-color: rgba(135, 206, 235,0.9) !important;
+  border-radius: 10px;
+  background-color: rgba(33, 150, 243 ,0.9) !important;
   display:  flex;
   flex-direction: column;
   justify-content: center;
@@ -541,6 +542,25 @@ div.inventory{
 .padleft-2pc{
   padding-left: 2%;
 }
+
+.circle-around {
+    border-radius: 50%;
+/*     width: 36px;
+    height: 36px;
+    padding: 8px;
+ */
+/*     background: #fff;
+ */
+    border: 2px solid #111;
+    color: #111;
+    text-align: center;
+    width: 2em;
+
+/*     font: 32px Arial, sans-serif;
+ */
+}
+
+
 /* old phones */
 @media all and (max-width: 320px){
   div{

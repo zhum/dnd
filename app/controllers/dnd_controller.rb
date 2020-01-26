@@ -83,11 +83,18 @@ class DNDController < BaseApp
     slim :player_select
   end
 
-  # player or master creation
+  # player creation
   get '/player_create' do
     logger.warn "PLAYER_CREATE"
     @title = "Создайте игрока"
     slim :player_create
+  end
+
+  # master creation
+  get '/master_create' do
+    logger.warn "MATER_CREATE"
+    @title = "Создайте мастера и приключение"
+    slim :mater_create
   end
 
   get '/logout' do
@@ -174,5 +181,17 @@ class DNDController < BaseApp
       @items = []
     end
     slim :buy
+  end
+
+  get '/note' do
+    slim :nothing_here
+  end
+
+  get '/rules' do
+    slim :nothing_here
+  end
+
+  get '/map' do
+    slim :nothing_here
   end
 end

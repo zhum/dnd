@@ -360,6 +360,23 @@ class Player < ActiveRecord::Base
     }
   end
 
+  def get_speed_low
+    bad = Armoring.all.any?{ |a|
+      a.armor.is_heavy && a.wear && a.armor.power>self.get_mod(:strength)
+    }
+    if bad
+      10
+    else
+      0
+    end
+  end
+
+  def 
+    bad = Armoring.all.any?{ |a|
+      a.armor.is_heavy && a.wear && 
+    }
+  end
+
   def wear_armor a
     if a.armor.power > self.mod_strength
       'Слишком тяжело, не могу надеть'

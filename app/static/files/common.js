@@ -96,14 +96,14 @@ function get_spell_help(id){
     +'<p>Компоненты: '+txt_or_empty(sp.components)+'</p>'
     +txt_or_empty(sp['description']);
 }
-function push_to_spells(str,x,id,keys_visible=false){
+function push_to_spells(str,x,id,keys_visible=false){//icon-info-sign
   str += '<div class="mui--divider-right mui--divider-bottom">'
-    +  '<i class="icon-question-sign" onclick="formModalHelp(spellFormHelp('+id+'))"></i>'
+    +  '<span class="circle-around" onclick="formModalHelp(spellFormHelp('+id+'))">&nbsp;?&nbsp;</span>'
     +  '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')
     +    '" href="#" onclick="activate_spell('+id+')">'
-    +    x['name']+'</a>'
-    +  '&nbsp;<i class="icon-'+(x['ready'] ? 'ok-sign' : 'circleloaderempty')+'" onclick="ready_spell('+id+')"></i> '
+    +    x['name']+'</a>&nbsp;'
     +  x['level']
+    +  '&nbsp;<i class="icon-'+(x['ready'] ? 'ok-sign' : 'circleloaderempty')+'" onclick="ready_spell('+id+')"></i> '
     +'</div>';
   return str;
 }
@@ -405,7 +405,7 @@ function overForm3(f1,f2,f3,arg){
 function spellFormHelp(id){
   var str = '<div class="fullwidth">'
     +get_spell_help(id)
-    +'<br><a class="dnd-btn dnd-btn--primary" href="#" onclick="xover('+"'modal-help-form'"+')";>Close</a>'
+    +'<br><a class="dnd-btn dnd-btn--accent" href="#" onclick="xover('+"'modal-help-form'"+')";>Close</a>'
     +"</div>";
   return str;
 }
