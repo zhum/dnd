@@ -18,6 +18,13 @@ ru:
   nothing_here: Тут пока ничего нет. Но мы сделаем.
   return_back: Назад
 
+  or_create_new_player: Или создайте нового персонажа
+  create_new_player: Создайте нового персонажа
+  or_create_new_adventure: Или создайте новое приключение
+  create_new_adventure: Создайте новое приключение
+  fights: Бои
+  add-npc: Добавить NPC
+
   char:
     characheristics: Характеристики
     strength: Сил

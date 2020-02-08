@@ -1,3 +1,25 @@
+class ExceptionHandling
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    begin
+      @app.call env
+    rescue => ex
+      env['rack.errors'].puts ex
+      env['rack.errors'].puts ex.backtrace[0..5].join("\n")
+      env['rack.errors'].flush
+
+      # hash = { :message => ex.to_s }
+      # hash[:backtrace] ex.backtrace if RACK_ENV['development']
+
+      [500, {'Content-Type' => 'text/text'}, ex.backtrace[0..5]]
+    end
+  end
+end
+
+
 class BaseApp < Sinatra::Base
 
   register Sinatra::Flash
@@ -10,6 +32,7 @@ class BaseApp < Sinatra::Base
   #enable :sessions
   #set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
   set :logging, true
+  use ExceptionHandling
   use Rack::Session::Cookie,
     :key => 'rack.session',
     #:domain => 'foo.com',
@@ -34,6 +57,10 @@ class BaseApp < Sinatra::Base
   # Register custom extensions
 
   configure do
+    set :dump_errors, false
+    set :raise_errors, true
+    set :show_exceptions, false
+
     #enable :logging
     $logger = Logger.new("#{settings.root}/../log/#{settings.environment}.log", 10, 10_240_000)
     $logger.level= Logger::INFO
@@ -75,11 +102,11 @@ class BaseApp < Sinatra::Base
 
   before do
     #env['rack.errors'] = $logger
-    logger.warn "session: user_id=#{session[:user_id]}; player_id=#{session[:player_id]}; master_id=#{session[:master_id]}; secret=#{session[:secret]}"
-    return if request.path=='/auth' or request.path=='/register'
     I18n.locale = 'ru' || params[:locale]
+    logger.warn "session: user_id=#{session[:user_id]}; player_id=#{session[:player_id]}; master_id=#{session[:master_id]}; secret=#{session[:secret]}"
+    pass if request.path=='/auth' or request.path=='/register'
     if request.websocket? #!!!!!!!!! FIXME! Do auth for websocket too
-      return
+      pass
     else
       authenticate!
     end

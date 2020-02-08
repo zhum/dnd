@@ -23,21 +23,31 @@ div.main.mui-container
           i.iw-cross
 
   div.dnd-flex-row.mui--z2.fullwidth
-    span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight');"
-      = t('fights')
-    span.mui--text-right
-      a href="/master/new-fight"
-        i.icon-plus-sign
-      | &nbsp;&nbsp;
-  div#fight.mui--hide
-    i.iw-reload
+    div.mui-select.mui-col-xs-12
+      label for='race_id'
+        = t('race')
+      select name='race_id' id='race'
+        - Race.where(is_npc: false).order(:id).each do |r|
+          option value="#{r.id}" label='#{t("char.#{r.name}")}'
+            = t("char.#{r.name}")
 
+    span.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="add_npc();"
+      = t('add-npc')
+
+  div.dnd-flex-row.fullwidth#fight-list
 
 javascript:
   var secret="#{{@user.secret}}";
   var player='?player_id='+"#{{@player.id}}";
+  var fight_id=#{{@fight.id}};
   function on_websocket_open(ws){
     ws.send(secret+': get_master');
+    ws.send(secret+': get_fight '+fight_id);
+  }
+
+  function add_npc() {
+    var npc_race = document.getElementById("race").value;
+    ws.send(secret+': new-npc '+fight_id+' '+npc_race);
   }
 
 script src="files/common.js"

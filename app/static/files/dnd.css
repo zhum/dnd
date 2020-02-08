@@ -246,6 +246,12 @@ i.iw-wait:before{
   opacity: 0;
 }
 
+.dnd-npc-fighter {
+  background-color: gray;
+}
+.dnd-player-fighter {
+  background-color: pink;
+}
 /* html {
   box-sizing: border-box;
 }

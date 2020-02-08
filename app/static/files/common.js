@@ -5,6 +5,7 @@ var flash_timeout=null;
 var flash_timeout_ms = 3000;
 var player;
 var prefs={};
+var fighters=[];
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 
 function txt_or_empty(txt){
@@ -238,7 +239,13 @@ function render_player(data){
   render_savethrows();
 
   render_spells();
+
+  render_bads();
   
+}
+
+function render_bads(){
+  set_html('bads',player.bads);
 }
 
 function render_chat(from=''){
@@ -276,6 +283,35 @@ function render_chat_full(from=''){
   chat_text = chat_text+'</div>';
   set_html('chat'+from,chat_text);
 }
+
+function render_fight() {
+  var str = '<div class="mui-row fullwidth"><div class="mui-col-xs-4">Name'+
+      '</div><div class="mui-col-xs-2">Race'+
+      '</div><div class="mui-col-xs-2">HP / MAX HP</div>'+
+      '<div class="mui-col-xs-2">Armor class</div>'+
+      '<div class="mui-col-xs-1">Initiative</div>'+
+      '<div class="mui-col-xs-1">Step</div></div>'
+  var len = fighters.length;
+  for (var i = 0; i <len; i++) {
+    str += 
+      '<div class="mui-row fullwidth"><div class="mui-col-xs-4 '+
+        (fighters[i].is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter')+
+        '">'+
+      fighters[i].name+'</div><div class="mui-col-xs-2">'+
+      fighters[i].race+'</div><div class="mui-col-xs-2">'+
+      fighters[i].hp+' / '+
+      fighters[i].max_hp+'</div><div class="mui-col-xs-2">'+
+      fighters[i].armor_class+'</div><div class="mui-col-xs-1">'+
+      fighters[i].initiative+'</div><div class="mui-col-xs-1">'+
+      fighters[i].step_order+'</div>'+
+      '</div>'
+  }
+  set_html('fight-list',str);
+}
+
+
+
+
 
 function toggle_item(item){
   var el = document.getElementById(item);
@@ -480,15 +516,15 @@ function try_connect(){
       if(msg['master']){
         render_master(msg['master']);
       }
-      else if(msg['player']){
+      if (msg['player']){
         player = msg['player'];
         render_player(player);
       }
-      else if(msg['prefs']){
+      if (msg['prefs']){
         prefs = msg['prefs'];
         apply_prefs(prefs);
       }
-      else if(msg['chat']){ // new message!
+      if (msg['chat']){ // new message!
         var id='';
         if('from' in msg){
           id = msg['from'];
@@ -499,7 +535,7 @@ function try_connect(){
         chat_messages[id].push(msg['chat']);
         render_chat(id);
       }
-      else if(msg['chat_history']){
+      if (msg['chat_history']){
         var id='';
         if('from' in msg){
           id = msg['from'];
@@ -507,7 +543,11 @@ function try_connect(){
         chat_messages[id] = msg['chat_history'];
         render_chat(id);
       }
-      else if(msg['flash']){
+      if (msg['fighters']){
+        fighters = msg['fighters'];
+        render_fight();
+      }
+      if (msg['flash']){
         var el = document.getElementById('dnd-flash')
         if(el){
           clearTimeout(flash_timeout);

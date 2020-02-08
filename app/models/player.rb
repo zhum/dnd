@@ -61,7 +61,7 @@ class Player < ActiveRecord::Base
     'strength','dexterity','constitution',
     'intellegence','wisdom','charisma'
   ]
-  CHARS = ['armour_class', 'initiative', 'speed',
+  CHARS = ['armor_class', 'initiative', 'speed',
            'pass_attentiveness', 'masterlevel','hit_dice','hit_dice_of']
 
   DTYPES = ['none', 'дробящий', 'колющий', 'рубящий']
@@ -70,7 +70,7 @@ class Player < ActiveRecord::Base
     "Обычная защита" => 
       lambda { |x,wear|
         dex = x.mod_dexterity
-        #logger.warn wear.inspect
+        logger.warn x.inspect+'//'+wear.inspect
         base = 10+(wear.map{|e| e.klass}.reduce(:+) || 0) +
                (wear.map{|w| w.max_dexterity} << dex).min
 
@@ -152,7 +152,7 @@ class Player < ActiveRecord::Base
     read_attribute(attr_name)
   end
 
-  def get_default_armour_class armors
+  def get_default_armor_class armors
     if armors.size>0
       armors.map{|a|
         a.klass + [self.mod_dexterity, a.max_dexterity].min
@@ -179,7 +179,7 @@ class Player < ActiveRecord::Base
     end
 
     case attr_name
-    when 'armour_class'
+    when 'armor_class'
       w_armors = armorings.select {|a| a.wear}.map{|w| w.armor}
       #wear = (w_armors.size > 0) ? 0 : 1
       (
@@ -246,7 +246,7 @@ class Player < ActiveRecord::Base
          'experience', 'weapon_proficiency'].map{|name|
       [name, read_attribute(name)]
     }
-    #h << ['armour_class', get_char('armour_class')]
+    #h << ['armor_class', get_char('armor_class')]
     h << ['race',I18n.t("char.#{self.race.name}")]
     h << ['klass', I18n.t("char.#{self.klass.name}")]
     h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
@@ -374,7 +374,7 @@ class Player < ActiveRecord::Base
   end
 
   def get_bads_from_wear
-    bad = Armoring.all.any?{ |a|
+    bad = armorings.any?{ |a|
       logger.warn "--- #{a.armor.name}/#{a.wear}/#{a.proficiency}"
       a.wear && ! a.proficiency
     }

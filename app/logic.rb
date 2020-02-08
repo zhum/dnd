@@ -32,7 +32,25 @@ class DNDLogic
         when 'get_master'
           logger.warn "got master request from #{player.id} (#{player.name})"
           return
-        
+
+        when /new-npc (\d+) (\d+)/
+          logger.warn "new-npc"
+          f = Fight.find_by_id($1)
+          r = Race.find_by_id($2)
+          return if r.nil? or f.nil? or f.adventure != player.adventure
+          npc = NonPlayer.generate(r, f)
+          if npc.save
+            f.update_step_orders
+            #players = player.adventure.players.where(is_master: false).select(:name,:race,:hp,:max_hp,:initiative)
+            ws.send({fighters: f.get_fighters.sort_by{|x|x[:step_order]}}.to_json)
+          end
+
+        when /get_fight (\d+)/
+          logger.warn "get_fight"
+          f = Fight.find_by_id($1)
+          return if f.nil? or f.adventure != player.adventure
+          ws.send({fighters: f.get_fighters.sort_by{|x|x[:step_order]}}.to_json)
+          
         # send player info
         when 'get_player'
           #@player = Player.find(session[:id]||1001)
@@ -380,7 +398,7 @@ class DNDLogic
         end
       end
     rescue => e
-      logger.warn "BAD message, got error: #{e.message} (#{e.backtrace[0..10].join("\n")})"
+      logger.warn "BAD message, got error: #{e.message} (#{e.backtrace.join("\n")})"
     end
   end
 end

@@ -5,6 +5,7 @@ class Armoring < ActiveRecord::Base
   before_create :update_proficiency
 
   def update_proficiency
+    self.proficiency = false
     if ['dwarf_hill','dwarf_mountain','dwarf_gray'].include? self.player.race.name && !self.armor.is_heavy
       self.proficiency = true
     end

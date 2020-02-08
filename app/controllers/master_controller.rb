@@ -1,27 +1,57 @@
 class MasterController < BaseApp
+
+  before /.*/ do
+    if request.path_info=='/new' or request.path_info =~ /^\/\d+$/
+      pass
+    else
+      @player = Player.find_by_id(session[:player_id]) || Player.find_by_id(session[:master_id])
+      logger.warn "master_id=#{session[:master_id]} player_id=#{session[:player_id]} -> player=#{@player.id}"
+      redirect '/auth' unless @player
+    end
+  end
+
   # master interface
   get '/' do
-    @player = Player.find(session[:player_id])
     slim :master, locals: {title: "Переписка с игроками"}
   end
 
   # Chat
   get '/msg' do
-    @player = Player.find(session[:player_id])
+    #@player = Player.find(session[:player_id])
     @adventure = @player.adventure
     @title = "Чат с игроками"
     slim :master_chat
   end
 
+  post '/new' do
+    adventure = Adventure.create(name: params[:adventure])
+    adventure.save
+    @player = Player.create(
+      user: @user,
+      adventure: adventure,
+      name: params[:reg_name],
+      is_master: true)
+    @player.save
+    session[:player_id] = @player.id
+    session[:master_id] = @player.id
+    redirect '/master'
+  end
+
+  get '/new-fight' do
+    @fight = Fight.create(adventure: @player.adventure)
+    slim :new_fight
+  end
+
   #...
   get '/:player_id' do
     @player = Player.find(params[:player_id])
-    if @player.user == @user
+    logger.warn "--- user_id=#{@user.id} player​‌​=#{@player} #{@player.user.id}"
+    if @player.user.id == @user.id
       session[:player_id] = params[:player_id]
       session[:master_id] = params[:player_id]
       redirect '/master'
     else
-      session[:user_id] = 0
+      session.clear
       redirect '/auth'
     end
   end
