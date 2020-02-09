@@ -27,7 +27,7 @@ div.main.mui-container
       label for='race_id'
         = t('race')
       select name='race_id' id='race'
-        - Race.where(is_npc: false).order(:id).each do |r|
+        - Race.where(is_npc: true).order(:id).each do |r|
           option value="#{r.id}" label='#{t("char.#{r.name}")}'
             = t("char.#{r.name}")
 
