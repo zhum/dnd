@@ -57,6 +57,10 @@ class DNDLogic
           #sleep 10
           logger.warn "id=#{player.id}"
           send_player ws, player, true
+          fights = player.adventure.fights.where(active: true)
+          if fights.count>0
+            ws.send({fighters: fights.take.get_fighters.sort_by{|x|x[:step_order]}}.to_json)
+          end
 
         # send player preferences info
         when 'get_prefs'

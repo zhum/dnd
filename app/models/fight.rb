@@ -3,6 +3,19 @@ class Fight < ActiveRecord::Base
 
   has_many   :non_players
 
+  def self.make_fight opts
+    add_players = opts.delete :add_players
+    add_players = true if add_players.nil?
+
+    f = self.create opts
+    f.adventure.players.each do |p|
+      p.is_fighter = add_players
+    end
+    f.active = false
+    f.ready  = true
+    f.finished = false
+    f
+  end
 
   def update_step_orders
     players = adventure.players

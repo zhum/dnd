@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_08_230108) do
+ActiveRecord::Schema.define(version: 2020_02_09_100543) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_230108) do
     t.integer "spell_slots_8", default: 0
     t.integer "spell_slots_9", default: 0
     t.integer "step_order", default: 0
+    t.boolean "is_fighter"
     t.index ["adventure_id"], name: "index_players_on_adventure_id"
     t.index ["klass_id"], name: "index_players_on_klass_id"
     t.index ["race_id"], name: "index_players_on_race_id"

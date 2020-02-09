@@ -38,7 +38,7 @@ class MasterController < BaseApp
   end
 
   get '/new-fight' do
-    @fight = Fight.create(adventure: @player.adventure)
+    @fight = Fight.make_fight(adventure: @player.adventure)
     slim :new_fight
   end
 
