@@ -10,10 +10,12 @@ class Fight < ActiveRecord::Base
     f = self.create opts
     f.adventure.players.each do |p|
       p.is_fighter = add_players
+      p.save
     end
     f.active = false
     f.ready  = true
     f.finished = false
+    f.save
     f
   end
 
@@ -30,10 +32,11 @@ class Fight < ActiveRecord::Base
     }
   end
 
-  def get_fighters(locale='ru')
+  # TODO: take is_master in account... do not show some fields to players
+  def get_fighters(is_master,locale='ru')
     I18n.locale = locale
     players = adventure.players
-      .where(is_master: false).includes(:race)
+      .where(is_master: false, is_fighter: true).includes(:race)
       .map { |e|
         {
           name: e.name, id: e.id, race: I18n.t("char.#{e.race.name}"),

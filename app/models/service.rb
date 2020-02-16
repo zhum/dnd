@@ -129,8 +129,13 @@ class Service
         'half-ork',
         'tiefling'
       ].each do |name|
-        r = Race.create(name: name, description: '')
-        r.save
+        Race.create!(name: name, description: '', is_npc: false) unless Race.find_by_name(name)
+      end
+      Data['npc_races'].each do |race|
+        Race.create!(
+          name: race[:name],
+          description: race[:description],
+          is_npc: true) unless Race.find_by_name(race[:name])
       end
     end
 
@@ -150,8 +155,7 @@ class Service
         'sorcerer',
         'ranger',
       ].each do |name|
-        r = Klass.create(name: name, description: '')
-        r.save
+        Klass.create!(name: name, description: '') unless Klass.find_by_name(name)
       end
     end
 
@@ -1493,6 +1497,24 @@ class Service
         lasting_time: '1 час',
         distance: '10 фт'
       }
+    ],
+    'npc_races' => [
+      {
+        name: 'goblin',
+        description: '',
+      },
+      {
+        name: 'hobgoblin',
+        description: '',
+      },
+      {
+        name: 'dragon',
+        description: '',
+      },
+      {
+        name: 'giant-spider',
+        description: '',
+      },
     ]
   }
 end

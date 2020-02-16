@@ -50,5 +50,17 @@ javascript:
     ws.send(secret+': new-npc '+fight_id+' '+npc_race);
   }
 
+  function fight_step_down(index){
+    ws.send(secret+': fighter-step '+fight_id+' '+fighters[index].id+' '+fighters[index].is_npc+' -');
+  }
+
+  function fight_step_up(index){
+    ws.send(secret+': fighter-step '+fight_id+' '+fighters[index].id+' '+fighters[index].is_npc+' +');
+  }
+
+  function fight_delete(index){
+    ws.send(secret+': fighter-del '+fight_id+' '+fighters[index].id+' '+fighters[index].is_npc);
+  }
+
 script src="files/common.js"
 

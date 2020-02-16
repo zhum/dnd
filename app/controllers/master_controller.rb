@@ -1,5 +1,6 @@
 class MasterController < BaseApp
 
+  # TODO: check he is real master...
   before /.*/ do
     if request.path_info=='/new' or request.path_info =~ /^\/\d+$/
       pass
@@ -37,10 +38,12 @@ class MasterController < BaseApp
     redirect '/master'
   end
 
-  get '/new-fight' do
-    @fight = Fight.make_fight(adventure: @player.adventure)
-    slim :new_fight
-  end
+  # get '/new-fight' do
+  #   @fight = @player.adventure.active_fight || @player.adventure.ready_fight
+  #   @fight ||= Fight.make_fight(adventure: @player.adventure)
+  #   @title = "Создание боя"
+  #   slim :new_fight
+  # end
 
   #...
   get '/:player_id' do

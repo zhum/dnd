@@ -20,6 +20,17 @@ class DNDLogic
       ws.send(m)
     end
 
+    def get_fight player
+      player.is_master? ?
+        (player.adventure.active_fight || player.adventure.ready_fight) :
+        player.adventure.active_fight
+    end
+
+    def get_fighter element
+      element[:is_npc] ?
+        NonPlayer.find(element[:id]) : Player.find(element[:id])
+    end
+
     def process_message ws,user,player,text,opts={}
       logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       begin
@@ -33,23 +44,72 @@ class DNDLogic
           logger.warn "got master request from #{player.id} (#{player.name})"
           return
 
-        when /new-npc (\d+) (\d+)/
+        when /new-npc (\d+)/
           logger.warn "new-npc"
-          f = Fight.find_by_id($1)
-          r = Race.find_by_id($2)
-          return if r.nil? or f.nil? or f.adventure != player.adventure
+          f = get_fight player
+          r = Race.find_by_id($1)
+          return if !player.is_master or r.nil? or f.nil? or f.adventure != player.adventure
           npc = NonPlayer.generate(r, f)
           if npc.save
             f.update_step_orders
             #players = player.adventure.players.where(is_master: false).select(:name,:race,:hp,:max_hp,:initiative)
-            ws.send({fighters: f.get_fighters.sort_by{|x|x[:step_order]}}.to_json)
+            ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
           end
 
-        when /get_fight (\d+)/
+        when 'new-fight'
+          logger.warn "New fight"
+          return if !player.is_master
+
+          fight = player.adventure.active_fight || player.adventure.ready_fight
+          if fight
+            fight.active = false
+            fight.finished = true
+            fight.ready = false
+            fight.save
+          end
+          fight = Fight.make_fight(adventure: player.adventure, add_players: true)
+          ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
+
+        # change fighter step priority
+        when /fighter-step (\d+) (\S+) (\+|-)/
+          logger.warn "fighter-step #{$1} #{$2} #{$3} (master=#{player.is_master}, afight=#{player.adventure.active_fight}, rfight=#{player.adventure.ready_fight}"
+          is_npc = $2=='true'
+          f = get_fight player
+          return if f.nil?
+          list = f.get_fighters(player.is_master).sort_by{|x|x[:step_order]}
+          logger.warn "... #{list.inspect}"
+          index = list.index{|x| x[:is_npc]==is_npc and x[:id]==$1.to_i}
+          if index
+            f0 = get_fighter list[index]
+            f1 = nil
+            if $3=='+' and index>0
+              f0[:step_order] -= 1
+              f1 = get_fighter list[index-1]
+              f1[:step_order] += 1
+            elsif $3=='-' and index<list.size
+              f0[:step_order]+=1
+              f1 = get_fighter list[index+1]
+              f1[:step_order] -= 1
+            else
+              warn "Ooooops! Bad fighter index!"
+              return
+            end
+            f1.save
+            f0.save
+            logger.warn "f0=#{f0.inspect}"
+            logger.warn "f1=#{f1.inspect}"
+            f = get_fight player
+            #f.update_step_orders
+            ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
+          else
+            warn "Oooops! no such fighter!"
+          end
+
+        when 'get_fight'
           logger.warn "get_fight"
-          f = Fight.find_by_id($1)
-          return if f.nil? or f.adventure != player.adventure
-          ws.send({fighters: f.get_fighters.sort_by{|x|x[:step_order]}}.to_json)
+          f = get_fight player
+          return if f.nil?
+          ws.send({fighters: f.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
           
         # send player info
         when 'get_player'
@@ -57,9 +117,9 @@ class DNDLogic
           #sleep 10
           logger.warn "id=#{player.id}"
           send_player ws, player, true
-          fights = player.adventure.fights.where(active: true)
-          if fights.count>0
-            ws.send({fighters: fights.take.get_fighters.sort_by{|x|x[:step_order]}}.to_json)
+          fight = player.adventure.active_fight
+          if fight
+            ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
           end
 
         # send player preferences info

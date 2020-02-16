@@ -26,19 +26,51 @@ div.main.mui-container
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight');"
       = t('fights')
     span.mui--text-right
-      a href="/master/new-fight"
+      a href="#" onclick="new_fight();"
         i.icon-plus-sign
       | &nbsp;&nbsp;
   div#fight.mui--hide
-    i.iw-reload
+    div.dnd-flex-row.mui--z2.fullwidth
+      div.mui-select.mui-col-xs-12
+        label for='race_id'
+          = t('race')
+        select name='race_id' id='race'
+          - Race.where(is_npc: true).order(:id).each do |r|
+            option value="#{r.id}" label='#{t("char.#{r.name}")}'
+              = t("char.#{r.name}")
 
+      span.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="add_npc();"
+        = t('add-npc')
+
+    div.dnd-flex-row.fullwidth#fight-list
 
 javascript:
   var secret="#{{@user.secret}}";
   var player='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
     ws.send(secret+': get_master');
+    ws.send(secret+': get_fight');
+  }
+
+  function new_fight(){
+    ws.send(secret+': new-fight');
+  }
+
+  function add_npc() {
+    var npc_race = document.getElementById("race").value;
+    ws.send(secret+': new-npc '+npc_race);
+  }
+
+  function fight_step_down(index){
+    ws.send(secret+': fighter-step '+fighters[index].id+' '+fighters[index].is_npc+' -');
+  }
+
+  function fight_step_up(index){
+    ws.send(secret+': fighter-step '+fighters[index].id+' '+fighters[index].is_npc+' +');
+  }
+
+  function fight_delete(index){
+    ws.send(secret+': fighter-del '+fighters[index].id+' '+fighters[index].is_npc);
   }
 
 script src="files/common.js"
-

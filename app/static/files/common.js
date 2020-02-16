@@ -284,9 +284,37 @@ function render_chat_full(from=''){
   set_html('chat'+from,chat_text);
 }
 
-function render_fight() {
-  var str = '<div class="mui-row fullwidth"><div class="mui-col-xs-4">Name'+
-      '</div><div class="mui-col-xs-2">Race'+
+function render_master_fight() {
+  var str = '<div class="mui-row fullwidth"><div class="mui-col-xs-6">Name'+
+      '</div><div class="mui-col-xs-2">HP / MAX HP</div>'+
+      '<div class="mui-col-xs-1">Armor class</div>'+
+      '<div class="mui-col-xs-1">Initiative</div>'+
+      '<div class="mui-col-xs-2">Step</div></div>'
+  var len = fighters.length;
+  for (var i = 0; i <len; i++) {
+    str += 
+      '<div class="mui-row fullwidth"><div class="mui-col-xs-6 '+
+        (fighters[i].is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter')+
+        '">'+
+        '<i class="icon-circledelete" onclick="fight_delete('+i+')"></i>&nbsp;'+
+        fighters[i].name+' ('+
+        fighters[i].race+')</div><div class="mui-col-xs-2">'+
+        fighters[i].hp+' / '+
+        fighters[i].max_hp+'</div><div class="mui-col-xs-1">'+
+        fighters[i].armor_class+'</div><div class="mui-col-xs-1">'+
+        fighters[i].initiative+'</div><div class="mui-col-xs-2">'+
+        fighters[i].step_order+
+          '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
+          ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
+        '</div>'+
+      '</div>'
+  }
+  set_html('fight-list',str);
+}
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function render_player_fight() {
+  var str = '<div class="mui-row fullwidth"><div class="mui-col-xs-6">Name'+
       '</div><div class="mui-col-xs-2">HP / MAX HP</div>'+
       '<div class="mui-col-xs-2">Armor class</div>'+
       '<div class="mui-col-xs-1">Initiative</div>'+
@@ -294,16 +322,20 @@ function render_fight() {
   var len = fighters.length;
   for (var i = 0; i <len; i++) {
     str += 
-      '<div class="mui-row fullwidth"><div class="mui-col-xs-4 '+
+      '<div class="mui-row fullwidth"><div class="mui-col-xs-6 '+
+        '<i class="icon-circledelete" onclick="fight_delete('+i+')">&nbsp;'+
         (fighters[i].is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter')+
         '">'+
-      fighters[i].name+'</div><div class="mui-col-xs-2">'+
-      fighters[i].race+'</div><div class="mui-col-xs-2">'+
-      fighters[i].hp+' / '+
-      fighters[i].max_hp+'</div><div class="mui-col-xs-2">'+
-      fighters[i].armor_class+'</div><div class="mui-col-xs-1">'+
-      fighters[i].initiative+'</div><div class="mui-col-xs-1">'+
-      fighters[i].step_order+'</div>'+
+        fighters[i].name+' ('+
+        fighters[i].race+')</div><div class="mui-col-xs-2">'+
+        fighters[i].hp+' / '+
+        fighters[i].max_hp+'</div><div class="mui-col-xs-2">'+
+        fighters[i].armor_class+'</div><div class="mui-col-xs-1">'+
+        fighters[i].initiative+'</div><div class="mui-col-xs-1">'+
+        fighters[i].step_order+
+          '&npsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')">&nbsp;'+
+          ' <i class="icon-fastup" onclick="fight_step_up('+i+')">&nbsp;'+
+        '</div>'+
       '</div>'
   }
   set_html('fight-list',str);
@@ -545,7 +577,9 @@ function try_connect(){
       }
       if (msg['fighters']){
         fighters = msg['fighters'];
-        render_fight();
+        if(true){
+          render_master_fight();
+        }
       }
       if (msg['flash']){
         var el = document.getElementById('dnd-flash')
