@@ -70,7 +70,7 @@ class Player < ActiveRecord::Base
     "Обычная защита" => 
       lambda { |x,wear|
         dex = x.mod_dexterity
-        logger.warn x.inspect+'//'+wear.inspect
+        #logger.warn x.inspect+'//'+wear.inspect
         base = 10+(wear.map{|e| e.klass}.reduce(:+) || 0) +
                (wear.map{|w| w.max_dexterity} << dex).min
 

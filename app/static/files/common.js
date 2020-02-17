@@ -8,6 +8,15 @@ var prefs={};
 var fighters=[];
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 
+
+function get_over_value(){
+  var v = get_int_value('over_value');
+  if(Number.isNaN(v))
+    v = 1;
+  return v;    
+}
+
+
 function txt_or_empty(txt){
   return txt==null ? '' : txt;
 }
@@ -299,9 +308,22 @@ function render_master_fight() {
         '<i class="icon-circledelete" onclick="fight_delete('+i+')"></i>&nbsp;'+
         fighters[i].name+' ('+
         fighters[i].race+')</div><div class="mui-col-xs-2">'+
-        fighters[i].hp+' / '+
-        fighters[i].max_hp+'</div><div class="mui-col-xs-1">'+
-        fighters[i].armor_class+'</div><div class="mui-col-xs-1">'+
+          (fighters[i].is_npc ?
+            '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
+            : '')+
+        fighters[i].hp+
+          (fighters[i].is_npc ?
+            '</a> / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
+            : ' / ')+
+        fighters[i].max_hp+
+          (fighters[i].is_npc ? '</a>' : '')+
+          '</div><div class="mui-col-xs-1">'+
+          (fighters[i].is_npc ?
+            '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
+            : '')+
+        fighters[i].armor_class+
+          (fighters[i].is_npc ? '</a>' : '')+
+          '</div><div class="mui-col-xs-1">'+
         fighters[i].initiative+'</div><div class="mui-col-xs-2">'+
         fighters[i].step_order+
           '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+

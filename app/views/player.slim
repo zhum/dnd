@@ -268,13 +268,6 @@ javascript:
     ws.send(secret+': get_prefs');
   }
 
-  function get_over_value(){
-    var v = get_int_value('over_value');
-    if(Number.isNaN(v))
-      v = 1;
-    return v;    
-  }
-
   function hp_plus(){
     var v = get_over_value();
     player['hp'] += v;

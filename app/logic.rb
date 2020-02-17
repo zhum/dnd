@@ -56,6 +56,27 @@ class DNDLogic
             ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
           end
 
+        when /fighter-del (\d+) (\S+)/
+          logger.warn "del fighter npc=#{$2}"
+          f = get_fight player
+          return if !player.is_master or f.nil?
+          if $2 == 'true' # NPC
+            npc = NonPlayer.find_by_id($1)
+            if npc and npc.fight == f
+              npc.delete
+              f.update_step_orders
+              ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
+            end
+          else # Player
+            pl = Player.find_by_id($1)
+            if pl
+              pl.is_fighter = false
+              pl.save
+              f.update_step_orders
+              ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
+            end
+          end
+
         when 'new-fight'
           logger.warn "New fight"
           return if !player.is_master
@@ -70,13 +91,55 @@ class DNDLogic
           fight = Fight.make_fight(adventure: player.adventure, add_players: true)
           ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
 
+        when /f_hp (\d+)=(-?\d+)/
+          logger.warn "fighter #{$1} hp=#{$2}"
+          fight = get_fight player
+          return if fight.nil?
+          npc = NonPlayer.find_by_id($1)
+          if npc and npc.fight.id==fight.id
+            npc.hp = $2.to_i
+            npc.save
+            ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
+          else
+            logger.warn "npc=#{npc}"
+            logger.warn "#{npc.fight.id}==#{fight.id}" if npc
+          end
+
+        when /f_max_hp (\d+)=(-?\d+)/
+          logger.warn "fighter #{$1} max_hp=#{$2}"
+          fight = get_fight player
+          return if fight.nil?
+          npc = NonPlayer.find_by_id($1)
+          if npc and npc.fight.id==fight.id
+            npc.max_hp = $2.to_i
+            npc.save
+            ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
+          else
+            logger.warn "npc=#{npc}"
+            logger.warn "#{npc.fight.id}==#{fight.id}" if npc
+          end
+
+        when /f_ac (\d+)=(-?\d+)/
+          logger.warn "fighter #{$1} ac=#{$2}"
+          fight = get_fight player
+          return if fight.nil?
+          npc = NonPlayer.find_by_id($1)
+          if npc and npc.fight.id==fight.id
+            npc.armor_class = $2.to_i
+            npc.save
+            ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
+          else
+            logger.warn "npc=#{npc}"
+            logger.warn "#{npc.fight.id}==#{fight.id}" if npc
+          end
+
         # change fighter step priority
         when /fighter-step (\d+) (\S+) (\+|-)/
           logger.warn "fighter-step #{$1} #{$2} #{$3} (master=#{player.is_master}, afight=#{player.adventure.active_fight}, rfight=#{player.adventure.ready_fight}"
           is_npc = $2=='true'
-          f = get_fight player
-          return if f.nil?
-          list = f.get_fighters(player.is_master).sort_by{|x|x[:step_order]}
+          fight = get_fight player
+          return if fight.nil?
+          list = fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}
           logger.warn "... #{list.inspect}"
           index = list.index{|x| x[:is_npc]==is_npc and x[:id]==$1.to_i}
           if index

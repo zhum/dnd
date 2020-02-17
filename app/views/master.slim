@@ -73,4 +73,62 @@ javascript:
     ws.send(secret+': fighter-del '+fighters[index].id+' '+fighters[index].is_npc);
   }
 
+  // change monster HP 
+  function f_hp_modify(c,mod){
+    var v = get_over_value();
+    if(mod=='+'){
+      fighters[c].hp += v;
+    }
+    else if(mod=='-'){
+      fighters[c].hp -= v;
+    }
+    else{
+      fighters[c].hp = v;
+    }
+    ws.send(secret+': f_hp '+fighters[c].id+'='+fighters[c].hp);
+  }
+
+  function f_hp_plus(c) { f_hp_modify(c,'+') }
+  function f_hp_minus(c){ f_hp_modify(c,'-') }
+  function f_hp_set(c)  { f_hp_modify(c,'=') }
+
+  // change monster MAX HP 
+  function f_max_hp_modify(c,mod){
+    var v = get_over_value();
+    if(mod=='+'){
+      fighters[c].max_hp += v;
+    }
+    else if(mod=='-'){
+      fighters[c].max_hp -= v;
+    }
+    else{
+      fighters[c].max_hp = v;
+    }
+    ws.send(secret+': f_max_hp '+fighters[c].id+'='+fighters[c].max_hp);
+  }
+
+  function f_max_hp_plus(c) { f_max_hp_modify(c,'+') }
+  function f_max_hp_minus(c){ f_max_hp_modify(c,'-') }
+  function f_max_hp_set(c)  { f_max_hp_modify(c,'=') }
+
+  // change monster armor class 
+  function f_ac_modify(c,mod){
+    var v = get_over_value();
+    if(mod=='+'){
+      fighters[c].armor_class += v;
+    }
+    else if(mod=='-'){
+      fighters[c].armor_class -= v;
+    }
+    else{
+      fighters[c].armor_class = v;
+    }
+    ws.send(secret+': f_ac '+fighters[c].id+'='+fighters[c].armor_class);
+  }
+
+  function f_ac_plus(c) { f_ac_modify(c,'+') }
+  function f_ac_minus(c){ f_ac_modify(c,'-') }
+  function f_ac_set(c)  { f_ac_modify(c,'=') }
+
+
 script src="files/common.js"
