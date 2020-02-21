@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_150105) do
+ActiveRecord::Schema.define(version: 2020_02_17_193035) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -75,9 +75,7 @@ ActiveRecord::Schema.define(version: 2020_02_09_150105) do
   create_table "fights", force: :cascade do |t|
     t.integer "adventure_id"
     t.integer "current_step", default: 0
-    t.boolean "active", default: false
-    t.boolean "ready", default: false
-    t.boolean "finished", default: false
+    t.integer "fase", default: 0
     t.index ["adventure_id"], name: "index_fights_on_adventure_id"
   end
 

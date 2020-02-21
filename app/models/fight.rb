@@ -3,6 +3,20 @@ class Fight < ActiveRecord::Base
 
   has_many   :non_players
 
+  STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish}
+
+  def ready
+    STATES[self.fase]==0
+  end
+
+  def active
+    STATES[self.fase]==2
+  end
+
+  def finish
+    STATES[self.fase]==3
+  end
+
   def self.make_fight opts
     add_players = opts.delete :add_players
     add_players = true if add_players.nil?
