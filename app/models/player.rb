@@ -1,3 +1,48 @@
+# == Schema Information
+#
+# Table name: players
+#
+#  id                    :integer          not null, primary key
+#  name                  :string
+#  hp                    :integer
+#  max_hp                :integer
+#  mcoins                :integer
+#  scoins                :integer
+#  gcoins                :integer
+#  ecoins                :integer
+#  pcoins                :integer
+#  secret                :integer
+#  user_id               :integer
+#  adventure_id          :integer
+#  is_master             :boolean          default("1")
+#  mod_strength          :integer
+#  mod_dexterity         :integer
+#  mod_constitution      :integer
+#  mod_intellegence      :integer
+#  mod_wisdom            :integer
+#  mod_charisma          :integer
+#  experience            :integer
+#  race_id               :integer
+#  klass_id              :integer
+#  mod_prof_dexterity    :boolean
+#  mod_prof_wisdom       :boolean
+#  mod_prof_constitution :boolean
+#  mod_prof_strength     :boolean
+#  mod_prof_intellegence :boolean
+#  mod_prof_charisma     :boolean
+#  spell_slots_1         :integer          default("0")
+#  spell_slots_2         :integer          default("0")
+#  spell_slots_3         :integer          default("0")
+#  spell_slots_4         :integer          default("0")
+#  spell_slots_5         :integer          default("0")
+#  spell_slots_6         :integer          default("0")
+#  spell_slots_7         :integer          default("0")
+#  spell_slots_8         :integer          default("0")
+#  spell_slots_9         :integer          default("0")
+#  step_order            :integer          default("0")
+#  is_fighter            :boolean
+#  real_initiative       :integer
+#
 #
 # t.string "name"
 # t.integer "hp"

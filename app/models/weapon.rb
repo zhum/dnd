@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: weapons
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  countable    :boolean
+#  description  :string
+#  damage       :integer
+#  damage_dice  :integer
+#  cost         :integer
+#  damage_type  :integer
+#  weight       :integer
+#  is_fencing   :boolean          default("0")
+#  is_universal :boolean          default("0")
+#  is_twohand   :boolean          default("0")
+#  is_throwable :boolean          default("0")
+#
 # string :name                                                                                                                                          
 # integer :count                                                                                                                                        
 # boolean :countable                                                                                                                                    

@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: skillings
+#
+#  id        :integer          not null, primary key
+#  player_id :integer
+#  skill_id  :integer
+#  ready     :boolean
+#  modifier  :integer
+#
 class Skilling < ActiveRecord::Base
   belongs_to :skill
   belongs_to :player

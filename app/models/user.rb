@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id            :integer          not null, primary key
+#  name          :string
+#  password_hash :string
+#  email         :string
+#  active        :boolean
+#  secret        :string
+#
 require 'bcrypt'
 
 class User < ActiveRecord::Base

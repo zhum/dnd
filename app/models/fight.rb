@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: fights
+#
+#  id           :integer          not null, primary key
+#  adventure_id :integer
+#  current_step :integer          default("0")
+#  fase         :integer          default("0")
+#
 class Fight < ActiveRecord::Base
   belongs_to :adventure
 

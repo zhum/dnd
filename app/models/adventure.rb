@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: adventures
+#
+#  id     :integer          not null, primary key
+#  name   :string
+#  opened :boolean
+#
 class Adventure < ActiveRecord::Base
   has_many :players
   #has_one  :master, class_name: 'Player'

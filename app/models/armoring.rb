@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: armorings
+#
+#  id          :integer          not null, primary key
+#  player_id   :integer
+#  armor_id    :integer
+#  count       :integer
+#  max_count   :integer
+#  wear        :boolean
+#  proficiency :boolean
+#
 class Armoring < ActiveRecord::Base
   belongs_to :player
   belongs_to :armor

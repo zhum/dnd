@@ -21,6 +21,7 @@ gem 'tux'
 group :development do
     gem 'sqlite3'
 #    gem 'shotgun'
+    gem 'annotate'
 end
 
 group :heroku do

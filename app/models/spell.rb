@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: spells
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  lasting_time :string
+#  spell_time   :string
+#  level        :integer
+#  slot         :integer
+#  description  :string
+#  components   :string
+#  distance     :integer
+#
 class Spell < ActiveRecord::Base
   # t.string  :name
   # t.string  :lasting_time

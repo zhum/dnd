@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: save_throws
+#
+#  id        :integer          not null, primary key
+#  kind      :integer
+#  count     :integer
+#  player_id :integer
+#
 class SaveThrow < ActiveRecord::Base
   belongs_to :player
 

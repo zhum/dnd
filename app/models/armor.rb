@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: armors
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  bad_stealth     :boolean
+#  weight          :integer
+#  cost            :integer
+#  klass           :integer
+#  description     :string
+#  power           :integer
+#  max_add_sleight :integer
+#  max_dexterity   :integer
+#  is_light        :boolean          default("0")
+#  is_heavy        :boolean          default("0")
+#
 class Armor < ActiveRecord::Base
   has_many :armoring
 

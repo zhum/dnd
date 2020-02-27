@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: non_players
+#
+#  id          :integer          not null, primary key
+#  race_id     :integer
+#  fight_id    :integer
+#  name        :string
+#  max_hp      :integer
+#  hp          :integer
+#  armor_class :integer
+#  initiative  :integer
+#  step_order  :integer
+#
 # string     :name
 # integer    :max_hp
 # integer    :hp
