@@ -14,6 +14,14 @@ class Fight < ActiveRecord::Base
 
   STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish}
 
+  scope :active, -> {
+    where fase: [1,2]
+  }
+
+  scope :ready, -> {
+    where fase: 0
+  }
+
   def ready
     STATES[self.fase]==0
   end
@@ -35,9 +43,10 @@ class Fight < ActiveRecord::Base
       p.is_fighter = add_players
       p.save
     end
-    f.active = false
-    f.ready  = true
-    f.finished = false
+    # f.active = false
+    # f.ready  = true
+    # f.finished = false
+    f.fase = 0
     f.save
     f
   end

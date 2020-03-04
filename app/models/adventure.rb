@@ -12,11 +12,11 @@ class Adventure < ActiveRecord::Base
   has_many :fights
 
   def active_fight
-    fights.where(active: true).take
+    fights.active.take
   end
 
   def ready_fight
-    fights.where(ready: true).take
+    fights.ready.take
   end
   
   def master

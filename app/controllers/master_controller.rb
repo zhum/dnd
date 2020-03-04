@@ -13,7 +13,7 @@ class MasterController < BaseApp
 
   # master interface
   get '/' do
-    slim :master, locals: {title: "Переписка с игроками"}
+    slim :master, locals: {title: "Гейм мастер"}
   end
 
   # Chat

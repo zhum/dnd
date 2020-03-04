@@ -19,6 +19,20 @@ class ExceptionHandling
   end
 end
 
+class DNDLogger
+  def self.set_file f
+    @_file = f
+  end
+
+  def self.logger
+    if @_logger.nil?
+      @_logger = Logger.new(@_file, 10, 10_240_000)
+      @_logger.level = Logger::INFO
+      @_logger.datetime_format = '%a %Y-%m-%d %H:%M '
+    end
+    @_logger
+  end
+end
 
 class BaseApp < Sinatra::Base
 
@@ -62,12 +76,13 @@ class BaseApp < Sinatra::Base
     set :show_exceptions, false
 
     #enable :logging
-    $logger = Logger.new("#{settings.root}/../log/#{settings.environment}.log", 10, 10_240_000)
-    $logger.level= Logger::INFO
+    # $logger = Logger.new("#{settings.root}/../log/#{settings.environment}.log", 10, 10_240_000)
+    # $logger.level= Logger::INFO
     #logfile.sync = true
-    use Rack::CommonLogger, $logger
-    set :logger, $logger
-    ActiveRecord::Base.logger = $logger
+    DNDLogger.set_file "#{settings.root}/../log/#{settings.environment}.log"
+    use Rack::CommonLogger, DNDLogger.logger #$logger
+    set :logger, DNDLogger.logger #$logger
+    ActiveRecord::Base.logger = DNDLogger.logger #$logger
 
     I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
     I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]

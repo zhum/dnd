@@ -371,7 +371,7 @@ function toggle_item(item){
   var el = document.getElementById(item);
   if(el){
     el.classList.toggle('mui--hide');
-    ws.send(secret+': pref ui_'+item+'='+(el.classList.contains('mui--hide') ? '0' : '1'));
+    ws.send(secret+': player/pref ui_'+item+'='+(el.classList.contains('mui--hide') ? '0' : '1'));
   }
 }
 

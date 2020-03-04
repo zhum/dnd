@@ -30,4 +30,5 @@ Dir.glob('./app/helpers/*.rb').each { |file| require file }
 Dir.glob('./app/*.rb').each { |file| require file }
 Dir.glob('./app/models/*.rb').each { |file| require file }
 Dir.glob('./app/controllers/*.rb').each { |file| require file }
+Dir.glob('./app/logic/*.rb').each { |file| require file }
 #warn "loaded..."

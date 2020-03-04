@@ -60,28 +60,28 @@ javascript:
   var player='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
     ws.send(secret+': get_master');
-    ws.send(secret+': get_fight');
+    ws.send(secret+': fight/get_fight');
   }
 
   function new_fight(){
-    ws.send(secret+': new-fight');
+    ws.send(secret+': fight/new');
   }
 
   function add_npc() {
     var npc_race = document.getElementById("race").value;
-    ws.send(secret+': new-npc '+npc_race);
+    ws.send(secret+': fight/new-npc '+npc_race);
   }
 
   function fight_step_down(index){
-    ws.send(secret+': fighter-step '+fighters[index].id+' '+fighters[index].is_npc+' -');
+    ws.send(secret+': fight/fighter-step '+fighters[index].id+' '+fighters[index].is_npc+' -');
   }
 
   function fight_step_up(index){
-    ws.send(secret+': fighter-step '+fighters[index].id+' '+fighters[index].is_npc+' +');
+    ws.send(secret+': fight/step '+fighters[index].id+' '+fighters[index].is_npc+' +');
   }
 
   function fight_delete(index){
-    ws.send(secret+': fighter-del '+fighters[index].id+' '+fighters[index].is_npc);
+    ws.send(secret+': fight/fighter-del '+fighters[index].id+' '+fighters[index].is_npc);
   }
 
   // change monster HP 
@@ -96,7 +96,7 @@ javascript:
     else{
       fighters[c].hp = v;
     }
-    ws.send(secret+': f_hp '+fighters[c].id+'='+fighters[c].hp);
+    ws.send(secret+': fight/hp '+fighters[c].id+'='+fighters[c].hp);
   }
 
   function f_hp_plus(c) { f_hp_modify(c,'+') }
@@ -115,7 +115,7 @@ javascript:
     else{
       fighters[c].max_hp = v;
     }
-    ws.send(secret+': f_max_hp '+fighters[c].id+'='+fighters[c].max_hp);
+    ws.send(secret+': fight/max_hp '+fighters[c].id+'='+fighters[c].max_hp);
   }
 
   function f_max_hp_plus(c) { f_max_hp_modify(c,'+') }
@@ -134,7 +134,7 @@ javascript:
     else{
       fighters[c].armor_class = v;
     }
-    ws.send(secret+': f_ac '+fighters[c].id+'='+fighters[c].armor_class);
+    ws.send(secret+': fight/ac '+fighters[c].id+'='+fighters[c].armor_class);
   }
 
   function f_ac_plus(c) { f_ac_modify(c,'+') }

@@ -264,21 +264,21 @@ javascript:
   var secret="#{{@user.secret}}";
   var player_str='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
-    ws.send(secret+': get_player');
-    ws.send(secret+': get_prefs');
+    ws.send(secret+': player/get');
+    ws.send(secret+': player/prefs');
   }
 
   function hp_plus(){
     var v = get_over_value();
     player['hp'] += v;
-    ws.send(secret+': hp='+player['hp']);
+    ws.send(secret+': player/hp='+player['hp']);
   }
 
   function hp_minus(){
     var v = get_over_value();
     if(player['hp']-v>=0){
       player['hp'] -= v;
-      ws.send(secret+': hp='+player['hp']);
+      ws.send(secret+': player/hp='+player['hp']);
     }
   }
 
@@ -286,21 +286,21 @@ javascript:
     var v = get_int_value('over_value');
     if(!Number.isNaN(v) && v>=0){
       player['hp'] = v;
-      ws.send(secret+': hp='+player['hp']);
+      ws.send(secret+': player/hp='+player['hp']);
     }
   }
 
   function maxhp_plus(){
     var v = get_over_value();
     player['max_hp'] += v;
-    ws.send(secret+': max_hp='+player['max_hp']);
+    ws.send(secret+': player/max_hp='+player['max_hp']);
   }
 
   function maxhp_minus(){
     var v = get_over_value();
     if(player['max_hp']-v>=0){
       player['max_hp'] -= v;
-      ws.send(secret+': max_hp='+player['max_hp']);
+      ws.send(secret+': player/max_hp='+player['max_hp']);
     }
   }
 
@@ -308,21 +308,21 @@ javascript:
     var v = get_int_value('over_value');
     if(!Number.isNaN(v) && v>=0){
       player['max_hp'] = v;
-      ws.send(secret+': max_hp='+player['max_hp']);
+      ws.send(secret+': player/max_hp='+player['max_hp']);
     }
   }
 
   function mod_plus(mod){
     var v = get_over_value();
     player['mods'][mod] += v;
-    ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+    ws.send(secret+': player/mod '+mod+'='+player['mods'][mod]);
   }
 
   function mod_minus(mod){
     var v = get_over_value();
     if(player['mods'][mod]-v>=0){
       player['mods'][mod] -= v;
-      ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+      ws.send(secret+': player/mod '+mod+'='+player['mods'][mod]);
     }
   }
 
@@ -330,20 +330,20 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v)){return;}
     player['mods'][mod] = v;
-    ws.send(secret+': mod '+mod+'='+player['mods'][mod]);
+    ws.send(secret+': player/mod '+mod+'='+player['mods'][mod]);
   }
 
   function mod_prof(mod){
     var v = get_attr('mod_prof_'+mod,'prof');
     var new_val = '1';
     if(v=='1'){ new_val = '0'; }
-    ws.send(secret+': mod_prof '+mod+'='+new_val);
+    ws.send(secret+': player/mod_prof '+mod+'='+new_val);
   }
 
   function wear_armor(mod){
     var v = player['armors'][mod]['wear'];
     var new_val = v ? '0' : '1';
-    ws.send(secret+': wear_armor '+mod+'='+new_val);
+    ws.send(secret+': player/wear_armor '+mod+'='+new_val);
   }
 
   function skill_prof(mod){
@@ -352,7 +352,7 @@ javascript:
       if(el.classList.contains('dnd-btn--primary')){
         var skill = get_skill_id_by_name(mod);
         var v = player['skills'][skill]['ready'];
-        ws.send(secret+': skill_prof['+skill+']='+(v ? '0' : '1'));
+        ws.send(secret+': player/skill_prof['+skill+']='+(v ? '0' : '1'));
       }
     }
   }
@@ -360,14 +360,14 @@ javascript:
   function arm_plus(armor){
     var v = get_over_value();
     player['armors'][armor]['count'] += v;
-    ws.send(secret+': armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
+    ws.send(secret+': player/armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
   }
 
   function arm_minus(armor){
     var v = get_over_value();
     if(player['armors'][armor]['count']-v>=0){
       player['armors'][armor]['count'] -= v;
-      ws.send(secret+': armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
+      ws.send(secret+': player/armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
     }
   }
 
@@ -375,7 +375,7 @@ javascript:
     var v = get_int_value('over_value');
     if(Number.isNaN(v)){return;}
     player['armors'][armor]['count'] = v;
-    ws.send(secret+': armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
+    ws.send(secret+': player/armor '+armor+'='+JSON.stringify(player['armors'][armor]['count']));
   }
 
   function thing_plus(thing){
@@ -383,14 +383,14 @@ javascript:
     if(Number.isNaN(v))
       v = 1;
     player['things'][thing]['count'] += v;
-    ws.send(secret+': thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
+    ws.send(secret+': player/thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
   }
 
   function thing_minus(thing){
     var v = get_over_value();
     if(player['things'][thing]['count']-v>=0){
       player['things'][thing]['count'] -= v;
-      ws.send(secret+': thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
+      ws.send(secret+': player/thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
     }
   }
 
@@ -399,20 +399,20 @@ javascript:
     if(Number.isNaN(v))
       return;
     player['things'][thing]['count'] = v;
-    ws.send(secret+': thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
+    ws.send(secret+': player/thing '+thing+'='+JSON.stringify(player['things'][thing]['count']));
   }
 
   function weap_plus(weap){
     var v = get_over_value();
     player['weapons'][weap]['count'] += v;
-    ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
+    ws.send(secret+': player/weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
   }
 
   function weap_minus(weap){
     var v = get_over_value();
     if(player['weapons'][weap]['count']-v>=0){
       player['weapons'][weap]['count'] -= v;
-      ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
+      ws.send(secret+': player/weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
     }
   }
 
@@ -421,21 +421,21 @@ javascript:
     if(Number.isNaN(v))
       return;
     player['weapons'][weap]['count'] = v;
-    ws.send(secret+': weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
+    ws.send(secret+': player/weap '+weap+'='+JSON.stringify(player['weapons'][weap]['count']));
   }
 
 
   function coins_plus(c){
     var v = get_over_value();
     player['coins'][c] += v;
-    ws.send(secret+': coins='+JSON.stringify(player['coins']));
+    ws.send(secret+': player/coins='+JSON.stringify(player['coins']));
   }
 
   function coins_minus(c){
     var v = get_over_value();
     if(player['coins'][c]-v>=0){
       player['coins'][c] -= v;
-      ws.send(secret+': coins='+JSON.stringify(player['coins']));
+      ws.send(secret+': player/coins='+JSON.stringify(player['coins']));
     }
   }
 
@@ -443,7 +443,7 @@ javascript:
     var v = get_int_value('over_value');
     if(!Number.isNaN(v) && v>=0){
       player['coins'][c] = v;
-      ws.send(secret+': coins='+JSON.stringify(player['coins']));
+      ws.send(secret+': player/coins='+JSON.stringify(player['coins']));
     }
   }
 
@@ -483,7 +483,7 @@ javascript:
     else{
       player['skills'][skill]['mod'] = v;
     }
-    ws.send(secret+': skill['+skill+']='+JSON.stringify(player['skills'][skill]['mod']));      
+    ws.send(secret+': player/skill['+skill+']='+JSON.stringify(player['skills'][skill]['mod']));      
   }
 
   function skill_plus(c) { skill_modify(c,'+') }
@@ -503,7 +503,7 @@ javascript:
     else{
       player['features'][c]['count'] = v;
     }
-    ws.send(secret+': feature['+c+']='+JSON.stringify(player['features'][c]['count']));      
+    ws.send(secret+': player/feature['+c+']='+JSON.stringify(player['features'][c]['count']));      
   }
 
   function feature_plus(c) { feature_modify(c,'+') }
@@ -523,7 +523,7 @@ javascript:
     else{
       player['chars'][c] = v;
     }
-    ws.send(secret+': char['+c+']='+JSON.stringify(player['chars'][c]));      
+    ws.send(secret+': player/char['+c+']='+JSON.stringify(player['chars'][c]));      
   }
 
   function char_plus(c) { char_modify(c,'+') }
@@ -541,7 +541,7 @@ javascript:
     else{
       player['savethrows'+c] = v;
     }
-    ws.send(secret+': savethrows'+c+'='+JSON.stringify(player['savethrows'+c]));      
+    ws.send(secret+': player/savethrows'+c+'='+JSON.stringify(player['savethrows'+c]));      
   }
 
   function saveth_plus(c) { saveth_modify(c,'+') }
@@ -559,7 +559,7 @@ javascript:
     else{
       player['spells_'+c] = v;
     }
-    ws.send(secret+': spells_'+c+'='+JSON.stringify(player['spells_'+c]));      
+    ws.send(secret+': player/spells_'+c+'='+JSON.stringify(player['spells_'+c]));      
   }
 
   function spell_plus(c) { spell_modify(c,'+') }
@@ -567,8 +567,8 @@ javascript:
   function spell_set(c)  { spell_modify(c,'=') }
 
   function activate_spell(c){
-    ws.send(secret+': activate_spell='+c);
+    ws.send(secret+': player/activate_spell='+c);
   }
   function ready_spell(c){
-    ws.send(secret+': ready_spell='+c);
+    ws.send(secret+': player/ready_spell='+c);
   }
