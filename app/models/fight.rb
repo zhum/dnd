@@ -22,27 +22,30 @@ class Fight < ActiveRecord::Base
     where fase: 0
   }
 
-  def ready
+  def is_ready?
     STATES[self.fase]==0
   end
 
-  def active
+  def is_active?
     STATES[self.fase]==2
   end
 
-  def finish
+  def is_finish?
     STATES[self.fase]==3
   end
 
-  def self.make_fight opts
-    add_players = opts.delete :add_players
-    add_players = true if add_players.nil?
+  def finish
+    self.fase = 3
+    save!
+  end
 
+  def self.make_fight opts
+    do_add_players = opts.delete :add_players
+    do_add_players = true if do_add_players.nil?
+
+    logger.warn "make_fight (#{do_add_players})"
     f = self.create opts
-    f.adventure.players.each do |p|
-      p.is_fighter = add_players
-      p.save
-    end
+    f.add_players if do_add_players
     # f.active = false
     # f.ready  = true
     # f.finished = false
@@ -67,6 +70,7 @@ class Fight < ActiveRecord::Base
   # TODO: take is_master in account... do not show some fields to players
   def get_fighters(is_master,locale='ru')
     I18n.locale = locale
+    logger.warn "get_fighters: "+adventure.players.map { |e| "#{e.name}/#{e.is_fighter}"}.join(';')
     players = adventure.players
       .where(is_master: false, is_fighter: true).includes(:race)
       .map { |e|
@@ -86,5 +90,13 @@ class Fight < ActiveRecord::Base
       }
     }
     players+fighters
+  end
+
+  def add_players
+    self.adventure.players.each do |p|
+      logger.warn "+ #{p.name}"
+      p.is_fighter = true
+      p.save
+    end
   end
 end

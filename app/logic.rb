@@ -22,7 +22,8 @@ class DNDLogic
 
     def get_fight player
       player.is_master? ?
-        (player.adventure.active_fight || player.adventure.ready_fight) :
+        (player.adventure.active_fight || player.adventure.ready_fight ||
+          Fight.make_fight(adventure: player.adventure, add_players: true)) :
         player.adventure.active_fight
     end
 

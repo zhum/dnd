@@ -6,7 +6,7 @@ div.main.mui-container
   div.app-bar.mui-container-fluid
     div.mui-row
       div.center.mui-col-xs-2
-        a href='/master/msg' Собщ
+        a href='/master/msg' Сообщ
         - players = @player.adventure.players.where(is_master: false).order(:name)
         - players.each do |p|
           span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}"
@@ -26,6 +26,9 @@ div.main.mui-container
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight');"
       = t('fights')
     span.mui--text-right
+      a href="#" onclick="del_fight();"
+        i.icon-minus-sign
+      | &nbsp;
       a href="#" onclick="new_fight();"
         i.icon-plus-sign
       | &nbsp;&nbsp;
@@ -65,6 +68,10 @@ javascript:
 
   function new_fight(){
     ws.send(secret+': fight/new');
+  }
+
+  function del_fight(){
+    ws.send(secret+': fight/del');
   }
 
   function add_npc() {
