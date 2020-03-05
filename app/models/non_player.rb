@@ -25,12 +25,19 @@ class NonPlayer < ActiveRecord::Base
   belongs_to :fight
 
   def self.generate race, fight
+    name = "#{race.name} #{get_next_id(fight,race)}"
+    logger.warn "name=#{name}"
     npc = create!(
-      race: race, fight: fight, name: 'none',
+      race: race, fight: fight, name: name,
       max_hp: 100, hp: 100, armor_class: 20,
       initiative: 1, step_order: 1)
-    npc.name = "NPC-#{npc.id}"
+    
     npc.save
     npc
+  end
+
+  def self.get_next_id fight, race
+    count = fight.get_fighters(true).select { |e| e[:race_id] == race.id}.count
+    count+1
   end
 end

@@ -24,13 +24,13 @@ class FightLogic < DNDLogic
 
         when /fighter-del (\d+) (\S+)/
           logger.warn "del fighter npc=#{$2}"
-          return if !player.is_master or f.nil?
+          return if !player.is_master or fight.nil?
           if $2 == 'true' # NPC
             npc = NonPlayer.find_by_id($1)
             if npc and npc.fight == fight
               npc.delete
               fight.update_step_orders
-              ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
+              ws.send({fighters: fight.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
             end
           else # Player
             pl = Player.find_by_id($1)
@@ -126,7 +126,7 @@ class FightLogic < DNDLogic
             logger.warn "f1=#{f1.inspect}"
             f = get_fight player
             #f.update_step_orders
-            ws.send({fighters: f.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
+            ws.send({fighters: fight.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
           else
             warn "Oooops! no such fighter!"
           end

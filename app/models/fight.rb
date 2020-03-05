@@ -51,6 +51,7 @@ class Fight < ActiveRecord::Base
     # f.finished = false
     f.fase = 0
     f.save
+    f.update_step_orders
     f
   end
 
@@ -67,7 +68,7 @@ class Fight < ActiveRecord::Base
     }
   end
 
-  # TODO: take is_master in account... do not show some fields to players
+  # TODO: take is_master into account... do not show some fields to players
   def get_fighters(is_master,locale='ru')
     I18n.locale = locale
     logger.warn "get_fighters: "+adventure.players.map { |e| "#{e.name}/#{e.is_fighter}"}.join(';')
@@ -75,7 +76,7 @@ class Fight < ActiveRecord::Base
       .where(is_master: false, is_fighter: true).includes(:race)
       .map { |e|
         {
-          name: e.name, id: e.id, race: I18n.t("char.#{e.race.name}"),
+          name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
           hp: e.hp, max_hp: e.max_hp, initiative: e.get_char(:initiative) || 0,
           armor_class: e.get_char(:armor_class) || 0, step_order: e.step_order,
           is_npc: false
@@ -83,7 +84,7 @@ class Fight < ActiveRecord::Base
       }
     fighters = non_players.all.map { |e|
       {
-        name: e.name, id: e.id, race: I18n.t("char.#{e.race.name}"),
+        name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
         hp: e.hp, max_hp: e.max_hp, initiative: e.initiative || 0,
         armor_class: e.armor_class, step_order: e.step_order || 0,
         is_npc: true
