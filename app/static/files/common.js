@@ -294,44 +294,58 @@ function render_chat_full(from=''){
 }
 
 function render_master_fight() {
-  var str = '<div class="mui-row fullwidth"><div class="mui-col-xs-6">Name'+
+  var header = '<div class="mui-row fullwidth"><div class="mui-col-xs-6">Name'+
       '</div><div class="mui-col-xs-2">HP / MAX HP</div>'+
       '<div class="mui-col-xs-1">Armor class</div>'+
       '<div class="mui-col-xs-1">Initiative</div>'+
-      '<div class="mui-col-xs-2">Step</div></div>'
-  var len = fighters.length;
-  for (var i = 0; i <len; i++) {
-    str += 
+      '<div class="mui-col-xs-2">Step</div></div>';
+  var str = '';
+  var off = '';
+  var i=-1;
+  var fighters_with_index = _.map(fighters,function(x){i+=1; return [x,i]});
+  //  ^^^^ [[fighter1, 0], [fighter2,1],...]
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  _.forEach(fighters_with_index, function(info){
+    var fighter = info[0];
+    var i = info[1];
+    var isf = fighter.is_fighter;
+    add = 
       '<div class="mui-row fullwidth"><div class="mui-col-xs-6 '+
-        (fighters[i].is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter')+
+        (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter')+
         '">'+
-        '<i class="icon-circledelete" onclick="fight_delete('+i+')"></i>&nbsp;'+
-        fighters[i].name+' ('+
-        fighters[i].race+')</div><div class="mui-col-xs-2">'+
-          (fighters[i].is_npc ?
+        '<i class="icon-circledelete" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
+        fighter.name+' ('+
+        fighter.race+')</div><div class="mui-col-xs-2">'+
+          (fighter.is_npc ?
             '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
             : '')+
-        fighters[i].hp+
-          (fighters[i].is_npc ?
+        fighter.hp+
+          (fighter.is_npc ?
             '</a> / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
             : ' / ')+
-        fighters[i].max_hp+
-          (fighters[i].is_npc ? '</a>' : '')+
+        fighter.max_hp+
+          (fighter.is_npc ? '</a>' : '')+
           '</div><div class="mui-col-xs-1">'+
-          (fighters[i].is_npc ?
+          (fighter.is_npc ?
             '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
             : '')+
-        fighters[i].armor_class+
-          (fighters[i].is_npc ? '</a>' : '')+
+        fighter.armor_class+
+          (fighter.is_npc ? '</a>' : '')+
           '</div><div class="mui-col-xs-1">'+
-        fighters[i].initiative+'</div><div class="mui-col-xs-2">'+
-        fighters[i].step_order+
+        fighter.initiative+'</div><div class="mui-col-xs-2">'+
+        fighter.step_order+
           '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
           ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
         '</div>'+
-      '</div>'
-  }
-  set_html('fight-list',str);
+      '</div>';
+    if(isf){
+      str += add;
+    }
+    else{
+      off += add;
+    }
+  });
+  set_html('fight-list',header+off+str);
 }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -73,9 +73,11 @@ class Fight < ActiveRecord::Base
     I18n.locale = locale
     logger.warn "get_fighters: "+adventure.players.map { |e| "#{e.name}/#{e.is_fighter}"}.join(';')
     players = adventure.players
-      .where(is_master: false, is_fighter: true).includes(:race)
+      .where(is_master: false)
+      .includes(:race)
       .map { |e|
         {
+          is_fighter: e.is_fighter,
           name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
           hp: e.hp, max_hp: e.max_hp, initiative: e.get_char(:initiative) || 0,
           armor_class: e.get_char(:armor_class) || 0, step_order: e.step_order,
@@ -84,6 +86,7 @@ class Fight < ActiveRecord::Base
       }
     fighters = non_players.all.map { |e|
       {
+        is_fighter: true,
         name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
         hp: e.hp, max_hp: e.max_hp, initiative: e.initiative || 0,
         armor_class: e.armor_class, step_order: e.step_order || 0,

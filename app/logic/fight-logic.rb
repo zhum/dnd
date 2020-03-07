@@ -42,6 +42,17 @@ class FightLogic < DNDLogic
             end
           end
 
+        when /fighter-restore (\d+)/
+          logger.warn "restore fighter #{$1}"
+          return if !player.is_master or fight.nil?
+          pl = Player.find_by_id($1)
+          if pl
+            pl.is_fighter = true
+            pl.save
+            fight.update_step_orders
+            ws.send({fighters: fight.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
+          end
+
         when 'del'
           if fight
             fight.finish
@@ -103,7 +114,7 @@ class FightLogic < DNDLogic
           is_npc = $2=='true'
           return if fight.nil?
           list = fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}
-          logger.warn "... #{list.inspect}"
+          # logger.warn "... #{list.inspect}"
           index = list.index{|x| x[:is_npc]==is_npc and x[:id]==$1.to_i}
           if index
             f0 = get_fighter list[index]
@@ -122,8 +133,8 @@ class FightLogic < DNDLogic
             end
             f1.save
             f0.save
-            logger.warn "f0=#{f0.inspect}"
-            logger.warn "f1=#{f1.inspect}"
+            # logger.warn "f0=#{f0.inspect}"
+            # logger.warn "f1=#{f1.inspect}"
             f = get_fight player
             #f.update_step_orders
             ws.send({fighters: fight.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
@@ -135,6 +146,8 @@ class FightLogic < DNDLogic
           logger.warn "get_fight"
           return if fight.nil?
           ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
+        else
+          logger.warn "Incorrect command '#{text}'. Ignore."
         end
       rescue => e
         logger.warn "BAD message, got error: #{e.message} (#{e.backtrace.join("\n")})"

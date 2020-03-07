@@ -62,7 +62,8 @@ javascript:
   var secret="#{{@user.secret}}";
   var player='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
-    ws.send(secret+': get_master');
+    //ws.send(secret+': get_master');
+    ws.send(secret+': player/prefs');
     ws.send(secret+': fight/get_fight');
   }
 
@@ -87,8 +88,12 @@ javascript:
     ws.send(secret+': fight/step '+fighters[index].id+' '+fighters[index].is_npc+' +');
   }
 
-  function fight_delete(index){
+  function fighter_delete(index){
     ws.send(secret+': fight/fighter-del '+fighters[index].id+' '+fighters[index].is_npc);
+  }
+
+  function fighter_restore(index){
+    ws.send(secret+': fight/fighter-restore '+fighters[index].id+' '+fighters[index].is_npc);
   }
 
   // change monster HP 
