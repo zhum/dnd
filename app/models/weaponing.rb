@@ -8,8 +8,6 @@
 #  count     :integer
 #  max_count :integer
 #
-# integer count
-# integer max_count
 
 class Weaponing < ActiveRecord::Base
   belongs_to :player

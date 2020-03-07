@@ -43,30 +43,6 @@
 #  is_fighter            :boolean
 #  real_initiative       :integer
 #
-#
-# t.string "name"
-# t.integer "hp"
-# t.integer "max_hp"
-# t.integer "mcoins"
-# t.integer "scoins"
-# t.integer "gcoins"
-# t.integer "ecoins"
-# t.integer "pcoins"
-# t.integer "secret"
-# t.boolean "is_master", default: false
-# t.integer "mod_strength"
-# t.integer "mod_dexterity"
-# t.integer "mod_constitution"
-# t.integer "mod_intellegence"
-# t.integer "mod_wisdom"
-# t.integer "mod_charisma"
-# t.integer "experience"
-# t.boolean "mod_prof_dexterity"
-# t.boolean "mod_prof_wisdom"
-# t.boolean "mod_prof_constitution"
-# t.boolean "mod_prof_strength"
-# t.boolean "mod_prof_intellegence"
-# t.boolean "mod_prof_charisma"
 
 class Player < ActiveRecord::Base
   validates_presence_of :name

@@ -3,7 +3,7 @@
 # Table name: non_players
 #
 #  id          :integer          not null, primary key
-#  race_id     :integer
+#  npc_type_id :integer
 #  fight_id    :integer
 #  name        :string
 #  max_hp      :integer
@@ -12,16 +12,10 @@
 #  initiative  :integer
 #  step_order  :integer
 #
-# string     :name
-# integer    :max_hp
-# integer    :hp
-# integer    :armor_class
-# integer    :initiative
-# integer    :step_order
 
 class NonPlayer < ActiveRecord::Base
   validates_presence_of :name
-  belongs_to :race
+  belongs_to :npc_type
   belongs_to :fight
 
   def self.generate race, fight
@@ -30,7 +24,7 @@ class NonPlayer < ActiveRecord::Base
     npc = create!(
       race: race, fight: fight, name: name,
       max_hp: 100, hp: 100, armor_class: 20,
-      initiative: 1, step_order: 1)
+      initiative: rand(20)+1, step_order: 1)
     
     npc.save
     npc

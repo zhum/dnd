@@ -16,12 +16,6 @@
 #  is_twohand   :boolean          default("0")
 #  is_throwable :boolean          default("0")
 #
-# string :name                                                                                                                                          
-# integer :count                                                                                                                                        
-# boolean :countable                                                                                                                                    
-# string  :description                                                                                                                                  
-# integer :dice                                                                                                                                         
-# integer :of_dice
 
 class Weapon < ActiveRecord::Base
   #belongs_to :player
