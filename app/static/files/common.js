@@ -313,7 +313,7 @@ function render_master_fight() {
       '<div class="mui-row fullwidth"><div class="mui-col-xs-6 '+
         (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter')+
         '">'+
-        '<i class="icon-circledelete" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
+        '<i class="icon-'+(isf ? 'circledelete' : 'fatundo')+'" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
         fighter.name+' ('+
         fighter.race+')</div><div class="mui-col-xs-2">'+
           (fighter.is_npc ?
