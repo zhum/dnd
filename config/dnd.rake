@@ -6,12 +6,12 @@ namespace :dnd do
 
   # added these lines to work
   desc "Load data from data.yml"
-  task :load_config do
+  task :load_all do
     Service.load_all
   end
 
   desc "Force load data from data.yml"
-  task :force_load_config  do
+  task :force_load_all  do
     Service.load_all true
   end
 end

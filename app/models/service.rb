@@ -164,8 +164,8 @@ module Service
           description: type[:description],
           max_hp: type[:max_hp],
           armor_class: type[:armor_class],
-          pass_attentiveness: type.fetch(:pass_attentiveness) || 0,
-          initiative: type.fetch(:initiative) || 0,
+          pass_attentiveness: type[:pass_attentiveness] || 0,
+          initiative: type[:initiative] || 0,
         ) unless NpcType.find_by_name(type[:name])
       end
     end
