@@ -2,15 +2,16 @@
 #
 # Table name: non_players
 #
-#  id          :integer          not null, primary key
-#  npc_type_id :integer
-#  fight_id    :integer
-#  name        :string
-#  max_hp      :integer
-#  hp          :integer
-#  armor_class :integer
-#  initiative  :integer
-#  step_order  :integer
+#  id                 :integer          not null, primary key
+#  npc_type_id        :integer
+#  fight_id           :integer
+#  name               :string
+#  max_hp             :integer
+#  hp                 :integer
+#  armor_class        :integer
+#  initiative         :integer
+#  step_order         :integer
+#  pass_attentiveness :integer          default("0")
 #
 
 class NonPlayer < ActiveRecord::Base
@@ -25,7 +26,9 @@ class NonPlayer < ActiveRecord::Base
       npc_type: npc_type, fight: fight, name: name,
       max_hp: npc_type.max_hp, hp: make_hp(npc_type),
       armor_class: npc_type.armor_class,
-      initiative: rand(20)+1, step_order: 1)
+      initiative: rand(20)+1+npc_type.initiative,
+      pass_attentiveness: npc.pass_attentiveness,
+      step_order: 1)
     
     npc.save
     npc

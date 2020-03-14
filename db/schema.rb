@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_093911) do
+ActiveRecord::Schema.define(version: 2020_03_14_064352) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_093911) do
     t.integer "armor_class"
     t.integer "initiative"
     t.integer "step_order"
+    t.integer "pass_attentiveness", default: 0
     t.index ["fight_id"], name: "index_non_players_on_fight_id"
     t.index ["npc_type_id"], name: "index_non_players_on_npc_type_id"
   end
@@ -119,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_03_07_093911) do
     t.string "description"
     t.integer "max_hp"
     t.integer "armor_class"
+    t.integer "initiative", default: 0
+    t.integer "pass_attentiveness", default: 0
   end
 
   create_table "players", force: :cascade do |t|
