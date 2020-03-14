@@ -131,11 +131,17 @@ class Service
       ].each do |name|
         Race.create!(name: name, description: '', is_npc: false) unless Race.find_by_name(name)
       end
-      Data['npc_races'].each do |race|
-        Race.create!(
-          name: race[:name],
-          description: race[:description],
-          is_npc: true) unless Race.find_by_name(race[:name])
+    end
+
+    def create_npc_types force=false
+      return if NpcType.count>0 && !force
+      Data['npc_types'].each do |type|
+        NpcType.create!(
+          name: type[:name],
+          description: type[:description],
+          max_hp: type[:max_hp],
+          armor_class: type[:armor_class],
+        ) unless NpcType.find_by_name(type[:name])
       end
     end
 
@@ -1498,22 +1504,30 @@ class Service
         distance: '10 фт'
       }
     ],
-    'npc_races' => [
+    'npc_types' => [
       {
         name: 'goblin',
         description: '',
+        max_hp: 10,
+        armor_class: 10
       },
       {
         name: 'hobgoblin',
         description: '',
+        max_hp: 10,
+        armor_class: 10
       },
       {
         name: 'dragon',
         description: '',
+        max_hp: 10,
+        armor_class: 10
       },
       {
         name: 'giant-spider',
         description: '',
+        max_hp: 10,
+        armor_class: 10
       },
     ]
   }

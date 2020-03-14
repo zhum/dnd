@@ -5,22 +5,26 @@ class FightLogic < DNDLogic
       fight = get_fight player
       begin
         case text
-        when /new-npc (\d+)/
-          race_id = $1.to_i
-          logger.warn "new-npc (#{race_id})"
-          r = Race.find_by_id(race_id)
+        when /new-npc (\d+) (\d+)/
+          type_id = $1.to_i
+          num = $2.to_i
+          logger.warn "new-npc (#{type_id} #{num})"
+          r = NpcType.find_by_id(type_id)
           # logger.warn "master-#{player.is_master} race-#{!r.nil?} fight-#{!f.nil?}"
           # logger.warn "fa=#{f.adventure} pa=#{player.adventure}"
           return if !player.is_master or r.nil? or fight.nil? or fight.adventure != player.adventure
-          npc = NonPlayer.generate(r, fight)
-          if npc.save
-            fight.update_step_orders
-            #players = player.adventure.players.where(is_master: false).select(:name,:race,:hp,:max_hp,:initiative)
-            ws.send({fighters: fight.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
-            logger.warn "ok!"
-          else
-            loger.warn "oooops... #{npc.errors.join(';')}"
+          while num>0 do
+            num -= 1
+            npc = NonPlayer.generate(r, fight)
+            if npc.save
+              fight.update_step_orders
+              #players = player.adventure.players.where(is_master: false).select(:name,:race,:hp,:max_hp,:initiative)
+              logger.warn "ok!"
+            else
+              loger.warn "oooops... #{npc.errors.join(';')}"
+            end
           end
+          ws.send({fighters: fight.get_fighters(true).sort_by{|x|x[:step_order]}}.to_json)
 
         when /fighter-del (\d+) (\S+)/
           logger.warn "del fighter npc=#{$2}"

@@ -34,16 +34,17 @@ div.main.mui-container
       | &nbsp;&nbsp;
   div#fight.fight.mui--hide
     div.dnd-flex-row.mui--z2.fullwidth
-      div.mui-select.mui-col-xs-12
+      div.mui-select.mui-col-xs-9
         label for='race_id'
-          = t('race')
-        select name='race_id' id='race'
-          - Race.where(is_npc: true).order(:id).each do |r|
+          = t('npc-type')
+        select name='race_id' id='npc-type'
+          - NpcType.order(:id).each do |r|
             option value="#{r.id}" label='#{t("char.#{r.name}")}'
               = t("char.#{r.name}")
-
-      span.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="add_npc();"
+      span.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised.mui-col-xs-2 onclick="add_npc();"
         = t('add-npc')
+      div.mui-textfield.mui-col-xs-1
+        input#npc-num type="text" placeholder="1"
 
     div.dnd-flex-row.fullwidth#fight-list
 
@@ -76,8 +77,11 @@ javascript:
   }
 
   function add_npc() {
-    var npc_race = document.getElementById("race").value;
-    ws.send(secret+': fight/new-npc '+npc_race);
+    var npc_type = document.getElementById("npc-type").value;
+    var npc_num = get_int_value('npc-num');
+    if(Number.isNaN(npc_num))
+      npc_num = 1;
+    ws.send(secret+': fight/new-npc '+npc_type+' '+npc_num);
   }
 
   function fight_step_down(index){

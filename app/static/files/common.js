@@ -9,10 +9,10 @@ var fighters=[];
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 
 
-function get_over_value(){
+function get_over_value(def=1){
   var v = get_int_value('over_value');
   if(Number.isNaN(v))
-    v = 1;
+    v = def;
   return v;    
 }
 
