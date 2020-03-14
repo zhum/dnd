@@ -17,5 +17,10 @@ namespace :db do
 
   # added these lines to work
   task seed: :load_config do
+    Service.load_all
+  end
+
+  task seed: :force_load_config do
+    Service.load_all true
   end
 end

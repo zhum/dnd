@@ -32,4 +32,4 @@ Dir.glob('./app/models/*.rb').each { |file| require file }
 Dir.glob('./app/controllers/*.rb').each { |file| require file }
 Dir.glob('./app/logic/*.rb').each { |file| require file }
 #warn "loaded..."
-Service.load_all ENV['DND_FORCE_LOAD_ALL']
+#Service.load_all ENV['DND_FORCE_LOAD_ALL']
