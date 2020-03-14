@@ -1,6 +1,20 @@
 module Service
     DTYPES={'дробящий' => 1, "колющий" => 2, "рубящий" => 3, "none" => 0}
 
+    def self.load_all force=false
+      init "db/data.yml"
+      create_armor force
+      create_weapon force
+      create_things force
+      create_features force
+      create_skills force
+      create_adventure force
+      create_races force
+      create_klasses force
+      create_spells force
+      create_npc_types force
+    end
+
     def self.save f
       File.open(f,"w"){|f|
         f.puts YAML.dump(Data)
@@ -15,7 +29,7 @@ module Service
       $data
     end
 
-    def self.import_armor force=false
+    def self.create_armor force=false
       return if Armor.count>0 and !force
       json = load_json['armor']
       json.each do |e|
@@ -37,7 +51,7 @@ module Service
         a.save
       end
     end
-    def self.import_weapon force=false
+    def self.create_weapon force=false
       return if Weapon.count>0 && !force
       json = load_json['weapon']
       json.each { |e|
@@ -56,7 +70,7 @@ module Service
         a.save
       }
     end
-    def self.import_things force=false
+    def self.create_things force=false
       return if Thing.count>0 && !force
       json = load_json['things']
       json.each { |e|
