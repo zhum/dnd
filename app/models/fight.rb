@@ -2,15 +2,16 @@
 #
 # Table name: fights
 #
-#  id           :integer          not null, primary key
-#  adventure_id :integer
-#  current_step :integer          default("0")
-#  fase         :integer          default("0")
+#  id            :integer          not null, primary key
+#  adventure_id  :integer
+#  current_step  :integer          default("0")
+#  fase          :integer          default("0")
+#  fighter_index :integer
 #
 class Fight < ActiveRecord::Base
   belongs_to :adventure
 
-  has_many   :non_players
+  has_many   :non_players, dependent: :destroy
 
   STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish}
 
@@ -46,10 +47,9 @@ class Fight < ActiveRecord::Base
     logger.warn "make_fight (#{do_add_players})"
     f = self.create opts
     f.add_players if do_add_players
-    # f.active = false
-    # f.ready  = true
-    # f.finished = false
     f.fase = 0
+    f.fighter_index = 0
+    f.current_step = 0
     f.save
     f.update_step_orders
     f
@@ -86,7 +86,7 @@ class Fight < ActiveRecord::Base
       }
     fighters = non_players.all.map { |e|
       {
-        is_fighter: true,
+        is_fighter: !e.is_dead,
         name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
         hp: e.hp, max_hp: e.max_hp, initiative: e.initiative || 0,
         armor_class: e.armor_class, step_order: e.step_order || 0,
@@ -102,5 +102,29 @@ class Fight < ActiveRecord::Base
       p.is_fighter = true
       p.save
     end
+  end
+
+  def kill_npc opts
+    f = nil
+    i = -1
+    if opts[:index]
+      i = opts[:index]
+      f = non_players.find_by_step_order i
+    elsif opts[:npc]
+      f = non_players.find_by_id opts[:npc].id
+      i = f.step_order
+    else
+      raise "Bad args for kill_npc (#{opts})"
+    end
+    f.is_dead = true
+    f.save
+    shift_list_tail i
+  end
+
+  def shift_list_tail index
+    (players+non_players).where("step_order > ?", index).each{ |p|
+      p.step_order -= 1
+      p.save
+    }
   end
 end

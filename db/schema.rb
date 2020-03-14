@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_071944) do
+ActiveRecord::Schema.define(version: 2020_03_14_081835) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -72,10 +72,16 @@ ActiveRecord::Schema.define(version: 2020_03_14_071944) do
     t.index ["player_id"], name: "index_featurings_on_player_id"
   end
 
+  create_table "fight_groups", force: :cascade do |t|
+    t.integer "adventure_id"
+    t.index ["adventure_id"], name: "index_fight_groups_on_adventure_id"
+  end
+
   create_table "fights", force: :cascade do |t|
     t.integer "adventure_id"
     t.integer "current_step", default: 0
     t.integer "fase", default: 0
+    t.integer "fighter_index"
     t.index ["adventure_id"], name: "index_fights_on_adventure_id"
   end
 
@@ -112,6 +118,8 @@ ActiveRecord::Schema.define(version: 2020_03_14_071944) do
     t.integer "step_order"
     t.integer "pass_attentiveness", default: 0
     t.boolean "is_dead", default: false
+    t.integer "fight_group_id"
+    t.index ["fight_group_id"], name: "index_non_players_on_fight_group_id"
     t.index ["fight_id"], name: "index_non_players_on_fight_id"
     t.index ["npc_type_id"], name: "index_non_players_on_npc_type_id"
   end

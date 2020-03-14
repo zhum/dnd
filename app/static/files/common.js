@@ -6,6 +6,7 @@ var flash_timeout_ms = 3000;
 var player;
 var prefs={};
 var fighters=[];
+var fight={};
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 
 
@@ -294,11 +295,11 @@ function render_chat_full(from=''){
 }
 
 function render_master_fight() {
-  var header = '<div class="mui-row fullwidth"><div class="mui-col-xs-6">Name'+
-      '</div><div class="mui-col-xs-2">HP / MAX HP</div>'+
-      '<div class="mui-col-xs-1">Armor class</div>'+
-      '<div class="mui-col-xs-1">Initiative</div>'+
-      '<div class="mui-col-xs-2">Step</div></div>';
+  var header = '<div class="dnd-flex-cont fullwidth"><div class="dnd-flex-grow1">Name'+
+      '</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">HP/MAX</div>'+
+      '<div class="dnd-3em dnd-flex-noresize center mui--divider-left">Arm</div>'+
+      '<div class="dnd-3em dnd-flex-noresize center mui--divider-left">In</div>'+
+      '<div class="dnd-5em dnd-flex-noresize center mui--divider-left">Step</div></div>';
   var str = '';
   var off = '';
   var i=-1;
@@ -310,12 +311,12 @@ function render_master_fight() {
     var i = info[1];
     var isf = fighter.is_fighter;
     add = 
-      '<div class="mui-row fullwidth"><div class="mui-col-xs-6 '+
+      '<div class="dnd-flex-cont fullwidth"><div class="dnd-flex-grow1 '+
         (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter')+
         '">'+
         '<i class="icon-'+(isf ? 'circledelete' : 'fatundo')+'" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
         fighter.name+' ('+
-        fighter.race+')</div><div class="mui-col-xs-2">'+
+        fighter.race+')</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
           (fighter.is_npc ?
             '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
             : '')+
@@ -325,19 +326,48 @@ function render_master_fight() {
             : ' / ')+
         fighter.max_hp+
           (fighter.is_npc ? '</a>' : '')+
-          '</div><div class="mui-col-xs-1">'+
+          '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
           (fighter.is_npc ?
             '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
             : '')+
         fighter.armor_class+
           (fighter.is_npc ? '</a>' : '')+
-          '</div><div class="mui-col-xs-1">'+
-        fighter.initiative+'</div><div class="mui-col-xs-2">'+
+          '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
+        fighter.initiative+'</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
         fighter.step_order+
           '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
           ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
         '</div>'+
       '</div>';
+    // add = 
+    //   '<div class="mui-row fullwidth"><div class="mui-col-xs-4 dnd-text-fighter '+
+    //     (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter')+
+    //     '">'+
+    //     '<i class="icon-'+(isf ? 'circledelete' : 'fatundo')+'" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
+    //     fighter.name+' ('+
+    //     fighter.race+')</div><div class="mui-col-xs-3 dnd-text-fighter">'+
+    //       (fighter.is_npc ?
+    //         '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
+    //         : '')+
+    //     fighter.hp+
+    //       (fighter.is_npc ?
+    //         '</a> / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
+    //         : ' / ')+
+    //     fighter.max_hp+
+    //       (fighter.is_npc ? '</a>' : '')+
+    //       '</div><div class="mui-col-xs-1 dnd-text-fighter">'+
+    //       (fighter.is_npc ?
+    //         '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
+    //         : '')+
+    //     fighter.armor_class+
+    //       (fighter.is_npc ? '</a>' : '')+
+    //       '</div><div class="mui-col-xs-1 dnd-text-fighter">'+
+    //     fighter.initiative+'</div><div class="mui-col-xs-3 dnd-text-fighter">'+
+    //     fighter.step_order+
+    //       '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
+    //       ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
+    //     '</div>'+
+    //   '</div>';
     if(isf){
       str += add;
     }
@@ -611,10 +641,15 @@ function try_connect(){
         chat_messages[id] = msg['chat_history'];
         render_chat(id);
       }
+      if (msg['fight']){
+        fight = msg['fight'];
+      }
       if (msg['fighters']){
         fighters = msg['fighters'];
-        if(true){
+        if(fight.render==1){
           render_master_fight();
+        }else if(fight.render==2){
+          render_player_fight();
         }
       }
       if (msg['flash']){

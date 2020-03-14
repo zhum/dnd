@@ -1,3 +1,31 @@
+
+/* old phones */
+@media all and (max-width: 320px){
+  div{
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 740px) {
+  div {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 741px) {
+  div {
+    font-size: 20px;
+  }
+  .modal-form {
+    width: 60vw;
+    height: 3em;
+    margin: 50vh auto;
+    padding: 5px;
+    background-color: #fff;
+  }
+}
+
+
 i.iw-edit:before{
   font-family: 'icon-worksregular';
   text-transform: none;
@@ -255,7 +283,11 @@ i.iw-wait:before{
 .dnd-player-fighter {
   background-color: green;
 }
-/* html {
+
+/* .dnd-text-fighter {
+  font-size: 13px;
+}
+ *//* html {
   box-sizing: border-box;
 }
 
@@ -502,6 +534,49 @@ div.inventory{
   margin: auto;
 }
 
+.dnd-2em {
+  width: 2em;
+}
+
+.dnd-1em {
+  width: 1em;
+}
+
+.dnd-3em {
+  width: 3em;
+}
+
+.dnd-5em {
+  width: 5em;
+}
+
+.dnd-7em {
+  width: 7em;
+}
+
+.dnd-pad3 {
+  padding: 3px;
+}
+.dnd-pad5 {
+  padding: 5px;
+}
+
+.dnd-marg3 {
+  margin: 3px;
+}
+.dnd-marg5 {
+  margin: 5px;
+}
+
+.dnd-flex-cont {
+  display: flex;
+}
+
+.dnd-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .dnd-flex-row {
   display: inline-flex;
   flex-direction: row;
@@ -523,6 +598,10 @@ div.inventory{
   flex-grow: 0;
 }
 
+.dnd-flex-noresize {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
 .modal-form {
   width: 95vw;
   height: 3em;
@@ -569,29 +648,3 @@ div.inventory{
  */
 }
 
-
-/* old phones */
-@media all and (max-width: 320px){
-  div{
-    font-size: 8px;
-  }
-}
-
-@media (min-width: 321px) and (max-width: 740px) {
-  div {
-    font-size: 13px;
-  }
-}
-
-@media (min-width: 741px) {
-  div {
-    font-size: 20px;
-  }
-  .modal-form {
-    width: 60vw;
-    height: 3em;
-    margin: 50vh auto;
-    padding: 5px;
-    background-color: #fff;
-  }
-}

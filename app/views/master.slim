@@ -33,18 +33,24 @@ div.main.mui-container
         i.icon-plus-sign
       | &nbsp;&nbsp;
   div#fight.fight.mui--hide
-    div.dnd-flex-row.mui--z2.fullwidth
-      div.mui-select.mui-col-xs-9
+    div.dnd-flex-cont.mui--z2.fullwidth
+      div.mui-select.dnd-flex-grow1
         label for='race_id'
           = t('npc-type')
         select name='race_id' id='npc-type'
           - NpcType.order(:id).each do |r|
             option value="#{r.id}" label='#{t("char.#{r.name}")}'
               = t("char.#{r.name}")
-      span.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised.mui-col-xs-2 onclick="add_npc();"
+      span.dnd-1em
+        |&nbsp;
+      span.dnd-7em.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="add_npc();"
         = t('add-npc')
-      div.mui-textfield.mui-col-xs-1
+      span.dnd-1em
+        |&nbsp;
+      div.mui-textfield.dnd-3em
         input#npc-num type="text" placeholder="1"
+      span.dnd-1em
+        |&nbsp;
 
     div.dnd-flex-row.fullwidth#fight-list
 
