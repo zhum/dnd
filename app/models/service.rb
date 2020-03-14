@@ -1,12 +1,21 @@
-class Service
-  class << self
+module Service
     DTYPES={'дробящий' => 1, "колющий" => 2, "рубящий" => 3, "none" => 0}
 
-    def load_json
-      Data
+    def self.save f
+      File.open(f,"w"){|f|
+        f.puts YAML.dump(Data)
+      }
     end
 
-    def import_armor force=false
+    def self.init f
+      $data = YAML.load(File.read(f))
+    end
+
+    def self.load_json
+      $data
+    end
+
+    def self.import_armor force=false
       return if Armor.count>0 and !force
       json = load_json['armor']
       json.each do |e|
@@ -28,7 +37,7 @@ class Service
         a.save
       end
     end
-    def import_weapon force=false
+    def self.import_weapon force=false
       return if Weapon.count>0 && !force
       json = load_json['weapon']
       json.each { |e|
@@ -47,7 +56,7 @@ class Service
         a.save
       }
     end
-    def import_things force=false
+    def self.import_things force=false
       return if Thing.count>0 && !force
       json = load_json['things']
       json.each { |e|
@@ -59,7 +68,7 @@ class Service
         a.save
       }
     end
-    def create_features force=false
+    def self.create_features force=false
       return if Feature.count>0 && !force
       json = load_json['features']
       json.each { |e|
@@ -76,8 +85,8 @@ class Service
      # 'strength','dexterity','constitution',
      # 'intellegence','wisdom','charisma'
    # ]
-   
-    def create_skills force=false
+
+    def self.create_skills force=false
       return if Skill.count>0 && !force
       {'athletics' => 0,
       'acrobatics' => 1,
@@ -101,7 +110,7 @@ class Service
       end
     end
 
-    def create_adventure force=false
+    def self.create_adventure force=false
       if Adventure.count>0 && !force
         return Adventure.first
       end
@@ -110,7 +119,7 @@ class Service
       a
     end
 
-    def create_races force=false
+    def self.create_races force=false
       return if Race.count>0 && !force
       [ 'dwarf_hill',
         'dwarf_mountain',
@@ -133,7 +142,7 @@ class Service
       end
     end
 
-    def create_npc_types force=false
+    def self.create_npc_types force=false
       return if NpcType.count>0 && !force
       Data['npc_types'].each do |type|
         NpcType.create!(
@@ -147,7 +156,7 @@ class Service
       end
     end
 
-    def create_klasses force=false
+    def self.create_klasses force=false
       return if Klass.count>0 && !force
       [
         'barbarian',
@@ -167,7 +176,7 @@ class Service
       end
     end
 
-    def create_spells force=false
+    def self.create_spells force=false
       return if Spell.count>0 && !force
       json = load_json['spells']
       json.each { |e|
@@ -175,10 +184,10 @@ class Service
         a.save
       }
     end
+end
 
+__END__
 
-
-  end
   Data={
     "armor" => [
       {
@@ -1533,4 +1542,5 @@ class Service
       },
     ]
   }
+
 end
