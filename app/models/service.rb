@@ -158,7 +158,7 @@ module Service
 
     def self.create_npc_types force=false
       return if NpcType.count>0 && !force
-      Data['npc_types'].each do |type|
+      load_json['npc_types'].each do |type|
         NpcType.create!(
           name: type[:name],
           description: type[:description],
