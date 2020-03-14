@@ -12,12 +12,16 @@
 #  initiative         :integer
 #  step_order         :integer
 #  pass_attentiveness :integer          default("0")
+#  is_dead            :boolean          default("0")
 #
 
 class NonPlayer < ActiveRecord::Base
   validates_presence_of :name
   belongs_to :npc_type
   belongs_to :fight
+  has_many :npc_things
+  has_many :npc_armors
+  has_many :npc_weapons
 
   def self.generate npc_type, fight
     name = "#{npc_type.name} #{get_next_id(fight,npc_type)}"

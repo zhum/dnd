@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_064352) do
+ActiveRecord::Schema.define(version: 2020_03_14_071944) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -111,8 +111,25 @@ ActiveRecord::Schema.define(version: 2020_03_14_064352) do
     t.integer "initiative"
     t.integer "step_order"
     t.integer "pass_attentiveness", default: 0
+    t.boolean "is_dead", default: false
     t.index ["fight_id"], name: "index_non_players_on_fight_id"
     t.index ["npc_type_id"], name: "index_non_players_on_npc_type_id"
+  end
+
+  create_table "npc_armors", force: :cascade do |t|
+    t.integer "armor_id"
+    t.integer "non_player_id"
+    t.integer "count"
+    t.index ["armor_id"], name: "index_npc_armors_on_armor_id"
+    t.index ["non_player_id"], name: "index_npc_armors_on_non_player_id"
+  end
+
+  create_table "npc_things", force: :cascade do |t|
+    t.integer "thing_id"
+    t.integer "non_player_id"
+    t.integer "count"
+    t.index ["non_player_id"], name: "index_npc_things_on_non_player_id"
+    t.index ["thing_id"], name: "index_npc_things_on_thing_id"
   end
 
   create_table "npc_types", force: :cascade do |t|
@@ -122,6 +139,14 @@ ActiveRecord::Schema.define(version: 2020_03_14_064352) do
     t.integer "armor_class"
     t.integer "initiative", default: 0
     t.integer "pass_attentiveness", default: 0
+  end
+
+  create_table "npc_weapons", force: :cascade do |t|
+    t.integer "weapon_id"
+    t.integer "non_player_id"
+    t.integer "count"
+    t.index ["non_player_id"], name: "index_npc_weapons_on_non_player_id"
+    t.index ["weapon_id"], name: "index_npc_weapons_on_weapon_id"
   end
 
   create_table "players", force: :cascade do |t|
