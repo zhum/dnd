@@ -27,6 +27,10 @@ ru:
   npc-type: Монстр
   add-npc: Добавить NPC
 
+  fight:
+    fase: Раунд
+    start: Начать
+    stop: Завершить
   char:
     characheristics: Характеристики
     strength: Сил

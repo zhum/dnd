@@ -275,13 +275,13 @@ i.iw-wait:before{
 }
 
 .dnd-off-fighter {
-  background-color: gray;
+  background-color: #c0c0c0;
 }
 .dnd-npc-fighter {
-  background-color: pink;
+  background-color: #f0c0c0;
 }
 .dnd-player-fighter {
-  background-color: green;
+  background-color: #80e080;
 }
 
 /* .dnd-text-fighter {
@@ -648,3 +648,10 @@ div.inventory{
  */
 }
 
+.dnd-cur-fighter {
+  color: #d00000;
+}
+
+.dnd-cur-fighter:after {
+  content: '>';  
+}

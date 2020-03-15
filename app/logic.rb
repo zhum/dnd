@@ -8,6 +8,10 @@ class DNDLogic
       x >= 0 ? x : 0
     end
 
+    def settings
+      BaseApp.settings
+    end
+
     def send_player ws, player, logit=false
       m = "{\"player\": #{player.to_json}}"
       logger.warn "get_player: '#{m}'" if logit
@@ -18,6 +22,15 @@ class DNDLogic
       m = "{\"flash\": \"#{flash}\"}"
       logger.warn "flash: #{m}" if logit
       ws.send(m)
+    end
+
+    def send_all message
+      settings.each_pair do |ws,player|
+        if block_given?
+          next unless yield player
+        end
+        ws.send(message)
+      end        
     end
 
     def get_fight player

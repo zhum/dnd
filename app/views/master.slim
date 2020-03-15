@@ -33,8 +33,16 @@ div.main.mui-container
         i.icon-plus-sign
       | &nbsp;&nbsp;
   div#fight.fight.mui--hide
+    div.dnd-flex-cont.fullwidth
+      span
+        = t('fight.fase')
+        |: 
+      span#fight-fase.dnd-3em.mui--divider-right
+        | ...
+      span#start-fight-btn.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="start_fight();"
+        = t('fight.start')
     div.dnd-flex-cont.mui--z2.fullwidth
-      div.mui-select.dnd-flex-grow1
+      span.mui-select.dnd-flex-grow1
         label for='race_id'
           = t('npc-type')
         select name='race_id' id='npc-type'
@@ -47,7 +55,7 @@ div.main.mui-container
         = t('add-npc')
       span.dnd-1em
         |&nbsp;
-      div.mui-textfield.dnd-3em
+      span.mui-textfield.dnd-3em
         input#npc-num type="text" placeholder="1"
       span.dnd-1em
         |&nbsp;
@@ -108,7 +116,12 @@ javascript:
 
   // change monster HP 
   function f_hp_modify(c,mod){
-    var v = get_over_value();
+    var v = get_over_value(null);
+    if(v === null){
+      if(mod=='=')
+        return
+      v=1
+    }
     if(mod=='+'){
       fighters[c].hp += v;
     }
@@ -127,7 +140,12 @@ javascript:
 
   // change monster MAX HP 
   function f_max_hp_modify(c,mod){
-    var v = get_over_value();
+    var v = get_over_value(null);
+    if(v === null){
+      if(mod=='=')
+        return
+      v=1
+    }
     if(mod=='+'){
       fighters[c].max_hp += v;
     }
@@ -146,7 +164,12 @@ javascript:
 
   // change monster armor class 
   function f_ac_modify(c,mod){
-    var v = get_over_value();
+    var v = get_over_value(null);
+    if(v === null){
+      if(mod=='=')
+        return
+      v=1
+    }
     if(mod=='+'){
       fighters[c].armor_class += v;
     }
@@ -162,6 +185,34 @@ javascript:
   function f_ac_plus(c) { f_ac_modify(c,'+') }
   function f_ac_minus(c){ f_ac_modify(c,'-') }
   function f_ac_set(c)  { f_ac_modify(c,'=') }
+
+  // change player initiative manually
+  function f_init_modify(c,mod){
+    var v = get_over_value(null);
+    if(v === null){
+      if(mod=='=')
+        return
+      v=1
+    }
+    if(mod=='+'){
+      fighters[c].initiative += v;
+    }
+    else if(mod=='-'){
+      fighters[c].initiative -= v;
+    }
+    else{
+      fighters[c].initiative = v;
+    }
+    ws.send(secret+': fight/initiative '+fighters[c].id+'='+fighters[c].initiative);
+  }
+
+  function f_init_plus(c) { f_init_modify(c,'+') }
+  function f_init_minus(c){ f_init_modify(c,'-') }
+  function f_init_set(c)  { f_init_modify(c,'=') }
+
+  function start_fight(){
+    ws.send(secret+': fight/start');
+  }
 
   /////////////////////////////////////////////////////////////////////////////
   function render_fight_groups() {
