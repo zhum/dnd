@@ -18,12 +18,9 @@ function get_over_value(def=1){
 }
 
 function show_message(txt){
-  var el = document.getElementById('short-flash');
-  if(el){
-    el.classList.remove('short-flash-green');
-    el.innerHTML = txt;
-    el.classList.add('short-flash-green');
-  }
+  PNotify.info({text: txt, delay: 5000});
+  var snd = document.getElementById('audionotifyer');
+  if(snd){snd.play();}
 }
 
 function txt_or_empty(txt){

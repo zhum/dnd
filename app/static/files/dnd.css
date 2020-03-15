@@ -671,3 +671,5 @@ div.inventory{
     85%  { opacity: 1; }
     to   { opacity: 0; }
 }
+
+audio {display:none;}
