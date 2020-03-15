@@ -381,6 +381,10 @@ function render_master_fight() {
   set_html('fight-list',header+off+str);
 }
 
+function render_dice_roll(){
+  set_html('fight-list','<div class="fullwidth"><input ');
+}
+
 function render_player_fight() {
   var header =
     '<div class="dnd-flex-cont fullwidth"><div class="dnd-1em"></div>'+
