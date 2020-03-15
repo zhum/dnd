@@ -24,11 +24,29 @@ class DNDLogic
       ws.send(m)
     end
 
+    def send_to_player p, txt
+      id = if p.is_a? Numeric
+        p
+      elsif p.is_a? Player
+        p.id
+      else
+        raise "Bad argument to send_to_player (#{p})"
+      end
+      _,ws = settings.sockets.find{|i,ws| i==id}
+      if ws
+        logger.warn "Send to #{id} '#{txt}'"
+        ws.send(txt)
+      else
+        logger.warn "Player #{id} is offline now..."
+      end
+    end
+
     def send_all message
-      settings.each_pair do |ws,player|
+      settings.sockets.each_pair do |player_id, ws|
         if block_given?
-          next unless yield player
+          next unless yield Player.find_by_id(player_id)
         end
+        logger.warn "send_all: #{player_id}"
         ws.send(message)
       end        
     end

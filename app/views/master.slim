@@ -24,7 +24,9 @@ div.main.mui-container
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight');"
-      = t('fights')
+      = t('fight.fights')
+      |:&nbsp;
+      span#fight-fase
     span.mui--text-right
       a href="#" onclick="del_fight();"
         i.icon-minus-sign
@@ -35,12 +37,16 @@ div.main.mui-container
   div#fight.fight.mui--hide
     div.dnd-flex-cont.fullwidth
       span
-        = t('fight.fase')
-        |: 
-      span#fight-fase.dnd-3em.mui--divider-right
+        = t('fight.round')
+        |:&nbsp;&nbsp;
+      span#fight-round.mui--divider-right
         | ...
+      |&nbsp;
       span#start-fight-btn.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="start_fight();"
         = t('fight.start')
+      |&nbsp;
+      span#next-fighter-btn.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised.mui--hide onclick="next_fighter();"
+        = t('fight.next')
     div.dnd-flex-cont.mui--z2.fullwidth
       span.mui-select.dnd-flex-grow1
         label for='race_id'
@@ -212,6 +218,10 @@ javascript:
 
   function start_fight(){
     ws.send(secret+': fight/start');
+  }
+
+  function next_fighter(){
+    ws.send(secret+': fight/next');
   }
 
   /////////////////////////////////////////////////////////////////////////////

@@ -29,9 +29,11 @@ ru:
 
   fight:
     fights: Битва
-    fase: Раунд
+    round: Раунд
     start: Начать
     stop: Завершить
+    next: Следующий боец
+    
   char:
     characheristics: Характеристики
     strength: Сил

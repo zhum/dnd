@@ -310,7 +310,6 @@ function fight_step(s){
 }
 
 function render_fight(){
-  var start_btn = document.getElementById('start-fight-btn');
   if(player){
     if(fight.fase==1){
       render_dice_roll();
@@ -323,6 +322,7 @@ function render_fight(){
     }
   }
   else{
+    var start_btn = document.getElementById('start-fight-btn');
     if(start_btn){
       if(fight.fase==0){
         start_btn.innerHTML = 'Roll initiative!';
@@ -337,8 +337,18 @@ function render_fight(){
         start_btn.innerHTML = 'New fight!';
       }
     }
+    var next_btn = document.getElementById('next-fighter-btn');
+    if(next_btn){
+      if(fight.fase==2){
+        next_btn.classList.remove('mui--hide');
+      }
+      else{
+        next_btn.classList.add('mui--hide');
+      }
+    }
   }
   set_html('fight-fase', fight_step(fight.fase));
+  set_html('fight-round', fight.step);
 }
 
 function render_master_fight() {

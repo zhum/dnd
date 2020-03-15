@@ -1,8 +1,8 @@
 class FightLogic < DNDLogic
   class<<self
-    def send_fight ws, fight, is_master
+    def fight_to_json fight, is_master
       render = is_master || fight.fase>0 #==2
-      ws.send({
+      {
         fighters: render ?
           fight.get_fighters(is_master).sort_by{|x|x[:step_order]} :
           [],
@@ -12,7 +12,16 @@ class FightLogic < DNDLogic
           fighter_index: fight.fighter_index,
           render: render
         }
-      }.to_json)
+      }.to_json
+    end
+
+    def send_fight ws, fight, is_master
+      ws.send fight_to_json(fight, is_master)
+    end
+    
+    def update_fight_for_all fight
+      send_all (fight_to_json(fight, false).to_s) {|p| !p.is_master}
+      send_all (fight_to_json(fight, true).to_s) {|p| p.is_master}
     end
 
     def new_fight player
@@ -35,6 +44,14 @@ class FightLogic < DNDLogic
         when 'get_fight'
           logger.warn "get_fight"
           send_fight ws, fight, player.is_master
+        when /^dice_rolled (\d+)/
+          c = player.get_char(:initiative)
+          logger.warn "c=#{c}"
+          player.real_initiative = c.to_i+$1.to_i
+          player.save
+          fight.update_step_orders
+          #send_player ws, player, true
+          update_fight_for_all fight
         else
           if is_master
             case text
@@ -88,6 +105,33 @@ class FightLogic < DNDLogic
                 send_fight ws, fight, player.is_master
               end
 
+            when 'next'
+              logger.warn "next fighter"
+              list = fight.get_fighters(is_master).sort_by{|x|x[:step_order]}
+              i = fight.fighter_index
+              flag = false
+              loop do
+                i += 1
+                if i>=list.size
+                  i = 0
+                  fight.current_step += 1
+                  if flag
+                    logger.warn "A!!!!!!!!!! infinite loop detected!"
+                    raise "infinite loop"
+                  else
+                    flag = true
+                  end
+                end
+                logger.warn "---> #{i}: #{list[i].inspect}"
+                break if list[i][:is_fighter]
+              end
+              fight.fighter_index = i
+              fight.save
+              update_fight_for_all fight
+              if !list[i][:is_npc]
+                send_to_player(list[i][:id],{event: 'Your move!'}.to_json)
+              end
+
             when 'del'
               fight.finish
               ws.send({fighters: []}.to_json)
@@ -101,9 +145,8 @@ class FightLogic < DNDLogic
 
             when 'start'
               logger.warn "Start fight! Do roll initiative"
-              if fight.fase > 0
-                logger.warn "No any ready fight now! Ignore."
-              else
+              case fight.fase
+              when 0
                 fight.fase = 1
                 fight.fighter_index = 0
                 fight.save
@@ -111,18 +154,17 @@ class FightLogic < DNDLogic
                 DNDLogic.send_all({event: 'roll-initiative'}) do |p|
                   ! p.is_master
                 end
-              end
-              
-            when 'roll-done'
-              logger.warn "Start real fight!"
-              if fight.fase != 1
-                logger.warn "No any ready fight now! Ignore."
-              else
+              when 1
                 fight.fase = 2
                 fight.fighter_index = 0
                 fight.save
                 send_fight ws, fight, player.is_master
                 DNDLogic.send_all({event: 'start-fight'})
+              when 2
+                fight.fase = 3
+                fight.save
+                send_fight ws, fight, player.is_master
+                DNDLogic.send_all({event: 'start-fight'})                
               end
             when /^initiative (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} initiative=#{$2}"

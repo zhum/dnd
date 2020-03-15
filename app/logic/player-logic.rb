@@ -12,7 +12,8 @@ class PlayerLogic < DNDLogic
           send_player ws, player, true
           fight = player.adventure.active_fight
           if fight
-            ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
+            FightLogic.send_fight ws, fight, player.is_master
+            #ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
           end
 
         # send player preferences info
