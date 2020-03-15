@@ -58,7 +58,7 @@ class Fight < ActiveRecord::Base
   def update_step_orders
     players = adventure.players
       .where(is_master: false)
-      .map { |e| {player: e, initiative: e.get_char(:initiative)}}
+      .map { |e| {player: e, initiative: (e.real_initiative || -1)}} #get_char(:initiative)}}
     fighters = non_players.all.map { |e| {player: e, initiative: e.initiative}}
     step = 1
     (players+fighters).sort_by{|x| -x[:initiative].to_i}.each{|x|
@@ -79,7 +79,7 @@ class Fight < ActiveRecord::Base
         {
           is_fighter: e.is_fighter,
           name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
-          hp: e.hp, max_hp: e.max_hp, initiative: e.get_char(:initiative) || 0,
+          hp: e.hp, max_hp: e.max_hp, initiative: (e.real_initiative || -1), #get_char(:initiative) || 0,
           armor_class: e.get_char(:armor_class) || 0, step_order: e.step_order,
           is_npc: false
         }

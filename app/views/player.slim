@@ -255,10 +255,12 @@ div.main.mui-container
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.fullwidth.mui--text-center onclick="toggle_item('fight');"
-      | Бой
-      span.mui-caret.mui-caret--right
+      = t('fight/fight')
+      |&nbsp;&nbsp;
+      span#fight-fase
+        | ...
   div#fight.mui--hide
-    i.iw-wait.loading
+    div.dnd-flex-row.fullwidth#fight-list
 
 javascript:
   var secret="#{{@user.secret}}";
@@ -266,6 +268,7 @@ javascript:
   function on_websocket_open(ws){
     ws.send(secret+': player/get');
     ws.send(secret+': player/prefs');
+    ws.send(secret+': fight/get_fight');
   }
 
   function hp_plus(){

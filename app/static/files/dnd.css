@@ -655,3 +655,19 @@ div.inventory{
 .dnd-cur-fighter:after {
   content: '>';  
 }
+
+.short-flash-green {
+    width: 100%;
+    background: #40d040;
+    opacity: 0;
+    
+    animation: fadeIn 5s;
+    animation-direction: alternate;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    15%  { opacity: 1; }
+    85%  { opacity: 1; }
+    to   { opacity: 0; }
+}

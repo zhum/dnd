@@ -75,7 +75,7 @@ div.main.mui-container
 
 javascript:
   var secret="#{{@user.secret}}";
-  var player='?player_id='+"#{{@player.id}}";
+  var player_str='?player_id='+"#{{@player.id}}";
   function on_websocket_open(ws){
     //ws.send(secret+': get_master');
     ws.send(secret+': player/prefs');

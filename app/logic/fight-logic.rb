@@ -1,10 +1,10 @@
 class FightLogic < DNDLogic
   class<<self
     def send_fight ws, fight, is_master
-      render = is_master || fight.fase==2
+      render = is_master || fight.fase>0 #==2
       ws.send({
         fighters: render ?
-          fight.get_fighters(true).sort_by{|x|x[:step_order]} :
+          fight.get_fighters(is_master).sort_by{|x|x[:step_order]} :
           [],
         fight: {
           fase: fight.fase,
@@ -96,7 +96,7 @@ class FightLogic < DNDLogic
               logger.warn "New fight (#{player.is_master} / #{fight})"
 
               fight.delete
-              make_fight player
+              new_fight player
               send_fight ws, get_fight(player), player.is_master
 
             when 'start'
@@ -108,9 +108,22 @@ class FightLogic < DNDLogic
                 fight.fighter_index = 0
                 fight.save
                 send_fight ws, fight, player.is_master
-                DNDLogic.send_all({event: 'start-fight'})
+                DNDLogic.send_all({event: 'roll-initiative'}) do |p|
+                  ! p.is_master
+                end
               end
               
+            when 'roll-done'
+              logger.warn "Start real fight!"
+              if fight.fase != 1
+                logger.warn "No any ready fight now! Ignore."
+              else
+                fight.fase = 2
+                fight.fighter_index = 0
+                fight.save
+                send_fight ws, fight, player.is_master
+                DNDLogic.send_all({event: 'start-fight'})
+              end
             when /^initiative (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} initiative=#{$2}"
               pl = Player.find_by_id($1)
@@ -119,6 +132,7 @@ class FightLogic < DNDLogic
               else
                 pl.real_initiative = $2.to_i
                 pl.save
+                fight.update_step_orders
                 send_fight ws, fight, player.is_master
               end
 
