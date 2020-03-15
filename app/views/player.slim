@@ -255,8 +255,8 @@ div.main.mui-container
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.fullwidth.mui--text-center onclick="toggle_item('fight');"
-      = t('fight/fight')
-      |&nbsp;&nbsp;
+      = t('fights')
+      |:&nbsp;&nbsp;
       span#fight-fase
         | ...
   div#fight.mui--hide
@@ -574,4 +574,8 @@ javascript:
   }
   function ready_spell(c){
     ws.send(secret+': player/ready_spell='+c);
+  }
+
+  function dice_rolled(){
+    
   }

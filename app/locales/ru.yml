@@ -28,6 +28,7 @@ ru:
   add-npc: Добавить NPC
 
   fight:
+    fights: Битва
     fase: Раунд
     start: Начать
     stop: Завершить

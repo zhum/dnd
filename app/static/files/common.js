@@ -8,7 +8,7 @@ var prefs={};
 var fighters=[];
 var fight={};
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
-
+var f_steps=['всё тихо...','кидайте инициативу!','битва!','битва окончена'];
 
 function get_over_value(def=1){
   var v = get_int_value('over_value');
@@ -302,24 +302,45 @@ function render_chat_full(from=''){
   set_html('chat'+from,chat_text);
 }
 
+function fight_step(s){
+  s = parseInt(s);
+  if(s<0 || s>3)
+    s=0;
+  return f_steps[s];
+}
+
 function render_fight(){
   var start_btn = document.getElementById('start-fight-btn');
-  if(start_btn){
-    if(fight.fase==0){
-      start_btn.innerHTML = 'Roll initiative!';
-    }
-    else if(fight.fase==1){
-      start_btn.innerHTML = 'Start fight!';
+  if(player){
+    if(fight.fase==1){
+      render_dice_roll();
     }
     else if(fight.fase==2){
-      start_btn.innerHTML = 'Stop fight!';
+      render_player_fight();
     }
     else{
-      start_btn.innerHTML = 'New fight!';
+      set_html('fight-list','.....');
     }
   }
-  set_html('fight-fase', fight.step)  
+  else{
+    if(start_btn){
+      if(fight.fase==0){
+        start_btn.innerHTML = 'Roll initiative!';
+      }
+      else if(fight.fase==1){
+        start_btn.innerHTML = 'Start fight!';
+      }
+      else if(fight.fase==2){
+        start_btn.innerHTML = 'Stop fight!';
+      }
+      else{
+        start_btn.innerHTML = 'New fight!';
+      }
+    }
+  }
+  set_html('fight-fase', fight_step(fight.fase));
 }
+
 function render_master_fight() {
   var header = '<div class="dnd-flex-cont fullwidth"><div class="dnd-flex-grow1">Name'+
       '</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">HP/MAX</div>'+
@@ -382,7 +403,7 @@ function render_master_fight() {
 }
 
 function render_dice_roll(){
-  set_html('fight-list','<div class="fullwidth"><input ');
+  set_html('fight-list','<div class="fullwidth mui--text-center"><input type="text" id="rolled-dice"></input><a href="#" class="dnd-btn" onClick="dice_rolled();">submit</a></div>');
 }
 
 function render_player_fight() {
@@ -694,14 +715,17 @@ function try_connect(){
       }
       if (msg['fighters']){
         fighters = msg['fighters'];
-        if(fight.render==1){
-          if(player){
+        if(player){
+          if(fight.fas==2){
             render_player_fight();
           }
-          else{
-            render_master_fight();
-          }
         }
+        else{ // MASTER
+          render_master_fight();
+        }
+        // else if(player && fight.fase==1){
+        //   render_dice_roll();
+        // }
         // }else if(fight.render==2){
         //   render_player_fight();
         // }
