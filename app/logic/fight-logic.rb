@@ -29,6 +29,20 @@ class FightLogic < DNDLogic
       send_fight ws, fight, player.is_master
     end
 
+    def update_npc n, fight
+      #logger.warn "fighter #{$1} hp=#{$2}"
+      npc = NonPlayer.find_by_id(n)
+      if npc and npc.fight.id==fight.id
+        yield npc
+        # npc.hp = $2.to_i
+        # npc.save
+        # send_fight ws, fight, player.is_master
+      else
+        logger.warn "npc=#{npc}"
+        logger.warn "#{npc.fight.id}==#{fight.id}" if npc
+      end      
+    end
+
     def process_message ws,user,player,text,opts={}
       logger.warn "Fight logic (#{text})"
       fight = get_fight player
@@ -180,41 +194,27 @@ class FightLogic < DNDLogic
 
             when /^hp (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} hp=#{$2}"
-              npc = NonPlayer.find_by_id($1)
-              if npc and npc.fight.id==fight.id
+              update_npc($1, fight) {|npc|
                 npc.hp = $2.to_i
                 npc.save
                 send_fight ws, fight, player.is_master
-              else
-                logger.warn "npc=#{npc}"
-                logger.warn "#{npc.fight.id}==#{fight.id}" if npc
-              end
-
+              }
+ 
             when /^max_hp (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} max_hp=#{$2}"
-              npc = NonPlayer.find_by_id($1)
-              if npc and npc.fight.id==fight.id
+              update_npc($1, fight) {|npc|
                 npc.max_hp = $2.to_i
                 npc.save
                 send_fight ws, fight, player.is_master
-                # ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
-              else
-                logger.warn "npc=#{npc}"
-                logger.warn "#{npc.fight.id}==#{fight.id}" if npc
-              end
-
+              }
+ 
             when /^ac (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} ac=#{$2}"
-              npc = NonPlayer.find_by_id($1)
-              if npc and npc.fight.id==fight.id
+              update_npc($1, fight) {|npc|
                 npc.armor_class = $2.to_i
                 npc.save
                 send_fight ws, fight, player.is_master
-                # ws.send({fighters: fight.get_fighters(player.is_master).sort_by{|x|x[:step_order]}}.to_json)
-              else
-                logger.warn "npc=#{npc}"
-                logger.warn "#{npc.fight.id}==#{fight.id}" if npc
-              end
+              }
 
             # change fighter step priority
             when /^step (\d+) (\S+) (\+|-)/

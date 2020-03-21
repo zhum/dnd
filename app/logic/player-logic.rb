@@ -1,5 +1,33 @@
 class PlayerLogic < DNDLogic
   class<<self
+
+    def update_something opts #id, player, klass, name
+      w = opts[:klass].find(opts[:id])
+      if w.player != opts[:player]
+        logger.warn "Bad #{opts[:name]} - not belongs to player!"
+      else
+        if opts[:count]<1
+          logger.warn "Deleting this #{opts[:name]}"
+          w.destroy
+        else
+          w.count = opts[:count]
+          w.save
+          logger.info "#{opts[:name]}: #{w}"
+        end
+        send_player opts[:ws], opts[:player]
+      end
+    end
+
+    def buy player, klass, klass_proxy, id, extra
+      t = klass.find(id)
+      name = klass.to_s.downcase.to_sym
+      if klass_proxy.where(player: player, name => t).count > 0 #.armors.include? t
+        logger.warn "#{klass} is already bought"
+      else
+        klass_proxy.create({player: player, name => t}.merge(extra)).save
+      end
+    end
+
     def process_message ws,user,player,text,opts={}
       logger.warn "Player logic..."
       begin
@@ -30,40 +58,15 @@ class PlayerLogic < DNDLogic
           logger.warn "----------------- TYPE=#{type}"
           case $1
           when 'things'
-            t = Thing.find(id)
-            if player.things.include? t
-              logger.warn "Thing is already bought"
-            else
-              player.thingings << Thinging.create(thing: t, count: 1)
-            end
+            buy player, Thing, Thinging, id, {count: 1}
           when 'armor'
-            t = Armor.find(id)
-            if player.armors.include? t
-              logger.warn "Armor is already bought"
-            else
-              Armoring.create(player: player, armor: t, count: 1).save
-            end
+            buy player, Armor, Armoring, id, {count: 1}
           when 'weapon'
-            t = Weapon.find(id)
-            if player.weapons.include? t
-              logger.warn "Weapon is already bought"
-            else
-              player.weaponings << Weaponing.create(weapon: t, count: 1)
-            end
+            buy player, Weapon, Weaponing, id, {count: 1}
           when 'feature'
-            t = Feature.find(id)
-            if player.features.include? t
-              logger.warn "Feature is already bought"
-            else
-              player.featurings << Featuring.create(feature: t, count: 1)
-            end
+            buy player, Feature, Featuring, id, {count: 1}
           when 'spells'
-            t = Spell.find(id)
-            if player.spells.include? t
-              logger.warn "Spell is already bought"
-            else
-              player.spellings << Spelling.create(spell: t)
-            end
+            buy player, Spell, Spelling, id, {}
           end
           player.save
 
@@ -100,22 +103,24 @@ class PlayerLogic < DNDLogic
 
         # weapon change
         when /^weap (\d+)=(\d+)/
-          id = $1.to_i
-          count = $2.to_i
-          w = Weaponing.find(id)
-          if w.player == player
-            if count<1
-              logger.warn "Deleting this weapon"
-              w.destroy
-            else
-              w.count = count
-              w.save
-              logger.info "Weapon: #{w}"
-            end
-            send_player ws, player
-          else
-            logger.warn "Bad weapon - not belongs to player!"
-          end
+          update_something id: $1.to_i, count: $2.to_i, ws: ws,
+            player: player, klass: Weaponing, name: 'weapon'
+          # id = $1.to_i
+          # count = $2.to_i
+          # w = Weaponing.find(id)
+          # if w.player == player
+          #   if count<1
+          #     logger.warn "Deleting this weapon"
+          #     w.destroy
+          #   else
+          #     w.count = count
+          #     w.save
+          #     logger.info "Weapon: #{w}"
+          #   end
+          #   send_player ws, player
+          # else
+          #   logger.warn "Bad weapon - not belongs to player!"
+          # end
         when /^skill\[(\d+)\]=(-?\d+)/
           id = $1.to_i
           mod = $2.to_i
@@ -152,27 +157,32 @@ class PlayerLogic < DNDLogic
   
         when /^feature\[(\d+)\]=(\d+)/
 #          warn ">>>> #{$1}/#{$2}"
-          id = $1.to_i
-          count = $2.to_i
-          w = player.featurings.where(id: id).take
-          if count<1
-            logger.warn "Bad feature count (#{count})"
-          else
-            w.count = count
-            w.save
-            logger.info "Feature: #{w}"
-          end
-          send_player ws, player
+          update_something id: $1.to_i, count: $2.to_i, ws: ws,
+            player: player, klass: Featuring, name: 'feature'
+
+          # id = $1.to_i
+          # count = $2.to_i
+          # w = player.featurings.where(id: id).take
+          # if count<1
+          #   logger.warn "Bad feature count (#{count})"
+          # else
+          #   w.count = count
+          #   w.save
+          #   logger.info "Feature: #{w}"
+          # end
+          # send_player ws, player
 
         when /^spells_(\d+)=(\d+)/
+          # update_something id: $1.to_i, count: $2.to_i, ws: ws,
+          #   player: player, klass: Spelling, name: 'spell'
           i = $1.to_i
           count = $2.to_i
           if count<1
             logger.warn "Bad spell slots count (#{count})"
-          else
-            player.write_attribute("spell_slots_#{i}",count)
-            player.save
+            count = 0
           end
+          player.write_attribute("spell_slots_#{i}",count)
+          player.save
           send_player ws, player
 
         when /^activate_spell=(\d+)/
@@ -214,41 +224,45 @@ class PlayerLogic < DNDLogic
 
         # armor change
         when /^armor (\d+)=(\d+)/
-          id = $1.to_i
-          count = $2.to_i
-          w = Armoring.find(id)
-          if w.player != player
-            logger.warn "Bad armor - not belongs to player!"
-          else
-            if count<1
-              logger.warn "Deleting this armor"
-              w.destroy
-            else
-              w.count = count
-              w.save
-              logger.info "armor: #{w}"
-            end
-            send_player ws, player
-          end
+          update_something id: $1.to_i, count: $2.to_i, ws: ws,
+            player: player, klass: Armoring, name: 'armor'
+          # id = $1.to_i
+          # count = $2.to_i
+          # w = Armoring.find(id)
+          # if w.player != player
+          #   logger.warn "Bad armor - not belongs to player!"
+          # else
+          #   if count<1
+          #     logger.warn "Deleting this armor"
+          #     w.destroy
+          #   else
+          #     w.count = count
+          #     w.save
+          #     logger.info "armor: #{w}"
+          #   end
+          #   send_player ws, player
+          # end
 
         # thing change
         when /^thing (\d+)=(\d+)/
-          id = $1.to_i
-          count = $2.to_i
-          w = Thinging.find(id)
-          if w.player != player
-            logger.warn "Bad thing - not belongs to player!"
-          else
-            if count<1
-              logger.warn "Deleting this thing"
-              w.destroy
-            else
-              w.count = count
-              w.save
-              logger.info "Thing: #{w}"
-            end
-            send_player ws, player
-          end
+          update_something id: $1.to_i, count: $2.to_i, ws: ws,
+            player: player, klass: Thinging, name: 'thing'
+          # id = $1.to_i
+          # count = $2.to_i
+          # w = Thinging.find(id)
+          # if w.player != player
+          #   logger.warn "Bad thing - not belongs to player!"
+          # else
+          #   if count<1
+          #     logger.warn "Deleting this thing"
+          #     w.destroy
+          #   else
+          #     w.count = count
+          #     w.save
+          #     logger.info "Thing: #{w}"
+          #   end
+          #   send_player ws, player
+          # end
 
         # savethrow change
         when /^savethrows(\d+)=(\d+)/

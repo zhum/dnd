@@ -29,6 +29,6 @@ javascript:
   }
 
   function buy(item_type,id,type){
-    ws.send(secret+': buy '+item_type+' '+id+' '+type);
+    ws.send(secret+': player/buy '+item_type+' '+id+' '+type);
     window.location.href = '/player';
   }
