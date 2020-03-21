@@ -19,6 +19,10 @@ class Adventure < ActiveRecord::Base
     fights.ready.take
   end
   
+  def finished_fight
+    fights.finished.take
+  end
+  
   def master
     self.players.where(is_master: true).take
   end

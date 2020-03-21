@@ -13,7 +13,7 @@ class Fight < ActiveRecord::Base
 
   has_many   :non_players, dependent: :destroy
 
-  STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish}
+  STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish, 4 => :deleted}
 
   scope :active, -> {
     where fase: [1,2]
@@ -21,6 +21,10 @@ class Fight < ActiveRecord::Base
 
   scope :ready, -> {
     where fase: 0
+  }
+
+  scope :finished, -> {
+    where fase: 3
   }
 
   def is_ready?
@@ -100,6 +104,7 @@ class Fight < ActiveRecord::Base
     self.adventure.players.each do |p|
       logger.warn "+ #{p.name}"
       p.is_fighter = true
+      p.real_initiative = -1
       p.save
     end
   end

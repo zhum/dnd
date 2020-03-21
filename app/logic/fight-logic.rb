@@ -25,17 +25,21 @@ class FightLogic < DNDLogic
     end
 
     def new_fight player
-      fight = Fight.make_fight(adventure: player.adventure, add_players: true)
-      send_fight ws, fight, player.is_master
+      logger.warn "NEW FIGHT..."
+      Fight.make_fight(adventure: player.adventure, add_players: true)
+      # send_fight ws, fight, player.is_master
     end
 
-    def update_npc n, fight
+    def update_npc n, fight, all=false
       #logger.warn "fighter #{$1} hp=#{$2}"
       npc = NonPlayer.find_by_id(n)
       if npc and npc.fight.id==fight.id
         yield npc
         npc.save
         send_fight ws, fight, player.is_master
+        if all
+          send_all(fight_to_json(fight,false)){|p| !p.is_master}
+        end
       else
         logger.warn "npc=#{npc}"
         logger.warn "#{npc.fight.id}==#{fight.id}" if npc
@@ -47,7 +51,7 @@ class FightLogic < DNDLogic
       fight = get_fight player
       is_master = player.is_master
       
-      new_fight if fight.nil?
+      fight = new_fight(player) if fight.nil?
       if fight.adventure != player.adventure
         logger.warn "Not correct adventure."
         return
@@ -84,6 +88,11 @@ class FightLogic < DNDLogic
                     logger.warn "ok!"
                   else
                     loger.warn "oooops... #{npc.errors.join(';')}"
+                  end
+                end
+                if fight.fase == 2 # fight in progress
+                  send_all(fight_to_json(fight,false)) do |p|
+                    not p.is_master
                   end
                 end
                 send_fight ws, fight, player.is_master
@@ -156,28 +165,41 @@ class FightLogic < DNDLogic
               new_fight player
               send_fight ws, get_fight(player), player.is_master
 
-            when 'start'
-              logger.warn "Start fight! Do roll initiative"
+            when 'next-fase'
+              logger.warn "Fight fase=#{fight.fase}. Do next!"
               case fight.fase
-              when 0
+              when 0 # just prepared
                 fight.fase = 1
                 fight.fighter_index = 0
                 fight.save
-                send_fight ws, fight, player.is_master
-                DNDLogic.send_all({event: 'roll-initiative'}) do |p|
+                logger.warn "Do roll initiative!"
+                #send_fight ws, fight, player.is_master
+                send_all(fight_to_json(fight, is_master)) do |p|
                   ! p.is_master
                 end
-              when 1
+                send_all({event: 'roll-initiative'}) do |p|
+                  ! p.is_master
+                end
+              when 1 # initiative rolled
                 fight.fase = 2
                 fight.fighter_index = 0
                 fight.save
-                send_fight ws, fight, player.is_master
-                DNDLogic.send_all({event: 'start-fight'})
-              when 2
+                logger.warn "Start fight!"
+                # send_fight ws, fight, player.is_master
+                send_all(fight_to_json(fight, is_master))
+                send_all({event: 'start-fight'})
+              when 2 # fight...
                 fight.fase = 3
                 fight.save
-                send_fight ws, fight, player.is_master
-                DNDLogic.send_all({event: 'start-fight'})                
+                logger.warn "Stop fight!"
+                # send_fight ws, fight, player.is_master
+                send_all(fight_to_json(fight, is_master))
+                send_all({event: 'stop-fight'})
+              when 3 # finished...
+                fight.delete
+                logger.warn "New fight!"
+                new_fight player
+                send_fight ws, get_fight(player), player.is_master                
               end
             when /^initiative (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} initiative=#{$2}"
@@ -191,12 +213,20 @@ class FightLogic < DNDLogic
                 send_fight ws, fight, player.is_master
               end
 
-            when /^hp (\d+)=(-?\d+)/
-              logger.warn "fighter #{$1} hp=#{$2}"
-              update_npc($1, fight) {|npc|
-                npc.hp = $2.to_i
-              }
- 
+            when /^hp (\d+)\/(.)=(-?\d+)/
+              logger.warn "fighter #{$1} hp=#{$3}"
+              if $2== 'n'
+                update_npc($1, fight) {|npc|
+                  npc.hp = $3.to_i
+                }
+              else
+                pl = Player.find_by_id($1)
+                pl.hp = $3.to_i
+                pl.save
+                send_fight ws, fight, player.is_master
+                send_all(fight_to_json(fight,false)){|p| !p.is_master}
+              end
+
             when /^max_hp (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} max_hp=#{$2}"
               update_npc($1, fight) {|npc|

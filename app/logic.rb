@@ -34,6 +34,7 @@ class DNDLogic
       end
       _,ws = settings.sockets.find{|i,ws| i==id}
       if ws
+        txt = txt.to_json if txt.is_a? Hash
         logger.warn "Send to #{id} '#{txt}'"
         ws.send(txt)
       else
@@ -42,9 +43,12 @@ class DNDLogic
     end
 
     def send_all message
+      message = message.to_json if message.is_a? Hash
       settings.sockets.each_pair do |player_id, ws|
         if block_given?
-          next unless yield Player.find_by_id(player_id)
+          flag = yield Player.find_by_id(player_id)
+          logger.warn "p=#{player_id} f=#{flag}"
+          next if !flag
         end
         logger.warn "send_all: #{player_id}"
         ws.send(message)
@@ -54,6 +58,7 @@ class DNDLogic
     def get_fight player
       player.is_master? ?
         (player.adventure.active_fight || player.adventure.ready_fight ||
+          player.adventure.finished_fight || 
           Fight.make_fight(adventure: player.adventure, add_players: true)) :
         player.adventure.active_fight
     end

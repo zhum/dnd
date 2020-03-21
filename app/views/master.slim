@@ -137,7 +137,8 @@ javascript:
     else{
       fighters[c].hp = v;
     }
-    ws.send(secret+': fight/hp '+fighters[c].id+'='+fighters[c].hp);
+    ws.send(secret+': fight/hp '+fighters[c].id+'/'+
+      (fighters[c].is_npc ? 'n' : 'p')+'='+fighters[c].hp);
   }
 
   function f_hp_plus(c) { f_hp_modify(c,'+') }
@@ -217,7 +218,7 @@ javascript:
   function f_init_set(c)  { f_init_modify(c,'=') }
 
   function start_fight(){
-    ws.send(secret+': fight/start');
+    ws.send(secret+': fight/next-fase');
   }
 
   function next_fighter(){

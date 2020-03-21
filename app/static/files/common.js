@@ -373,12 +373,13 @@ function render_master_fight() {
         '<i class="icon-'+(isf ? 'circledelete' : 'fatundo')+'" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
         fighter.name+' ('+
         fighter.race+')</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-          (fighter.is_npc ?
+          ((fighter.is_npc || fight.fase==2) ?
             '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
             : '')+
         fighter.hp+
+          ((fighter.is_npc || fight.fase==2) ? '</a>' : '')+
           (fighter.is_npc ?
-            '</a> / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
+            ' / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
             : ' / ')+
         fighter.max_hp+
           (fighter.is_npc ? '</a>' : '')+
@@ -723,7 +724,7 @@ function try_connect(){
       if (msg['fighters']){
         fighters = msg['fighters'];
         if(player){
-          if(fight.fas==2){
+          if(fight.fase==2){
             render_player_fight();
           }
         }
