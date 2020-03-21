@@ -34,9 +34,8 @@ class FightLogic < DNDLogic
       npc = NonPlayer.find_by_id(n)
       if npc and npc.fight.id==fight.id
         yield npc
-        # npc.hp = $2.to_i
-        # npc.save
-        # send_fight ws, fight, player.is_master
+        npc.save
+        send_fight ws, fight, player.is_master
       else
         logger.warn "npc=#{npc}"
         logger.warn "#{npc.fight.id}==#{fight.id}" if npc
@@ -196,24 +195,22 @@ class FightLogic < DNDLogic
               logger.warn "fighter #{$1} hp=#{$2}"
               update_npc($1, fight) {|npc|
                 npc.hp = $2.to_i
-                npc.save
-                send_fight ws, fight, player.is_master
               }
  
             when /^max_hp (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} max_hp=#{$2}"
               update_npc($1, fight) {|npc|
                 npc.max_hp = $2.to_i
-                npc.save
-                send_fight ws, fight, player.is_master
+                # npc.save
+                # send_fight ws, fight, player.is_master
               }
  
             when /^ac (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} ac=#{$2}"
               update_npc($1, fight) {|npc|
                 npc.armor_class = $2.to_i
-                npc.save
-                send_fight ws, fight, player.is_master
+                # npc.save
+                # send_fight ws, fight, player.is_master
               }
 
             # change fighter step priority
