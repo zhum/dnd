@@ -1,0 +1,11 @@
+#!/bin/sh
+
+H='heroku config:set'
+
+$H DATABASE_URL=postgres://aaa:bbb:5432/ccc
+$H HEROKU=1
+$H LANG=en_US.UTF-8
+$H RACK_ENV=heroku
+$H RAILS_ENV=heroku
+$H SESSION_SECRET=1234567890
+$H SINATRA_ENV=heroku
