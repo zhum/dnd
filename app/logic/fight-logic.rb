@@ -275,7 +275,7 @@ class FightLogic < DNDLogic
             when /^add-to-group (\d+) (\d+) (\d+)/
               grp = FightGroup.find_by_id($1)
               r = NpcType.find_by_id($2)
-              num = $2.to_i
+              num = $3.to_i
               logger.warn "grp-new-npc (#{grp} #{r} #{num})"
               if r.nil?
                 logger.warn "No such NPC"
