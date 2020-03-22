@@ -598,6 +598,11 @@ div.inventory{
   flex-grow: 0;
 }
 
+.dnd-grp-title {
+  font-weight: bold;
+  background: #008010;
+}
+
 .dnd-flex-noresize {
   flex-grow: 0;
   flex-shrink: 0;

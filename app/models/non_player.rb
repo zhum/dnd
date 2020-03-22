@@ -13,6 +13,7 @@
 #  step_order         :integer
 #  pass_attentiveness :integer          default("0")
 #  is_dead            :boolean          default("0")
+#  fight_group_id     :integer
 #
 
 class NonPlayer < ActiveRecord::Base
@@ -24,11 +25,12 @@ class NonPlayer < ActiveRecord::Base
   has_many :npc_armors, dependent: :destroy
   has_many :npc_weapons, dependent: :destroy
 
-  def self.generate npc_type, fight
-    name = "#{npc_type.name} #{get_next_id(fight,npc_type)}"
+  def self.generate npc_type, fight_group
+    name = "#{npc_type.name} #{get_next_id(fight_group,npc_type)}"
     logger.warn "name=#{name}"
+    f = fight_group.is_a?(Fight) ? fight_group : nil
     npc = create!(
-      npc_type: npc_type, fight: fight, name: name,
+      npc_type: npc_type, fight: f, name: name,
       max_hp: npc_type.max_hp, hp: make_hp(npc_type),
       armor_class: npc_type.armor_class,
       initiative: rand(20)+1+npc_type.initiative,
@@ -39,8 +41,8 @@ class NonPlayer < ActiveRecord::Base
     npc
   end
 
-  def self.get_next_id fight, npc_type
-    count = fight.non_players.where(npc_type_id: npc_type.id).count
+  def self.get_next_id fight_group, npc_type
+    count = fight_group.non_players.where(npc_type_id: npc_type.id).count
     count+1
   end
 
@@ -54,4 +56,15 @@ class NonPlayer < ActiveRecord::Base
     npc_type
   end
 
+  def to_hash
+    {
+      npc_type: npc_type.name, name: name,
+      id: id,
+      max_hp: max_hp, hp: hp,
+      armor_class: armor_class,
+      initiative: initiative,
+      pass_attentiveness: pass_attentiveness,
+      step_order: step_order
+    }
+  end
 end

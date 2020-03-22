@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: fight_groups
+#
+#  id           :integer          not null, primary key
+#  adventure_id :integer
+#  name         :string
+#
 class FightGroup < ActiveRecord::Base
   belongs_to :adventure
 

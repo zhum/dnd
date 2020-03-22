@@ -10,6 +10,7 @@ class Adventure < ActiveRecord::Base
   has_many :players
   #has_one  :master, class_name: 'Player'
   has_many :fights
+  has_many :fight_groups
 
   def active_fight
     fights.active.take

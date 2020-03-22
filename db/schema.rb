@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_081835) do
+ActiveRecord::Schema.define(version: 2020_03_21_103537) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_081835) do
 
   create_table "fight_groups", force: :cascade do |t|
     t.integer "adventure_id"
+    t.string "name"
     t.index ["adventure_id"], name: "index_fight_groups_on_adventure_id"
   end
 

@@ -15,6 +15,17 @@ class FightLogic < DNDLogic
       }.to_json
     end
 
+    def groups_to_json adventure
+      groups = adventure.fight_groups.order(:id).map { |grp| 
+        {
+          name: grp.name,
+          id: grp.id,
+          npc: grp.non_players.sort_by{|x|x[:step_order]}.map { |e| e.to_hash },
+        }
+      }
+      {groups: groups}.to_json
+    end
+
     def send_fight ws, fight, is_master
       ws.send fight_to_json(fight, is_master)
     end
@@ -83,7 +94,7 @@ class FightLogic < DNDLogic
                 while num>0 do
                   num -= 1
                   npc = NonPlayer.generate(r, fight)
-                  if npc.save
+                  if npc
                     fight.update_step_orders
                     logger.warn "ok!"
                   else
@@ -242,6 +253,63 @@ class FightLogic < DNDLogic
                 # npc.save
                 # send_fight ws, fight, player.is_master
               }
+
+            when 'get_groups'
+              ws.send groups_to_json(player.adventure)
+
+            when /^new-group (.*)/
+              name = $1.chomp
+              FightGroup.create!(adventure: player.adventure, name: name)
+              ws.send groups_to_json(player.adventure)
+
+            when /^del-group (\d+)/
+              grp = FightGroup.find_by_id($1)
+              if grp.nil? or grp.adventure != player.adventure
+                logger.warn "Bad group number... Ignore."
+              else
+                grp.delete
+                ws.send groups_to_json(player.adventure)
+              end
+
+            # grp_id npc_type num
+            when /^add-to-group (\d+) (\d+) (\d+)/
+              grp = FightGroup.find_by_id($1)
+              r = NpcType.find_by_id($2)
+              num = $2.to_i
+              logger.warn "grp-new-npc (#{grp} #{r} #{num})"
+              if r.nil?
+                logger.warn "No such NPC"
+              elsif grp.adventure != player.adventure
+                logger.warn "Not our adventure"
+              else
+                while num>0 do
+                  num -= 1
+                  npc = NonPlayer.generate(r, grp)
+                  if npc
+                    grp.non_players << npc
+                    logger.warn "ok!"
+                  else
+                    loger.warn "oooops... npc was not created"
+                  end
+                end
+                grp.save
+                ws.send groups_to_json(player.adventure)
+              end
+
+            # grp_id npc_id
+            when /^del-from-group (\d+) (\d+)/
+              grp = FightGroup.find_by_id($1)
+              r = NonPlayer.find_by_id($2)
+              if grp.nil? or r.nil?
+                logger.warn "No such group or NPC. Ignore"
+              elsif grp.adventure != player.adventure
+                logger.warn "Not our adventure. Ignore"
+              elsif r.fight_group.id != grp.id
+                logger.warn "Not our NPC. Ignore"
+              else
+                r.delete
+                ws.send groups_to_json(player.adventure)
+              end
 
             # change fighter step priority
             when /^step (\d+) (\S+) (\+|-)/

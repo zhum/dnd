@@ -6,6 +6,7 @@ var flash_timeout_ms = 3000;
 var player;
 var prefs={};
 var fighters=[];
+var groups=[];
 var fight={};
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 var f_steps=['всё тихо...','кидайте инициативу!','битва!','битва окончена'];
@@ -418,9 +419,6 @@ function render_player_fight() {
   var header =
     '<div class="dnd-flex-cont fullwidth"><div class="dnd-1em"></div>'+
     '<div class="dnd-flex-grow1">Name</div>'+
-    //'<div class="dnd-5em dnd-flex-noresize center mui--divider-left">HP/MAX</div>'+
-    //'<div class="dnd-3em dnd-flex-noresize center mui--divider-left">Arm</div>'+
-    //'<div class="dnd-3em dnd-flex-noresize center mui--divider-left">In</div>'+
     '<div class="dnd-5em dnd-flex-noresize center mui--divider-left">Step</div></div>';
   var str = '';
   var off = '';
@@ -440,32 +438,8 @@ function render_player_fight() {
         '">'+
         fighter.name+' ('+
         fighter.race+')</div>'+
-        //'<div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-          // (fighter.is_npc ?
-          //   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
-          //   : '')+
-        // fighter.hp+
-        //   (fighter.is_npc ?
-        //     '</a> / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
-        //     : ' / ')+
-        // fighter.max_hp+
-        //   (fighter.is_npc ? '</a>' : '')+
-        //   '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
-        //   (fighter.is_npc ?
-        //     '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
-        //     : '')+
-        // fighter.armor_class+
-        //   (fighter.is_npc ? '</a>' : '')+
-        //   '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
-        // (!fighter.is_npc && fight.fase==1 ?
-        //   '<span class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_init_plus\',\'f_init_minus\',\'f_init_set\','+i+'));">'+
-        //   fighter.initiative+'</span>' :
-        // fighter.initiative)+
-          // '</div>'+
         '<div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
           fighter.step_order+
-          // '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
-          // ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
         '</div>'+
       '</div>';
     if(isf){
@@ -720,6 +694,10 @@ function try_connect(){
       if (msg['fight']){
         fight = msg['fight'];
         render_fight();
+      }
+      if (msg['groups']){
+        groups = msg['groups'];
+        render_fight_groups();
       }
       if (msg['fighters']){
         fighters = msg['fighters'];
