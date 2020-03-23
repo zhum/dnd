@@ -267,6 +267,36 @@ div.main.mui-container
   div#fight.mui--hide
     div.dnd-flex-row.fullwidth#fight-list
 
+///////////////////////////////////////////////////////////////////////
+// Templates
+///////////////////////////////////////////////////////////////////////
+div.mui--hide.template data-template-name='tmpl-spell-line'
+  div.mui--divider-right.mui--divider-bottom
+    span.circle-around onclick="formModalHelp(spellFormHelp('{{id}}'))"
+      |&nbsp;?&nbsp;
+    a class="dnd-btn {{active}}" href="#" onclick="activate_spell('{{id}}')"
+      | {{name}}
+    | &nbsp;
+    | {{level}}
+    | &nbsp;
+    i class="icon-{{ready}}" onclick="ready_spell('{{id}}')"
+
+div.mui--hide.template data-template-name='tmpl-thing-line'
+  span.mui--text-left
+    a.dnd-btn.dnd-btn--primary href="#" onclick="formModal(overForm3('thing_plus','thing_minus','thing_set','{{id}}'));"
+      | {{name}}
+  | {{count}}
+
+div.mui--hide.template data-template-name='tmpl-weap-line'
+  div.mui-row.mui--divider-bottom.weapon
+    div.mui-col-xs-6.mui--text-left
+      a.dnd-btn.dnd-btn--primary href="#" onclick="formModal(overForm3('weap_plus','weap_minus','weap_set','{{id}}'));"
+        | {{name}}
+      |&nbsp;{{damage}}d{{damage_dice}}({{damage_type_str}})
+    div.mui-col-xs-1 {{count}}
+    div.mui-col-xs-5.mui--divider-left
+      |{{description}}
+
 javascript:
   var secret="#{{@user.secret}}";
   var player_str='?player_id='+"#{{@player.id}}";

@@ -30,6 +30,10 @@ class FightLogic < DNDLogic
       ws.send fight_to_json(fight, is_master)
     end
     
+    def send_groups ws, adventure
+      ws.send groups_to_json(adventure)
+    end
+    
     def update_fight_for_all fight
       send_all (fight_to_json(fight, false).to_s) {|p| !p.is_master}
       send_all (fight_to_json(fight, true).to_s) {|p| p.is_master}
@@ -41,19 +45,31 @@ class FightLogic < DNDLogic
       # send_fight ws, fight, player.is_master
     end
 
-    def update_npc n, fight, all=false
+    def update_npc ws, n, fight, all=false
       #logger.warn "fighter #{$1} hp=#{$2}"
       npc = NonPlayer.find_by_id(n)
       if npc and npc.fight.id==fight.id
         yield npc
         npc.save
-        send_fight ws, fight, player.is_master
+        send_fight ws, fight, true
         if all
           send_all(fight_to_json(fight,false)){|p| !p.is_master}
         end
       else
         logger.warn "npc=#{npc}"
         logger.warn "#{npc.fight.id}==#{fight.id}" if npc
+      end      
+    end
+
+    def update_npc_grp ws, n, adventure
+      npc = NonPlayer.find_by_id(n)
+      if npc
+        yield npc
+        npc.save
+        logger.warn "npc updated: #{npc.inspect}"
+        send_groups ws, adventure
+      else
+        logger.warn "update_npc_grp falied for npc=#{npc}"
       end      
     end
 
@@ -184,8 +200,8 @@ class FightLogic < DNDLogic
                 fight.fighter_index = 0
                 fight.save
                 logger.warn "Do roll initiative!"
-                #send_fight ws, fight, player.is_master
-                send_all(fight_to_json(fight, is_master)) do |p|
+                send_fight ws, fight, true
+                send_all(fight_to_json(fight, false)) do |p|
                   ! p.is_master
                 end
                 send_all({event: 'roll-initiative'}) do |p|
@@ -224,10 +240,42 @@ class FightLogic < DNDLogic
                 send_fight ws, fight, player.is_master
               end
 
+            when /^npc_name_grp (\d+)=(.*)/
+              npc = NonPlayer.find_by_id($1)
+              if npc && npc.fight_group.adventure==player.adventure
+                update_npc_grp(ws, npc, player.adventure) {|n|
+                  n.name = $2
+                }
+              else
+                logger.warn "Invalid group. Ignore"
+              end
+
+            when /^grp_(\S+) (\d+)=(-?\d+)/
+              logger.warn "group-#{$1} #{$2} =#{$3}"
+              npc = NonPlayer.find_by_id($2)
+              if npc && npc.fight_group.adventure==player.adventure
+                update_npc_grp(ws, npc, player.adventure) {|n|
+                  case $1
+                  when 'hp'
+                    n.hp = $3.to_i
+                  when 'max_hp'
+                    n.max_hp = $3.to_i
+                  when 'ac'
+                    n.armor_class = $3.to_i
+                  when 'init'
+                    n.initiative = $3.to_i
+                  else
+                    logger.warn "Bad type: #{$1}"
+                  end
+                }
+              else
+                logger.warn "Invalid group. Ignore"
+              end
+
             when /^hp (\d+)\/(.)=(-?\d+)/
               logger.warn "fighter #{$1} hp=#{$3}"
               if $2== 'n'
-                update_npc($1, fight) {|npc|
+                update_npc(ws, $1, fight) {|npc|
                   npc.hp = $3.to_i
                 }
               else
@@ -240,7 +288,7 @@ class FightLogic < DNDLogic
 
             when /^max_hp (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} max_hp=#{$2}"
-              update_npc($1, fight) {|npc|
+              update_npc(ws, $1, fight) {|npc|
                 npc.max_hp = $2.to_i
                 # npc.save
                 # send_fight ws, fight, player.is_master
@@ -248,7 +296,7 @@ class FightLogic < DNDLogic
  
             when /^ac (\d+)=(-?\d+)/
               logger.warn "fighter #{$1} ac=#{$2}"
-              update_npc($1, fight) {|npc|
+              update_npc(ws, $1, fight) {|npc|
                 npc.armor_class = $2.to_i
                 # npc.save
                 # send_fight ws, fight, player.is_master

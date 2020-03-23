@@ -8,12 +8,35 @@ var prefs={};
 var fighters=[];
 var groups=[];
 var fight={};
+var templates={};
 var dam_types=['none', 'дрб.', 'кол.', 'руб.'];
 var f_steps=['всё тихо...','кидайте инициативу!','битва!','битва окончена'];
+
+function compile_templates(){
+  _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+  var arr = document.getElementsByClassName('template');
+  var name;
+  _.forEach(arr, function(e){
+    name = e.getAttribute('data-template-name');
+    //var h = e.innerHTML;
+    //console.log('html='+h);
+    templates[name] = _.template(e.innerHTML);
+    //console.log('>>'+templates[name]({}));
+  });
+  
+}
+
 
 function get_over_value(def=1){
   var v = get_int_value('over_value');
   if(Number.isNaN(v))
+    v = def;
+  return v;    
+}
+
+function get_over_text(def=''){
+  var v = get_value('over_value');
+  if(typeof v === 'object' || typeof v === 'undefined' || v=='')
     v = def;
   return v;    
 }
@@ -114,14 +137,21 @@ function get_spell_help(id){
     +txt_or_empty(sp['description']);
 }
 function push_to_spells(str,x,id,keys_visible=false){//icon-info-sign
-  str += '<div class="mui--divider-right mui--divider-bottom">'
-    +  '<span class="circle-around" onclick="formModalHelp(spellFormHelp('+id+'))">&nbsp;?&nbsp;</span>'
-    +  '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')
-    +    '" href="#" onclick="activate_spell('+id+')">'
-    +    x['name']+'</a>&nbsp;'
-    +  x['level']
-    +  '&nbsp;<i class="icon-'+(x['ready'] ? 'ok-sign' : 'circleloaderempty')+'" onclick="ready_spell('+id+')"></i> '
-    +'</div>';
+  str += templates['tmpl-spell-line']({
+    id: id,
+    active: (x['active'] ? ' dnd-btn--primary' : ''),
+    ready: (x['ready'] ? 'ok-sign' : 'circleloaderempty'),
+    name: x['name'],
+    level: x['level']
+  });
+   // '<div class="mui--divider-right mui--divider-bottom">'
+   //  +  '<span class="circle-around" onclick="formModalHelp(spellFormHelp('+id+'))">&nbsp;?&nbsp;</span>'
+   //  +  '<a class="dnd-btn'+(x['active'] ? ' dnd-btn--primary' : '')
+   //  +    '" href="#" onclick="activate_spell('+id+')">'
+   //  +    x['name']+'</a>&nbsp;'
+   //  +  x['level']
+   //  +  '&nbsp;<i class="icon-'+(x['ready'] ? 'ok-sign' : 'circleloaderempty')+'" onclick="ready_spell('+id+')"></i> '
+   //  +'</div>';
   return str;
 }
 
@@ -134,9 +164,14 @@ function render_spells(mod=false){
 }
 
 function push_to_thing(str,x,id,keys_visible=false){
-  str += '<span class="mui--text-left">'+
-   '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'thing_plus\',\'thing_minus\',\'thing_set\','+id+'));">'+
-    x['name']+'</a><span> '+x['count']+'</span></span>';
+  str += templates['tmpl-thing-line']({
+    id: id,
+    name: x['name'],
+    count: x['count']
+  });
+  // '<span class="mui--text-left">'+
+  //  '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'thing_plus\',\'thing_minus\',\'thing_set\','+id+'));">'+
+  //   x['name']+'</a><span> '+x['count']+'</span></span>';
   return str;
 }
 
@@ -151,18 +186,28 @@ function render_things(mod=false){
 }
 
 function push_to_weap(str,x,id,keys_visible){
-  str += '<div class="mui-row mui--divider-bottom weapon">'
-    +  '<div class="mui-col-xs-6 mui--text-left">'
-    +    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\','+id+'));">'
-    +      x['name']
-    +    '&nbsp;'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+')</a>'
-    +  '</div>'
-    +  '<div class="mui-col-xs-1">'+x['count']+'</div>'
-    +  '<div class="mui-col-xs-5 mui--divider-left">'
-    +    x['description']
-    //'</div><div class="mui-col-xs-1 mui--divider-left">'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+
-    +  '</div>'
-    +'</div>';
+  str += templates['tmpl-weap-line']({
+    id: id,
+    name: x['name'],
+    damage: x['damage'],
+    damage_dice: x['damage_dice'],
+    damage_type: x['damage_type'],
+    damage_type_str: dam_types[x['damage_type']],
+    count: x['count'],
+    description: x['description'],
+  });
+   // '<div class="mui-row mui--divider-bottom weapon">'
+   //  +  '<div class="mui-col-xs-6 mui--text-left">'
+   //  +    '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'weap_plus\',\'weap_minus\',\'weap_set\','+id+'));">'
+   //  +      x['name']
+   //  +    '&nbsp;'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+')</a>'
+   //  +  '</div>'
+   //  +  '<div class="mui-col-xs-1">'+x['count']+'</div>'
+   //  +  '<div class="mui-col-xs-5 mui--divider-left">'
+   //  +    x['description']
+   //  //'</div><div class="mui-col-xs-1 mui--divider-left">'+x['damage']+'d'+x['damage_dice']+'('+dam_types[x['damage_type']]+
+   //  +  '</div>'
+   //  +'</div>';
   return str;
 }
 
@@ -580,7 +625,14 @@ function overForm3(f1,f2,f3,arg){
     '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f2+"('"+arg+"');xover();\"> - </a>"+
     '<input type="text" autofocus class="dnd-flex-grow2" id="over_value" onkeydown="if(event.keyCode==13){'+f3+"('"+arg+"');xover();}\"></input>"+
     '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f3+"('"+arg+"');xover();\">OK</a>"+
-  '</div></form>'
+  '</div></form>';
+}
+
+function overFormText(f1,arg){
+  return '<form class="mui--text-center"><div class="dnd-flex-row fullwidth">'+
+    '<input type="text" autofocus class="dnd-flex-grow2" id="over_value" onkeydown="if(event.keyCode==13){'+f1+"('"+arg+"');xover();}\"></input>"+
+    '<a class="dnd-btn dnd-btn--primary dnd-flex-grow1" href="#" onclick="'+f1+"('"+arg+"');xover();\">OK</a>"+
+  '</div></form>';
 }
 
 function spellFormHelp(id){
@@ -734,6 +786,7 @@ function try_connect(){
 /*  INIT  */
 window.onload = function(){
 
+  compile_templates();
   try_connect();
 
   if(typeof(dnd_init)==='function'){

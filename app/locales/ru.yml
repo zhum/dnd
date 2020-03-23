@@ -26,6 +26,7 @@ ru:
   fight-groups: Группы
   npc-type: Монстр
   add-npc: Добавить NPC
+  grp-npc-type: Монстр
 
   fight:
     fights: Битва

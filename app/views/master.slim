@@ -95,9 +95,64 @@ div.main.mui-container
         |&nbsp;
     div.dnd-flex-row.fullwidth#fight-group-list
 
+////////////////////////////////////////////////////////////////////////
+// Templates
+////////////////////////////////////////////////////////////////////////
+div.mui--hide.template data-template-name='tmpl-grp-data'
+  div.mui-row.fullwidth onclick="toggle_item('fight-group-{{ grp_id }}');"
+    div.mui--pull-left.mui--text-center
+      a href="#" onclick="kill_npc_group('{{ grp_id }}');"
+        i.icon-circledelete
+        |&nbsp;
+        | {{ grp_name }}
+    div.mui--pull-right
+      a href="#" onclick="new_npc_group('{{ grp_id }}');"
+        i.icon-plus-sign
+  div.fullwidth.dnd-flex-row id="fight-group-{{ grp_id }}"
+    |{{ data }}
+
+div.mui--hide.template data-template-name='tmpl-grp-line'
+  div.dnd-flex-cont.fullwidth.dnd-npc-fighter
+    div.dnd-flex-grow1
+      a href="#" onclick="del_npc_group('{{grp_id}}','{{npc_id}}')"
+        i.icon-circledelete
+      | &nbsp;
+      a.dnd-btn.dnd-btn--primary href="#" id="g_name_{{npc_id}}" onclick="formModal(overFormText('g_name_set',{{npc_id}}));"
+        |{{npc_name}}
+      | ({{ npc_type }})
+
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+      a.dnd-btn.dnd-btn--primary id="g_hp_{{npc_id}}" href="#" onclick="formModal(overForm3('g_hp_plus','g_hp_minus','g_hp_set',{{npc_id}}));"
+        | {{npc_hp}}
+      | / 
+      a.dnd-btn.dnd-btn--primary id="g_max_hp_{{npc_id}}" href="#" onclick="formModal(overForm3('g_max_hp_plus','g_max_hp_minus','g_max_hp_set',{{npc_id}}));"
+        | {{npc_max_hp}}
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+      a.dnd-btn.dnd-btn--primary id="g_ac_{{npc_id}}" href="#" onclick="formModal(overForm3('g_ac_plus','g_ac_minus','g_ac_set',{{npc_id}}));"
+        | {{npc_armor_class}}
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+      a.dnd-btn.dnd-btn--primary id="g_init_{{npc_id}}" href="#" onclick="formModal(overForm3('g_init_plus','g_init_minus','g_init_set',{{npc_id}}));"
+        | {{npc_initiative}}
+
+div.mui--hide.template data-template-name='tmpl-grp-head'
+  div.dnd-flex-row.fullwidth.dnd-grp-title
+    div.fullwidth.dnd-flex-cont
+      div.dnd-flex-grow1.mui--text-left
+        | Name
+      div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+        | HP/MAX
+      div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+        | Arm
+      div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+        | In
+
 javascript:
   var secret="#{{@user.secret}}";
   var player_str='?player_id='+"#{{@player.id}}";
+
+  //_.templateSettings.interpolate = /{{([s\S]+?)}}/g;
+  //var cp_grp_head = _.template(document.getElementById('tmpl-grp-head'));
+
   function on_websocket_open(ws){
     //ws.send(secret+': get_master');
     ws.send(secret+': player/prefs');
@@ -256,6 +311,51 @@ javascript:
     ws.send(secret+': fight/next');
   }
 
+  // grp change monster name
+  function g_name_set(npc_id){
+    var v = get_over_text('');
+    ws.send(secret+': fight/npc_name_grp '+npc_id+'='+v);
+  }
+
+  // grp change monster parameter
+  function g_modify(type,npc_id,mod){
+    var v = get_over_value(null);
+    var c = get_int_value('g_'+type+'_'+npc_id);
+    if(v === null){
+      if(mod=='=')
+        return
+      v=1
+    }
+    if(mod=='+'){
+      c += v;
+    }
+    else if(mod=='-'){
+      c -= v;
+    }
+    else{
+      c = v;
+    }
+    ws.send(secret+': fight/grp_'+type+' '+npc_id+'='+c);
+  }
+
+  function g_max_hp_plus(c) { g_modify('max_hp',c,'+') }
+  function g_max_hp_minus(c){ g_modify('max_hp',c,'-') }
+  function g_max_hp_set(c)  { g_modify('max_hp',c,'=') }
+
+  function g_hp_plus(c) { g_modify('hp',c,'+') }
+  function g_hp_minus(c){ g_modify('hp',c,'-') }
+  function g_hp_set(c)  { g_modify('hp',c,'=') }
+
+  function g_ac_plus(c) { g_modify('ac',c,'+') }
+  function g_ac_minus(c){ g_modify('ac',c,'-') }
+  function g_ac_set(c)  { g_modify('ac',c,'=') }
+
+  function g_init_plus(c) { g_modify('init',c,'+') }
+  function g_init_minus(c){ g_modify('init',c,'-') }
+  function g_init_set(c)  { g_modify('init',c,'=') }
+
+
+
   // add npc to group
   function new_npc_group(id){
     var npc_type = document.getElementById("grp-npc-type").value;
@@ -276,47 +376,32 @@ javascript:
   }
   /////////////////////////////////////////////////////////////////////////////
   function render_fight_group(grp) {
-    var str = '<div class="mui-row fullwidth" onclick="toggle_item(\'fight-group-'+grp.id+'\');">'+
-      '<div class="mui--pull-left">'+
-      '<a href="#" onclick="kill_npc_group('+grp.id+');">'+
-        '<i class="icon-circledelete"></i></a>&nbsp;'+
-        grp.name+'</div><div class="mui--pull-right">'+
-      // '<a href="#" onclick="del_npc_group('+grp.id+');">'+
-      //   '<i class="icon-minus-sign"></i></a>'+
-      '<a href="#" onclick="new_npc_group('+grp.id+');">'+
-        '<i class="icon-plus-sign"></i></a></div></div>'+
-      '<div id="fight-group-'+grp.id+'" class="fullwidth dnd-flex-row">';
+    var str = '';//templates['tmpl-grp-head']({grp_id: grp.id, grp_name: grp.name});
     var npc = grp.npc;
     var len = npc.length;
     for (var i = 0; i <len; i++) {
-      var arg = {i: i, grp: grp.id};
-      str += 
-        '<div class="dnd-flex-cont fullwidth dnd-npc-fighter">'+
-          //'<div class="dnd-1em dnd-flex-noresize">'+
-          //</div>'+
-          '<div class="dnd-flex-grow1">'+
-            '<a href="#" onclick="del_npc_group('+grp.id+','+npc[i].id+')"><i class="icon-circledelete"></i></a>&nbsp;'+
-            npc[i].name+' ('+
-          npc[i].npc_type+')</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-            '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'g_hp_plus\',\'g_hp_minus\',\'g_hp_set\','+arg+'));">'+
-          npc[i].hp+
-              '</a> / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'g_max_hp_plus\',\'g_max_hp_minus\',\'g_max_hp_set\','+arg+'));">'+
-          npc[i].max_hp+'</a></div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-            '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'g_ac_plus\',\'g_ac_minus\',\'g_ac_set\','+arg+'));">'+
-          npc[i].armor_class+
-            '</a></div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-          npc[i].initiative+'</div>'+
-        '</div>'; //cont
+      //var arg = {i: i, grp: grp.id};
+      str += templates['tmpl-grp-line']({
+        grp_id: grp.id,
+        //arg: '{i: '+i+', grp: '+grp.id+'}',
+        npc_id: npc[i].id,
+        npc_name: npc[i].name,
+        npc_type: npc[i].npc_type,
+        npc_armor_class: npc[i].armor_class,
+        npc_hp: npc[i].hp,
+        npc_max_hp: npc[i].max_hp,
+        npc_initiative: npc[i].initiative,
+      });
     }
-    return str+'</div>'; //row
+    return templates['tmpl-grp-data']({
+      data: str,
+      grp_id: grp.id,
+      grp_name: grp.name
+    });
   }
 
   function render_fight_groups() {
-    var str = '<div class="dnd-flex-row fullwidth dnd-grp-title"><div class="fullwidth dnd-flex-cont">'+
-      '<div class="dnd-flex-grow1 mui--text-left">Name'+
-      '</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">HP / MAX HP</div>'+
-      '<div class="dnd-5em dnd-flex-noresize center mui--divider-left">Armor class</div>'+
-      '<div class="dnd-5em dnd-flex-noresize center mui--divider-left">Initiative</div></div></div>';
+    var str = templates['tmpl-grp-head']({});
     _.forEach(groups, function(grp){
       str += render_fight_group(grp);
     });
