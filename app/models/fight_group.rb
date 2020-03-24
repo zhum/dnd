@@ -11,11 +11,11 @@ class FightGroup < ActiveRecord::Base
 
   has_many   :non_players, dependent: :destroy
 
-  def self.to_fight fight
+  def to_fight fight
     non_players.each do |f|
       new_fighter = f.dup
       new_fighter.fight_group = nil
-      fight << new_fighter
+      fight.non_players << new_fighter
     end
   end
 end

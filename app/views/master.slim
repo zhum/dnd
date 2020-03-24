@@ -106,7 +106,10 @@ div.mui--hide.template data-template-name='tmpl-grp-data'
         |&nbsp;
         | {{ grp_name }}
     div.mui--pull-right
-      a href="#" onclick="new_npc_group('{{ grp_id }}');"
+      a href="#" onclick="event.stopPropagation(); group2fight('{{ grp_id }}');"
+        i.icon-upload
+      |&nbsp;
+      a href="#" onclick="event.stopPropagation(); new_npc_group('{{ grp_id }}');"
         i.icon-plus-sign
   div.fullwidth.dnd-flex-row id="fight-group-{{ grp_id }}"
     |{{ data }}
@@ -145,6 +148,49 @@ div.mui--hide.template data-template-name='tmpl-grp-head'
         | Arm
       div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
         | In
+///////////////////////////////////////////////////////////////////////
+/// fight
+///////////////////////////////////////////////////////////////////////
+
+div.mui--hide.template data-template-name='tmpl-fight-head'
+  div.dnd-flex-cont.fullwidth
+    div.dnd-flex-grow1 Name
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left HP/MAX
+    div.dnd-3em.dnd-flex-noresize.center.mui--divider-left Arm
+    div.dnd-3em.dnd-flex-noresize.center.mui--divider-left In
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left Step
+  
+div.mui--hide.template data-template-name='tmpl-fight-line'
+  div.dnd-flex-cont.fullwidth
+    div class="dnd-1em {{cur_fighter_class}}"
+    /'+(fight.fighter_index==i ? ' dnd-cur-fighter' : '')+'
+    div class="dnd-flex-grow1 {{f_class}}"
+      | {{marker}}
+      i class="{{del_class}}" onclick="{{del_action}}({{i}})"
+      |&nbsp;
+      |{{name}} ({{race}})
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+      span class="{{hp_edit_class}}" onclick="{{hp_edit_action}};"
+        |{{hp}}
+      |/
+      span class="{{npc_edit_class}}" onclick="{{max_hp_edit_action}};"
+        |{{max_hp}}
+    div.dnd-3em.dnd-flex-noresize.center.mui--divider-left
+      span class="{{npc_edit_class}}" onclick="{{ac_edit_action}};"
+        |{{armor_class}}
+    div.dnd-3em.dnd-flex-noresize.center.mui--divider-left
+      span class="{{init_edit_class}}" onclick="{{init_edit_action}};"
+        |{{initiative}}
+    div.dnd-5em.dnd-flex-noresize.center.mui--divider-left
+      |{{step_order}}
+      |&nbsp;
+      i.icon-fastdown onclick="fight_step_down({{i}})"
+      |&nbsp;
+      i.icon-fastup onclick="fight_step_up({{i}})"
+      |&nbsp;
+
+
+
 
 javascript:
   var secret="#{{@user.secret}}";
@@ -309,6 +355,11 @@ javascript:
 
   function next_fighter(){
     ws.send(secret+': fight/next');
+  }
+
+
+  function group2fight(grp_id){
+    ws.send(secret+': fight/group2fight '+grp_id);
   }
 
   // grp change monster name

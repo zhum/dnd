@@ -410,42 +410,63 @@ function render_master_fight() {
     var fighter = info[0];
     var i = info[1];
     var isf = fighter.is_fighter;
-    add = 
-      '<div class="dnd-flex-cont fullwidth">'+
-        '<div class="dnd-1em'+(fight.fighter_index==i ? ' dnd-cur-fighter' : '')+'"></div>'+
-        '<div class="dnd-flex-grow1 '+
-        (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter')+
-        '">'+
-        '<i class="icon-'+(isf ? 'circledelete' : 'fatundo')+'" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
-        fighter.name+' ('+
-        fighter.race+')</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-          ((fighter.is_npc || fight.fase==2) ?
-            '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
-            : '')+
-        fighter.hp+
-          ((fighter.is_npc || fight.fase==2) ? '</a>' : '')+
-          (fighter.is_npc ?
-            ' / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
-            : ' / ')+
-        fighter.max_hp+
-          (fighter.is_npc ? '</a>' : '')+
-          '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
-          (fighter.is_npc ?
-            '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
-            : '')+
-        fighter.armor_class+
-          (fighter.is_npc ? '</a>' : '')+
-          '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
-        (!fighter.is_npc && fight.fase==1 ?
-          '<span class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_init_plus\',\'f_init_minus\',\'f_init_set\','+i+'));">'+
-          fighter.initiative+'</span>' :
-        fighter.initiative)+
-          '</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
-          fighter.step_order+
-          '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
-          ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
-        '</div>'+
-      '</div>';
+    add = templates['tmpl-fight-line']({
+      cur_fighter_class: (fight.fighter_index==i ? 'dnd-cur-fighter' : ''),
+      f_class: (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter'),
+      del_class: (isf ? 'circledelete' : 'fatundo'),
+      del_action: (isf ? 'fighter_delete' : 'fighter_restore'),
+      marker: (fight.fighter_index==i ? 'dnd-cur-fighter' : ''),
+      name: fighter.name,
+      race: fighter.race,
+      hp_edit_class: ((fighter.is_npc || fight.fase==2) ? 'dnd-btn dnd-btn--primary' : ''),
+      hp_edit_action: ((fighter.is_npc || fight.fase==2) ? "formModal(overForm3('f_hp_plus','f_hp_minus','f_hp_set','"+i+"'));" : ''),
+      hp: fighter.hp,
+      initiative: fighter.initiative,
+      max_hp: fighter.max_hp,
+      armor_class: fighter.armor_class,
+      npc_edit_class: (fighter.is_npc ? 'dnd-btn dnd-btn--primary' : ''),
+      max_hp_edit_action: ((fighter.is_npc || fight.fase==2) ? "formModal(overForm3('max_f_hp_plus','max_f_hp_minus','max_f_hp_set','"+i+"'));" : ''),
+      ac_edit_action: (fighter.is_npc ? "formModal(overForm3('f_ac_plus','f_ac_minus','f_ac_set','"+i+"'));" : ''),
+      init_edit_class: (!fighter.is_npc && fight.fase==1 ? 'dnd-btn dnd-btn--primary' : ''),
+      init_edit_action: (!fighter.is_npc && fight.fase==1 ? "formModal(overForm3('f_init_plus','f_init_minus','f_init_set','"+i+"'));" : ''),
+      step_order: fighter.step_order,
+      i: i
+    });
+      // '<div class="dnd-flex-cont fullwidth">'+
+      //   '<div class="dnd-1em'+(fight.fighter_index==i ? ' dnd-cur-fighter' : '')+'"></div>'+
+      //   '<div class="dnd-flex-grow1 '+
+      //   (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter')+
+      //   '">'+
+      //   '<i class="icon-'+(isf ? 'circledelete' : 'fatundo')+'" onclick="'+(isf ? 'fighter_delete' : 'fighter_restore')+'('+i+')"></i>&nbsp;'+
+      //   fighter.name+' ('+
+      //   fighter.race+')</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
+      //     ((fighter.is_npc || fight.fase==2) ?
+      //       '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_hp_plus\',\'f_hp_minus\',\'f_hp_set\','+i+'));">'
+      //       : '')+
+      //   fighter.hp+
+      //     ((fighter.is_npc || fight.fase==2) ? '</a>' : '')+
+      //     (fighter.is_npc ?
+      //       ' / <a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_max_hp_plus\',\'f_max_hp_minus\',\'f_max_hp_set\','+i+'));">'
+      //       : ' / ')+
+      //   fighter.max_hp+
+      //     (fighter.is_npc ? '</a>' : '')+
+      //     '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
+      //     (fighter.is_npc ?
+      //       '<a class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_ac_plus\',\'f_ac_minus\',\'f_ac_set\','+i+'));">'
+      //       : '')+
+      //   fighter.armor_class+
+      //     (fighter.is_npc ? '</a>' : '')+
+      //     '</div><div class="dnd-3em dnd-flex-noresize center mui--divider-left">'+
+      //   (!fighter.is_npc && fight.fase==1 ?
+      //     '<span class="dnd-btn dnd-btn--primary" href="#" onclick="formModal(overForm3(\'f_init_plus\',\'f_init_minus\',\'f_init_set\','+i+'));">'+
+      //     fighter.initiative+'</span>' :
+      //   fighter.initiative)+
+      //     '</div><div class="dnd-5em dnd-flex-noresize center mui--divider-left">'+
+      //     fighter.step_order+
+      //     '&nbsp;<i class="icon-fastdown" onclick="fight_step_down('+i+')"></i>&nbsp;'+
+      //     ' <i class="icon-fastup" onclick="fight_step_up('+i+')"></i>&nbsp;'+
+      //   '</div>'+
+      // '</div>';
     if(isf){
       str += add;
     }

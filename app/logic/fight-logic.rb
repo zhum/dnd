@@ -250,6 +250,16 @@ class FightLogic < DNDLogic
                 logger.warn "Invalid group. Ignore"
               end
 
+            when /^group2fight (\d+)/
+              logger.warn "group2fight #{$1}"
+              grp = FightGroup.find_by_id($1)
+              if grp && grp.adventure == player.adventure
+                grp.to_fight fight
+                update_fight_for_all fight 
+              else
+                logger.warn "Bad fight group. Ignore"
+              end
+              
             when /^grp_(\S+) (\d+)=(-?\d+)/
               logger.warn "group-#{$1} #{$2} =#{$3}"
               npc = NonPlayer.find_by_id($2)
