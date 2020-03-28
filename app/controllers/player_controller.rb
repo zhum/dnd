@@ -25,6 +25,42 @@ class PlayerController < BaseApp
     @title = "Создайте персонажа"
     slim :player_create
   end
+
+  # player profile view
+  get '/profile' do
+    slim :player_profile
+  end
+  
+  # player profile update
+  post '/profile' do
+    slim :player_profile
+  end
+  
+  # player profile update
+  post '/profile/avatar' do
+    id = session[:player_id].to_i
+    if id > 0
+      file_data = params[:data]
+      if file_data =~ /data:image\/([a-z]+);base64,(.*)/
+        if $1 == 'png'
+          File.open("app/static/img/player_#{id}.png","wb"){|f|
+            f.write Base64.decode64($2)
+          }
+          flash[:info] = t('avatar-saved')
+        else
+          logger.warn "Oooops! Bad image type (#{$1})"
+          flash[:warn] = t('something-wrong')
+        end
+      else
+        flash[:warn] = t('something-wrong')
+        logger.warn "Oops! Bad form data: #{file_data[0 .. 40]} ..."
+      end
+    else
+      flash[:warn] = t('something-wrong')
+    end
+    redirect '/player/profile'
+    logger.warn "Oops! Unauthorized yet..."
+  end
   
   # player interface
   get '/' do

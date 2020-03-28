@@ -111,6 +111,9 @@ class BaseApp < Sinatra::Base
   def authenticate!
     if session[:user_id].to_i==0
       flash[:warn]="Упс! переход на #{request.path} невозможен - не удалась аутентификация :("
+      session[:player_id]=0
+      session[:master_id]=0
+      session[:secret]=''
       redirect '/auth'
     end
   end

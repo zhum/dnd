@@ -293,7 +293,8 @@ div.mui--hide.template data-template-name='tmpl-weap-line'
       a.dnd-btn.dnd-btn--primary href="#" onclick="formModal(overForm3('weap_plus','weap_minus','weap_set','{{id}}'));"
         | {{name}}
       |&nbsp;{{damage}}d{{damage_dice}}({{damage_type_str}})
-    div.mui-col-xs-1 {{count}}
+    div.mui-col-xs-1
+      |{{count}}
     div.mui-col-xs-5.mui--divider-left
       |{{description}}
 

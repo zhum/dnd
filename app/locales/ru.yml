@@ -28,6 +28,9 @@ ru:
   add-npc: Добавить NPC
   grp-npc-type: Монстр
 
+  something-wrong: Что-то пошло не так
+  avatar-saved: Аватарка обновлена успешно!
+
   fight:
     fights: Битва
     round: Раунд
