@@ -52,22 +52,22 @@ class Player < ActiveRecord::Base
   has_many :prefs
 
   has_many :weaponings
-  has_many :weapons, through: :weaponings
+  has_many :weapons, through: :weaponings, foreign_key: 'item_id', source: :item
 
   has_many :armorings
-  has_many :armors, through: :armorings
+  has_many :armors, through: :armorings, foreign_key: 'item_id', source: :item
 
   has_many :thingings
-  has_many :things, through: :thingings
+  has_many :things, through: :thingings, foreign_key: 'item_id', source: :item
 
   has_many :skillings
   has_many :skills, through: :skillings
 
   has_many :featurings
-  has_many :features, through: :featurings
+  has_many :features, through: :featurings, foreign_key: 'item_id', source: :item
 
   has_many :spellings
-  has_many :spells, through: :spellings
+  has_many :spells, through: :spellings, foreign_key: 'item_id', source: :item
   has_many :spell_affects
   has_many :spell_actives, class_name: "SpellAffect", foreign_key: "owner_id"
 
@@ -201,7 +201,7 @@ class Player < ActiveRecord::Base
 
     case attr_name
     when 'armor_class'
-      w_armors = armorings.select {|a| a.wear}.map{|w| w.armor}
+      w_armors = armorings.select {|a| a.wear}.map{|w| w.item}
       #wear = (w_armors.size > 0) ? 0 : 1
       (
         features.select{|f|
@@ -212,10 +212,10 @@ class Player < ActiveRecord::Base
       ).max
     when 'speed'
       base = chars.where(name: 'speed').take.value
-      if armorings.all.any?{|x| x.wear && x.armor.is_heavy}
+      if armorings.all.any?{|x| x.wear && x.item.is_heavy}
         if self.race.name != 'dwarf_mountain' && self.race.name != 'dwarf_hill' &&
            self.race.name != 'dwarf_gray'
-          return base - 10 if x.armor.power < self.mod_strength
+          return base - 10 if x.item.power < self.mod_strength
         end
       end
       base
@@ -227,7 +227,7 @@ class Player < ActiveRecord::Base
 
   def all_weapon
     weaponings.all.map{|w|
-      ww = w.weapon;
+      ww = w.item;
       atrs = ['name','countable','description','damage',
               'damage_dice','cost','damage_type','weight'].map{|x|
         [x,ww.read_attribute(x)]
@@ -285,14 +285,14 @@ class Player < ActiveRecord::Base
 
     h << ['weapons',Hash[all_weapon]]
     h << ['things',Hash[thingings.all.map{|t|
-      tt=t.thing;
+      tt=t.item;
       [t.id,{count: t.count}.merge(Hash[
         ['name','cost','weight'].map{|x| [x,tt.read_attribute(x)]}])
       ]
     }]]
     h << ['armors',Hash[self.armorings.all.map{|a|
       #logger.warn "A=#{a.inspect}"
-      aa = a.armor
+      aa = a.item
       [a.id, {name: aa.name, count: a.count, wear: a.wear}]}]
     ]
 
@@ -306,7 +306,7 @@ class Player < ActiveRecord::Base
       }
     ]]
     h << ['features',Hash[self.featurings.all.map { |e|
-        s = e.feature
+        s = e.item
         [e.id, {name: s.name,
                 max_count: s.max_count,
                 description: s.description,
@@ -315,7 +315,7 @@ class Player < ActiveRecord::Base
     ]]
 
     h << ['spells',Hash[self.spellings.all.map { |e|
-        s = e.spell
+        s = e.item
         [s.id, {name: s.name,
                 description: s.description,
                 ready: e.ready ? true : false,
@@ -388,13 +388,13 @@ class Player < ActiveRecord::Base
   def get_bad_stealth
     bad = Armoring.all.any?{ |a|
       #logger.warn "#{a.armor.bad_stealth} && #{a.wear}"
-      a.armor.bad_stealth && a.wear
+      a.item.bad_stealth && a.wear
     }
   end
 
   def get_speed_low
     bad = Armoring.all.any?{ |a|
-      a.armor.is_heavy && a.wear && a.armor.power>self.get_mod(:strength)
+      a.item.is_heavy && a.wear && a.item.power>self.get_mod(:strength)
     }
     if bad
       10
@@ -405,7 +405,7 @@ class Player < ActiveRecord::Base
 
   def get_bads_from_wear
     bad = armorings.any?{ |a|
-      logger.warn "--- #{a.armor.name}/#{a.wear}/#{a.proficiency}"
+      logger.warn "--- #{a.item.name}/#{a.wear}/#{a.proficiency}"
       a.wear && ! a.proficiency
     }
     if bad

@@ -782,12 +782,9 @@ function try_connect(){
         else{ // MASTER
           render_master_fight();
         }
-        // else if(player && fight.fase==1){
-        //   render_dice_roll();
-        // }
-        // }else if(fight.render==2){
-        //   render_player_fight();
-        // }
+      }
+      if (msg['redirect']){
+        window.location.href = msg['redirect'];
       }
       if (msg['flash']){
         var el = document.getElementById('dnd-flash')

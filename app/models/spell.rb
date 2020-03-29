@@ -21,4 +21,5 @@ class Spell < ActiveRecord::Base
   # t.string  :description
   # t.string  :components
   # t.integer :distance
+  has_many :spelling, inverse_of: :item
 end

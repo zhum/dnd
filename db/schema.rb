@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_103537) do
+ActiveRecord::Schema.define(version: 2020_03_29_131535) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 2020_03_21_103537) do
 
   create_table "armorings", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "armor_id"
+    t.integer "item_id"
     t.integer "count"
     t.integer "max_count"
     t.boolean "wear"
     t.boolean "proficiency"
-    t.index ["armor_id"], name: "index_armorings_on_armor_id"
+    t.index ["item_id"], name: "index_armorings_on_item_id"
     t.index ["player_id"], name: "index_armorings_on_player_id"
   end
 
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 2020_03_21_103537) do
 
   create_table "featurings", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "feature_id"
+    t.integer "item_id"
     t.integer "count"
-    t.index ["feature_id"], name: "index_featurings_on_feature_id"
+    t.index ["item_id"], name: "index_featurings_on_item_id"
     t.index ["player_id"], name: "index_featurings_on_player_id"
   end
 
@@ -254,11 +254,11 @@ ActiveRecord::Schema.define(version: 2020_03_21_103537) do
   end
 
   create_table "spellings", force: :cascade do |t|
-    t.integer "spell_id"
+    t.integer "item_id"
     t.integer "player_id"
     t.boolean "ready"
+    t.index ["item_id"], name: "index_spellings_on_item_id"
     t.index ["player_id"], name: "index_spellings_on_player_id"
-    t.index ["spell_id"], name: "index_spellings_on_spell_id"
   end
 
   create_table "spells", force: :cascade do |t|
@@ -274,11 +274,11 @@ ActiveRecord::Schema.define(version: 2020_03_21_103537) do
 
   create_table "thingings", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "thing_id"
+    t.integer "item_id"
     t.integer "count"
     t.string "modificator"
+    t.index ["item_id"], name: "index_thingings_on_item_id"
     t.index ["player_id"], name: "index_thingings_on_player_id"
-    t.index ["thing_id"], name: "index_thingings_on_thing_id"
   end
 
   create_table "things", force: :cascade do |t|
@@ -297,11 +297,11 @@ ActiveRecord::Schema.define(version: 2020_03_21_103537) do
 
   create_table "weaponings", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "weapon_id"
+    t.integer "item_id"
     t.integer "count"
     t.integer "max_count"
+    t.index ["item_id"], name: "index_weaponings_on_item_id"
     t.index ["player_id"], name: "index_weaponings_on_player_id"
-    t.index ["weapon_id"], name: "index_weaponings_on_weapon_id"
   end
 
   create_table "weapons", force: :cascade do |t|
@@ -323,5 +323,5 @@ ActiveRecord::Schema.define(version: 2020_03_21_103537) do
   add_foreign_key "spell_affects", "players"
   add_foreign_key "spell_affects", "spellings"
   add_foreign_key "spellings", "players"
-  add_foreign_key "spellings", "spells"
+  add_foreign_key "spellings", "spells", column: "item_id"
 end

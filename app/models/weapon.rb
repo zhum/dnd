@@ -18,8 +18,7 @@
 #
 
 class Weapon < ActiveRecord::Base
-  #belongs_to :player
-  has_many :weaponings
+  has_many :weaponings, inverse_of: :item
 
   def short_description
     "#{weight}фнт. #{damage}d#{damage_dice} #{damage_type} #{description}"

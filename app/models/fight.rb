@@ -78,7 +78,7 @@ class Fight < ActiveRecord::Base
   end
 
   # TODO: take is_master into account... do not show some fields to players
-  def get_fighters(is_master,locale='ru')
+  def get_fighters(is_master,locale=:ru)
     I18n.locale = locale
     logger.warn "get_fighters: "+adventure.players.map { |e| "#{e.name}/#{e.is_fighter}"}.join(';')
     players = adventure.players

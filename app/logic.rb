@@ -1,5 +1,8 @@
 class DNDLogic
   class<<self
+    include ::AppHelpers
+    include ::PartitionHelpers
+
     def logger
       DNDLogger.logger
     end
@@ -70,6 +73,7 @@ class DNDLogic
 
     def process_message ws,user,player,text,opts={}
       logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
+      I18n.default_locale = opts[:locale] || :ru
       begin
         case text
         when 'hello'

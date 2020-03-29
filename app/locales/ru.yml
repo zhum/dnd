@@ -62,6 +62,7 @@ ru:
   rules: Правила
   map: Карта
   notes: Заметки
+  not_enough_money: Недостаточно денег
 
   fight:
     fights: Битва

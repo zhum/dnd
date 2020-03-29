@@ -6,7 +6,7 @@ class PlayerLogic < DNDLogic
       if w.player != opts[:player]
         logger.warn "Bad #{opts[:name]} - not belongs to player!"
       else
-        if opts[:count]<1
+        if opts[:count] < 1
           logger.warn "Deleting this #{opts[:name]}"
           w.destroy
         else
@@ -23,26 +23,35 @@ class PlayerLogic < DNDLogic
     def buy player, klass, klass_proxy, id, extra
       logger.warn "BUY! #{id} #{extra}"
       t = klass.find(id)
+      logger.warn "t=#{t.inspect}"
       exclusive = extra.delete :exclusive
       take_money = extra.delete :money
-      name = klass.to_s.downcase.to_sym
       ok = true
-      item = klass_proxy.where(player: player, name => t).take
-      if item.count > 0 #.armors.include? t
+      item = klass_proxy.where(player: player, item: t).take
+      logger.warn "item=#{item}"
+      if item && item.count > 0
         if exclusive
           logger.warn "#{klass} is already bought"
           ok = false
         else
-          item.count += extra[:count] || 1
-          item.save
+          if take_money
+            if ! player.reduce_money t.cost
+              ok = false
+              # flash[:info] = t('not-enough-money')
+            else
+              item.count += extra[:count] || 1
+              item.save
+            end
+          end
         end
       else
-        x = klass_proxy.create!({player: player, name => t}.merge(extra))
+        x = klass_proxy.create!({player: player, item: t}.merge(extra))
 
         if take_money
           if ! player.reduce_money t.cost
             x.destroy
             ok = false
+            # flash[:info] = t('not-enough-money')
           end
         end
       end
@@ -78,7 +87,7 @@ class PlayerLogic < DNDLogic
           id = $2.to_i
           type = $4.to_i
           logger.warn "----------------- TYPE=#{type}"
-          case $1
+          result = case $1
           when 'things'
             buy player, Thing, Thinging, id, {count: 1, money: 1}
           when 'armor'
@@ -90,7 +99,12 @@ class PlayerLogic < DNDLogic
           when 'spells'
             buy player, Spell, Spelling, id, {}
           end
-          player.save
+          if result
+            player.save
+            ws.send redirect: '/player'
+          else
+            ws.send({flash: t('not_enough_money')}.to_json)
+          end
 
         # send chat history
         when 'get_chat'

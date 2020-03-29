@@ -8,7 +8,7 @@
 #  weight :integer
 #
 class Thing < ActiveRecord::Base
-  has_many :thingings
+  has_many :thingings, inverse_of: :item
 
   def short_description
     "#{weight}фнт."

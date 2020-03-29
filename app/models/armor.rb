@@ -16,7 +16,7 @@
 #  is_heavy        :boolean          default("0")
 #
 class Armor < ActiveRecord::Base
-  has_many :armoring
+  has_many :armoring, inverse_of: :item
 
   def short_description
     "#{weight}фнт. #{klass}кл. #{description}"

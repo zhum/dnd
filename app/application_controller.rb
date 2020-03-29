@@ -120,7 +120,7 @@ class BaseApp < Sinatra::Base
 
   before do
     #env['rack.errors'] = $logger
-    I18n.locale = 'ru' || params[:locale]
+    I18n.locale = params[:locale] || :ru
     logger.warn "session: user_id=#{session[:user_id]}; player_id=#{session[:player_id]}; master_id=#{session[:master_id]}; secret=#{session[:secret]}"
     pass if request.path=='/auth' or request.path=='/register'
     if request.websocket? #!!!!!!!!! FIXME! Do auth for websocket too

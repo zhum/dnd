@@ -9,7 +9,7 @@
 #  modificator :string
 #
 class Thinging < ActiveRecord::Base
-  belongs_to :thing
+  belongs_to :item, class_name: 'Thing' 
   belongs_to :player
 
   #count

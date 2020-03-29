@@ -9,5 +9,5 @@
 #
 class Spelling < ActiveRecord::Base
   belongs_to :player
-  belongs_to :spell
+  belongs_to :item, class_name: 'Spell'
 end
