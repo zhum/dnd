@@ -250,15 +250,24 @@ class Player < ActiveRecord::Base
     weaponing.delete
   end
 
-  def reduce_money ammount
+  # returns true if money was reduced
+  def reduce_money amount
     total = mcoins+10*scoins+100*gcoins+50*ecoins+1000*pcoins
-    total -= ammount
-    total = 0 if total<0
+    return false if total < amount
+    total -= amount
+    pc = total / 1000
+    total %= 1000
     gc = total / 100
     total %= 100
+    em = 0
+    if total > 50
+      total -= 50
+      em = 1
+    end
     sc = total / 10
     mc = total % 10
-    update(mcoins: mc, scoins: sc, gcoins: gc, ecoins: 0, pcoins: 0)
+    update(mcoins: mc, scoins: sc, gcoins: gc, ecoins: em, pcoins: pc)
+    true
   end
 
   def to_json

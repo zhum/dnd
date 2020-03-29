@@ -18,14 +18,36 @@ class PlayerLogic < DNDLogic
       end
     end
 
+    # player, armor/weapon/..., armoring/..., id, {count: N, ...}
+    # exclusive = only one element allowed
     def buy player, klass, klass_proxy, id, extra
+      logger.warn "BUY! #{id} #{extra}"
       t = klass.find(id)
+      exclusive = extra.delete :exclusive
+      take_money = extra.delete :money
       name = klass.to_s.downcase.to_sym
-      if klass_proxy.where(player: player, name => t).count > 0 #.armors.include? t
-        logger.warn "#{klass} is already bought"
+      ok = true
+      item = klass_proxy.where(player: player, name => t).take
+      if item.count > 0 #.armors.include? t
+        if exclusive
+          logger.warn "#{klass} is already bought"
+          ok = false
+        else
+          item.count += extra[:count] || 1
+          item.save
+        end
       else
-        klass_proxy.create({player: player, name => t}.merge(extra)).save
+        x = klass_proxy.create!({player: player, name => t}.merge(extra))
+
+        if take_money
+          if ! player.reduce_money t.cost
+            x.destroy
+            ok = false
+          end
+        end
       end
+      logger.warn "success=#{ok}"
+      ok
     end
 
     def process_message ws,user,player,text,opts={}
@@ -58,13 +80,13 @@ class PlayerLogic < DNDLogic
           logger.warn "----------------- TYPE=#{type}"
           case $1
           when 'things'
-            buy player, Thing, Thinging, id, {count: 1}
+            buy player, Thing, Thinging, id, {count: 1, money: 1}
           when 'armor'
-            buy player, Armor, Armoring, id, {count: 1}
+            buy player, Armor, Armoring, id, {count: 1, money: 1}
           when 'weapon'
-            buy player, Weapon, Weaponing, id, {count: 1}
+            buy player, Weapon, Weaponing, id, {count: 1, money: 1}
           when 'feature'
-            buy player, Feature, Featuring, id, {count: 1}
+            buy player, Feature, Featuring, id, {count: 1, money: 1}
           when 'spells'
             buy player, Spell, Spelling, id, {}
           end

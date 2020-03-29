@@ -8,36 +8,6 @@ require "base64"
 class DNDController < BaseApp
   WSregex = Regexp.new '^(\S+): (.*)'
 
-  # get '/avatar-upload' do
-  #   slim :'avatar-upload'    
-  # end
-
-  # post '/avatar-upload-crop' do
-  #   id = session[:player_id].to_i
-  #   if id > 0
-  #     file_data = params[:data]
-  #     if file_data =~ /data:image\/([a-z]+);base64,(.*)/
-  #       if $1 == 'png'
-  #         File.open("app/static/img/player_#{id}.png","wb"){|f|
-  #           f.write Base64.decode64($2)
-  #         }
-  #         flash[:info] = t('avatar-saved')
-  #         redirect '/player/profile'
-  #       else
-  #         logger.warn "Oooops! Bad image type (#{$1})"
-  #         flash[:warn] = t('something-wrong')
-  #         redirect '/avatar-upload'
-  #       end
-  #     else
-  #       flash[:warn] = t('something-wrong')
-  #       logger.warn "Oops! Bad form data: #{file_data[0 .. 40]} ..."
-  #       redirect '/avatar-upload'
-  #     end
-  #   else
-  #     redirect '/avatar-upload'
-  #   end
-  # end
-
   get '/img/player/:player_id' do
     id = params[:player_id].to_i
     if id == 0
