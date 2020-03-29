@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_131535) do
+ActiveRecord::Schema.define(version: 2020_03_29_174249) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "name"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 2020_03_29_131535) do
     t.integer "armor_class"
     t.integer "initiative", default: 0
     t.integer "pass_attentiveness", default: 0
+    t.boolean "is_tmp", default: false
   end
 
   create_table "npc_weapons", force: :cascade do |t|

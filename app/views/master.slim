@@ -29,6 +29,7 @@ div.main.mui-container
         a href='/logout' alt="#{t('logout')}" title="#{t('logout')}"
           i.icon-exitalt
 
+  // FIGHT
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight');"
       = t('fight.fights')
@@ -51,6 +52,8 @@ div.main.mui-container
       |&nbsp;
       span#next-fighter-btn.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised.mui--hide onclick="next_fighter();"
         = t('fight.next')
+
+    // ADD MONSTER
     div.dnd-flex-cont.mui--z2.fullwidth
       span.mui-select.dnd-flex-grow1
         label for='race_id'
@@ -70,9 +73,52 @@ div.main.mui-container
       span.dnd-1em
         |&nbsp;
 
+    // ADD TMP MONSTER
+    div.dnd-flex-cont.mui--z2.fullwidth
+      span.mui-textfield.mui-textfield--float-label.dnd-flex-grow1
+        label
+          = t('npc-type')
+        input#tmp_race_id name="tmp_race_id" size="10"
+      span.dnd-1em
+        |&nbsp;
+      span.mui-textfield.mui-textfield--float-label.dnd-flex-grow0
+        label
+          = t('hp')
+        input#tmp_hp name="tmp_hp" size="3"
+      span.dnd-1em
+        |&nbsp;
+      span.mui-textfield.mui-textfield--float-label.dnd-flex-grow0
+        label
+          = t('max_hp')
+        input#tmp_max_hp name="tmp_max_hp" size="3"
+      span.dnd-1em
+        |&nbsp;
+      span.mui-textfield.mui-textfield--float-label.dnd-flex-grow0
+        label
+          = t('armor_short')
+        input#tmp_armor name="tmp_armor" size="3"
+      span.dnd-1em
+        |&nbsp;
+      span.mui-textfield.mui-textfield--float-label.dnd-flex-grow0
+        label
+          = t('initiative_short')
+        input#tmp_initiative name="tmp_initiative" size="3"
+      span.dnd-1em
+        |&nbsp;
+ 
+
+      span.dnd-7em.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="add_tmp_npc();"
+        = t('add-npc')
+      span.dnd-1em
+        |&nbsp;
+      span.mui-textfield.dnd-3em
+        input#npc-tmp-num type="text" placeholder="1"
+      span.dnd-1em
+        |&nbsp;
+
     div.dnd-flex-row.fullwidth#fight-list
 
-
+  // GROUP
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight-group');"
       = t('fight-groups')
@@ -166,11 +212,10 @@ div.mui--hide.template data-template-name='tmpl-fight-head'
     div.dnd-5em.dnd-flex-noresize.center.mui--divider-left Step
   
 div.mui--hide.template data-template-name='tmpl-fight-line'
-  div.dnd-flex-cont.fullwidth
-    div class="dnd-1em {{cur_fighter_class}}"
+  div class="dnd-flex-cont fullwidth {{cur_fighter_class}}"
+    div class="dnd-1em {{marker}}"
     /'+(fight.fighter_index==i ? ' dnd-cur-fighter' : '')+'
     div class="dnd-flex-grow1 {{f_class}}"
-      | {{marker}}
       i class="{{del_class}}" onclick="{{del_action}}({{i}})"
       |&nbsp;
       |{{name}} ({{race}})
@@ -235,10 +280,24 @@ javascript:
 
   function add_npc() {
     var npc_type = document.getElementById("npc-type").value;
-    var npc_num = get_int_value('npc-num');
-    if(Number.isNaN(npc_num))
-      npc_num = 1;
+    var npc_num = get_int_value('npc-num',1);
     ws.send(secret+': fight/new-npc '+npc_type+' '+npc_num);
+  }
+
+  function add_tmp_npc() {
+    var npc_type = document.getElementById("tmp_race_id").value;
+    var npc_num = get_int_value('npc-tmp-num',1);
+    var npc_hp = get_int_value('tmp_hp',1);
+    var npc_max_hp = get_int_value('tmp_max_hp',1);
+    var npc_arm = get_int_value('tmp_armor',1);
+    var npc_ini = get_int_value('tmp_initiative',1);
+    ws.send(secret+': fight/new-tmp-npc'+
+      ' '+npc_hp+
+      ' '+npc_max_hp+
+      ' '+npc_arm+
+      ' '+npc_ini+
+      ' '+npc_num+
+      ' '+npc_type);
   }
 
   function fight_step_down(index){

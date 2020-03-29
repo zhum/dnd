@@ -21,6 +21,10 @@ ru:
   hp: ХП
   max_hp: Макс. ХП
   experience: Опыт
+  armor: Класс доспеха
+  initiative: Бонус инициативы
+  armor_short: КД
+  initiative_short: Ini
   main-chars: Основные параметры
   savethrows: Спасброски от смерти
   savethrows_ok: удачные
@@ -76,6 +80,7 @@ ru:
     del-grp: Удалить группу
     to_fight: Добавить в бой
     new_npc: Добавить NPC
+    cannot_create_npc: Не могу создать такого монстра :(
     
   char:
     characheristics: Характеристики

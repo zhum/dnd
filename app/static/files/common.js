@@ -89,10 +89,10 @@ function get_value(id){
   return null;
 }
 
-function get_int_value(id){
+function get_int_value(id,def=Number.NaN){
   var v = get_value(id);
   if(typeof v === 'object' || typeof v === 'undefined' || v=='')
-    return Number.NaN;
+    return def;
   return Number(v);
 }
 
@@ -411,9 +411,9 @@ function render_master_fight() {
     var i = info[1];
     var isf = fighter.is_fighter;
     add = templates['tmpl-fight-line']({
-      cur_fighter_class: (fight.fighter_index==i ? 'dnd-cur-fighter' : ''),
+      cur_fighter_class: (fight.fighter_index==i ? 'dnd-cur-fighter=line' : ''),
       f_class: (isf ? (fighter.is_npc ? 'dnd-npc-fighter' : 'dnd-player-fighter') : 'dnd-off-fighter'),
-      del_class: (isf ? 'circledelete' : 'fatundo'),
+      del_class: (isf ? 'icon-circledelete' : 'icon-fatundo'),
       del_action: (isf ? 'fighter_delete' : 'fighter_restore'),
       marker: (fight.fighter_index==i ? 'dnd-cur-fighter' : ''),
       name: fighter.name,

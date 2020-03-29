@@ -667,6 +667,9 @@ div.inventory{
  */
 }
 
+.dnd-cur-fighter-line {
+  background: #c04040;
+}
 .dnd-cur-fighter {
   color: #d00000;
 }

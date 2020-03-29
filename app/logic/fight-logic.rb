@@ -131,6 +131,39 @@ class FightLogic < DNDLogic
                 send_fight ws, fight, player.is_master
               end
 
+            # num, hp, max_hp, armor, initiative, name
+            when /^new-tmp-npc (\d+) (\d+) (\d+) (\d+) (\d+) (.+)/
+              num = $5.to_i
+              logger.warn "new-tmp-npc (#{$6} #{num})"
+              r = NpcType.find_or_create_by!(name: $6, is_tmp: true)
+              if r.nil?
+                logger.warn "Cannot create such NPC"
+                ws.send({flash: t('cannot_create_npc')}.to_json)
+              else
+                hp            = $1.to_i
+                r.max_hp      = $2.to_i
+                r.armor_class = $3.to_i
+                r.initiative  = $4.to_i
+                r.save
+                while num>0 do
+                  num -= 1
+                  npc = NonPlayer.generate(r, fight)
+                  npc.hp = hp
+                  if npc
+                    fight.update_step_orders
+                    logger.warn "ok!"
+                  else
+                    loger.warn "oooops... #{npc.errors.join(';')}"
+                  end
+                end
+                if fight.fase == 2 # fight in progress
+                  send_all(fight_to_json(fight,false)) do |p|
+                    not p.is_master
+                  end
+                end
+                send_fight ws, fight, player.is_master
+              end
+
             when /^fighter-del (\d+) (\S+)/
               logger.warn "del fighter npc=#{$2}"
               if $2 == 'true' # NPC
