@@ -377,7 +377,7 @@ function render_fight(){
         start_btn.innerHTML = 'Stop fight!';
       }
       else{
-        start_btn.innerHTML = 'New fight!';
+        start_btn.innerHTML = 'New fight! <span style="display: none">'+fight.fase+'</span>';
       }
     }
     var next_btn = document.getElementById('next-fighter-btn');

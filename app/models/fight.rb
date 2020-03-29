@@ -11,7 +11,7 @@
 class Fight < ActiveRecord::Base
   belongs_to :adventure
 
-  has_many   :non_players, dependent: :destroy
+  has_many   :non_players, dependent: :delete_all
 
   STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish, 4 => :deleted}
 
@@ -42,6 +42,11 @@ class Fight < ActiveRecord::Base
   def finish
     self.fase = 3
     save!
+  end
+
+  def delete
+    #self.non_players.destroy
+    self.destroy
   end
 
   def self.make_fight opts

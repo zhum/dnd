@@ -1,5 +1,9 @@
 == styled_flash
 div.main
+  div.fullwidth.mui--text-center
+    a href="/player/profile"
+      i.icon-settingsthree-gears
+      = t('profile')
   - players = @user.players.select{|p| ! p.is_master}
   - masters = @user.players.select{|p| p.is_master}
   - if players.size>0

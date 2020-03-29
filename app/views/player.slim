@@ -15,24 +15,33 @@ div.main.mui-container
   div.app-bar.mui-container-fluid
     div.mui-row
       div.center.mui-col-xs-2
-        a href='/player/msg' Сообщ
+        a href='/player/msg'
+          = t('messages')
         span#chat-indicator class='no-messages'
           i.iw-bell
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/note' Заметки
-      div.center.mui-col-xs-4.mui--divider-left
-        a href='/rules' Правила
+        a href='/note'
+          = t('notes')
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/map'
+        a href='/rules'
+          = t('rules')
+      div.center.mui-col-xs-2.mui--divider-left
+        a href='/map' title="#{t('map')}" alt="#{t('map')}"
           i.iw-map
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/logout'
+        a href='/player/profile'
+          = t('profile')
+      div.center.mui-col-xs-1.mui--divider-left
+        a href='/player_select' alt="#{t('select_player')}" title="#{t('select_player')}"
           i.iw-cross
+      div.center.mui-col-xs-1.mui--divider-left
+        a href='/logout' alt="#{t('logout')}" title="#{t('logout')}"
+          i.icon-exitalt
 
   div.info.mui-container-fluid
     div.mui-row
       div.avatar.mui-col-xs-3
-        img.avatar src="/img/player/#{@player.id}"
+        img.avatar src="/img/player/#{@player.id}" width="300" height="300"
       div.char-info.mui-col-xs-8
         div.fullwidth
           span#player-name.player-name.iw-reload

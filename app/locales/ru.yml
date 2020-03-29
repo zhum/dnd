@@ -1,4 +1,15 @@
 ru:
+  activerecord:
+    errors:
+      template:
+        header:
+          one:   "1 ошибка при сохранении %{model}"
+          other: "%{count} ошибок при сохранении %{model}"
+        body:    "Проблемы с сохранением:"
+      messages:
+        blank: "Поле не должно быть пустым"
+
+
   name: Имя
   klass: Класс
   race: Раса
@@ -30,6 +41,27 @@ ru:
 
   something-wrong: Что-то пошло не так
   avatar-saved: Аватарка обновлена успешно!
+  username: Имя
+  email: E-mail
+  is_active: Активен
+  yesyes: да
+  nono: нет
+  change_password: Сменить пароль
+  back: Назад
+  logout: Выход
+  select_player: Смена игрока
+  rotate: Повернуть
+  do_submit: Отправить
+  do_change: Сменить
+  change_avatar: Сменить аватарку
+  password_changed: Пароль успешно изменён
+  back-user: Назад к выбору игрока
+  back-player: Назад к игроку
+  profile: Профиль
+  messages: Сообщ.
+  rules: Правила
+  map: Карта
+  notes: Заметки
 
   fight:
     fights: Битва
@@ -37,6 +69,11 @@ ru:
     start: Начать
     stop: Завершить
     next: Следующий боец
+    new: Новая битва
+    new-grp: Новая группа
+    del-grp: Удалить группу
+    to_fight: Добавить в бой
+    new_npc: Добавить NPC
     
   char:
     characheristics: Характеристики

@@ -41,7 +41,13 @@ class FightLogic < DNDLogic
 
     def new_fight player
       logger.warn "NEW FIGHT..."
-      Fight.make_fight(adventure: player.adventure, add_players: true)
+      fight = get_fight player
+      if fight
+        logger.warn "deleted old fight #{fight.id}"
+        fight.delete
+      end
+      f=Fight.make_fight(adventure: player.adventure, add_players: true)
+      logger.warn "New fight #{f.id}"
       # send_fight ws, fight, player.is_master
     end
 

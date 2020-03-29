@@ -53,7 +53,7 @@ class NonPlayer < ActiveRecord::Base
   end
 
   def race
-    npc_type
+    self.npc_type
   end
 
   def to_hash

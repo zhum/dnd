@@ -2,25 +2,32 @@
 div.main.mui-container
   div.app-bar.center
     = @player.name
-    | (мастер)
+    | (мастер) 
+    = @player.adventure.name
   div.app-bar.mui-container-fluid
     div.mui-row
       div.center.mui-col-xs-2
-        a href='/master/msg' Сообщ
+        a href='/master/msg'
+          = t('messages')
         - players = @player.adventure.players.where(is_master: false).order(:name)
         - players.each do |p|
           span id="chat-indicator#{p.id}" class="chat-indicator no-messages" data-chat-id="#{p.id}"
             i.iw-bell
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/note' Заметки
+        a href='/note'
+          = t('notes')
       div.center.mui-col-xs-4.mui--divider-left
-        a href='/rules' Правила
+        a href='/rules'
+          = t('rules')
       div.center.mui-col-xs-2.mui--divider-left
-        a href='/map'
+        a href='/map' title="#{t('map')}" alt="#{t('map')}"
           i.iw-map
-      div.center.mui-col-xs-2.mui--divider-left
-        a href='/logout'
+      div.center.mui-col-xs-1.mui--divider-left
+        a href='/player_select' alt="#{t('select_player')}" title="#{t('select_player')}"
           i.iw-cross
+      div.center.mui-col-xs-1.mui--divider-left
+        a href='/logout' alt="#{t('logout')}" title="#{t('logout')}"
+          i.icon-exitalt
 
   div.dnd-flex-row.mui--z2.fullwidth
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('fight');"
@@ -28,10 +35,7 @@ div.main.mui-container
       |:&nbsp;
       span#fight-fase
     span.mui--text-right
-      a href="#" onclick="del_fight();"
-        i.icon-minus-sign
-      | &nbsp;
-      a href="#" onclick="new_fight();"
+      a href="#" onclick="new_fight();" title="#{t('fight.new')}" alt="#{t('fight.new')}"
         i.icon-plus-sign
       | &nbsp;&nbsp;
   div#fight.fight.mui--hide
@@ -75,7 +79,7 @@ div.main.mui-container
     span.mui--text-right
       input#group-name.mui--hide type='text'
     span.mui--text-right
-      a href="#" onclick="new_fight_group();"
+      a href="#" onclick="new_fight_group();" title="#{t('fight.new-grp')}" alt="#{t('fight.new-grp')}"
         i.icon-plus-sign
       | &nbsp;&nbsp;
   div#fight-group.fight-group.mui--hide
@@ -99,17 +103,18 @@ div.main.mui-container
 // Templates
 ////////////////////////////////////////////////////////////////////////
 div.mui--hide.template data-template-name='tmpl-grp-data'
-  div.mui-row.fullwidth onclick="toggle_item('fight-group-{{ grp_id }}');"
+  div.mui-row.fullwidth style="display: inline-flex;" onclick="toggle_item('fight-group-{{ grp_id }}');"
     div.mui--pull-left.mui--text-center
-      a href="#" onclick="kill_npc_group('{{ grp_id }}');"
+      a href="#" onclick="kill_npc_group('{{ grp_id }}');" title="#{t('fight.del-grp')}" alt="#{t('fight.del-grp')}"
         i.icon-circledelete
         |&nbsp;
-        | {{ grp_name }}
+    div.mui--pull-left.fill-width.mui--text-center
+      | {{ grp_name }}
     div.mui--pull-right
-      a href="#" onclick="event.stopPropagation(); group2fight('{{ grp_id }}');"
+      a href="#" onclick="event.stopPropagation(); group2fight('{{ grp_id }}');" title="#{t('fight.to_fight')}" alt="#{t('fight.to_fight')}"
         i.icon-upload
       |&nbsp;
-      a href="#" onclick="event.stopPropagation(); new_npc_group('{{ grp_id }}');"
+      a href="#" onclick="event.stopPropagation(); new_npc_group('{{ grp_id }}');" title="#{t('fight.new_npc')}" alt="#{t('fight.new_npc')}"
         i.icon-plus-sign
   div.fullwidth.dnd-flex-row id="fight-group-{{ grp_id }}"
     |{{ data }}

@@ -28,16 +28,32 @@ class PlayerController < BaseApp
 
   # player profile view
   get '/profile' do
+    @player = Player.find_by_id(session[:player_id])
     slim :player_profile
   end
   
   # player profile update
   post '/profile' do
+    @player = Player.find(session[:player_id])
     slim :player_profile
   end
   
   # player profile update
-  post '/profile/avatar' do
+  post '/password' do
+    if params[:password].to_s != ''
+      @user.password = params[:password]
+      @user.save
+      logger.warn "User=#{@user.id}/#{@user.email} pass='#{params[:password]}'"
+      flash[:info] = t('password_changed')
+    else
+      logger.warn "Errors: #{@user.errors.inspect}"
+      flash[:info] = t('something-wrong')
+    end
+    redirect '/player/profile'
+  end
+
+  # player profile update
+  post '/avatar' do
     id = session[:player_id].to_i
     if id > 0
       file_data = params[:data]
