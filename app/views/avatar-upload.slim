@@ -1,0 +1,89 @@
+== styled_flash
+script src="/files/croppie.min.js"
+link rel="stylesheet" type="text/css" href="files/croppie.min.css"
+
+div.main
+  form#img-form action='/avatar-upload-crop' method="post"
+    img#preview.mui--hide name='preview'
+    input#data type='hidden' name='data'
+  form#simpleform.fullwidth action='/avatar-upload'
+    div.fullwidth.mui-row
+      div#image.mui-col-xs-10 style="height: 300px"
+      div.mui-col-xs-2
+        input type="file" id="image-upl" onchange="loadFile(event);"
+        /button#vanilla-rotate class="vanilla-rotate" data-deg="-90" Rotate
+        div.mui-btn.mui-btn--primary onclick="do_submit();"
+          | Отправить
+      img#preview
+
+javascript:
+  var x;
+  var el = document.getElementById('image');
+  croppie = new Croppie(el, {
+    viewport: { width: 100, height: 100 },
+    boundary: { width: 300, height: 300 },
+    showZoomer: true,
+    enableResizeboolean: true,
+    enableOrientation: true
+  });
+
+  var loadFile = function(event) {
+    var preview = document.getElementById('image');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+
+    reader.onloadend = function () {
+      //preview.src = reader.result;
+      croppie.bind({
+        url: reader.result
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  }
+  //   var output = document.getElementById('image');
+  //   var reader = new FileReader();
+  //   //output.src = URL.createObjectURL(event.target.files[0]);
+  //   //output.onload = function() {
+  //   //  URL.revokeObjectURL(output.src) // free memory
+  //   //}
+  //   output.croppie('bind',{
+  //     url: event.target.result
+  //   });
+  //   reader.readAsDataURL(event.target.files[0]);
+  // };
+
+  //vanillaRotate = document.getElementById('vanilla-rotate');
+  vanillaSubmit = document.getElementById('push');
+
+  // vanillaRotate.addEventListener('click', function() {
+  //   croppie.rotate(parseInt(vanillaRotate.getAttribute('deg')));
+  // });
+
+  function do_submit(){
+    croppie.result({
+      type: 'canvas',
+      size: 'original'
+    }).then(function (resp) {
+        // document.getElementById('avatar').val(resp);
+        // document.getElementById('img-form').submit();
+      document.getElementById('preview').setAttribute('src', resp);
+      document.getElementById('data').value = resp;
+      document.forms['img-form'].submit();
+
+      // var xhr = new XMLHttpRequest();
+
+      // xhr.open('POST', '/avatar-upload-crop');
+      // //xhr.setRequestHeader('Content-Type', 'application/image');
+      // xhr.onload = function() {
+      //   if (xhr.status !== 200) {
+      //     alert('Request failed.  Returned status of ' + xhr.status);
+      //   }
+      // };
+      // xhr.send(resp);
+    });
+  };

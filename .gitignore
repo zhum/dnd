@@ -5,4 +5,5 @@ dnd.sublime-workspace
 *.swp
 *~
 heroku.config.sh
+app/static/img/*
 

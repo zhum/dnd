@@ -1,0 +1,119 @@
+== styled_flash
+script src="/files/croppie.min.js"
+link rel="stylesheet" type="text/css" href="files/croppie.min.css"
+
+div.main
+  form#img-form action='/player/avatar' method="post"
+    img#preview.mui--hide name='preview'
+    input#data type='hidden' name='data'
+  div.fullwidth.dnd-flex-cont.dnd-15line
+    div.fullwidth.dnd-flex-row.mui--divider-bottom
+      span.dnd-flex-grow1
+      span.mui--text-center.dnd-flex-noresize
+        a href="/player_select"
+          i.icon-pageback
+          = t('back-user')
+      - if session[:player_id].to_i > 0
+        span.dnd-flex-grow1
+        span.mui--text-center.dnd-flex-noresize
+          a href="/player"
+            i.icon-pageback
+            = t('back-player')
+      span.dnd-flex-grow1
+
+  div.mui-container-fluid.dnd-15line
+    div.fullwidth.dnd-flex-row
+      span.mui-col-xs-4.mui-col-md-2.mui--divider-bottom.mui--text-right
+        = t('email')
+        |:
+      span.mui-col-xs-8.mui-col-md-4.mui--divider-bottom
+        = @user.email
+
+
+      span.mui-col-xs-4.mui-col-md-3.mui--divider-bottom.mui--text-right
+        = t('username')
+        |:
+      span.mui-col-xs-8.mui-col-md-3.mui--divider-bottom
+        = @user.name
+
+
+      span.mui-col-xs-4.mui-col-md-2.mui--divider-bottom.mui--text-right
+        = t('is_active')
+        |:
+      span.mui-col-xs-8.mui-col-md-4.mui--divider-bottom
+        = @user.active ? t('yesyes') : t('nono')
+
+
+      span.mui-col-xs-4.mui-col-md-3.mui--divider-bottom.mui--text-right
+        = t('change_password')
+        |:
+      form#pass-form.mui-col-xs-8.mui-col-md-3.mui--divider-bottom. action="/player/password" method="post"
+        input#password type="password" name="password" size="5" style="padding: 5px 5px; line-height: 5px; display:inline-block;"
+        span.dnd-btn onclick="send_password();"
+          = t('do_change')
+
+
+    - if @player
+      div.fullwidth.mui-row
+        div.mui-col-xs-12.mui-col-md-4.mui--text-center style="height: 300px"
+          img#avatar_preview src="/img/player/#{@player && @player.id}" width="300" height="300"
+        div.mui-col-xs-12.mui-col-md-5 style="height: 300px"
+          div#image
+        div.mui-col-xs-12.mui-col-md-3
+          span.fullwidth.mui--text-center
+            = t('change_avatar')
+          input type="file" id="image-upl" onchange="loadFile(event);"
+          button.dnd-btn style="width: 100%" data-deg="-90" onclick="do_rotate('-90');"
+            = t('rotate')
+          button.dnd-btn.dnd-btn--primary style="width: 100%" onclick="do_submit();"
+            = t('do_submit')
+
+javascript:
+  var x;
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var el = document.getElementById('image');
+    croppie = new Croppie(el, {
+      viewport: { width: 150, height: 150 },
+      boundary: { width: 250, height: 250 },
+      showZoomer: true,
+      enableResizeboolean: true,
+      enableOrientation: true
+    });
+  });
+
+  var loadFile = function(event) {
+    var preview = document.getElementById('image');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+
+    reader.onloadend = function () {
+      croppie.bind({
+        url: reader.result
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  };
+
+  function do_rotate(angle) {
+    croppie.rotate(angle);
+  };
+
+  function do_submit(){
+    croppie.result({
+      type: 'canvas',
+      size: 'original'
+    }).then(function (resp) {
+      document.getElementById('avatar_preview').setAttribute('src', resp);
+      document.getElementById('data').value = resp;
+      document.forms['img-form'].submit();
+    });
+  };
+
+  function send_password(){
+    document.forms['pass-form'].submit();
+  };
