@@ -8,7 +8,7 @@ div.main.mui-container
     = @player.adventure.name
     |)
   div.info.mui-container-fluid
-    div.mui-row.mui--text-center.dnd-flash#dnd-flash
+    div.mui-row.mui--text-center.dnd-flash.no-messages#dnd-flash
 
   div.info.mui-container-fluid
     div.mui-row.mui--text-center
@@ -34,7 +34,7 @@ javascript:
   function on_websocket_open(ws){
   }
 
-  function buy(item_type,id,type){
-    ws.send(secret+': player/buy '+item_type+' '+id+' '+type);
+  function buy(item_type,id,take_money){
+    ws.send(secret+': player/buy '+item_type+' '+id+' '+take_money);
     //window.location.href = '/player';
   }

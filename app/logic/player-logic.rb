@@ -27,21 +27,27 @@ class PlayerLogic < DNDLogic
       exclusive = extra.delete :exclusive
       take_money = extra.delete :money
       ok = true
+      msg = nil
       item = klass_proxy.where(player: player, item: t).take
       logger.warn "item=#{item}"
-      if item && item.count > 0
-        if exclusive
+      if item
+        if exclusive #&& item.count > 0
           logger.warn "#{klass} is already bought"
+          msg = t('already_bought')
           ok = false
         else
           if take_money
             if ! player.reduce_money t.cost
               ok = false
+              msg = t('not_enough_money')
               # flash[:info] = t('not-enough-money')
             else
               item.count += extra[:count] || 1
               item.save
             end
+          else
+            item.count += extra[:count] || 1
+            item.save
           end
         end
       else
@@ -51,12 +57,13 @@ class PlayerLogic < DNDLogic
           if ! player.reduce_money t.cost
             x.destroy
             ok = false
+            msg = t('not_enough_money')
             # flash[:info] = t('not-enough-money')
           end
         end
       end
       logger.warn "success=#{ok}"
-      ok
+      return ok, msg
     end
 
     def process_message ws,user,player,text,opts={}
@@ -83,27 +90,27 @@ class PlayerLogic < DNDLogic
           warn "Sent..."
 
         # buy
-        when /buy (\S+) (\d+)(\s*)(.*)/
+        when /buy (\S+) (\d+)\s*(.*)/
           id = $2.to_i
-          type = $4.to_i
-          logger.warn "----------------- TYPE=#{type}"
-          result = case $1
+          take_money = ($3.to_i>0)
+          logger.warn "----------------- take_money=#{take_money}"
+          result, message = case $1
           when 'things'
-            buy player, Thing, Thinging, id, {count: 1, money: 1}
+            buy player, Thing, Thinging, id, {count: 1, money: take_money}
           when 'armor'
-            buy player, Armor, Armoring, id, {count: 1, money: 1}
+            buy player, Armor, Armoring, id, {count: 1, money: take_money}
           when 'weapon'
-            buy player, Weapon, Weaponing, id, {count: 1, money: 1}
+            buy player, Weapon, Weaponing, id, {count: 1, money: take_money}
           when 'feature'
-            buy player, Feature, Featuring, id, {count: 1, money: 1}
+            buy player, Feature, Featuring, id, {count: 1, money: take_money}
           when 'spells'
-            buy player, Spell, Spelling, id, {}
+            buy player, Spell, Spelling, id, {exclusive: true, take_money: false}
           end
           if result
             player.save
-            ws.send redirect: '/player'
+            ws.send({redirect: '/player'}.to_json)
           else
-            ws.send({flash: t('not_enough_money')}.to_json)
+            ws.send({flash: message}.to_json)
           end
 
         # send chat history

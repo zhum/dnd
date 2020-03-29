@@ -63,6 +63,7 @@ ru:
   map: Карта
   notes: Заметки
   not_enough_money: Недостаточно денег
+  already_bought: Уже есть!
 
   fight:
     fights: Битва
