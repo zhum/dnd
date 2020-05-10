@@ -81,6 +81,7 @@ ru:
     to_fight: Добавить в бой
     new_npc: Добавить NPC
     cannot_create_npc: Не могу создать такого монстра :(
+    temp_monsters: Временные
     
   char:
     characheristics: Характеристики

@@ -55,13 +55,19 @@ div.main.mui-container
 
     // ADD MONSTER
     div.dnd-flex-cont.mui--z2.fullwidth
-      span.mui-select.dnd-flex-grow1
+      span.dnd-flex-grow1
         label for='race_id'
           = t('npc-type')
-        select name='race_id' id='npc-type'
-          - NpcType.order(:id).each do |r|
-            option value="#{r.id}" label='#{t("char.#{r.name}")}'
-              = t("char.#{r.name}")
+        select.dnd-drop name='race_id' id='npc-type'
+          - NpcType.where(is_tmp: false).order(:name).each do |r|
+            option value="#{r.id}" label='#{r.name}'
+              = r.name
+          - if NpcType.where(is_tmp: true).count > 0
+            option label="#{t('fight.temp-monsters')}" disabled="yes"
+              = t('fight.temp-monsters')
+            - NpcType.order(:name).where(is_tmp: true).each do |r|
+              option value="#{r.id}" label='#{r.name}'
+                = r.name
       span.dnd-1em
         |&nbsp;
       span.dnd-7em.mui-btn.mui-btn--small.mui-btn--primary.mui-btn--raised onclick="add_npc();"
@@ -130,13 +136,19 @@ div.main.mui-container
       | &nbsp;&nbsp;
   div#fight-group.fight-group.mui--hide
     div.dnd-flex-cont.mui--z2.fullwidth
-      span.mui-select.dnd-flex-grow1
+      span.dnd-flex-grow1
         label for='grp_race_id'
           = t('grp-npc-type')
-        select name='grp_race_id' id='grp-npc-type'
-          - NpcType.order(:id).each do |r|
-            option value="#{r.id}" label='#{t("char.#{r.name}")}'
-              = t("char.#{r.name}")
+        select.dnd-drop name='grp_race_id' id='grp-npc-type'
+          - NpcType.order(:name).where(is_tmp: false).each do |r|
+            option value="#{r.id}" label='#{r.name}'
+              = r.name
+          - if NpcType.where(is_tmp: true).count > 0
+            option label="#{t('fight.temp-monsters')}" disabled="yes"
+              = t('fight.temp-monsters')
+            - NpcType.order(:name).where(is_tmp: true).each do |r|
+              option value="#{r.id}" label='#{r.name}'
+                = r.name
       span.dnd-1em
         |&nbsp;
       span.mui-textfield.dnd-3em

@@ -67,4 +67,5 @@ class NonPlayer < ActiveRecord::Base
       step_order: step_order
     }
   end
+
 end

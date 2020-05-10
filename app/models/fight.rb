@@ -99,7 +99,7 @@ class Fight < ActiveRecord::Base
       {
         is_fighter: !e.is_dead,
         name: e.name, id: e.id, race_id: e.race.id,
-        race: e.race.is_tmp ? e.race.name : I18n.t("char.#{e.race.name}"),
+        race: e.race.is_tmp ? e.race.name : e.race.name, #I18n.t("char.#{e.race.name}"),
         hp: e.hp, max_hp: e.max_hp, initiative: e.initiative || 0,
         armor_class: e.armor_class, step_order: e.step_order || 0,
         is_npc: true
