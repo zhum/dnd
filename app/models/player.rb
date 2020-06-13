@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: players
@@ -44,6 +46,11 @@
 #  real_initiative       :integer
 #
 
+#
+# Player class
+#
+# @author [serg]
+#
 class Player < ActiveRecord::Base
   validates_presence_of :name
 
@@ -64,12 +71,13 @@ class Player < ActiveRecord::Base
   has_many :skills, through: :skillings
 
   has_many :featurings
-  has_many :features, through: :featurings, foreign_key: 'item_id', source: :item
+  has_many :features, through: :featurings,
+                      foreign_key: 'item_id', source: :item
 
   has_many :spellings
   has_many :spells, through: :spellings, foreign_key: 'item_id', source: :item
   has_many :spell_affects
-  has_many :spell_actives, class_name: "SpellAffect", foreign_key: "owner_id"
+  has_many :spell_actives, class_name: 'SpellAffect', foreign_key: 'owner_id'
 
   has_many :save_throws
 
@@ -78,35 +86,39 @@ class Player < ActiveRecord::Base
   belongs_to :race
   belongs_to :klass
 
-  MODS = [
-    'strength','dexterity','constitution',
-    'intellegence','wisdom','charisma'
-  ]
-  CHARS = ['armor_class', 'initiative', 'speed',
-           'pass_attentiveness', 'masterlevel','hit_dice','hit_dice_of']
+  after_initialize :set_def, unless: :persisted?
 
-  DTYPES = ['none', 'дробящий', 'колющий', 'рубящий']
+  MODS = %w[
+    strength dexterity constitution
+    intellegence wisdom charisma
+  ].map(&:freeze)
+  CHARS = %w[
+    armor_class initiative speed
+    pass_attentiveness masterlevel hit_dicehit_dice_of
+  ].map(&:freeze)
+
+  DTYPES = %w[none дробящий колющий рубящий].map(&:freeze)
 
   AC_FORMULAS = {
-    "Обычная защита" => 
-      lambda { |x,wear|
+    'Обычная защита' =>
+      lambda { |x, wear|
         dex = x.mod_dexterity
-        #logger.warn x.inspect+'//'+wear.inspect
-        base = 10+(wear.map{|e| e.klass}.reduce(:+) || 0) +
-               (wear.map{|w| w.max_dexterity} << dex).min
+        # logger.warn x.inspect+'//'+wear.inspect
+        base = 10 + (wear.map(&:klass).reduce(:+) || 0) +
+               (wear.map(&:max_dexterity) << dex).min
 
-        base + case x.klass.name
-        when 'barbarian'
-          # add constitution and shield af any
-          wear.any?{|w| w.power != -1} ? 0 : x.mod_constitution
-        when 'monk'
-          wear.size>0 ? 0 : mod_wisdom
-        else
-          0
-        end
+        base +
+          case x.klass.name
+          when 'barbarian'
+            # add constitution and shield af any
+            wear.any? { |w| w.power != -1 } ? 0 : x.mod_constitution
+          when 'monk'
+            wear.size.positive? ? 0 : mod_wisdom
+          else
+            0
+          end
       }
   }
-  after_initialize :set_def, unless: :persisted?
 
   def set_def
     self.hp ||= 20
@@ -116,7 +128,7 @@ class Player < ActiveRecord::Base
     self.gcoins ||= 0
     self.ecoins ||= 0
     self.pcoins ||= 0
-    self.is_master = false if self.is_master.nil?
+    self.is_master = false if is_master.nil?
     self.mod_strength ||= 0
     self.mod_dexterity ||= 0
     self.mod_constitution ||= 0
@@ -124,135 +136,138 @@ class Player < ActiveRecord::Base
     self.mod_wisdom ||= 0
     self.mod_charisma ||= 0
     self.experience ||= 0
-    MODS.each{ |c|
-      if read_attribute("mod_#{c}").nil?
-        write_attribute("mod_#{c}",1)
-      end
-    }
-    CHARS.each { |c|
-      unless self.chars.find_by name: c
-        self.chars << Char.create(name: c, value: 1)
-      end
-    }
-    ['athletics',
-     'acrobatics',
-     'investigation',
-     'perception',
-     'survival',
-     'performance',
-     'intimidation',
-     'history',
-     'sleight_of_hands',
-     'arcana',
-     'medicine',
-     'deception',
-     'nature',
-     'insight',
-     'religion',
-     'stealth',
-     'persuasion',
-     'animal_handling'
+    MODS.each do |c|
+      write_attribute("mod_#{c}", 1) if read_attribute("mod_#{c}").nil?
+    end
+    CHARS.each do |c|
+      next if chars.find_by name: c
+      chars << Char.create(name: c, value: 1)
+    end
+    %w[
+      athletics
+      acrobatics
+      investigation
+      perception
+      survival
+      performance
+      intimidation
+      history
+      sleight_of_hands
+      arcana
+      medicine
+      deception
+      nature
+      insight
+      religion
+      stealth
+      persuasion
+      animal_handling
     ].each do |k|
-      unless self.skillings.find_by name: k
-        self.skillings << Skilling.create(
-          skill: Skill.find_by(name: k),
-          ready: false,
-          modifier: 0
-        )
-      end
+      next if skillings.find_by name: k
+      skillings << Skilling.create(
+        skill: Skill.find_by(name: k),
+        ready: false,
+        modifier: 0
+      )
     end
   end
 
-  def get_mod name_or_index
-    attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
-      "mod_#{name_or_index.to_s}"
-    else
-      "mod_#{MODS[name_or_index.to_i]}"
-    end
+  def get_mod(name_or_index)
+    attr_name =
+      if name_or_index.is_a?(String) || name_or_index.is_a?(Symbol)
+        "mod_#{name_or_index}"
+      else
+        "mod_#{MODS[name_or_index.to_i]}"
+      end
 
     read_attribute(attr_name)
   end
 
-  def get_default_armor_class armors
-    if armors.size>0
-      armors.map{|a|
+  def get_default_armor_class(armors)
+    if armors.size.positive?
+      armors.map do |a|
         a.klass + [self.mod_dexterity, a.max_dexterity].min
-      }.sum
+      end.sum
     else
-      10+self.mod_dexterity
-    end    
+      10 + mod_dexterity
+    end
   end
 
-  def set_char name_or_index, value
-    attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
-      name_or_index.to_s
-    else
-      CHARS[name_or_index.to_i]
-    end
-    self.write_attribute(attr_name,value)    
+  def set_char(name_or_index, value)
+    attr_name =
+      if name_or_index.is_a?(String) || name_or_index.is_a?(Symbol)
+        name_or_index.to_s
+      else
+        CHARS[name_or_index.to_i]
+      end
+    write_attribute(attr_name, value)
   end
 
-  def get_char name_or_index
-    attr_name = if name_or_index.is_a?(String) or name_or_index.is_a?(Symbol)
-      name_or_index.to_s
-    else
-      CHARS[name_or_index.to_i]
-    end
+  def get_char(name_or_index)
+    attr_name =
+      if name_or_index.is_a?(String) || name_or_index.is_a?(Symbol)
+        name_or_index.to_s
+      else
+        CHARS[name_or_index.to_i]
+      end
 
     case attr_name
     when 'armor_class'
-      w_armors = armorings.select {|a| a.wear}.map{|w| w.item}
-      #wear = (w_armors.size > 0) ? 0 : 1
+      w_armors = armorings.select(&:wear).map(&:item)
+      # wear = (w_armors.size > 0) ? 0 : 1
       (
-        features.select{|f|
-          AC_FORMULAS.has_key? f.name
-        }.map{|f|
-          AC_FORMULAS[f.name].call(self,w_armors)
-        } << AC_FORMULAS['Обычная защита'].call(self,w_armors)
+        features.select { |f| AC_FORMULAS.key? f.name }
+        .map { |f| AC_FORMULAS[f.name].call(self, w_armors) } <<
+        AC_FORMULAS['Обычная защита'].call(self, w_armors)
       ).max
     when 'speed'
       base = chars.where(name: 'speed').take.value
-      if armorings.all.any?{|x| x.wear && x.item.is_heavy}
-        if self.race.name != 'dwarf_mountain' && self.race.name != 'dwarf_hill' &&
-           self.race.name != 'dwarf_gray'
-          return base - 10 if x.item.power < self.mod_strength
+      if armorings.all.any? { |x| x.wear && x.item.is_heavy }
+        if race.name != 'dwarf_mountain' && race.name != 'dwarf_hill' &&
+           race.name != 'dwarf_gray'
+          return base - 10 if x.item.power < mod_strength
         end
       end
       base
     else
-      #warn attr_name
+      # warn attr_name
       chars.where(name: attr_name).take.value
     end
   end
 
   def all_weapon
-    weaponings.all.map{|w|
-      ww = w.item;
-      atrs = ['name','countable','description','damage',
-              'damage_dice','cost','damage_type','weight'].map{|x|
-        [x,ww.read_attribute(x)]
-      }.append(['count', w.count]).append(['max_count', w.max_count])
+    weaponings.all.map do |w|
+      ww = w.item
+      atrs = %w[name countable description damage
+                damage_dice cost damage_type weight].map do |x|
+        [x, ww.read_attribute(x)]
+      end.append(['count', w.count]).append(['max_count', w.max_count])
       [w.id, Hash[atrs]]
-    }
+    end
   end
 
-  def add_weapon(w,count,max_count)
-    weaponings << Weaponing.create!(count: count, max_count: max_count, weapon: w)
+  def add_weapon(w, count, max_count)
+    weaponings << Weaponing.create!(
+      count: count,
+      max_count: max_count,
+      weapon: w
+    )
     save
   end
 
   def del_weapon(w)
-    weaponing = if w.is_a?(Numeric)
-      Weaponing.where(player_id: id, weapon_id: w)
-    else
-      Weaponing.where(player_id: id, weapon_id: w.id)
-    end
+    weaponing =
+      if w.is_a?(Numeric)
+        Weaponing.where(player_id: id, weapon_id: w)
+      else
+        Weaponing.where(player_id: id, weapon_id: w.id)
+      end
     weaponing.delete
   end
 
   # returns true if money was reduced
-  def reduce_money amount
-    total = mcoins+10*scoins+100*gcoins+50*ecoins+1000*pcoins
+  def reduce_money(amount)
+    total = mcoins + 10 * scoins + 100 * gcoins + 50 * ecoins + 1000 * pcoins
     return false if total < amount
     total -= amount
     pc = total / 1000
@@ -272,61 +287,80 @@ class Player < ActiveRecord::Base
 
   def to_json
     I18n.default_locale = :ru
-    h = ['id', 'name', 'hp', 'max_hp',
-         'experience', 'weapon_proficiency'].map{|name|
+    h = %w[id name hp max_hp
+           experience weapon_proficiency].map do |name|
       [name, read_attribute(name)]
-    }
-    #h << ['armor_class', get_char('armor_class')]
-    h << ['race',I18n.t("char.#{self.race.name}")]
-    h << ['klass', I18n.t("char.#{self.klass.name}")]
-    h << ['coins',[mcoins,scoins,gcoins,ecoins,pcoins]]
-    h << ['chars',Hash[chars.map{|c| [c.name,self.get_char(c.name)]}]] #c.value.to_i
-    h << ['mods',Hash[MODS.map{|c| [c,[read_attribute("mod_#{c}"),read_attribute("mod_prof_#{c}") ? '1' : '0']]}]]
+    end
+    # h << ['armor_class', get_char('armor_class')]
+    h << ['race', I18n.t("char.#{race.name}")]
+    h << ['klass', I18n.t("char.#{klass.name}")]
+    h << ['coins', [mcoins, scoins, gcoins, ecoins, pcoins]]
+    h << ['chars', Hash[chars.map { |c| [c.name, get_char(c.name)] }]]
+    h << ['mods', Hash[
+      MODS.map do |c|
+        [
+          c, [
+            read_attribute("mod_#{c}"),
+            read_attribute("mod_prof_#{c}") ? '1' : '0'
+          ]
+        ]
+      end
+    ]]
 
-    h << ['weapons',Hash[all_weapon]]
-    h << ['things',Hash[thingings.all.map{|t|
-      tt=t.item;
-      [t.id,{count: t.count}.merge(Hash[
-        ['name','cost','weight'].map{|x| [x,tt.read_attribute(x)]}])
-      ]
-    }]]
-    h << ['armors',Hash[self.armorings.all.map{|a|
-      #logger.warn "A=#{a.inspect}"
-      aa = a.item
-      [a.id, {name: aa.name, count: a.count, wear: a.wear}]}]
-    ]
+    h << ['weapons', Hash[all_weapon]]
+    h << ['things', Hash[
+          thingings.all.map do |t|
+            tt = t.item
+            [
+              t.id, { count: t.count }.merge(Hash[
+                %w[name cost weight].map { |x| [x, tt.read_attribute(x)] }
+              ])
+            ]
+          end
+          ]]
+    h << ['armors', Hash[
+           armorings.all.map do |a|
+             # logger.warn "A=#{a.inspect}"
+             aa = a.item
+             [a.id, { name: aa.name, count: a.count, wear: a.wear }]
+           end
+           ]]
 
-    1.upto(9) { |n| h << ["spells_#{n}", self.read_attribute("spell_slots_#{n}")]}
-    h << ['skills',Hash[self.skillings.all.map { |e|
+    1.upto(9) do |n|
+      h << ["spells_#{n}", read_attribute("spell_slots_#{n}")]
+    end
+    h << ['skills', Hash[
+      skillings.all.map do |e|
         s = e.skill
-        [e.id, {name: s.name,
-                ready: e.ready,
-                base: s.base,
-                mod: e.value}]
-      }
+        [e.id, { name: s.name,
+                 ready: e.ready,
+                 base: s.base,
+                 mod: e.value }]
+      end
     ]]
-    h << ['features',Hash[self.featurings.all.map { |e|
+    h << ['features', Hash[
+      featurings.all.map do |e|
         s = e.item
-        [e.id, {name: s.name,
-                max_count: s.max_count,
-                description: s.description,
-                count: e.count}]
-      }
+        [e.id, { name: s.name,
+                 max_count: s.max_count,
+                 description: s.description,
+                 count: e.count }]
+      end
     ]]
 
-    h << ['spells',Hash[self.spellings.all.map { |e|
+    h << ['spells', Hash[spellings.all.map do |e|
         s = e.item
-        [s.id, {name: s.name,
-                description: s.description,
-                ready: e.ready ? true : false,
-                level: s.level,
-                spell_time: s.spell_time,
-                lasting_time: s.lasting_time,
-                components: s.components,
-                distance: s.distance,
-                active: (self.spell_actives.where(spelling: e).count > 0),
-        }]
-      }
+        [s.id, { name: s.name,
+                 description: s.description,
+                 ready: e.ready ? true : false,
+                 level: s.level,
+                 spell_time: s.spell_time,
+                 lasting_time: s.lasting_time,
+                 components: s.components,
+                 distance: s.distance,
+                 active: spell_actives.where(spelling: e).count.positive? }
+        ]
+      end
     ]]
 
     s = get_save_throws 1
@@ -334,23 +368,23 @@ class Player < ActiveRecord::Base
     s = get_save_throws 2
     h << [:savethrows2, s ? s.count : 0]
 
-    h << [:bad_stealth, self.get_bad_stealth]
+    h << [:bad_stealth, get_bad_stealth]
     h << [:total_weight, total_weight]
     #warn "===> #{Hash[h].inspect}"
-    bads = [get_bads_from_wear].reject{|x| x.nil?}
+    bads = [get_bads_from_wear].reject(&:nil?)
     h << [:bads, bads]
-    Hash[h].to_json.to_s 
+    Hash[h].to_json.to_s
   end
 
-  def get_save_throws kind
+  def get_save_throws(kind)
     save_throws.where(kind: kind).take
   end
 
-  def self.try_create user, params
+  def self.try_create(user, params)
     warn "params: #{params.inspect}"
     # skills = Skill.find_by_id(params[:skills])
     # features = Feature.find_by_id(params[:features])
-    player = self.create(
+    player = create(
       name: params[:reg_name],
       user: user,
       adventure: Adventure.find_by_id(params[:adventure]),
@@ -362,7 +396,7 @@ class Player < ActiveRecord::Base
       mod_intellegence: params[:intellegence].to_i,
       mod_wisdom: params[:wisdom].to_i,
       mod_charisma: params[:charisma].to_i,
-
+      #
       hp: params[:hp].to_i,
       max_hp: params[:max_hp].to_i,
       experience: params[:experience].to_i,
@@ -373,12 +407,16 @@ class Player < ActiveRecord::Base
       pcoins: 1,
       is_master: false
     )
-    player.skillings = Skill.all.map{|s|
-      Skilling.create(skill: s, modifier: 1, ready: params[:skills].include?(s.id.to_s))
-    }
-    player.featurings = Feature.where(id: params[:features]).map {|f|
+    player.skillings = Skill.all.map do |s|
+      Skilling.create(
+        skill: s,
+        modifier: 1,
+        ready: params[:skills].include?(s.id.to_s)
+      )
+    end
+    player.featurings = Feature.where(id: params[:features]).map do |f|
       Featuring.create(feature: f, count: 1)
-    }
+    end
     player.save_throws << SaveThrow.create(kind: 1, count: 0)
     player.save_throws << SaveThrow.create(kind: 2, count: 0)
     player.save!
@@ -386,16 +424,16 @@ class Player < ActiveRecord::Base
   end
 
   def get_bad_stealth
-    bad = Armoring.all.any?{ |a|
-      #logger.warn "#{a.armor.bad_stealth} && #{a.wear}"
+    Armoring.all.any? do |a|
+      # logger.warn "#{a.armor.bad_stealth} && #{a.wear}"
       a.item.bad_stealth && a.wear
-    }
+    end
   end
 
   def get_speed_low
-    bad = Armoring.all.any?{ |a|
-      a.item.is_heavy && a.wear && a.item.power>self.get_mod(:strength)
-    }
+    Armoring.all.any? do |a|
+      a.item.is_heavy && a.wear && a.item.power > get_mod(:strength)
+    end
     if bad
       10
     else
@@ -404,23 +442,18 @@ class Player < ActiveRecord::Base
   end
 
   def get_bads_from_wear
-    bad = armorings.any?{ |a|
+    bad = armorings.any? do |a|
       logger.warn "--- #{a.item.name}/#{a.wear}/#{a.proficiency}"
-      a.wear && ! a.proficiency
-    }
-    if bad
-      "Помехи к Силе и Ловкости, нельзя использовать заклинания"
-    else
-      nil
+      a.wear && !a.proficiency
     end
+    bad ? 'Помехи к Силе и Ловкости, нельзя использовать заклинания' : nil
   end
 
   def total_weight
-    w = armors.all.inject(0){ |mem, var| mem += var.weight } +
-      things.all.inject(0.0){ |mem, var| mem += var.weight/10.0 } +
-      weapons.inject(0){ |mem, var| mem += var.weight } +
-      (mcoins+scoins+gcoins+pcoins+ecoins)/50.0
-    "%0.2f" % w
+    w = armors.all.inject(0) { |mem, var| mem + var.weight } +
+        things.all.inject(0.0) { |mem, var| mem + var.weight / 10.0 } +
+        weapons.inject(0) { |mem, var| mem + var.weight } +
+        (mcoins + scoins + gcoins + pcoins + ecoins) / 50.0
+    format('%0.2f', w)
   end
-
 end

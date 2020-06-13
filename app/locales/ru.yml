@@ -10,6 +10,13 @@ ru:
         blank: "Поле не должно быть пустым"
 
 
+  confirm_password: >
+    Please confirm your password reset by
+    following this link: %{base}/reset_password?pass=%{str}
+  bad_secret: "Bad secret: %{m}"
+  bad_request: "Bad ws request (%{msg})"
+  cannot_register: >
+    Хм... Что-то пошло не так. Не получается зарегистрировать!..
   name: Имя
   klass: Класс
   race: Раса

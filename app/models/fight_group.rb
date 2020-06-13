@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: fight_groups
@@ -6,12 +8,17 @@
 #  adventure_id :integer
 #  name         :string
 #
+
+# Group of fighters
+#
+# @author [serg]
+#
 class FightGroup < ActiveRecord::Base
   belongs_to :adventure
 
   has_many   :non_players, dependent: :destroy
 
-  def to_fight fight
+  def to_fight(fight)
     non_players.each do |f|
       new_fighter = f.dup
       new_fighter.fight_group = nil

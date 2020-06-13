@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: fights
@@ -8,53 +10,65 @@
 #  fase          :integer          default("0")
 #  fighter_index :integer
 #
+#
+
+# Fight class
+#
+# @author [serg]
+#
 class Fight < ActiveRecord::Base
   belongs_to :adventure
 
   has_many   :non_players, dependent: :delete_all
 
-  STATES = {0 => :init, 1 => :roll_init, 2 => :fight, 3 => :finish, 4 => :deleted}
+  STATES = {
+    0 => :init,
+    1 => :roll_init,
+    2 => :fight,
+    3 => :finish,
+    4 => :deleted
+  }.freeze
 
-  scope :active, -> {
-    where fase: [1,2]
+  scope :active, lambda {
+    where fase: [1, 2]
   }
 
-  scope :ready, -> {
+  scope :ready, lambda {
     where fase: 0
   }
 
-  scope :finished, -> {
+  scope :finished, lambda {
     where fase: 3
   }
 
-  def is_ready?
-    STATES[self.fase]==0
+  def ready?
+    STATES[fase] == :init
   end
 
-  def is_active?
-    STATES[self.fase]==2
+  def active?
+    STATES[fase] == :fight
   end
 
-  def is_finish?
-    STATES[self.fase]==3
+  def finish?
+    STATES[fase] == :finish
   end
 
   def finish
-    self.fase = 3
+    fase = 3
     save!
   end
 
   def delete
     #self.non_players.destroy
-    self.destroy
+    destroy
   end
 
-  def self.make_fight opts
+  def self.make_fight(opts)
     do_add_players = opts.delete :add_players
     do_add_players = true if do_add_players.nil?
 
     logger.warn "make_fight (#{do_add_players})"
-    f = self.create opts
+    f = create opts
     f.add_players if do_add_players
     f.fase = 0
     f.fighter_index = 0
@@ -65,51 +79,65 @@ class Fight < ActiveRecord::Base
   end
 
   def update_step_orders
-    players = adventure.players
-      .where(is_master: false)
-      .map { |e| {player: e, initiative: (e.real_initiative || -1)}} #get_char(:initiative)}}
-    fighters = non_players.all.map { |e| {player: e, initiative: e.initiative}}
+    players = adventure
+              .players
+              .where(is_master: false)
+              .map do |e|
+                { player: e, initiative: (e.real_initiative || -1) }
+              end
+    fighters = non_players.all.map do |e|
+      { player: e, initiative: e.initiative }
+    end
     step = 1
-    (players+fighters).sort_by{|x| -x[:initiative].to_i}.each{|x|
+    (players + fighters).sort_by { |x| -x[:initiative].to_i }.each do |x|
       x[:player].step_order = step
       x[:player].save
       step += 1
-    }
+    end
   end
 
   # TODO: take is_master into account... do not show some fields to players
-  def get_fighters(is_master,locale=:ru)
+  def get_fighters(is_master, locale = :ru)
     I18n.locale = locale
-    logger.warn "get_fighters: "+adventure.players.map { |e| "#{e.name}/#{e.is_fighter}"}.join(';')
-    players = adventure.players
-      .where(is_master: false)
-      .includes(:race)
-      .map { |e|
-        {
-          is_fighter: e.is_fighter,
-          name: e.name, id: e.id, race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
-          hp: e.hp, max_hp: e.max_hp, initiative: (e.real_initiative || -1), #get_char(:initiative) || 0,
-          armor_class: e.get_char(:armor_class) || 0, step_order: e.step_order,
-          is_npc: false
-        }
-      }
-    fighters = non_players.all.map { |e|
+    logger.warn 'get_fighters: ' + adventure.players.map do |e|
+      "#{e.name}/#{e.is_fighter}"
+    end.join(';')
+    players = adventure
+              .players
+              .where(is_master: false)
+              .includes(:race)
+              .map do |e|
+                {
+                  is_fighter: e.is_fighter,
+                  name: e.name, id: e.id,
+                  race_id: e.race.id, race: I18n.t("char.#{e.race.name}"),
+                  hp: e.hp, max_hp: e.max_hp,
+                  initiative: (e.real_initiative || -1),
+                  # get_char(:initiative) || 0,
+                  armor_class: e.get_char(:armor_class) || 0,
+                  step_order: e.step_order,
+                  is_npc: false
+                }
+              end
+    fighters = non_players.all.map do |e|
       # logger.warn "#{e.inspect}"
       # logger.warn "#{e.race.inspect}"
       {
         is_fighter: !e.is_dead,
         name: e.name, id: e.id, race_id: e.race.id,
-        race: e.race.is_tmp ? e.race.name : e.race.name, #I18n.t("char.#{e.race.name}"),
+        race: e.race.name,
+        # e.race.is_tmp ? e.race.name : e.race.name,
+        # I18n.t("char.#{e.race.name}"),
         hp: e.hp, max_hp: e.max_hp, initiative: e.initiative || 0,
         armor_class: e.armor_class, step_order: e.step_order || 0,
         is_npc: true
       }
-    }
-    players+fighters
+    end
+    players + fighters
   end
 
   def add_players
-    self.adventure.players.each do |p|
+    adventure.players.each do |p|
       logger.warn "+ #{p.name}"
       p.is_fighter = true
       p.real_initiative = -1
@@ -117,7 +145,7 @@ class Fight < ActiveRecord::Base
     end
   end
 
-  def kill_npc opts
+  def kill_npc(opts)
     f = nil
     i = -1
     if opts[:index]
@@ -134,10 +162,10 @@ class Fight < ActiveRecord::Base
     shift_list_tail i
   end
 
-  def shift_list_tail index
-    (players+non_players).where("step_order > ?", index).each{ |p|
+  def shift_list_tail(index)
+    (players + non_players).where('step_order > ?', index).each do |p|
       p.step_order -= 1
       p.save
-    }
+    end
   end
 end

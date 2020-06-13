@@ -46,40 +46,50 @@ class DNDController < BaseApp
         redirect '/auth'
       end
     else
-      logger.warn 'Websocket!'
-      request.websocket do |ws|
-        ws.onopen do
-          logger.warn "Connection " # {ws.methods}"
-          # ws.send("Hello World!")
-          # settings.sockets
-        end
-        ws.onmessage do |msg|
-          logger.warn "GOT: '#{msg}'"
-          on_websocket_message ws, msg
-        end
-        ws.onclose do
-          # warn("websocket closed")
-          settings.sockets.delete_if do |k, s|
-            logger.warn "Delete socket #{k}"
-            s == ws
-          end
+      websocket_event request
+    end
+  end
+
+  def websocket_event(request)
+    logger.warn 'Websocket!'
+    request.websocket do |ws|
+      ws.onopen do
+        # logger.warn "Connection " # {ws.methods}"
+        # ws.send("Hello World!")
+        # settings.sockets
+      end
+      ws.onmessage do |msg|
+        logger.warn "GOT: '#{msg}'"
+        on_websocket_message ws, msg
+      end
+      ws.onclose do
+        # warn("websocket closed")
+        settings.sockets.delete_if do |k, s|
+          logger.warn "Delete socket #{k}"
+          s == ws
         end
       end
     end
   end
 
+  #
+  # process websocket message
+  # @param ws  Websocket
+  # @param msg String    text
+  #
+  # @return ignore it
   def on_websocket_message(ws, msg)
     if WSregex.match msg
       player_id = params[:player_id].to_i
       txt = Regexp.last_match(2)
       user = User.find_by_secret Regexp.last_match(1)
       if user.nil?
-        logger.warn "Bad secret: #{Regexp.last_match(1)}"
+        logger.warn t('.bad_secret', m: Regexp.last_match(1))
       else
         on_player_websocket ws, player_id, user, txt
       end
     else
-      logger.warn "Bad ws request (#{msg})"
+      logger.warn t('.bad_request', msg: msg)
     end
   end
 
@@ -87,7 +97,8 @@ class DNDController < BaseApp
     player = Player.find_by_id(player_id)
     if player && player.user == user
       settings.sockets[player_id] ||= ws
-      DNDLogic.process_message(ws, user, player, txt,
+      DNDLogic.process_message(
+        ws, user, player, txt,
         ws: settings.sockets,
         player: !player.is_master,
         master: player.is_master
@@ -141,11 +152,7 @@ class DNDController < BaseApp
     redirect '/'
   end
 
-  def auth_password
-    session[:user_id] = @user.id
-    session[:secret] = @user.secret
-    players = @user.players.where(is_master: false)
-    masters = @user.players.where(is_master: true)
+  def first_redirect(players, masters, session)
     if players.size + masters.size >= 0
       logger.warn "User=#{@user.inspect}"
       logger.warn "player_select! (#{session.inspect})"
@@ -157,6 +164,14 @@ class DNDController < BaseApp
       logger.warn 'OK!'
       redirect '/'
     end
+  end
+
+  def auth_password
+    session[:user_id] = @user.id
+    session[:secret] = @user.secret
+    players = @user.players.where(is_master: false)
+    masters = @user.players.where(is_master: true)
+    first_redirect players, masters, session
   end
 
   post '/auth' do
@@ -186,7 +201,7 @@ class DNDController < BaseApp
       secret: SecureRandom.alphanumeric(32)
     )
     unless user.save
-      flash[:warn] = 'Хм... Что-то пошло не так. Не получается зарегистрировать!..'
+      flash[:warn] = t('.cannot_register')
       logger.warn "Register fail. #{user.errors.full_messages}"
       redirect '/auth'
     end
@@ -203,7 +218,7 @@ class DNDController < BaseApp
         expire: Time.now.to_i + EXPIRATION_TIME
       )
       IO.popen("mail -s 'Password reset' #{user.email}", 'w') do |io|
-        io.write "Please confirm your password reset by following this link: #{BASE_PATH}/reset_password?pass=#{str}\n"
+        io.write t('.confirm_password', base: BASE_PATH, str: str)
       end
       flash[:info] = 'Выслали ссылку для сброса пароля на email!'
     else
@@ -230,54 +245,54 @@ class DNDController < BaseApp
     @player = Player.find(session[:player_id].to_i)
     @item_type = params[:type]
     @items = case params[:type]
-    when 'things'
-      Thing.all.map do |x|
-        {
-          cost: x.cost,
-          id: x.id,
-          name: x.name,
-          description: x.short_description
-        }
-     end
-    when 'weapon'
-      Weapon.all.map do |x|
-        {
-          cost: x.cost,
-          id: x.id,
-          name: x.name,
-          description: x.short_description
-        }
-      end
-    when 'armor'
-      Armor.all.map do |x|
-        {
-          cost: x.cost,
-          id: x.id,
-          name: x.name,
-          description: x.short_description
-        }
-      end
-    when 'feature'
-      Feature.all.map do |x|
-        {
-          cost: 0,
-          id: x.id,
-          name: x.name,
-          description: x.description
-        }
-      end
-    when 'spells'
-      Spell.all.map do |x|
-        {
-          cost: 0,
-          id: x.id,
-          name: x.name,
-          description: x.description
-        }
-      end
-    else
-      []
-    end
+             when 'things'
+               Thing.all.map do |x|
+                 {
+                   cost: x.cost,
+                   id: x.id,
+                   name: x.name,
+                   description: x.short_description
+                 }
+               end
+             when 'weapon'
+               Weapon.all.map do |x|
+                 {
+                   cost: x.cost,
+                   id: x.id,
+                   name: x.name,
+                   description: x.short_description
+                 }
+               end
+             when 'armor'
+               Armor.all.map do |x|
+                 {
+                   cost: x.cost,
+                   id: x.id,
+                   name: x.name,
+                   description: x.short_description
+                 }
+               end
+             when 'feature'
+               Feature.all.map do |x|
+                 {
+                   cost: 0,
+                   id: x.id,
+                   name: x.name,
+                   description: x.description
+                 }
+               end
+             when 'spells'
+               Spell.all.map do |x|
+                 {
+                   cost: 0,
+                   id: x.id,
+                   name: x.name,
+                   description: x.description
+                 }
+               end
+             else
+               []
+             end
     slim :buy
   end
 
