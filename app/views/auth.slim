@@ -9,6 +9,9 @@ div.main
           label.mui-col-xs-5.mui-col-md-3.text-right for='email'
             | Email:
           input.mui-col-xs-6.mui-col-md-8 name='email' id='email' type='email'
+          | &nbsp;
+          a.if_email_not_empty href='/reset_password'
+            | Забыли пароль?
         div.mui-row
           label.mui-col-xs-5.mui-col-md-3.text-right for='password'
             | Пароль:
@@ -37,7 +40,10 @@ div.main
         input type='submit' value='Отправить'
 
 css:
-  .main{
+  .if_email_not_empty {
+    enabled
+  }
+  .main {
     width: 90%;
     background-color: #eee;
   }

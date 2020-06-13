@@ -1,7 +1,6 @@
 #
 # frozen_string_literal: true
 
-#
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra-websocket'
@@ -222,7 +221,7 @@ class DNDController < BaseApp
     redirect '/player_create'
   end
 
-  get '/reset_password' do
+  post '/reset_password' do
     user = User.find_by_email(params[:email].downcase.strip)
     if user
       user.send_password_reset
@@ -233,7 +232,7 @@ class DNDController < BaseApp
     redirect '/auth'
   end
 
-  post '/reset_password' do
+  get '/reset_password' do
     key = params[:pass]
     if key
       data = CredentialsManage.get_ontime_data(key, true)
