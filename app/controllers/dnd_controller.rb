@@ -143,6 +143,19 @@ class DNDController < BaseApp
     slim :auth
   end
 
+  # get '/password_reset' do
+  #   @title = t('password_reset_title')
+  #   slim :password_reset
+  # end
+
+  # post '/password_reset' do
+  #   User.reset_password(params[:login])
+  #   session[:player_id] = 0
+  #   session[:secret] = 0
+  #   flash[:warn] = t('password_reseted')
+  #   redirect '/auth'
+  # end
+
   def auth_admin
     session[:user_id] = 1
     session[:player_id] = 1001
@@ -212,14 +225,7 @@ class DNDController < BaseApp
   get '/reset_password' do
     user = User.find_by_email(params[:email].downcase.strip)
     if user
-      str = CredentialsManage.create_onetime_data(
-        user: user,
-        reset_password: 1,
-        expire: Time.now.to_i + EXPIRATION_TIME
-      )
-      IO.popen("mail -s 'Password reset' #{user.email}", 'w') do |io|
-        io.write t('.confirm_password', base: BASE_PATH, str: str)
-      end
+      user.send_password_reset
       flash[:info] = 'Выслали ссылку для сброса пароля на email!'
     else
       flash[:warn] = 'Не нашли в базе такой email!'
@@ -232,12 +238,12 @@ class DNDController < BaseApp
     if key
       data = CredentialsManage.get_ontime_data(key, true)
       if data && data[:reset_password].to_i == 1
-        ###########################################################
-        ###########################################################
-        ###########################################################
+        session[:user_id] = data[:user].id
+        redirect '/new_password'
       end
     else
       flash[:warn] = 'Не нашли в базе такой email!'
+      redirect '/auth'
     end
   end
 

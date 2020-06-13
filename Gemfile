@@ -17,6 +17,7 @@ gem 'bcrypt'
 gem 'require_all'
 gem 'pry'
 gem 'tux'
+gem 'pony'
 
 group :development do
     gem 'sqlite3'

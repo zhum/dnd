@@ -6,6 +6,18 @@ require 'securerandom'
 #
 # CredentialsManage module
 #
+# Examples:
+# CredentialsManage.create_onetime_data(
+#   'user1',
+#   pass: '123',
+#   name: 'Foo') => 'qwe-asd-zxc-123-ppp'
+#
+# CredentialsManage.search_by_user('user1')
+#   => {'qwe-asd-zxc-123-ppp' => {pass: '123', name: 'Foo'}}
+#
+# CredentialsManage.get_ontime_data('qwe-asd-zxc-123-ppp')
+#   => {pass: '123', name: 'Foo'}
+#
 module CredentialsManage
   def db
     YAML::Store.new('db/credentials.yml')

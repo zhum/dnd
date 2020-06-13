@@ -1,3 +1,10 @@
+# frozen_string_literal: true
+
+#
+# Main logic
+#
+# @author [serg]
+#
 class DNDLogic
   class<<self
     include ::AppHelpers
@@ -15,27 +22,28 @@ class DNDLogic
       BaseApp.settings
     end
 
-    def send_player ws, player, logit=false
+    def send_player(ws, player, logit = false)
       m = "{\"player\": #{player.to_json}}"
       logger.warn "get_player: '#{m}'" if logit
       ws.send(m)
     end
 
-    def send_flash ws, flash, logit=false
+    def send_flash(ws, flash, logit = false)
       m = "{\"flash\": \"#{flash}\"}"
       logger.warn "flash: #{m}" if logit
       ws.send(m)
     end
 
-    def send_to_player p, txt
-      id = if p.is_a? Numeric
-        p
-      elsif p.is_a? Player
-        p.id
-      else
-        raise "Bad argument to send_to_player (#{p})"
-      end
-      _,ws = settings.sockets.find{|i,ws| i==id}
+    def send_to_player(p, txt)
+      id =
+        if p.is_a? Numeric
+          p
+        elsif p.is_a? Player
+          p.id
+        else
+          raise "Bad argument to send_to_player (#{p})"
+        end
+      _, ws = settings.sockets.find { |i, _| i == id }
       if ws
         txt = txt.to_json if txt.is_a? Hash
         logger.warn "Send to #{id} '#{txt}'"
@@ -45,33 +53,38 @@ class DNDLogic
       end
     end
 
-    def send_all message
+    def send_all(message)
       message = message.to_json if message.is_a? Hash
       settings.sockets.each_pair do |player_id, ws|
         if block_given?
           flag = yield Player.find_by_id(player_id)
           logger.warn "p=#{player_id} f=#{flag}"
-          next if !flag
+          next unless flag
         end
         logger.warn "send_all: #{player_id}"
         ws.send(message)
-      end        
+      end
     end
 
-    def get_fight player
-      player.is_master? ?
+    def get_fight(player)
+      if player.is_master?
         (player.adventure.active_fight || player.adventure.ready_fight ||
-          player.adventure.finished_fight || 
-          Fight.make_fight(adventure: player.adventure, add_players: true)) :
+          player.adventure.finished_fight ||
+          Fight.make_fight(adventure: player.adventure, add_players: true))
+      else
         player.adventure.active_fight
+      end
     end
 
-    def get_fighter element
-      element[:is_npc] ?
-        NonPlayer.find(element[:id]) : Player.find(element[:id])
+    def get_fighter(element)
+      if element[:is_npc]
+        NonPlayer.find(element[:id])
+      else
+        Player.find(element[:id])
+      end
     end
 
-    def process_message ws,user,player,text,opts={}
+    def process_message(ws, user, player, text, opts = {})
       logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       I18n.default_locale = opts[:locale] || :ru
       begin
@@ -79,20 +92,20 @@ class DNDLogic
         when 'hello'
           logger.warn "got hello from #{player.id} (#{player.name})"
           return
-        
+
         # # send master info (NOT USED)
         # when 'get_master'
         #   logger.warn "got master request from #{player.id} (#{player.name})"
         #   return
-        when /player\/(.*)/
-          text =~ /player\/(.*)/
-          PlayerLogic.process_message ws,user, player, $1, opts
-        when /fight\/(.*)/
-          text =~ /fight\/(.*)/
-          FightLogic.process_message ws,user, player, $1, opts
-        when /master\/(.*)/
-          text =~ /master\/(.*)/
-          MasterLogic.process_message ws,user, player, $1, opts
+        when %r{player\/(.*)}
+          text =~ %r{player\/(.*)}
+          PlayerLogic.process_message ws, user, player, LAST_MATCH_INFO[1], opts
+        when %r{fight\/(.*)}
+          text =~ %r{fight\/(.*)}
+          FightLogic.process_message ws, user, player, LAST_MATCH_INFO[1], opts
+        when %r{master\/(.*)}
+          text =~ %r{master\/(.*)}
+          MasterLogic.process_message ws, user, player, LAST_MATCH_INFO[1], opts
         end
       rescue => e
         logger.warn "BAD message, got error: #{e.message} (#{e.backtrace.join("\n")})"

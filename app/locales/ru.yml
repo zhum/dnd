@@ -10,9 +10,14 @@ ru:
         blank: "Поле не должно быть пустым"
 
 
-  confirm_password: >
-    Please confirm your password reset by
-    following this link: %{base}/reset_password?pass=%{str}
+  auth_failed: >
+    Упс! переход на %{path} невозможен - не удалась аутентификация :(
+  password_reset_title: Сброс пароля
+  password_reset_subject: Сброс пароля
+  password_reset_body: >
+    Кто-то (скорее всего Вы), запросил сброс пароля на сайте по DND.
+    Если это Вы, пройдите по ссылке %{base}/reset_password?pass=%{str}.
+    Если нет, проигнорируйте это письмо, пожалуйста.
   bad_secret: "Bad secret: %{m}"
   bad_request: "Bad ws request (%{msg})"
   cannot_register: >
