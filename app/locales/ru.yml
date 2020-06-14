@@ -15,9 +15,11 @@ ru:
   password_reset_title: Сброс пароля
   password_reset_subject: Сброс пароля
   password_reset_body: >
-    Кто-то (скорее всего Вы), запросил сброс пароля на сайте по DND.
-    Если это Вы, пройдите по ссылке %{base}/reset_password?pass=%{str}.
-    Если нет, проигнорируйте это письмо, пожалуйста.
+    <p>Кто-то (скорее всего Вы), запросил сброс пароля на сайте по DND.
+    Если это Вы, пройдите по <a href="%{base}/reset_password?pass=%{str}">
+    ссылке</a> или вставьте этот адрес в строку браузера:
+    %{base}/reset_password?pass=%{str}.</p>
+    <p>Если это были не Вы, проигнорируйте это письмо, пожалуйста.</p>
   bad_secret: "Bad secret: %{m}"
   bad_request: "Bad ws request (%{msg})"
   cannot_register: >

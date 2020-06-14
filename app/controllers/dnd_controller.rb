@@ -1,5 +1,4 @@
-#
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 require 'sinatra/base'
 require 'sinatra/reloader'
@@ -15,8 +14,8 @@ require 'base64'
 class DNDController < BaseApp
   WSregex = Regexp.new '^(\S+): (.*)'
 
-  BASE_PATH = 'http://zhum.freeddns.org:4567'
-  AUTH_KEY = 'fgkrtpnbhnwuyfdgvpoeb'
+  BASE_PATH = ENV['BASE_PATH'] || 'http://zhum.freeddns.org:4567'
+  AUTH_KEY = ENV['AUTH_KEY'] || 'fgkrtpnbhnwuyfdgvpoeb'
   EXPIRATION_TIME = 3600 * 6 # 6 hours
   SECRET_KEY_REGEXP = /^X-Auth-Key:\s+(\S.*)/i
   SUBJECT_REGEXP = /^Subject:\s+.*(\S.*)/i
@@ -94,7 +93,7 @@ class DNDController < BaseApp
 
   def on_player_websocket(ws, player_id, user, txt)
     player = Player.find_by_id(player_id)
-    if player && player.user == user
+    if player && player.user.id == user.id
       settings.sockets[player_id] ||= ws
       DNDLogic.process_message(
         ws, user, player, txt,
@@ -222,26 +221,60 @@ class DNDController < BaseApp
   end
 
   post '/reset_password' do
+    logger.warn "--> #{request.inspect}"
     user = User.find_by_email(params[:email].downcase.strip)
     if user
-      user.send_password_reset
-      flash[:info] = 'Выслали ссылку для сброса пароля на email!'
+      user.send_password_reset base_url
+      # "#{request[:scheme]}://#{request[:host]}:#{request[:port]}"
+      'Выслали ссылку для сброса пароля на email!'
     else
-      flash[:warn] = 'Не нашли в базе такой email!'
+      'Не нашли в базе такой email!'
     end
-    redirect '/auth'
+    # redirect '/auth'
   end
 
   get '/reset_password' do
     key = params[:pass]
-    if key
-      data = CredentialsManage.get_ontime_data(key, true)
+    logger.warn "reset_password: #{key}"
+    if key.to_s != ''
+      data = CredentialsManage.get_ontime_data(key, false)
+      logger.warn "reset_password data: #{data}"
       if data && data[:reset_password].to_i == 1
-        session[:user_id] = data[:user].id
-        redirect '/new_password'
+        # session[:user_id] = data[:user]
+        @secret = key
+        slim :new_password
+      else
+        flash[:warn] = 'Ссылка больше не действительна.'
+        redirect '/auth'
       end
     else
       flash[:warn] = 'Не нашли в базе такой email!'
+      redirect '/auth'
+    end
+  end
+
+  post '/new_password' do
+    key = params[:secret]
+    logger.warn "new_password_key: #{key}"
+    if key.to_s != ''
+      data = CredentialsManage.get_ontime_data(key, true)
+      logger.warn "new_password data: #{data}"
+      if data && data[:reset_password].to_i == 1
+        user = User.find(data[:user])
+        if user
+          session[:user_id] = data[:user]
+          user.password = params[:password]
+          auth_password
+        else
+          flash[:warn] = 'Ой, не нашёл такого пользователя!!!'
+          redirect '/auth'
+        end
+      else
+        flash[:warn] = 'Ой, пароль уже сменили!!!'
+        redirect '/auth'
+      end
+    else
+      flash[:warn] = 'Используйте ссылку "Забыл пароль"'
       redirect '/auth'
     end
   end

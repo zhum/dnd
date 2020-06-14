@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # == Schema Information
 #
@@ -99,9 +99,8 @@ class Fight < ActiveRecord::Base
   # TODO: take is_master into account... do not show some fields to players
   def get_fighters(is_master, locale = :ru)
     I18n.locale = locale
-    logger.warn 'get_fighters: ' + adventure.players.map do |e|
-      "#{e.name}/#{e.is_fighter}"
-    end.join(';')
+    f = adventure.players.map { |e| "#{e.name}/#{e.is_fighter}" }.join(';')
+    logger.warn "get_fighters: #{f}"
     players = adventure
               .players
               .where(is_master: false)

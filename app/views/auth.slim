@@ -1,5 +1,6 @@
 == styled_flash
 div.main
+  div#notify.hideit.notify
   form.fullwidth action='/auth' method='post'
     fieldset.fullwidth 
       div.mui-container-fluid
@@ -8,14 +9,14 @@ div.main
         div.mui-row
           label.mui-col-xs-5.mui-col-md-3.text-right for='email'
             | Email:
-          input.mui-col-xs-6.mui-col-md-8 name='email' id='email' type='email'
+          input#email.mui-col-xs-6.mui-col-md-8 name='email' type='email'
           | &nbsp;
-          a.if_email_not_empty href='/reset_password'
+          a.if_email_not_empty onclick="reset_password();"
             | Забыли пароль?
         div.mui-row
           label.mui-col-xs-5.mui-col-md-3.text-right for='password'
             | Пароль:
-          input.mui-col-xs-6.mui-col-md-8 name='password' id='password' type='password'
+          input#password.mui-col-xs-6.mui-col-md-8 name='password' type='password'
         div.fullwidth.center
           input type='submit' value='Отправить'
 
@@ -39,10 +40,36 @@ div.main
       div.fullwidth.center
         input type='submit' value='Отправить'
 
-css:
-  .if_email_not_empty {
-    enabled
+javascript:
+  function show_notify(text){
+    var notify = document.getElementById('notify');
+    notify.innerText = text;
+    notify.classList.remove('showit');
+    void notify.offsetWidth;
+    notify.classList.add('showit');
   }
+  function reset_password(){
+    var el = document.getElementById('email');
+    if(el){
+      var request = new XMLHttpRequest();
+      request.open('POST', '/reset_password', true);
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.onreadystatechange = function() {
+        if(request.readyState == XMLHttpRequest.DONE) {
+          if(request.status == 200){
+            show_notify(request.responseText);
+          }
+          else{
+            show_notify('Ой, что-то пошло не так... Попробуйте сбросить пароль немного позднее.');
+          }
+        }
+      }
+
+      request.send('email='+el.value);
+      show_notify('Отправляем...')
+    }
+  }
+css:
   .main {
     width: 90%;
     background-color: #eee;
@@ -52,3 +79,34 @@ css:
       width: 800px;
       background-color: #eee;
     }
+  }
+
+  .notify {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    background-color: #080;
+
+  }
+  .hideit {
+    margin-top: -2em;
+  }
+  .showit {
+    animation: showit 5s 1;
+  }
+
+  @keyframes showit {
+    from {
+      margin-top: -2em;
+    }
+    20% {
+      margin-top: 0em;
+    }
+    80% {
+      margin-top: 0em;
+    }
+    to {
+      margin-top: -2em;
+    }
+  }

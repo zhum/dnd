@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 #
 # Main logic
@@ -9,10 +9,6 @@ class DNDLogic
   class<<self
     include ::AppHelpers
     include ::PartitionHelpers
-
-    def logger
-      DNDLogger.logger
-    end
 
     def zero_plus(x)
       x >= 0 ? x : 0
@@ -85,6 +81,7 @@ class DNDLogic
     end
 
     def process_message(ws, user, player, text, opts = {})
+      warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       I18n.default_locale = opts[:locale] || :ru
       begin
@@ -99,13 +96,13 @@ class DNDLogic
         #   return
         when %r{player\/(.*)}
           text =~ %r{player\/(.*)}
-          PlayerLogic.process_message ws, user, player, LAST_MATCH_INFO[1], opts
+          PlayerLogic.process_message ws, user, player, $LAST_MATCH_INFO[1], opts
         when %r{fight\/(.*)}
           text =~ %r{fight\/(.*)}
-          FightLogic.process_message ws, user, player, LAST_MATCH_INFO[1], opts
+          FightLogic.process_message ws, user, player, $LAST_MATCH_INFO[1], opts
         when %r{master\/(.*)}
           text =~ %r{master\/(.*)}
-          MasterLogic.process_message ws, user, player, LAST_MATCH_INFO[1], opts
+          MasterLogic.process_message ws, user, player, $LAST_MATCH_INFO[1], opts
         end
       rescue => e
         logger.warn "BAD message, got error: #{e.message} (#{e.backtrace.join("\n")})"

@@ -38,7 +38,7 @@ div.main.mui-container
         a href='/logout' alt="#{t('logout')}" title="#{t('logout')}"
           i.icon-exitalt
 
-  div.info.mui-container-fluid
+  div.dnd-info.mui-container-fluid
     div.mui-row
       div.avatar.mui-col-xs-3
         img.avatar src="/img/player/#{@player.id}" width="300" height="300"
@@ -55,10 +55,10 @@ div.main.mui-container
           span.player-exp#player-exp
             i.iw-reload
         div.fullwidth
-          a#hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('hp_plus','hp_minus','hp_set'));"
+          a#hp.hp.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('hp_plus','hp_minus','hp_set'));"
             i.iw-reload
           | &nbsp; (
-          a#max-hp.hp.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('maxhp_plus','maxhp_minus','maxhp_set'));"
+          a#max-hp.hp.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('maxhp_plus','maxhp_minus','maxhp_set'));"
             i.iw-reload
           | ) &nbsp;
           span.hp
@@ -74,31 +74,31 @@ div.main.mui-container
             | &nbsp;фнт.
       div.coins.fullwidth.dnd-flex-row
           span.center
-            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',0));"
+            a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',0));"
               | ММ: 
             span#ccoins
               i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
-            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',1));"
+            a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',1));"
               | СМ: 
             span#scoins
               i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
-            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',2));"
+            a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',2));"
               | ЗМ: 
             span#gcoins
               i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
-            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',3));"
+            a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',3));"
               | ЭМ: 
             span#ecoins
               i.iw-reload
           span.center.mui--divider-left
             | &nbsp;
-            a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',4));"
+            a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('coins_plus','coins_minus','coins_set',4));"
               | ПМ:
             span#pcoins 
               i.iw-reload
@@ -106,12 +106,12 @@ div.main.mui-container
         div.dnd-flex-grow1
           = t('savethrows')
           |:
-        div.dnd-flex-grow1.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('saveth_plus','saveth_minus','saveth_set',1));"
+        div.dnd-flex-grow1.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('saveth_plus','saveth_minus','saveth_set',1));"
           = t('savethrows_ok')
           |: 
           span#savethrows1
             |...
-        div.dnd-flex-grow1.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('saveth_plus','saveth_minus','saveth_set',2));"
+        div.dnd-flex-grow1.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('saveth_plus','saveth_minus','saveth_set',2));"
           = t('savethrows_fail')
           |: 
           span#savethrows2
@@ -124,43 +124,43 @@ div.main.mui-container
       span.mui--text-center.block.fullwidth
         span.block.fullwidth.mui--text-center.label1
           i.icon-securityalt-shieldalt
-          a.dnd-btn.dnd-btn--primary#ch_armor_class href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','armor_class'));"
+          a.dnd-btn.dnd-btn--primary#ch_armor_class onclick="formModal(overForm3('char_plus','char_minus','char_set','armor_class'));"
             i.iw-reload
           | КД
     div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth
         span.block.fullwidth.mui--text-center.label1
           i.icon-queen
-          a.dnd-btn.dnd-btn--primary#ch_initiative href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','initiative'));"
+          a.dnd-btn.dnd-btn--primary#ch_initiative onclick="formModal(overForm3('char_plus','char_minus','char_set','initiative'));"
             i.iw-reload
           | Инициатива
     div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth
         span.block.fullwidth.mui--text-center.label1
           i.icon-rabbit
-          a.dnd-btn.dnd-btn--primary#ch_speed href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','speed'));"
+          a.dnd-btn.dnd-btn--primary#ch_speed onclick="formModal(overForm3('char_plus','char_minus','char_set','speed'));"
             i.iw-reload
           | Скорость
     div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth
         span.block.fullwidth.mui--text-center.label1
           i.icon-glasses
-          a.dnd-btn.dnd-btn--primary#ch_pass_attentiveness href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','pass_attentiveness'));"
+          a.dnd-btn.dnd-btn--primary#ch_pass_attentiveness onclick="formModal(overForm3('char_plus','char_minus','char_set','pass_attentiveness'));"
             i.iw-reload
           | Внимательность
     div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth
         span.block.fullwidth.mui--text-center.label1
           i.icon-screwdriver
-          a.dnd-btn.dnd-btn--primary#ch_masterlevel href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','masterlevel'));"
+          a.dnd-btn.dnd-btn--primary#ch_masterlevel onclick="formModal(overForm3('char_plus','char_minus','char_set','masterlevel'));"
             i.iw-reload
           | Мастерство
     div.mui-col-xs-4.mui-col-sm-4.mui--divider-left.mui--divider-bottom
       span.block.mui--text-center.fullwidth.label1
-        a.dnd-btn.dnd-btn--primary#ch_hit_dice href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','hit_dice'));"
+        a.dnd-btn.dnd-btn--primary#ch_hit_dice onclick="formModal(overForm3('char_plus','char_minus','char_set','hit_dice'));"
           | X
         | D 
-        a.dnd-btn.dnd-btn--primary#ch_hit_dice_of href='#' onclick="formModal(overForm3('char_plus','char_minus','char_set','hit_dice_of'));"
+        a.dnd-btn.dnd-btn--primary#ch_hit_dice_of onclick="formModal(overForm3('char_plus','char_minus','char_set','hit_dice_of'));"
           | Y
         | Кость хитов
 
@@ -174,7 +174,7 @@ div.main.mui-container
         div.mui-col-xs-4.mui--divider-left
           span.dnd-btn id="mod_prof_#{i}" onclick="mod_prof('#{i}');"
           i class="#{char_icons[i]}"
-          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
+          a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
           span id="mod_#{i}"
             i.iw-reload
@@ -183,7 +183,7 @@ div.main.mui-container
         div.mui-col-xs-4.mui--divider-left
           span.dnd-btn id="mod_prof_#{i}" onclick="mod_prof('#{i}');"
           i class="#{char_icons[i]}"
-          a.dnd-btn.dnd-btn--primary href='#' onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
+          a.dnd-btn.dnd-btn--primary onclick="formModal(overForm3('mod_plus','mod_minus','mod_set','#{i}'));"
             = t("char.#{i}")
           span id="mod_#{i}"
             i.iw-reload
@@ -191,13 +191,13 @@ div.main.mui-container
     span.dnd-flex-grow1.mui--text-center onclick="toggle_item('skills');"
       = t('char.skills')
     span.mui--text-right
-      a href='#' onclick="toggle_edit_skills();"
+      a onclick="toggle_edit_skills();"
         i.icon-pencil
       | &nbsp;
   div#skills
     - ['athletics','acrobatics','stealth','sleight_of_hands','investigation','history','arcana','religion','nature','perception','survival','medicine','insight','animal_handling','persuasion','performance','intimidation','deception'].each do |s|
         div.mui-col-xs-6.mui-col-md-4.mui--divider-left
-          a.skill_edit.mui--hide href='#' onclick="formModal(overForm3('skill_plus','skill_minus','skill_set','#{s}'));"
+          a.skill_edit.mui--hide onclick="formModal(overForm3('skill_plus','skill_minus','skill_set','#{s}'));"
             i.icon-pencil
           | &nbsp;
           span.dnd-btn.skill_prof_btn id="skill_#{s}" onclick="skill_prof('#{s}');"

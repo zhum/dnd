@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # == Schema Information
 #
@@ -411,11 +411,11 @@ class Player < ActiveRecord::Base
       Skilling.create(
         skill: s,
         modifier: 1,
-        ready: params[:skills].include?(s.id.to_s)
+        ready: params[:skills]&.include?(s.id.to_s)
       )
     end
     player.featurings = Feature.where(id: params[:features]).map do |f|
-      Featuring.create(feature: f, count: 1)
+      Featuring.create(item: f, count: 1)
     end
     player.save_throws << SaveThrow.create(kind: 1, count: 0)
     player.save_throws << SaveThrow.create(kind: 2, count: 0)

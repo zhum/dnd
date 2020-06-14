@@ -1,10 +1,10 @@
 module AppHelpers
-  def t(x)
-    I18n.t(x)
+  def t(*x)
+    I18n.t(*x)
   end
 
-  def l(x)
-    I18n.l(x)
+  def l(*x)
+    I18n.l(*x)
   end
 
   def overForm3(f1, f2, f3, arg = '')
@@ -22,4 +22,9 @@ module AppHelpers
   def base_url
     "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
   end
+
+  def logger
+    DNDLogger.logger
+  end
+
 end

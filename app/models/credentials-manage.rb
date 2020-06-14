@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 require 'yaml/store'
 require 'securerandom'
@@ -19,33 +19,40 @@ require 'securerandom'
 #   => {pass: '123', name: 'Foo'}
 #
 module CredentialsManage
-  def db
-    YAML::Store.new('db/credentials.yml')
-  end
-
-  # store data and return unique key
-  def create_onetime_data(user, data = {})
-    key = SecureRandom.uuid
-    db.transaction do
-      db[key] = { user: user, created_at: Time.now.to_i }.merge(data)
+  class<<self
+    def db
+      YAML::Store.new('db/credentials.yml')
     end
-    key
-  end
 
-  # get stored data by key, delete it then by default
-  def get_ontime_data(str, delete = true)
-    ret = nil
-    db.transaction do
-      ret = db[str]
-      db.delete(str) if delete
+    public
+
+    # store data and return unique key
+    def create_onetime_data(user, data = {})
+      key = SecureRandom.uuid
+      d = db
+      d.transaction do
+        d[key] = { user: user, created_at: Time.now.to_i }.merge(data)
+      end
+      key
     end
-    ret
-  end
 
-  # get all user related data
-  def search_by_user(user)
-    db.transaction do
-      db.select { |_, v| v[:user] == user }
+    # get stored data by key, delete it then by default
+    def get_ontime_data(str, delete = true)
+      ret = nil
+      d = db
+      d.transaction do
+        ret = d[str]
+        d.delete(str) if delete
+      end
+      ret
+    end
+
+    # get all user related data
+    def search_by_user(user)
+      d = db
+      d.transaction do
+        d.select { |_, v| v[:user] == user }
+      end
     end
   end
 end

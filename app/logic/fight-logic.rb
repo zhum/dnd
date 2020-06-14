@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 #
 # Fight logic
@@ -11,7 +11,7 @@ class FightLogic < DNDLogic
       render = is_master || fight.fase.positive?
       {
         fighters: if render
-                    fight.get_fighters(is_master).sort_by(&:step_order)
+                    fight.get_fighters(is_master).sort_by{ |x| x[:step_order] }
                   else
                     []
                   end,
@@ -36,7 +36,9 @@ class FightLogic < DNDLogic
     end
 
     def send_fight(ws, fight, is_master)
-      ws.send fight_to_json(fight, is_master)
+      s = fight_to_json(fight, is_master)
+      logger.warn "send_fight: #{s}"
+      ws.send s
     end
 
     def send_groups(ws, adventure)

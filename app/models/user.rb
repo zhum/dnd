@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # == Schema Information
 #
@@ -15,6 +15,9 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   include BCrypt
+  include AppHelpers
+
+  DEF_EXPIRATION_TIME = 3600*24 # 1 day
 
   validates_presence_of :email, :password_hash
 
@@ -48,18 +51,18 @@ class User < ActiveRecord::Base
   # end
   #
 
-  def send_password_reset
+  def send_password_reset(base_url)
     secret = CredentialsManage.create_onetime_data(
       id,
       reset_password: 1,
-      expire: Time.now.to_i + EXPIRATION_TIME
+      expire: Time.now.to_i + DEF_EXPIRATION_TIME
     )
     Pony.mail(
       to: email,
       via: :smtp,
       via_options: {
         address:              ENV['SMTP_SERVER'] || 'localhost',
-        port:                 '25',
+        port:                 '587',
         enable_starttls_auto: true,
         user_name:            ENV['SMTP_USER'] || 'user',
         password:             ENV['SMTP_PASS'] || 'password_see_note',
@@ -69,7 +72,8 @@ class User < ActiveRecord::Base
       },
       from: ENV['SMTP_FROM'] || 'master@dnd.zhum.freeddns.org',
       subject: t('password_reset_subject'),
-      body: t('password_reset_body', base: BASE_PATH, str: secret)
+      charset: 'utf-8',
+      html_body: t('password_reset_body', base: base_url, str: secret)
     )
   end
 

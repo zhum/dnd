@@ -35,6 +35,21 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);  
 }
 
+.flash{
+  border: 4px double #994466;
+  background:  #449966;
+  color: black;
+  font-weight: bold;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px;  
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);  
+}
+
+.info {
+  color: white;
+  background: #000088;
+}
+
 i.iw-edit:before{
   font-family: 'icon-worksregular';
   text-transform: none;
@@ -293,6 +308,9 @@ i.iw-wait:before{
   background-color: #80e080;
 }
 
+.dnd-info {
+  background-color: #e0e0e0;
+}
 /* .dnd-text-fighter {
   font-size: 13px;
 }
