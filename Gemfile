@@ -18,6 +18,8 @@ gem 'require_all'
 gem 'pry'
 gem 'tux'
 gem 'pony'
+gem 'sassc'
+gem 'dbm'
 
 group :development do
     gem 'sqlite3'

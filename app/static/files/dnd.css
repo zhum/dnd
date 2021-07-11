@@ -1,4 +1,4 @@
-
+﻿
 /* old phones */
 @media all and (max-width: 320px){
   div{
@@ -27,7 +27,7 @@
 
 .dnd-flash{
   border: 4px double #994466;
-  background:  #449966;
+  background:  #ee0;
   color: black;
   font-weight: bold;
   padding: 5px 5px 5px 5px;

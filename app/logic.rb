@@ -81,7 +81,7 @@ class DNDLogic
     end
 
     def process_message(ws, user, player, text, opts = {})
-      warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
+      # warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       logger.warn "Logic got '#{text}' from #{player.id} #{player.is_master} #{player.name}"
       I18n.default_locale = opts[:locale] || :ru
       begin

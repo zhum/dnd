@@ -1,6 +1,7 @@
 # frozen_string_literal: false
 
-require 'yaml/store'
+require 'dbm'
+require 'yaml/dbm'
 require 'securerandom'
 
 #
@@ -20,18 +21,32 @@ require 'securerandom'
 #
 module CredentialsManage
   class<<self
-    def db
-      YAML::Store.new('db/credentials.yml')
+    def transaction
+      d = YAML::DBM.new('db/credentials.yml')
+      # d.transaction do
+        yield d
+      # end
+      d.close
     end
 
-    public
+    EXPIRATION_TIME = 3600 * 6 # 6 hours
+
+    def delete_expired(exp = EXPIRATION_TIME)
+      now = Time.now.to_i
+      transaction do |db|
+        db.delete_if { |_, v| v[:created_at] + exp > now }
+      end
+    end
 
     # store data and return unique key
     def create_onetime_data(user, data = {})
       key = SecureRandom.uuid
-      d = db
-      d.transaction do
-        d[key] = { user: user, created_at: Time.now.to_i }.merge(data)
+      # d = db
+      # d.transaction do
+      #   d[key] = { user: user, created_at: Time.now.to_i }.merge(data)
+      # end
+      transaction do |db|
+        db[key] = { user: user, created_at: Time.now.to_i }.merge(data)
       end
       key
     end
@@ -39,18 +54,22 @@ module CredentialsManage
     # get stored data by key, delete it then by default
     def get_ontime_data(str, delete = true)
       ret = nil
-      d = db
-      d.transaction do
-        ret = d[str]
-        d.delete(str) if delete
+      # d = db
+      # d.transaction do
+      #   ret = d[str]
+      #   d.delete(str) if delete
+      # end
+      transaction do |db|
+        ret = db[str]
+        db.delete(str) if delete
       end
       ret
     end
 
     # get all user related data
     def search_by_user(user)
-      d = db
-      d.transaction do
+      # d = db
+      transaction do
         d.select { |_, v| v[:user] == user }
       end
     end

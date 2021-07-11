@@ -117,6 +117,20 @@ class BaseApp < Sinatra::Base
       #   logger.warn "Reloaded!"
       # end
     end
+
+    # precompile SASS
+    logger.warn '====== Compile sass ========='
+    Dir.glob(File.join(settings.root, '../sass/*.sass')).each do |file|
+      css = File.join(settings.root, "../app/static/files/#{File.basename(file, '.sass')}.css.new")
+      if !File.exist?(css) || File.stat(file).mtime > File.stat(css).mtime
+        data = SassC::Engine.new(File.read(file), syntax: :sass, style: :compressed).render
+        File.open(css, 'w+') { |f| f.write data }
+        logger.warn "update #{file}"
+      else
+        logger.warn "--skip #{file}"
+      end
+    end
+    logger.warn '======     done     ========='
   end
 
   set :sockets, {}

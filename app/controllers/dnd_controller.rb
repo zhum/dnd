@@ -141,19 +141,6 @@ class DNDController < BaseApp
     slim :auth
   end
 
-  # get '/password_reset' do
-  #   @title = t('password_reset_title')
-  #   slim :password_reset
-  # end
-
-  # post '/password_reset' do
-  #   User.reset_password(params[:login])
-  #   session[:player_id] = 0
-  #   session[:secret] = 0
-  #   flash[:warn] = t('password_reseted')
-  #   redirect '/auth'
-  # end
-
   def auth_admin
     session[:user_id] = 1
     session[:player_id] = 1001
@@ -163,17 +150,25 @@ class DNDController < BaseApp
     redirect '/'
   end
 
+  def player_select_redirect(session)
+    logger.warn "User=#{@user.inspect}"
+    logger.warn "player_select! (#{session.inspect})"
+    redirect '/player_select'
+  end
+
+  def player_redirect(players, session)
+    @player = players.first
+    session[:player_id] = @player.id
+    flash[:info] = 'Успешный вход!'
+    logger.warn 'OK!'
+    redirect '/'
+  end
+
   def first_redirect(players, masters, session)
     if players.size + masters.size >= 0
-      logger.warn "User=#{@user.inspect}"
-      logger.warn "player_select! (#{session.inspect})"
-      redirect '/player_select'
+      player_select_redirect(session)
     else
-      @player = players.first
-      session[:player_id] = @player.id
-      flash[:info] = 'Успешный вход!'
-      logger.warn 'OK!'
-      redirect '/'
+      player_redirect(players, session)
     end
   end
 
@@ -221,7 +216,7 @@ class DNDController < BaseApp
   end
 
   post '/reset_password' do
-    logger.warn "--> #{request.inspect}"
+    # logger.warn "--> #{request.inspect}"
     user = User.find_by_email(params[:email].downcase.strip)
     if user
       user.send_password_reset base_url
@@ -230,7 +225,6 @@ class DNDController < BaseApp
     else
       'Не нашли в базе такой email!'
     end
-    # redirect '/auth'
   end
 
   get '/reset_password' do
@@ -257,6 +251,7 @@ class DNDController < BaseApp
     key = params[:secret]
     logger.warn "new_password_key: #{key}"
     if key.to_s != ''
+      CredentialsManage.delete_expired
       data = CredentialsManage.get_ontime_data(key, true)
       logger.warn "new_password data: #{data}"
       if data && data[:reset_password].to_i == 1
